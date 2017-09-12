@@ -108,6 +108,7 @@
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_LightColor\SFN_LightColor.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Cross\SFN_Cross.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Subtract\SFN_Subtract.shader" />
+     <None Include="Assets\BearWithMe\Prefabs\DELETE ME.txt" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\Shader Presets\PresetParticleAlphaBlended.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Parallax\SFN_Parallax_DEP.shader" />
      <None Include="Assets\ProCore\ProBuilder\Shader\pb_FaceHighlight.shader" />
@@ -116,6 +117,7 @@
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Multiply\SFN_Multiply_4.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Rotator\SFN_Rotator_PIV_SPD.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Cubemap\SFN_Cubemap.shader" />
+     <None Include="Assets\BearWithMe\Meshes\DELETE ME.txt" />
      <None Include="Assets\ShaderForge\Readme.txt" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_FragmentPosition\SFN_FragmentPosition.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Abs\SFN_Abs.shader" />
@@ -155,6 +157,7 @@
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Divide\SFN_Divide.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_InverseLerp\SFN_InverseLerp.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_ArcTan\SFN_ArcTan.shader" />
+     <None Include="Assets\BearWithMe\Materials\DELETE ME.txt" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Tex2d\SFN_Tex2d_UV.shader" />
      <None Include="Assets\ShaderForge\Example Assets\Shaders\Refraction.shader" />
      <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexPicker.shader" />
@@ -178,6 +181,7 @@
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Length\SFN_Length.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Posterize\SFN_Posterize.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Blend\SFN_Blend_Darken.shader" />
+     <None Include="Assets\BearWithMe\Particles\DELETE ME.txt" />
      <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Fresnel\SFN_Fresnel_NRM_EXP.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Parallax\SFN_Parallax_REF.shader" />
@@ -249,6 +253,7 @@
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Add\SFN_Add_5.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Tex2dAsset\SFN_Tex2dAsset.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Sin\SFN_Sin.shader" />
+     <None Include="Assets\BearWithMe\Scripts\DELETE ME.txt" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Add\SFN_Add_3.shader" />
      <None Include="Assets\ShaderForge\Example Assets\Shaders\PixelRotator.shader" />
      <None Include="Assets\ShaderForge\Example Assets\Shaders\CustomLighting.shader" />
@@ -269,6 +274,7 @@
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_LightAttenuation\SFN_LightAttenuation.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_MultiplyMatrix\SFN_MultiplyMatrix.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Blend\SFN_Blend_Exclusion.shader" />
+     <None Include="Assets\BearWithMe\Textures\DELETE ME.txt" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Blend\SFN_Blend_LinearBurn.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_DepthBlend\SFN_DepthBlend.shader" />
      <None Include="Assets\ShaderForge\Editor\InternalResources\GPU Rendering\SFN_Step\SFN_Step.shader" />
@@ -301,19 +307,19 @@
  <HintPath>C:/Program Files/Unity2017/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/s165441/Documents/SVN/Bear-With-Me_Greybox/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="pb_Stl">
- <HintPath>C:/Users/s165441/Documents/SVN/Bear-With-Me_Greybox/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
- </Reference>
- <Reference Include="Poly2Tri">
- <HintPath>C:/Users/s165441/Documents/SVN/Bear-With-Me_Greybox/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ClassesLib/Poly2Tri.dll</HintPath>
+ <HintPath>C:/Users/s160621/Documents/SVN/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/s165441/Documents/SVN/Bear-With-Me_Greybox/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/s160621/Documents/SVN/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="KdTreeLib">
- <HintPath>C:/Users/s165441/Documents/SVN/Bear-With-Me_Greybox/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ClassesLib/KdTreeLib.dll</HintPath>
+ <HintPath>C:/Users/s160621/Documents/SVN/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ClassesLib/KdTreeLib.dll</HintPath>
+ </Reference>
+ <Reference Include="pb_Stl">
+ <HintPath>C:/Users/s160621/Documents/SVN/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
+ </Reference>
+ <Reference Include="Poly2Tri">
+ <HintPath>C:/Users/s160621/Documents/SVN/trunk/Greybox_Workflow/Assets/ProCore/ProBuilder/Classes/ClassesLib/Poly2Tri.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
