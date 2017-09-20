@@ -17,9 +17,13 @@ public class CharAttack : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if(XCI.GetButton(XboxButton.A, controller))
+		if(Input.GetButtonDown("Fire1"))
         {
-            
+            Anim.SetBool("IsAttack", true);
+        }
+        else
+        {
+            Anim.SetBool("IsAttack", false);
         }
 	}
 }
