@@ -6,24 +6,20 @@ using XboxCtrlrInput;
 public class CharAttack : MonoBehaviour
 {
     private Animator Anim;
-    public XboxController controller;
+    public XboxController m_Controller;
 
     // Use this for initialization
-    void Awake ()
+    void Awake()
     {
         Anim = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-		if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") || XCI.GetButton(XboxButton.A, m_Controller))
         {
-            Anim.SetBool("IsAttack", true);
+            Anim.SetTrigger("Attack1");
         }
-        else
-        {
-            Anim.SetBool("IsAttack", false);
-        }
-	}
+    }
 }
