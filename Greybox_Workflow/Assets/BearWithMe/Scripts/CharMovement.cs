@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XboxCtrlrInput;
+using XInputDotNetPure;
 
 public class CharMovement : MonoBehaviour
 {
+    public XboxController mXboxController = XboxController.First;
+
     private Rigidbody m_RigidBody;
     public float m_fSpeed = 50.0f;
     public float m_fFriction = 50.0f;
@@ -27,10 +31,11 @@ public class CharMovement : MonoBehaviour
     //------------------------------------------
     private void FixedUpdate()
     {
-        float m_fHorizontal = Input.GetAxis("Horizontal");
-        float m_fVertical = Input.GetAxis("Vertical");
+        Vector3 movement = Vector3.zero;
+        movement.x = Input.GetAxis("Horizontal") + XCI.GetAxis(XboxAxis.LeftStickX, mXboxController);
+        movement.z = Input.GetAxis("Vertical") + XCI.GetAxis(XboxAxis.LeftStickY, mXboxController);
 
-        Vector3 movement = new Vector3(m_fHorizontal, 0.0f, m_fVertical);
+
 
         m_RigidBody.AddForce(movement * m_fSpeed, ForceMode.Force);
 
@@ -41,7 +46,7 @@ public class CharMovement : MonoBehaviour
 
         Vector3 playerVeloc = m_RigidBody.velocity;
 
-        if (m_fHorizontal == 0)
+        if (movement.x == 0)
         {
             if (playerVeloc.x > 0)
             {
@@ -69,7 +74,7 @@ public class CharMovement : MonoBehaviour
             }
         }
 
-        if (m_fVertical == 0)
+        if (movement.z == 0)
         {
             if (playerVeloc.z > 0)
             {
