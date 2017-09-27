@@ -19,7 +19,7 @@ public class CharAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") || XCI.GetButton(XboxButton.A, m_Controller))
         {
-            Anim.SetTrigger("Attack1");
+            Anim.SetTrigger("Attack1Trigger");
         }
     }
 }
