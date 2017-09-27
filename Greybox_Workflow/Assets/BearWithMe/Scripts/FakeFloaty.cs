@@ -6,53 +6,58 @@ public class FakeFloaty : MonoBehaviour
 {
     //Good values to use for platforms: Mass = 0.9, drag = 0.01, angular drag = 2, bforce = 250, rotationcorrect = 4, splashforce = -1.25
 
+    //-----------Serialize Fields-----------
     [SerializeField]
     private float buoyancyForce;
     [SerializeField]
     private float rotationCorrection;
-
-    private float calculatedBuoyancy;
-    
-
     [SerializeField]
     private float waterLevel;
-    private float mass;
-    private float airResist;
-    private float waterResist;
     [SerializeField]
     private float splashDownForce;
 
+    //-----------Floats------------
+    private float calculatedBuoyancy;
+    private float mass;
+    private float airResist;
+    private float waterResist;
+
+    //----------Booleans---------
     private bool submerged;
 
+    //--------Vector 3's---------
+    private Vector3 angle;
+
     private Rigidbody rb;
-	// Use this for initialization
-	void Start ()
+
+
+    // Use this for initialization
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
         mass = rb.mass;
         airResist = rb.drag;
         submerged = false;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-
-
-
-
-	}
+       
+    }
 
     void FixedUpdate()
     {
+        ClampRotation();
 
         if (transform.position.y > waterLevel)
         {
             submerged = false;
         }
-            //move the object on Y towards water level
-            //calculate vector between water level and object position
-            Vector3 vecBetween = (new Vector3(transform.position.x, waterLevel + transform.localScale.y, transform.position.z) - transform.position);
+
+        //move the object on Y towards water level
+        //calculate vector between water level and object position
+        Vector3 vecBetween = (new Vector3(transform.position.x, waterLevel + transform.localScale.y, transform.position.z) - transform.position);
 
 
         //if object center is below the water
@@ -71,15 +76,11 @@ public class FakeFloaty : MonoBehaviour
             waterResist = vecBetween.magnitude * 0.1f;
             rb.drag = waterResist;
             rb.AddForce(vecBetween * buoyancyForce * Time.fixedDeltaTime);
-
         }
         else
         {
             //no buoyancy in the air
-
             rb.drag = airResist;
-        
-
         }
 
         if (transform.rotation != Quaternion.identity)
@@ -87,7 +88,38 @@ public class FakeFloaty : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, (rotationCorrection * Time.fixedDeltaTime));
         }
 
+    }
 
+    //Clamps local rotation x and z of object
+    private void ClampRotation()
+    {
+        angle = transform.localRotation.eulerAngles;
 
+        if (angle.x < 355.0f && angle.x > 340.0f)
+        {
+            angle = transform.localRotation.eulerAngles;
+            angle.x = 355.0f;
+            transform.localRotation = Quaternion.Euler(angle);
+        }
+
+        if (angle.x > 5.0f && angle.x < 15.0f)
+        {
+            angle = transform.localRotation.eulerAngles;
+            angle.x = 5.0f;
+            transform.localRotation = Quaternion.Euler(angle);
+        }
+
+        if (angle.z < 355.0f && angle.z > 340.0f)
+        {
+            angle = transform.localRotation.eulerAngles;
+            angle.z = 355.0f;
+            transform.localRotation = Quaternion.Euler(angle);
+        }
+        if (angle.z > 5.0f && angle.z < 15.0f)
+        {
+            angle = transform.localRotation.eulerAngles;
+            angle.z = 5.0f;
+            transform.localRotation = Quaternion.Euler(angle);
+        }
     }
 }
