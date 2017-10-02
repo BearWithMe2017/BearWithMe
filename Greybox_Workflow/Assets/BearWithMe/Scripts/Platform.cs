@@ -26,6 +26,19 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SinkPlatform();
+
+
+
+    }
+
+    void SlipperyPlatform()
+    {
+        
+    }
+
+    void SinkPlatform()
+    {
         if(Input.GetKeyDown("1")) //---This IF is For testing so it doesnt run on first frame of update
         {
             switch (platformNum)
@@ -63,31 +76,30 @@ public class Platform : MonoBehaviour
                         platformNum = -1;
                         break;
                     }
+
+             //------------------For Demo-------------------------
+             //if (Input.GetKeyDown("1"))
+             //{
+             //    rb = plat1.GetComponent<Rigidbody>();
+             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+             //}
+             //if (Input.GetKeyDown("2"))
+             //{
+             //    rb = plat2.GetComponent<Rigidbody>();
+             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+             //}
+             //if (Input.GetKeyDown("3"))
+             //{
+             //    rb = plat3.GetComponent<Rigidbody>();
+             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+             //}
+             //if (Input.GetKeyDown("4"))
+             //{
+             //    rb = plat4.GetComponent<Rigidbody>();
+             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+             //}
             }
         }
-
-        //------------------For Demo-------------------------
-        //if (Input.GetKeyDown("1"))
-        //{
-        //    rb = plat1.GetComponent<Rigidbody>();
-        //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        //}
-        //if (Input.GetKeyDown("2"))
-        //{
-        //    rb = plat2.GetComponent<Rigidbody>();
-        //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        //}
-        //if (Input.GetKeyDown("3"))
-        //{
-        //    rb = plat3.GetComponent<Rigidbody>();
-        //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        //}
-        //if (Input.GetKeyDown("4"))
-        //{
-        //    rb = plat4.GetComponent<Rigidbody>();
-        //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-        //}
-
     }
 }
 
