@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XboxCtrlrInput;
-using XInputDotNetPure;
 
 public class CharMovement : MonoBehaviour
 {
-    public XboxController mXboxController = XboxController.First;
+    public XboxController m_XController;
 
     private Rigidbody m_RigidBody;
     public float m_fSpeed = 50.0f;
@@ -32,8 +31,8 @@ public class CharMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = Vector3.zero;
-        movement.x = Input.GetAxis("Horizontal") + XCI.GetAxis(XboxAxis.LeftStickX, mXboxController);
-        movement.z = Input.GetAxis("Vertical") + XCI.GetAxis(XboxAxis.LeftStickY, mXboxController);
+        movement.x = Input.GetAxis("Horizontal") + XCI.GetAxis(XboxAxis.LeftStickX, m_XController);
+        movement.z = Input.GetAxis("Vertical") + XCI.GetAxis(XboxAxis.LeftStickY, m_XController);
 
 
 
