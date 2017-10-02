@@ -14,7 +14,7 @@ public class CharAttack : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_Controller = InputManager.ActiveDevice;
+        m_Controller = InputManager.Devices[1];
         m_RigidBody = GetComponent<Rigidbody>();
         Anim = GetComponent<Animator>();
     }

@@ -8,12 +8,12 @@ public class CharMovement : MonoBehaviour
 
     private Rigidbody m_RigidBody;
     public float m_fSpeed = 50.0f;
-    //public float m_fFriction = 50.0f;
+    public float m_fFriction = 50.0f;
     public InputDevice m_Controller;
     // Use this for initialization
     void Awake()
     {
-        m_Controller = InputManager.ActiveDevice;
+        m_Controller = InputManager.Devices[1];
         m_RigidBody = GetComponent<Rigidbody>();
         m_RigidBody.maxAngularVelocity = 10;
     }
@@ -48,7 +48,7 @@ public class CharMovement : MonoBehaviour
         {
             if (playerVeloc.x > 0)
             {
-             //   playerVeloc.x -= m_fFriction * Time.deltaTime;
+                playerVeloc.x -= m_fFriction * Time.deltaTime;
 
                 if (playerVeloc.x < 0.0f)
                 {
@@ -58,7 +58,7 @@ public class CharMovement : MonoBehaviour
 
             if (playerVeloc.x < 0)
             {
-               // playerVeloc.x += m_fFriction * Time.deltaTime;
+                playerVeloc.x += m_fFriction * Time.deltaTime;
 
                 if (playerVeloc.x > 0.0f)
                 {
@@ -76,7 +76,7 @@ public class CharMovement : MonoBehaviour
         {
             if (playerVeloc.z > 0)
             {
-              //  playerVeloc.z -= m_fFriction * Time.deltaTime;
+                playerVeloc.z -= m_fFriction * Time.deltaTime;
 
                 if (playerVeloc.z < 0.0f)
                     playerVeloc.z = 0.0f;
@@ -84,7 +84,7 @@ public class CharMovement : MonoBehaviour
 
             if (playerVeloc.z < 0)
             {
-              //  playerVeloc.z += m_fFriction * Time.deltaTime;
+                playerVeloc.z += m_fFriction * Time.deltaTime;
 
                 if (playerVeloc.z > 0.0f)
                     playerVeloc.z = 0.0f;
