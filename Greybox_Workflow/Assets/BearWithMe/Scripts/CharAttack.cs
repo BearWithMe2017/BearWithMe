@@ -1,20 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using InControl;
+using XboxCtrlrInput;
 
 public class CharAttack : MonoBehaviour
 {
     private Animator Anim;
     public float m_fForce = 500;
     private Rigidbody m_RigidBody;
-    public InputDevice m_Controller;
+    public XboxController m_Controller;
     private bool m_bGuardUp = false;
 
     // Use this for initialization
     void Awake()
     {
-        m_Controller = InputManager.Devices[1];
+        m_Controller = XboxController.First;
         m_RigidBody = GetComponent<Rigidbody>();
         Anim = GetComponent<Animator>();
     }
@@ -23,12 +23,12 @@ public class CharAttack : MonoBehaviour
     void Update()
     {
         
-        if (m_Controller.Action1.WasPressed)
+        if (XCI.GetButtonDown(XboxButton.A))
         {         
             Anim.SetTrigger("Attack1Trigger");
         }
 
-        if (m_Controller.Action2.WasPressed)
+        if (XCI.GetButtonDown(XboxButton.B))
         {
             m_bGuardUp = true;
         }

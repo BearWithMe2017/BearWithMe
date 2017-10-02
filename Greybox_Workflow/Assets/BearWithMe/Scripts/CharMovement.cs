@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using InControl;
+using XboxCtrlrInput;
 
 public class CharMovement : MonoBehaviour
 {
@@ -9,11 +9,11 @@ public class CharMovement : MonoBehaviour
     private Rigidbody m_RigidBody;
     public float m_fSpeed = 50.0f;
     public float m_fFriction = 50.0f;
-    public InputDevice m_Controller;
+    public XboxController m_Controller;
     // Use this for initialization
     void Awake()
     {
-        m_Controller = InputManager.Devices[1];
+        m_Controller = XboxController.First;
         m_RigidBody = GetComponent<Rigidbody>();
         m_RigidBody.maxAngularVelocity = 10;
     }
@@ -32,8 +32,8 @@ public class CharMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = Vector3.zero;
-        movement.x = m_Controller.LeftStickX;
-        movement.z = m_Controller.LeftStickY;
+        movement.x = XCI.GetAxis(XboxAxis.LeftStickX);
+        movement.z = XCI.GetAxis(XboxAxis.LeftStickY);
 
         m_RigidBody.AddForce(movement * m_fSpeed, ForceMode.Force);
 
