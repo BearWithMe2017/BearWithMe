@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XboxCtrlrInput;
+using InControl;
 
 public class CharAttack : MonoBehaviour
 {
     private Animator Anim;
     public float m_fForce = 500;
     private Rigidbody m_RigidBody;
-    public XboxController m_Controller;
-    private bool m_bGuardUp;
+    public InputDevice m_Controller;
+    private bool m_bGuardUp = false;
 
     // Use this for initialization
     void Awake()
     {
+        m_Controller = InputManager.ActiveDevice;
         m_RigidBody = GetComponent<Rigidbody>();
         Anim = GetComponent<Animator>();
     }
@@ -21,9 +22,19 @@ public class CharAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") || XCI.GetButton(XboxButton.A, m_Controller))
-        {
+        
+        if (m_Controller.Action1.WasPressed)
+        {         
             Anim.SetTrigger("Attack1Trigger");
+        }
+
+        if (m_Controller.Action2.WasPressed)
+        {
+            m_bGuardUp = true;
+        }
+        else
+        {
+            m_bGuardUp = false;
         }
     }
 
@@ -47,20 +58,17 @@ public class CharAttack : MonoBehaviour
             // And finally we add force in the direction of dir and multiply it by force. 
             // This will push back the player
             m_RigidBody.AddForce(dir * m_fForce);
-        }
-        else if(Input.GetButtonDown("Fire2") || XCI.GetButton(XboxButton.B, m_Controller))
+        }  
+        //AIDS
+        if(m_bGuardUp == true && collision.gameObject.tag == "Player")
         {
-            m_bGuardUp = true;
-            if(m_bGuardUp == true)
-            {
-                // Calculate Angle Between the collision point and the player
-                Vector3 dir = collision.contacts[0].point - transform.position;
-                // We then get the opposite (-Vector3) and normalize it
-                dir = -dir.normalized;
-                // And finally we add force in the direction of dir and multiply it by force. 
-                // This will push back the player
-                m_RigidBody.AddForce((dir * m_fForce) / 2);
-            }
-        }
+            // Calculate Angle Between the collision point and the player
+            Vector3 dir = collision.contacts[0].point - transform.position;
+            // We then get the opposite (-Vector3) and normalize it
+            dir = -dir.normalized;
+            // And finally we add force in the direction of dir and multiply it by force. 
+            // This will push back the player
+            m_RigidBody.AddForce((dir * m_fForce) / 2);
+        }     
     }
 }
