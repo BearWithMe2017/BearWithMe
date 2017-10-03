@@ -58,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = Vector3.zero;
-        movement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);
-        movement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
+        movement.x = Input.GetAxis("Horizontal") + XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);
+        movement.z = Input.GetAxis("Vertical") + XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
 
         m_RigidBody.AddForce(movement * m_fSpeed, ForceMode.Force);
 

@@ -9,7 +9,7 @@ public class CharAttack : MonoBehaviour
     public float m_fForce = 500;
     private Rigidbody m_RigidBody;
     public XboxController m_Controller;
-    private bool m_bGuardUp = false;
+    public bool m_bGuardUp = false;
 
     private static bool didQueryNumOfCtrlrs = false;
     private Vector3 newPosition;
@@ -70,32 +70,23 @@ public class CharAttack : MonoBehaviour
     //Paramaters:
     //Collision
     //---------------------------------------------------
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            if (m_bGuardUp == true)
+            PlayerAttack player = other.GetComponent<PlayerAttack>();
+            if (player.m_bGuardUp)
             {
-                // Calculate Angle Between the collision point and the player
-                Vector3 dir = collision.contacts[0].point - transform.position;
-                // We then get the opposite (-Vector3) and normalize it
-                dir = -dir.normalized;
-                // And finally we add force in the direction of dir and multiply it by force. 
-                // This will push back the player
-                m_RigidBody.AddForce((dir * m_fForce) / 4);
-
+                Vector3 dir = (other.transform.position - transform.position);
+                dir = dir.normalized;
+                other.GetComponent<Rigidbody>().AddForce(dir * m_fForce / 100.0f, ForceMode.Impulse);
             }
             else
             {
-                // Calculate Angle Between the collision point and the player
-                Vector3 dir = collision.contacts[0].point - transform.position;
-                // We then get the opposite (-Vector3) and normalize it
-                dir = -dir.normalized;
-                // And finally we add force in the direction of dir and multiply it by force. 
-                // This will push back the player
-                m_RigidBody.AddForce(dir * m_fForce);
-
+                Vector3 dir = (other.transform.position - transform.position);
+                dir = dir.normalized;
+                other.GetComponent<Rigidbody>().AddForce(dir * m_fForce, ForceMode.Impulse);
             }
-        }  
+        }
     }
 }
