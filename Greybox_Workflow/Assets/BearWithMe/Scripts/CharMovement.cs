@@ -59,8 +59,8 @@ public class CharMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = Vector3.zero;
-        movement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);
-        movement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
+        movement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_Controller) + Input.GetAxis("Horizontal");
+        movement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_Controller) + Input.GetAxis("Vertical");
 
         m_RigidBody.AddForce(movement * m_fSpeed, ForceMode.Force);
 
