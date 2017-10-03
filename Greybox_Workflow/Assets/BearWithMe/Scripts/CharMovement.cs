@@ -5,18 +5,45 @@ using XboxCtrlrInput;
 
 public class CharMovement : MonoBehaviour
 {
-
+    public XboxController m_Controller;
     private Rigidbody m_RigidBody;
+    private Vector3 newPosition;
+
     public float m_fSpeed = 50.0f;
     public float m_fFriction = 50.0f;
-    public XboxController m_Controller;
+    private static bool didQueryNumOfCtrlrs = false;
+
     // Use this for initialization
     void Awake()
     {
-        m_Controller = XboxController.First;
+        m_Controller = XboxController.Second;
         m_RigidBody = GetComponent<Rigidbody>();
         m_RigidBody.maxAngularVelocity = 10;
+
+        newPosition = transform.position;
+
+        if (!didQueryNumOfCtrlrs)
+        {
+            didQueryNumOfCtrlrs = true;
+
+            int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+            if (queriedNumberOfCtrlrs == 1)
+            {
+                Debug.Log("Only " + queriedNumberOfCtrlrs + " Xbox controller plugged in.");
+            }
+            else if (queriedNumberOfCtrlrs == 0)
+            {
+                Debug.Log("No Xbox controllers plugged in!");
+            }
+            else
+            {
+                Debug.Log(queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
+            }
+
+            XCI.DEBUG_LogControllerNames();
+        }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -32,8 +59,8 @@ public class CharMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = Vector3.zero;
-        movement.x = XCI.GetAxis(XboxAxis.LeftStickX);
-        movement.z = XCI.GetAxis(XboxAxis.LeftStickY);
+        movement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);
+        movement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
 
         m_RigidBody.AddForce(movement * m_fSpeed, ForceMode.Force);
 

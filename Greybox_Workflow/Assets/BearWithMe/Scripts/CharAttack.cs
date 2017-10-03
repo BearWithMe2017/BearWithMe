@@ -11,24 +11,47 @@ public class CharAttack : MonoBehaviour
     public XboxController m_Controller;
     private bool m_bGuardUp = false;
 
+    private static bool didQueryNumOfCtrlrs = false;
+    private Vector3 newPosition;
     // Use this for initialization
     void Awake()
     {
-        m_Controller = XboxController.First;
+        m_Controller = XboxController.Second;
         m_RigidBody = GetComponent<Rigidbody>();
         Anim = GetComponent<Animator>();
+
+        if (!didQueryNumOfCtrlrs)
+        {
+            didQueryNumOfCtrlrs = true;
+
+            int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+            if (queriedNumberOfCtrlrs == 1)
+            {
+                Debug.Log("Only " + queriedNumberOfCtrlrs + " Xbox controller plugged in.");
+            }
+            else if (queriedNumberOfCtrlrs == 0)
+            {
+                Debug.Log("No Xbox controllers plugged in!");
+            }
+            else
+            {
+                Debug.Log(queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
+            }
+
+            XCI.DEBUG_LogControllerNames();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        if (XCI.GetButtonDown(XboxButton.A))
+        if (XCI.GetButtonDown(XboxButton.A, m_Controller))
         {         
             Anim.SetTrigger("Attack1Trigger");
         }
 
-        if (XCI.GetButtonDown(XboxButton.B))
+        if (XCI.GetButtonDown(XboxButton.B, m_Controller))
         {
             m_bGuardUp = true;
         }
@@ -51,24 +74,28 @@ public class CharAttack : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // Calculate Angle Between the collision point and the player
-            Vector3 dir = collision.contacts[0].point - transform.position;
-            // We then get the opposite (-Vector3) and normalize it
-            dir = -dir.normalized;
-            // And finally we add force in the direction of dir and multiply it by force. 
-            // This will push back the player
-            m_RigidBody.AddForce(dir * m_fForce);
+            if (m_bGuardUp == true)
+            {
+                // Calculate Angle Between the collision point and the player
+                Vector3 dir = collision.contacts[0].point - transform.position;
+                // We then get the opposite (-Vector3) and normalize it
+                dir = -dir.normalized;
+                // And finally we add force in the direction of dir and multiply it by force. 
+                // This will push back the player
+                m_RigidBody.AddForce((dir * m_fForce) / 4);
+
+            }
+            else
+            {
+                // Calculate Angle Between the collision point and the player
+                Vector3 dir = collision.contacts[0].point - transform.position;
+                // We then get the opposite (-Vector3) and normalize it
+                dir = -dir.normalized;
+                // And finally we add force in the direction of dir and multiply it by force. 
+                // This will push back the player
+                m_RigidBody.AddForce(dir * m_fForce);
+
+            }
         }  
-        //AIDS
-        if(m_bGuardUp == true && collision.gameObject.tag == "Player")
-        {
-            // Calculate Angle Between the collision point and the player
-            Vector3 dir = collision.contacts[0].point - transform.position;
-            // We then get the opposite (-Vector3) and normalize it
-            dir = -dir.normalized;
-            // And finally we add force in the direction of dir and multiply it by force. 
-            // This will push back the player
-            m_RigidBody.AddForce((dir * m_fForce) / 2);
-        }     
     }
 }
