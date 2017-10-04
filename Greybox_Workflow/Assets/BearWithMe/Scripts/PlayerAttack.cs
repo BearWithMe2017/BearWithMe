@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator Anim;
     public float m_fForce = 500;
 
-    private bool m_bGuardUp = false;
+    public bool m_bGuardUp = false;
 
     private static bool didQueryNumOfCtrlrs = false;
     private Vector3 m_NewPosition;
