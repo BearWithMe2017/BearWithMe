@@ -11,7 +11,12 @@ public class Platform : MonoBehaviour
     private GameObject plat4;
     private int platformNum;
     private bool forceApplied;
+    [SerializeField]
+    bool isSlippery;
+    [SerializeField]
+    bool isSunk;
     float platformHeight;
+    float sinkSpeed;
 
     // Use this for initialization
     void Start ()
@@ -22,98 +27,141 @@ public class Platform : MonoBehaviour
         plat3 = GameObject.Find("Plat3");
         plat4 = GameObject.Find("Plat4");
         //default value (value > 3 || < 0)
-        platformNum = -1;
+        platformNum = 0;
         forceApplied = false;
+        isSlippery = false;
+        isSunk = false;
         platformHeight = 1.04f;
-
+        sinkSpeed = 0.7f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        SinkPlatform();
-        SlipperyPlatform();
-        
 
         
+    }
+
+    void FixedUpdate()
+    {
+        if (isSunk == true)
+        {
+            SinkPlatform();
+        }
+        if (isSlippery == true)
+        {
+            SlipperyPlatform();
+        }
+
     }
 
     void SlipperyPlatform()
     {
+       
 
-
-
-        if (Input.GetKeyDown("2")) //---This IF is For testing so it doesnt run on first frame of update
+        switch (platformNum)
         {
-            rb = plat1.GetComponent<Rigidbody>();
-            rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+            case 0:
+                {
+                    rb = plat1.GetComponent<Rigidbody>();
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    platformNum = -1;
+                    break;
+                }
+            case 1:
+                {
+                    rb = plat2.GetComponent<Rigidbody>();
+                    platformNum = -1;
+                    break;
+                }
+            case 2:
+                {
+                    rb = plat3.GetComponent<Rigidbody>();
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    platformNum = -1;
+                    break;
+                }
+            case 3:
+                {
+                    rb = plat4.GetComponent<Rigidbody>();
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    platformNum = -1;
+                    break;
+                }
+            default:
+                {
+                    platformNum = -1;
+                    break;
+                }
         }
 
-        Debug.Log(rb.transform.position.y);
+        Vector3 direction = (plat1.transform.position - new Vector3(plat1.transform.position.x, 0.4f, plat1.transform.position.z)).normalized;
+        rb.MovePosition(plat1.transform.position - direction * sinkSpeed * Time.fixedDeltaTime);
 
-        if (transform.position.y <= 0.4f)
-        {
+        Debug.Log(plat1.transform.position.y);
+
+        if (transform.position.y <= 1.0f)
+            {
 
             //Lerp back to orginal position
-            //rb.transform.position = Vector3.Lerp(rb.transform.position, initialPos, 100 * Time.deltaTime);
+            //rb.transform.position = Vector3.Lerp(rb.transform.position, new Vector3(rb.transform.position.x, 1.05f, rb.transform.position.z), 50 * Time.deltaTime);
 
-            rb.AddForce(0, 10.0f, 0, ForceMode.Impulse);
+            //rb.AddForce(0, 10.0f, 0, ForceMode.Impulse);
             forceApplied = true;
-        }
 
-        if (transform.position.y >= platformHeight && forceApplied)
-        {
-            rb.constraints = RigidbodyConstraints.FreezePositionY;
-        }
+            }
 
-       //if (transform.position.y == transform.parent.position.y && forceApplied )
-       //{
-       //    rb.constraints = RigidbodyConstraints.FreezePositionY;
-       //   // rb.useGravity = true;
-       // }
+            if (transform.position.y >= platformHeight  && forceApplied)
+            {
+                rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationY;
+            }
 
+            //if (transform.position.y == transform.parent.position.y && forceApplied )
+            //{
+            //    rb.constraints = RigidbodyConstraints.FreezePositionY;
+            //   // rb.useGravity = true;
+            // }
+        
     }
 
     void SinkPlatform()
     {
-        if(Input.GetKeyDown("1")) //---This IF is For testing so it doesnt run on first frame of update
+        switch (platformNum)
         {
-            switch (platformNum)
-            {
-                case 0:
-                    {
-                        rb = plat1.GetComponent<Rigidbody>();
-                        rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                        platformNum = -1;
-                        break;
-                    }
-                case 1:
-                    {
-                        rb = plat2.GetComponent<Rigidbody>();
-                        rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                        platformNum = -1;
-                        break;
-                    }
-                case 2:
-                    {
-                        rb = plat3.GetComponent<Rigidbody>();
-                        rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                        platformNum = -1;
-                        break;
-                    }
-                case 3:
-                    {
-                        rb = plat4.GetComponent<Rigidbody>();
-                        rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                        platformNum = -1;
-                        break;
-                    }
-                default:
-                    {
-                        platformNum = -1;
-                        break;
-                    }
-
+            case 0:
+                {
+                    rb = plat1.GetComponent<Rigidbody>();
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    platformNum = -1;
+                    break;
+                }
+            case 1:
+                {
+                    rb = plat2.GetComponent<Rigidbody>();
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    platformNum = -1;
+                    break;
+                }
+            case 2:
+                {
+                    rb = plat3.GetComponent<Rigidbody>();
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    platformNum = -1;
+                    break;
+                }
+            case 3:
+                {
+                    rb = plat4.GetComponent<Rigidbody>();
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    platformNum = -1;
+                    break;
+                }
+            default:
+                {
+                    platformNum = -1;
+                    break;
+                }
+        }
              //------------------For Demo-------------------------
              //if (Input.GetKeyDown("1"))
              //{
@@ -135,8 +183,8 @@ public class Platform : MonoBehaviour
              //    rb = plat4.GetComponent<Rigidbody>();
              //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
              //}
-            }
-        }
+            
+      
     }
 }
 
