@@ -20,6 +20,13 @@ public class CharAttack : MonoBehaviour
         m_RigidBody = GetComponent<Rigidbody>();
         Anim = GetComponent<Animator>();
 
+        if (m_RigidBody.GetComponent<SphereCollider>() != null)
+        {
+            Debug.Log("Collideroff");
+            //do something
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+        }
+
         if (!didQueryNumOfCtrlrs)
         {
             didQueryNumOfCtrlrs = true;
@@ -88,5 +95,17 @@ public class CharAttack : MonoBehaviour
                 other.GetComponent<Rigidbody>().AddForce(dir * m_fForce, ForceMode.Impulse);
             }
         }
+    }
+
+    public void AttackOn()
+    {
+        gameObject.GetComponent<SphereCollider>().enabled = true;
+        Debug.Log("On");
+    }
+
+    public void AttackOff()
+    {
+        gameObject.GetComponent<SphereCollider>().enabled = false;
+        Debug.Log("Off");
     }
 }
