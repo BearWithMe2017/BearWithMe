@@ -17,6 +17,7 @@ public class Platform : MonoBehaviour
     bool isSunk;
     float platformHeight;
     float sinkSpeed;
+    Animator animator;
 
     // Use this for initialization
     void Start ()
@@ -33,6 +34,7 @@ public class Platform : MonoBehaviour
         isSunk = false;
         platformHeight = 1.04f;
         sinkSpeed = 0.7f;
+        animator = transform.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -46,11 +48,15 @@ public class Platform : MonoBehaviour
     {
         if (isSunk == true)
         {
-            SinkPlatform();
+            animator.Play("Sink");
+            isSunk = false;
+            //SinkPlatform();
         }
         if (isSlippery == true)
         {
-            SlipperyPlatform();
+            animator.Play("Slippery");
+            isSlippery = false;
+            //SlipperyPlatform();
         }
 
     }
