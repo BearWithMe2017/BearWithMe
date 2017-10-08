@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_Controller = XboxController.First;
+        m_Controller = XboxController.All;
         m_RigidBody = GetComponent<Rigidbody>();
         m_RigidBody.maxAngularVelocity = 10;
 
