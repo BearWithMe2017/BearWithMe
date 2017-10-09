@@ -10,7 +10,7 @@ public class Buoyancy : MonoBehaviour
     [SerializeField]
     private float rotationCorrection = 5.0f;
     [SerializeField]
-    private float waterLevel = 1.0f;
+    private float waterLevel = 0.0f;
     [SerializeField]
     private float splashDownForce = -1.25f;
 

@@ -23,10 +23,10 @@ public class Platform : MonoBehaviour
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
-        plat1 = GameObject.Find("Plat1");
-        plat2 = GameObject.Find("Plat2");
-        plat3 = GameObject.Find("Plat3");
-        plat4 = GameObject.Find("Plat4");
+      //  plat1 = GameObject.Find("Plat1");
+      //  plat2 = GameObject.Find("Plat2");
+      //  plat3 = GameObject.Find("Plat3");
+      //  plat4 = GameObject.Find("Plat4");
         //default value (value > 3 || < 0)
         platformNum = 0;
         forceApplied = false;
@@ -34,7 +34,7 @@ public class Platform : MonoBehaviour
         isSunk = false;
         platformHeight = 1.04f;
         sinkSpeed = 0.7f;
-        animator = transform.GetComponent<Animator>();
+        animator = transform.GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame
@@ -63,43 +63,43 @@ public class Platform : MonoBehaviour
 
     void SlipperyPlatform()
     {
-       
+        rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
 
-        switch (platformNum)
-        {
-            case 0:
-                {
-                    rb = plat1.GetComponent<Rigidbody>();
-                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                    platformNum = -1;
-                    break;
-                }
-            case 1:
-                {
-                    rb = plat2.GetComponent<Rigidbody>();
-                    platformNum = -1;
-                    break;
-                }
-            case 2:
-                {
-                    rb = plat3.GetComponent<Rigidbody>();
-                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                    platformNum = -1;
-                    break;
-                }
-            case 3:
-                {
-                    rb = plat4.GetComponent<Rigidbody>();
-                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                    platformNum = -1;
-                    break;
-                }
-            default:
-                {
-                    platformNum = -1;
-                    break;
-                }
-        }
+        // switch (platformNum)
+        // {
+        //     case 0:
+        //         {
+        //             rb = plat1.GetComponent<Rigidbody>();
+        //             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+        //             platformNum = -1;
+        //             break;
+        //         }
+        //     case 1:
+        //         {
+        //             rb = plat2.GetComponent<Rigidbody>();
+        //             platformNum = -1;
+        //             break;
+        //         }
+        //     case 2:
+        //         {
+        //             rb = plat3.GetComponent<Rigidbody>();
+        //             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+        //             platformNum = -1;
+        //             break;
+        //         }
+        //     case 3:
+        //         {
+        //             rb = plat4.GetComponent<Rigidbody>();
+        //             rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+        //             platformNum = -1;
+        //             break;
+        //         }
+        //     default:
+        //         {
+        //             platformNum = -1;
+        //             break;
+        //         }
+        // }
 
         Vector3 direction = (plat1.transform.position - new Vector3(plat1.transform.position.x, 0.4f, plat1.transform.position.z)).normalized;
         rb.MovePosition(plat1.transform.position - direction * sinkSpeed * Time.fixedDeltaTime);
