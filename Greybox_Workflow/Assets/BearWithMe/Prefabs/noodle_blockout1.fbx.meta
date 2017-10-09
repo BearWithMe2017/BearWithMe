@@ -1,33 +1,29 @@
 fileFormatVersion: 2
-guid: 96ae3dbb2a55c6642a1eea9d3c2951ad
-timeCreated: 1507500645
+guid: 48c8db67865dfef48ab9049fdd228bd3
+timeCreated: 1507517403
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Noodle_Joint_Lower1
-    100002: Noodle_Joint_Lower2
-    100004: Noodle_Joint_Root
-    100006: Noodle_Joint_Upper1
-    100008: Noodle_Joint_Upper2
-    100010: Noodle_Joint_Upper3
-    100012: Noodle_Joint_Upper4
-    100014: Noodle_Joint_Upper5
-    100016: Noodle_Mesh
-    100018: //RootNode
-    400000: Noodle_Joint_Lower1
-    400002: Noodle_Joint_Lower2
-    400004: Noodle_Joint_Root
-    400006: Noodle_Joint_Upper1
-    400008: Noodle_Joint_Upper2
-    400010: Noodle_Joint_Upper3
-    400012: Noodle_Joint_Upper4
-    400014: Noodle_Joint_Upper5
-    400016: Noodle_Mesh
-    400018: //RootNode
-    4300000: Noodle_Mesh
+    100000: //RootNode
+    100002: noodle_joint1
+    100004: noodle_joint2
+    100006: noodle_joint3
+    100008: noodle_joint4
+    100010: noodle_joint5
+    100012: noodle_mesh
+    100014: noodle_root
+    400000: //RootNode
+    400002: noodle_joint1
+    400004: noodle_joint2
+    400006: noodle_joint3
+    400008: noodle_joint4
+    400010: noodle_joint5
+    400012: noodle_mesh
+    400014: noodle_root
+    4300000: noodle_mesh
     9500000: //RootNode
-    13700000: Noodle_Mesh
+    13700000: noodle_mesh
   materials:
     importMaterials: 1
     materialName: 0
