@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody m_RigidBody;
     public float m_fSpeed = 50.0f;
     public float m_fFriction = 50.0f;
+
     private Animator Anim;
 
     public XboxController m_Controller;
@@ -51,8 +52,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-
-
     }
     //------------------------------------------
     //
@@ -63,8 +62,9 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = Vector3.zero;
-        movement.x = Input.GetAxis("Horizontal") + XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);
+        movement.x = Input.GetAxis("Horizontal") + XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);     
         movement.z = Input.GetAxis("Vertical") + XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
+        
 
         m_RigidBody.AddForce(movement * m_fSpeed, ForceMode.Force);
 
@@ -73,11 +73,19 @@ public class PlayerMovement : MonoBehaviour
             m_RigidBody.rotation = Quaternion.LookRotation(movement.normalized, Vector3.up);
         }
 
+       
+
         Vector3 playerVeloc = m_RigidBody.velocity;
 
+        if (movement.x != 0 || movement.z != 0)
+        {
+            Anim.SetBool("IsMoving", true);
 
-
-
+        }
+        else
+        {
+            Anim.SetBool("IsMoving", false);
+        }
 
         if (movement.x == 0)
         {
@@ -99,7 +107,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     playerVeloc.x = 0.0f;
                 }
-
             }
 
             if (playerVeloc.x < 1.0f && playerVeloc.x > -1.0f)
@@ -116,8 +123,6 @@ public class PlayerMovement : MonoBehaviour
 
                 if (playerVeloc.z < 0.0f)
                     playerVeloc.z = 0.0f;
-
-                Anim.SetBool("IsMoving", true);
             }
 
             if (playerVeloc.z < 0)
@@ -132,8 +137,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerVeloc.z = 0;
             }
-
-            Anim.SetBool("IsMoving", false);
 
         }
 
