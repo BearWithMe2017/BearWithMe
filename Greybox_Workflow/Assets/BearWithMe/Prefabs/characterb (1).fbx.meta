@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fed42157b72ce88439cc1671e800eea6
-timeCreated: 1507526126
+guid: ea2e148d8e745dc47834e5674e3a8e86
+timeCreated: 1507526107
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -30,6 +30,7 @@ ModelImporter:
     100044: characterb_joint_spine4
     100046: characterb_joint_wrist_l
     100048: characterb_joint_wrist_r
+    100050: characterb_mesh
     400000: //RootNode
     400002: characterb_joint_ankle_l
     400004: characterb_joint_ankle_r
@@ -55,8 +56,10 @@ ModelImporter:
     400044: characterb_joint_spine4
     400046: characterb_joint_wrist_l
     400048: characterb_joint_wrist_r
-    7400000: attackanim
+    400050: characterb_mesh
+    4300000: characterb_mesh
     9500000: //RootNode
+    13700000: characterb_mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -80,49 +83,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: attackanim
-      takeName: Take 001
-      firstFrame: 40
-      lastFrame: 68
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0.48076302
-        functionName: AttackOn
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5804675
-        functionName: AttackOff
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

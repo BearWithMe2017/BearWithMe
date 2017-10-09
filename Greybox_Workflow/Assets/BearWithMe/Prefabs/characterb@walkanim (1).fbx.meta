@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fed42157b72ce88439cc1671e800eea6
-timeCreated: 1507526126
+guid: c33805c2766e4c5409cae120fe1bb169
+timeCreated: 1507526134
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -55,7 +55,7 @@ ModelImporter:
     400044: characterb_joint_spine4
     400046: characterb_joint_wrist_l
     400048: characterb_joint_wrist_r
-    7400000: attackanim
+    7400000: walkanim (1)
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -82,17 +82,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: attackanim
+      name: walkanim (1)
       takeName: Take 001
-      firstFrame: 40
-      lastFrame: 68
+      firstFrame: 13
+      lastFrame: 37
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -104,21 +104,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.48076302
-        functionName: AttackOn
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5804675
-        functionName: AttackOff
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
