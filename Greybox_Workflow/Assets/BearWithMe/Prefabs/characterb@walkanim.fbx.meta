@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f4da239774ee8e34f926dd7d063dba81
-timeCreated: 1507500507
+guid: 7da74a4eec8553e40bb84f1f162abaa4
+timeCreated: 1507526711
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -30,7 +30,6 @@ ModelImporter:
     100044: characterb_joint_spine4
     100046: characterb_joint_wrist_l
     100048: characterb_joint_wrist_r
-    100050: characterb_mesh
     400000: //RootNode
     400002: characterb_joint_ankle_l
     400004: characterb_joint_ankle_r
@@ -56,11 +55,8 @@ ModelImporter:
     400044: characterb_joint_spine4
     400046: characterb_joint_wrist_l
     400048: characterb_joint_wrist_r
-    400050: characterb_mesh
-    4300000: characterb_mesh
     7400000: Take 001
     9500000: //RootNode
-    13700000: characterb_mesh
   materials:
     importMaterials: 1
     materialName: 0

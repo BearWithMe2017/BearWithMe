@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody m_RigidBody;
     public float m_fSpeed = 50.0f;
     public float m_fFriction = 50.0f;
+    private Animator Anim;
+
     public XboxController m_Controller;
 
     private static bool didQueryNumOfCtrlrs = false;
@@ -16,9 +18,10 @@ public class PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_Controller = XboxController.All;
         m_RigidBody = GetComponent<Rigidbody>();
         m_RigidBody.maxAngularVelocity = 10;
+        Anim = GetComponent<Animator>();
+
 
         newPosition = transform.position;
 
@@ -48,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+
+
     }
     //------------------------------------------
     //
@@ -70,6 +75,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 playerVeloc = m_RigidBody.velocity;
 
+
+
+
+
         if (movement.x == 0)
         {
             if (playerVeloc.x > 0)
@@ -90,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     playerVeloc.x = 0.0f;
                 }
+
             }
 
             if (playerVeloc.x < 1.0f && playerVeloc.x > -1.0f)
@@ -106,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (playerVeloc.z < 0.0f)
                     playerVeloc.z = 0.0f;
+
+                Anim.SetBool("IsMoving", true);
             }
 
             if (playerVeloc.z < 0)
@@ -120,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerVeloc.z = 0;
             }
+
+            Anim.SetBool("IsMoving", false);
 
         }
 

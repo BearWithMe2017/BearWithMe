@@ -19,7 +19,6 @@ public class PlayerAttack : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_Controller = XboxController.All;
         m_RigidBody = GetComponent<Rigidbody>();
         Anim = GetComponent<Animator>();
 
