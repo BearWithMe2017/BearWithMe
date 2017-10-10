@@ -15,9 +15,15 @@ public class Platform : MonoBehaviour
     bool isSlippery;
     [SerializeField]
     bool isSunk;
+
+
     float platformHeight;
     float sinkSpeed;
     Animator animator;
+
+    float baseMass;
+    int playerCount;
+
 
     // Use this for initialization
     void Start ()
@@ -35,12 +41,21 @@ public class Platform : MonoBehaviour
         platformHeight = 1.04f;
         sinkSpeed = 0.7f;
         animator = transform.GetComponentInParent<Animator>();
+        playerCount = 0;
+        baseMass = 4.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (playerCount > 0)
+        {
+            rb.mass = baseMass - playerCount;
+        }
+        else
+        {
+            rb.mass = baseMass;
+        }
         
     }
 
@@ -192,6 +207,29 @@ public class Platform : MonoBehaviour
             
       
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.CompareTag("Player"))
+        {
+            playerCount++;
+        }
+
+
+    }
+
+
+    private void OnCollisionExit(Collision collision)
+    {
+
+        if (collision.collider.gameObject.CompareTag("Player"))
+        {
+            playerCount--;
+        }
+
+    }
+
 }
 
 

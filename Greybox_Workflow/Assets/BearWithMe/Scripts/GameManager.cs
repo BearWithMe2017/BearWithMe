@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	private void Awake()
+    public int playerNumber;
+    public List<GameObject> Players;
+    private float timeLeft;
+
+    private void Awake()
 	{
 		//find any game manager
 		GameManager[] managers = FindObjectsOfType<GameManager>();
@@ -19,6 +23,40 @@ public class GameManager : MonoBehaviour
 			//set yourself to not destroy (because you are the gamemanager)
 			GameObject.DontDestroyOnLoad(gameObject);
 		}
+
+        //UIManager.getNumofPlayers()
+        //timeLeft = UIManager.getTime();
+        timeLeft = 30f;
 			
 	}
+
+    private void Start()
+    {
+        InvokeRepeating("UpdateTime", 1f, 1f);
+
+    }
+
+    private void Update()
+    {
+      
+    }
+
+
+
+    private void UpdateTime()
+    {
+        timeLeft -= 1;
+
+        //ui.Time = "timeLeft";
+
+        if (timeLeft < 0)
+        {
+           //Round End
+        }
+    }
+
+    public int TimeLeft
+    {
+        get { return TimeLeft; }
+    }
 }

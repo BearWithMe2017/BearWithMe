@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
         Anim = GetComponent<Animator>();
 
 
-        gameObject.GetComponentInChildren<SphereCollider>().enabled = false;
+        gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
 
         if (!didQueryNumOfCtrlrs)
         {
@@ -139,13 +139,13 @@ public class PlayerAttack : MonoBehaviour
 
     public void AttackOn()
     {
-        gameObject.GetComponentInChildren<SphereCollider>().enabled = true;
+        gameObject.GetComponentInChildren<CapsuleCollider>().enabled = true;
         Debug.Log("On");
     }
 
     public void AttackOff()
     {
-        gameObject.GetComponentInChildren<SphereCollider>().enabled = false;
+        gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         Debug.Log("Off");
     }
 }

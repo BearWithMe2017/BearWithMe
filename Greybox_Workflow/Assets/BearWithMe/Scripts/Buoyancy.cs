@@ -10,6 +10,8 @@ public class Buoyancy : MonoBehaviour
     [SerializeField]
     private float rotationCorrection = 5.0f;
     [SerializeField]
+    private bool rotation;
+    [SerializeField]
     private float waterLevel = 0.0f;
     [SerializeField]
     private float splashDownForce = -1.25f;
@@ -34,6 +36,7 @@ public class Buoyancy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         airResist = rb.drag;
         submerged = false;
+        rotation = true;
     }
 
     // Update is called once per frame
@@ -44,7 +47,6 @@ public class Buoyancy : MonoBehaviour
 
     void FixedUpdate()
     {
-        ClampRotation();
 
         if (transform.position.y > waterLevel)
         {
@@ -57,7 +59,7 @@ public class Buoyancy : MonoBehaviour
 
 
         //if object center is below the water
-        if ( transform.position.y < waterLevel)
+        if (transform.position.y < waterLevel)
         {
             //if you were out of water last frame
             if (submerged == false)
@@ -65,7 +67,7 @@ public class Buoyancy : MonoBehaviour
                 //add impulse force
                 rb.AddForce(0, splashDownForce * rb.velocity.y, 0, ForceMode.Impulse);
             }
-           
+
             //calculate buoyancy based on the distance and a force
             // calculatedBuoyancy = vecBetween.magnitude * buoyancyForce;
             submerged = true;
@@ -79,9 +81,14 @@ public class Buoyancy : MonoBehaviour
             rb.drag = airResist;
         }
 
-        if (transform.rotation != Quaternion.identity)
+        if (rotation)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, (rotationCorrection * Time.fixedDeltaTime));
+            if (transform.rotation != Quaternion.identity)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, (rotationCorrection * Time.fixedDeltaTime));
+            }
+
+            ClampRotation();
         }
 
     }
@@ -118,4 +125,7 @@ public class Buoyancy : MonoBehaviour
             transform.localRotation = Quaternion.Euler(angle);
         }
     }
+
+
 }
+
