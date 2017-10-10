@@ -82,7 +82,7 @@ public class CharAttack : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerAttack player = other.GetComponent<PlayerAttack>();
-            if (player.m_bGuardUp)
+            if (player.BGuardUp)
             {
                 Vector3 dir = (other.transform.position - transform.position);
                 dir = dir.normalized;

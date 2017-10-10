@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody>();
-        m_Controller = XboxController.All;
         m_RigidBody.maxAngularVelocity = 10;
         Anim = GetComponent<Animator>();
 
@@ -73,8 +72,6 @@ public class PlayerMovement : MonoBehaviour
         {
             m_RigidBody.rotation = Quaternion.LookRotation(movement.normalized, Vector3.up);
         }
-
-       
 
         Vector3 playerVeloc = m_RigidBody.velocity;
 

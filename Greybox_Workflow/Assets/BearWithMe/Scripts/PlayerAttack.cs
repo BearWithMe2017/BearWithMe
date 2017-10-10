@@ -10,10 +10,23 @@ public class PlayerAttack : MonoBehaviour
     private Animator Anim;
     public float m_fForce = 500;
 
-    public bool m_bGuardUp = false;
+    private bool m_bGuardUp = false;
 
     private static bool didQueryNumOfCtrlrs = false;
     private Vector3 m_NewPosition;
+
+    public bool BGuardUp
+    {
+        get
+        {
+            return m_bGuardUp;
+        }
+
+        set
+        {
+            m_bGuardUp = value;
+        }
+    }
 
 
     // Use this for initialization
@@ -50,20 +63,19 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if (Input.GetButtonDown("Fire1") || XCI.GetButtonDown(XboxButton.A, m_Controller))
         {
             Anim.SetTrigger("Attack1Trigger");
         }
 
-        if (Input.GetButtonDown("Fire2") || XCI.GetButtonDown(XboxButton.B, m_Controller))
+        if (Input.GetButton("Fire2") || XCI.GetButton(XboxButton.B, m_Controller))
         {
-            m_bGuardUp = true;
+            Debug.Log("Blocking");
+            BGuardUp = true;
         }
         else
         {
-            m_bGuardUp = false;
+            BGuardUp = false;
         }
     }
 
@@ -110,7 +122,7 @@ public class PlayerAttack : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerAttack player = other.GetComponent<PlayerAttack>();
-            if (player.m_bGuardUp)
+            if (player.BGuardUp == true)
             {
                 Vector3 dir = (other.transform.position - transform.position);
                 dir = dir.normalized;
