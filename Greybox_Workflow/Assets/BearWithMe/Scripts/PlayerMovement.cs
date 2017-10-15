@@ -6,25 +6,29 @@ using XboxCtrlrInput;
 public class PlayerMovement : MonoBehaviour
 {
 
-    private Rigidbody m_RigidBody;
+   
     public float m_fSpeed = 50.0f;
     public float m_fFriction = 50.0f;
+    public float m_fJumpPower = 50.0f;
+    public float m_fFallGravity = 10.0f;
+
+    private bool m_bGrounded = true;
+    private static bool didQueryNumOfCtrlrs = false;
+
+    private RaycastHit m_HasHit;
+
+    private Rigidbody m_RigidBody;
 
     private Animator Anim;
 
     public XboxController m_Controller;
 
-    private static bool didQueryNumOfCtrlrs = false;
-    private Vector3 newPosition;
     // Use this for initialization
     void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody>();
         m_RigidBody.maxAngularVelocity = 10;
         Anim = GetComponent<Animator>();
-
-
-        newPosition = transform.position;
 
         if (!didQueryNumOfCtrlrs)
         {
@@ -51,7 +55,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //raycast to check if the player has landed or not
+        if (Physics.Raycast(transform.position, Vector3.down, 0.2f))
+        {
+            m_bGrounded = true;
+        }
+        else
+        {
+            m_bGrounded = false;
+        }
     }
     //------------------------------------------
     //
@@ -147,5 +159,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
         m_RigidBody.angularVelocity = Vector3.zero;
+
+        // Jumping through physics
+        // and makeing it feel right through gravity manipulation
+        if(m_bGrounded == true)
+        {
+            if(Input.GetButtonDown("Jump") || XCI.GetButtonDown(XboxButton.A, m_Controller))
+            {       
+                m_RigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);           
+            }  
+        }
+        if(m_bGrounded == false)
+        {
+            if (m_RigidBody.velocity.y < 0)
+            {
+                m_RigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
+            }
+        }      
     }
 }
