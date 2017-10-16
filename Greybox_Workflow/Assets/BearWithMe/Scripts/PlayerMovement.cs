@@ -5,21 +5,31 @@ using XboxCtrlrInput;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float m_fSpeed = 50.0f;
-    public float m_fFriction = 50.0f;
-    public float m_fJumpPower = 5.0f;
-    public float m_fFallGravity = 5.0f;
+    private RaycastHit m_HasHit;
+    private Rigidbody m_RigidBody;
+    private Animator Anim;
+    public XboxController m_Controller;
+
+    [SerializeField] private float m_fSpeed;
+    public float Speed
+    {
+        get
+        {
+            return m_fSpeed;
+        }
+        set
+        {
+            m_fSpeed = value;
+        }
+    }
+
+    [SerializeField] private float m_fFriction;
+
+    public float m_fJumpPower;
+    public float m_fFallGravity;
 
     private bool m_bGrounded = true;
     private static bool didQueryNumOfCtrlrs = false;
-
-    private RaycastHit m_HasHit;
-
-    private Rigidbody m_RigidBody;
-
-    private Animator Anim;
-
-    public XboxController m_Controller;
 
     // Use this for initialization
     void Awake()
@@ -71,12 +81,22 @@ public class PlayerMovement : MonoBehaviour
     //------------------------------------------
     private void FixedUpdate()
     {
+        int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+
         Vector3 movement = Vector3.zero;
-        movement.x = Input.GetAxis("Horizontal") + XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);     
-        movement.z = Input.GetAxis("Vertical") + XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
+        if (queriedNumberOfCtrlrs > 0)
+        {
+            movement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);
+            movement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
+        }
+        else
+        {
+            movement.x = Input.GetAxis("Horizontal");
+            movement.z = Input.GetAxis("Vertical");
+        }
         
 
-        m_RigidBody.AddForce(movement * m_fSpeed, ForceMode.Force);
+        m_RigidBody.AddForce(movement * Speed, ForceMode.Force);
 
         if (movement.magnitude > 0.01f)
         {

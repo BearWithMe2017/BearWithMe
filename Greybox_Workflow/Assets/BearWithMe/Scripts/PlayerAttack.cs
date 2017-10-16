@@ -8,12 +8,18 @@ public class PlayerAttack : MonoBehaviour
     public XboxController m_Controller;
     private Animator Anim;
     private Vector3 m_NewPosition;
+    private PlayerMovement m_PlayerMovementSpeed;
 
-    public float m_fForce = 10.0f;
-    public float m_fChargeForce1st = 2.0f;
-    public float m_fChargeForce2nd = 3.0f;
-    public float m_fChargeForce3rd = 4.0f;
-    public float m_fChargeForce4th = 5.0f;
+    public float m_fForce;
+
+    public float m_fChargeForce1st;
+    public float m_fChargeForce2nd;
+    public float m_fChargeForce3rd;
+    public float m_fChargeForce4th;
+
+    [SerializeField] private float m_fFullSpeed;
+    [SerializeField] private float m_fHalfSpeed;
+
     private float m_fHeldDown = 0.0f;
 
 
@@ -21,13 +27,14 @@ public class PlayerAttack : MonoBehaviour
     private bool m_bChargeAtk = false;
     private static bool didQueryNumOfCtrlrs = false;
 
+
+
     public bool BGuardUp
     {
         get
         {
             return m_bGuardUp;
         }
-
         set
         {
             m_bGuardUp = value;
@@ -40,6 +47,8 @@ public class PlayerAttack : MonoBehaviour
         Anim = GetComponent<Animator>();
 
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
+
+        m_PlayerMovementSpeed = GetComponent<PlayerMovement>();
 
         if (!didQueryNumOfCtrlrs)
         {
@@ -60,47 +69,61 @@ public class PlayerAttack : MonoBehaviour
             }
 
             XCI.DEBUG_LogControllerNames();
-        }
+
+            
+        }  
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetButtonDown("Fire1") || XCI.GetButtonDown(XboxButton.RightBumper, m_Controller))
-        //{
-        //    Anim.SetTrigger("Attack1Trigger");
-        //}
-        Debug.Log(m_fHeldDown);
-        if (Input.GetButton("Fire1") || XCI.GetButton(XboxButton.X, m_Controller))
-        {
-            Anim.SetTrigger("Attack1Trigger");
+        int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
-            m_fHeldDown += Time.deltaTime;
+        Debug.Log(m_fHeldDown);
+        if (queriedNumberOfCtrlrs > 0)
+        {
+            if (XCI.GetButton(XboxButton.X, m_Controller))
+            {
+                Anim.SetTrigger("Attack1Trigger");
+
+                m_fHeldDown += Time.deltaTime;
+            }
         }
-        if(m_fHeldDown >= 0.50f)
+        else
+        {
+            if (Input.GetButton("Fire1"))
+            {
+                Anim.SetTrigger("Attack1Trigger");
+
+                m_fHeldDown += Time.deltaTime;
+            }
+        }
+
+        if (m_fHeldDown >= 0.50f)
         {
             m_bChargeAtk = true;
+            m_PlayerMovementSpeed.Speed = m_fHalfSpeed;
         }
         else
         {
             m_bChargeAtk = false;
+            m_PlayerMovementSpeed.Speed = m_fFullSpeed;        
         }
-        //else
-        //{
-        //    if (m_fHeldDown >= 0.50f)
-        //    {
-        //        m_bChargeAtk = true;
-        //        m_fHeldDownTime = m_fHeldDown;
-        //        m_fHeldDown = 0.0f;
-        //    }
-        //    else
-        //    {
-        //        m_fHeldDown = 0.0f;
-        //       // m_bChargeAtk = false;
-        //    }
-        //}
 
-        if (Input.GetButton("Fire2") || XCI.GetButton(XboxButton.B, m_Controller))
+        if (queriedNumberOfCtrlrs > 0)
+        {
+            if (XCI.GetButton(XboxButton.B, m_Controller))
+            {
+                Debug.Log("Blocking");
+                BGuardUp = true;
+            }
+            else
+            {
+                BGuardUp = false;
+            }
+        }
+
+        if(Input.GetButton("Fire2"))
         {
             Debug.Log("Blocking");
             BGuardUp = true;
@@ -188,6 +211,7 @@ public class PlayerAttack : MonoBehaviour
     public void AttackOff()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
+        m_fHeldDown = 0.0f;
         Debug.Log("Off");
     }
 }
