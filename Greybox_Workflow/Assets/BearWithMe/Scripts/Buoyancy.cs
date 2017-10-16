@@ -88,7 +88,7 @@ public class Buoyancy : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, (rotationCorrection * Time.fixedDeltaTime));
             }
 
-            ClampRotation();
+            //ClampRotation();
         }
 
     }

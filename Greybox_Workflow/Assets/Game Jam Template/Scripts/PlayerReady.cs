@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XboxCtrlrInput;
 
 public class PlayerReady : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class PlayerReady : MonoBehaviour
     public GameObject MatchSettingsUI;
     public GameObject Camera3;
     public GameObject CharacterUI;
+
+    public XboxController m_Controller;
 
     public bool changeScenes;                                           //If true, load a new scene when Start is pressed, if false, fade out UI and continue in single scene
 
@@ -149,6 +152,13 @@ public class PlayerReady : MonoBehaviour
             //{
             //    g.SetActive(true);
             //}
+
+            LoadScene();
         }
+    }
+
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(1);
     }
 }

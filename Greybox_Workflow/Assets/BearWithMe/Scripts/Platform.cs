@@ -209,26 +209,26 @@ public class Platform : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.gameObject.CompareTag("Player"))
-        {
-            playerCount++;
-        }
-
-
-    }
-
-
-    private void OnCollisionExit(Collision collision)
-    {
-
-        if (collision.collider.gameObject.CompareTag("Player"))
-        {
-            playerCount--;
-        }
-
-    }
+   private void OnCollisionEnter(Collision collision)
+   {
+       if (collision.collider.gameObject.CompareTag("Player"))
+       {
+           playerCount++;
+       }
+   
+   
+   }
+   
+   
+   private void OnCollisionExit(Collision collision)
+   {
+   
+       if (collision.collider.gameObject.CompareTag("Player"))
+       {
+           playerCount--;
+       }
+   
+   }
 
 }
 
