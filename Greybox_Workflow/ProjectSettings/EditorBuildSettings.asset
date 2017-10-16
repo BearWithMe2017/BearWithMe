@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/BearWithMe/Scenes/Andrew_scene_002.unity
+    guid: f71ca2275f110ed4e9e3ec5441cbf816

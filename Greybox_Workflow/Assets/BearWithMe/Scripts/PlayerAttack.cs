@@ -9,9 +9,16 @@ public class PlayerAttack : MonoBehaviour
     private Animator Anim;
     private Vector3 m_NewPosition;
 
-    public float m_fForce = 500;
+    public float m_fForce = 10.0f;
+    public float m_fChargeForce1st = 2.0f;
+    public float m_fChargeForce2nd = 3.0f;
+    public float m_fChargeForce3rd = 4.0f;
+    public float m_fChargeForce4th = 5.0f;
+    private float m_fHeldDown = 0.0f;
+
 
     private bool m_bGuardUp = false;
+    private bool m_bChargeAtk = false;
     private static bool didQueryNumOfCtrlrs = false;
 
     public bool BGuardUp
@@ -59,10 +66,39 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") || XCI.GetButtonDown(XboxButton.RightBumper, m_Controller))
+        //if (Input.GetButtonDown("Fire1") || XCI.GetButtonDown(XboxButton.RightBumper, m_Controller))
+        //{
+        //    Anim.SetTrigger("Attack1Trigger");
+        //}
+        Debug.Log(m_fHeldDown);
+        if (Input.GetButton("Fire1") || XCI.GetButton(XboxButton.X, m_Controller))
         {
             Anim.SetTrigger("Attack1Trigger");
+
+            m_fHeldDown += Time.deltaTime;
         }
+        if(m_fHeldDown >= 0.50f)
+        {
+            m_bChargeAtk = true;
+        }
+        else
+        {
+            m_bChargeAtk = false;
+        }
+        //else
+        //{
+        //    if (m_fHeldDown >= 0.50f)
+        //    {
+        //        m_bChargeAtk = true;
+        //        m_fHeldDownTime = m_fHeldDown;
+        //        m_fHeldDown = 0.0f;
+        //    }
+        //    else
+        //    {
+        //        m_fHeldDown = 0.0f;
+        //       // m_bChargeAtk = false;
+        //    }
+        //}
 
         if (Input.GetButton("Fire2") || XCI.GetButton(XboxButton.B, m_Controller))
         {
@@ -89,17 +125,56 @@ public class PlayerAttack : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerAttack player = other.GetComponent<PlayerAttack>();
-            if (player.BGuardUp == true)
+            if (player.BGuardUp == true && m_bChargeAtk == false)
             {
                 Vector3 dir = (other.transform.position - transform.position);
                 dir = dir.normalized;
-                other.GetComponent<Rigidbody>().AddForce(dir * m_fForce / 100.0f, ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().AddForce(dir * m_fForce / 5.00f, ForceMode.Impulse);
+                m_fHeldDown = 0.0f;
+            }
+            else if (m_bChargeAtk == true && BGuardUp == false)
+            {
+                Debug.Log("Charge Attack");
+                if (m_fHeldDown >= 0.50f && m_fHeldDown <= 0.99f)
+                {
+                    Debug.Log("Charge Attack");
+                    Vector3 dir = (other.transform.position - transform.position);
+                    dir = dir.normalized;
+                    other.GetComponent<Rigidbody>().AddForce(dir * m_fForce * m_fChargeForce1st, ForceMode.Impulse);
+                    m_fHeldDown = 0.0f;
+                }
+                else if (m_fHeldDown >= 1.00f && m_fHeldDown <= 1.49f)
+                {
+                    Debug.Log("Charge Attack");
+                    Vector3 dir = (other.transform.position - transform.position);
+                    dir = dir.normalized;
+                    other.GetComponent<Rigidbody>().AddForce(dir * m_fForce * m_fChargeForce2nd, ForceMode.Impulse);
+                    m_fHeldDown = 0.0f;
+                }
+                else if (m_fHeldDown >= 1.50f && m_fHeldDown <= 1.99f)
+                {
+                    Debug.Log("Charge Attack");
+                    Vector3 dir = (other.transform.position - transform.position);
+                    dir = dir.normalized;
+                    other.GetComponent<Rigidbody>().AddForce(dir * m_fForce * m_fChargeForce3rd, ForceMode.Impulse);
+                    m_fHeldDown = 0.0f;
+                }
+                else if (m_fHeldDown >= 2.00f)
+                {
+                    Debug.Log("Charge Attack");
+                    Vector3 dir = (other.transform.position - transform.position);
+                    dir = dir.normalized;
+                    other.GetComponent<Rigidbody>().AddForce(dir * m_fForce * m_fChargeForce4th, ForceMode.Impulse);
+                    m_fHeldDown = 0.0f;
+                }
+                
             }
             else
             {
                 Vector3 dir = (other.transform.position - transform.position);
                 dir = dir.normalized;
                 other.GetComponent<Rigidbody>().AddForce(dir * m_fForce, ForceMode.Impulse);
+                m_fHeldDown = 0.0f;
             }
         }
     }

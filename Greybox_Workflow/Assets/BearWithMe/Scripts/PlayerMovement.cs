@@ -5,12 +5,10 @@ using XboxCtrlrInput;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-   
     public float m_fSpeed = 50.0f;
     public float m_fFriction = 50.0f;
-    public float m_fJumpPower = 50.0f;
-    public float m_fFallGravity = 10.0f;
+    public float m_fJumpPower = 5.0f;
+    public float m_fFallGravity = 5.0f;
 
     private bool m_bGrounded = true;
     private static bool didQueryNumOfCtrlrs = false;
@@ -175,6 +173,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 m_RigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
             }
-        }      
+        }
     }
 }
