@@ -67,10 +67,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 Debug.Log(queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
             }
-
-            XCI.DEBUG_LogControllerNames();
-
-            
+            XCI.DEBUG_LogControllerNames();            
         }  
     }
 

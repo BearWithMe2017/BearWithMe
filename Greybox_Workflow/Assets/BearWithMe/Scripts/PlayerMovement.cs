@@ -24,6 +24,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [SerializeField] private float m_fFriction;
+    public float Friction
+    {
+        get
+        {
+            return m_fFriction;
+        }
+        set
+        {
+            m_fFriction = value;
+        }
+    }
 
     public float m_fJumpPower;
     public float m_fFallGravity;
