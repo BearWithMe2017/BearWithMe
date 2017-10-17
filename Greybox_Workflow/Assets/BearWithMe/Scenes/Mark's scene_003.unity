@@ -5600,6 +5600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currFriction: 0
   isSlippery: 0
   isSunk: 0
 --- !u!54 &115751160
@@ -25841,7 +25842,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh71092
+  m_Name: pb_Mesh14574
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -64682,6 +64683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currFriction: 0
   isSlippery: 0
   isSunk: 0
 --- !u!54 &1195019454
@@ -72422,6 +72424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currFriction: 0
   isSlippery: 0
   isSunk: 0
 --- !u!43 &1364198773
@@ -110442,6 +110445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currFriction: 0
   isSlippery: 0
   isSunk: 0
 --- !u!54 &2127149437

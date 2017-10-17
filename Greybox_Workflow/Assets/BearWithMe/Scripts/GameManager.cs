@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey("b"))
+        if (Input.GetKeyDown("b"))
         {
             LoadBeachBall();
         }
