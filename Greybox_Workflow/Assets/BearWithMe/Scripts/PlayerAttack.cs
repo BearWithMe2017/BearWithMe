@@ -76,7 +76,7 @@ public class PlayerAttack : MonoBehaviour
     {
         int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
-        Debug.Log(m_fHeldDown);
+   
         if (queriedNumberOfCtrlrs > 0)
         {
             if (XCI.GetButton(XboxButton.X, m_Controller))

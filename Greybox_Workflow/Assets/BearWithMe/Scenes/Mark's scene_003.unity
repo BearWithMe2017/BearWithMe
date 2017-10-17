@@ -5504,7 +5504,7 @@ GameObject:
   - component: {fileID: 115751158}
   m_Layer: 0
   m_Name: Plat4
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5564,8 +5564,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7, y: 1, z: 7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7, y: 0.55, z: 7}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!33 &115751157
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5615,7 +5615,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!1 &126099167
 GameObject:
@@ -8085,7 +8085,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4853811025227416, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.257
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 4853811025227416, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8119,7 +8119,7 @@ Prefab:
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fSpeed
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4784650624936072, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8135,6 +8135,27 @@ Prefab:
       propertyPath: m_fFallGravity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fFullSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54023648312030790, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65688389169719112, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 266830af206cb4e4dbdb9a408a70e54a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
   m_IsPrefabParent: 0
@@ -12598,7 +12619,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh70014
+  m_Name: pb_Mesh30324
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -64565,7 +64586,7 @@ GameObject:
   - component: {fileID: 1195019452}
   m_Layer: 0
   m_Name: Plat3
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64625,8 +64646,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7, y: 1, z: 7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7, y: 0.55, z: 7}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!33 &1195019451
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -64676,7 +64697,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!1 &1202503236
 GameObject:
@@ -69256,6 +69277,64 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1001 &1283686375
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -11.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -3.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.14120258
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.77086794
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.11191578
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.61098236
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613398510575424, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 103.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592757082922320, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 20.76
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!43 &1304098385
 Mesh:
   m_ObjectHideFlags: 0
@@ -72232,7 +72311,7 @@ GameObject:
   - component: {fileID: 1354304024}
   m_Layer: 0
   m_Name: Plat1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72311,7 +72390,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!65 &1354304022
 BoxCollider:
@@ -72323,8 +72402,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7, y: 0.4, z: 7}
-  m_Center: {x: 0, y: 0.22, z: 0}
+  m_Size: {x: 7, y: 0.55, z: 7}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!33 &1354304023
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83942,6 +84021,11 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1 &1587964333 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1613398510575424, guid: 051938850a8a3a24da23b802bb86837e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1283686375}
 --- !u!43 &1588599743
 Mesh:
   m_ObjectHideFlags: 0
@@ -91953,6 +92037,7 @@ MonoBehaviour:
   playerNumber: 2
   Players:
   - {fileID: 0}
+  beachBallPrefab: {fileID: 1587964333}
 --- !u!4 &1727128391
 Transform:
   m_ObjectHideFlags: 0
@@ -99824,7 +99909,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh71076
+  m_Name: pb_Mesh31408
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -99952,7 +100037,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh17978
+  m_Name: pb_Mesh32380
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -107145,7 +107230,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Time:'
+  m_Text: 
 --- !u!222 &2034208347
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -110261,7 +110346,7 @@ GameObject:
   - component: {fileID: 2127149435}
   m_Layer: 0
   m_Name: Plat2
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110321,8 +110406,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7, y: 1, z: 7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 7, y: 0.55, z: 7}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!33 &2127149434
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -110372,7 +110457,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!1001 &2141831469
 Prefab:

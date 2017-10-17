@@ -11,11 +11,14 @@ public class Platform : MonoBehaviour
     private GameObject plat4;
     private int platformNum;
     private bool forceApplied;
+    public float currFriction;
+    private float prevPlayerFriction;
     [SerializeField]
     bool isSlippery;
     [SerializeField]
     bool isSunk;
-
+    bool wasSunk;
+    bool wasSlippery;
 
     float platformHeight;
     float sinkSpeed;
@@ -24,25 +27,28 @@ public class Platform : MonoBehaviour
     float baseMass;
     int playerCount;
 
+    void Awake()
+    {
 
+    }
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
-      //  plat1 = GameObject.Find("Plat1");
-      //  plat2 = GameObject.Find("Plat2");
-      //  plat3 = GameObject.Find("Plat3");
-      //  plat4 = GameObject.Find("Plat4");
+
         //default value (value > 3 || < 0)
         platformNum = 0;
         forceApplied = false;
         isSlippery = false;
         isSunk = false;
+        wasSunk = false;
+        wasSlippery = false;
         platformHeight = 1.04f;
         sinkSpeed = 0.7f;
         animator = transform.GetComponentInParent<Animator>();
         playerCount = 0;
         baseMass = 4.0f;
+        currFriction = 50.0f;
     }
 
     // Update is called once per frame
@@ -63,12 +69,14 @@ public class Platform : MonoBehaviour
     {
         if (isSunk == true)
         {
+            wasSunk = true;
             animator.Play("Sink");
             isSunk = false;
             //SinkPlatform();
         }
         if (isSlippery == true)
         {
+            wasSlippery = true;
             animator.Play("Slippery");
             isSlippery = false;
             //SlipperyPlatform();
@@ -118,8 +126,6 @@ public class Platform : MonoBehaviour
 
         Vector3 direction = (plat1.transform.position - new Vector3(plat1.transform.position.x, 0.4f, plat1.transform.position.z)).normalized;
         rb.MovePosition(plat1.transform.position - direction * sinkSpeed * Time.fixedDeltaTime);
-
-        Debug.Log(plat1.transform.position.y);
 
         if (transform.position.y <= 1.0f)
             {
@@ -183,27 +189,6 @@ public class Platform : MonoBehaviour
                     break;
                 }
         }
-             //------------------For Demo-------------------------
-             //if (Input.GetKeyDown("1"))
-             //{
-             //    rb = plat1.GetComponent<Rigidbody>();
-             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-             //}
-             //if (Input.GetKeyDown("2"))
-             //{
-             //    rb = plat2.GetComponent<Rigidbody>();
-             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-             //}
-             //if (Input.GetKeyDown("3"))
-             //{
-             //    rb = plat3.GetComponent<Rigidbody>();
-             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-             //}
-             //if (Input.GetKeyDown("4"))
-             //{
-             //    rb = plat4.GetComponent<Rigidbody>();
-             //    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-             //}
             
       
     }
@@ -213,8 +198,20 @@ public class Platform : MonoBehaviour
    {
        if (collision.collider.gameObject.CompareTag("Player"))
        {
-           playerCount++;
-       }
+
+            playerCount++;
+
+
+           //PlayerMovement playerMovement = collision.collider.gameObject.GetComponent<PlayerMovement>();
+           //prevPlayerFriction = playerMovement.Friction;
+           //if (wasSlippery == true)
+           //{
+           //    prevPlayerFriction = playerMovement.Friction;
+           //    playerMovement.Friction -= ((playerMovement.Friction * slipFrictionPercent) / 100);
+           //    Debug.Log("playerMovement Friction: " + playerMovement.Friction);
+           //}
+            
+        }
    
    
    }
@@ -225,8 +222,18 @@ public class Platform : MonoBehaviour
    
        if (collision.collider.gameObject.CompareTag("Player"))
        {
-           playerCount--;
-       }
+            playerCount--;
+
+          //  PlayerMovement playerMovement = collision.collider.gameObject.GetComponent<PlayerMovement>();
+          //
+          // 
+          //
+          // if (wasSlippery == true)
+          // {
+          //      playerMovement.Friction = prevPlayerFriction;
+          //      Debug.Log("Leaving Collision: " + playerMovement.Friction);
+          //  }
+        }
    
    }
 

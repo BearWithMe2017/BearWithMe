@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public int playerNumber;
     public List<GameObject> Players;
     private float timeLeft;
+    Text timer;
+    [SerializeField]
+    GameObject beachBallPrefab;
+    
 
     private void Awake()
 	{
@@ -27,18 +33,26 @@ public class GameManager : MonoBehaviour
         //UIManager.getNumofPlayers()
         //timeLeft = UIManager.getTime();
         timeLeft = 30f;
-			
-	}
+        timer = GameObject.Find("RoundTime").GetComponent<Text>();
+
+    }
 
     private void Start()
     {
-        InvokeRepeating("UpdateTime", 1f, 1f);
-
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            UpdateTime();
+            InvokeRepeating("UpdateTime", 1f, 1f);
+        }
+       // LoadBeachBall();
     }
 
     private void Update()
     {
-      
+        if (Input.GetKey("b"))
+        {
+            LoadBeachBall();
+        }
     }
 
 
@@ -47,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         timeLeft -= 1;
 
-        //ui.Time = "timeLeft";
+        timer.text = "Time: " + timeLeft;
 
         if (timeLeft < 0)
         {
@@ -58,5 +72,19 @@ public class GameManager : MonoBehaviour
     public int TimeLeft
     {
         get { return TimeLeft; }
+    }
+
+    void LoadBeachBall()
+    {
+        Vector3[] BallPosArray = new Vector3[4];
+
+        BallPosArray[0] = new Vector3(-15f, 4f, Random.Range(-15.0f, 15.0f));
+        BallPosArray[1] = new Vector3(21f, 4f, Random.Range(-15.0f, 15.0f));
+        BallPosArray[2] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, -17f);
+        BallPosArray[3] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, 15f);
+
+
+        beachBallPrefab = Instantiate(beachBallPrefab, BallPosArray[Random.Range(0, BallPosArray.Length)], Quaternion.identity);
+        beachBallPrefab.SetActive(true);
     }
 }

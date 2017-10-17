@@ -23,21 +23,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    [SerializeField] private float m_fFriction;
-    public float Friction
-    {
-        get
-        {
-            return m_fFriction;
-        }
-        set
-        {
-            m_fFriction = value;
-        }
-    }
-
     public float m_fJumpPower;
     public float m_fFallGravity;
+
+    private float platformFriction;
 
     private bool m_bGrounded = true;
     private static bool didQueryNumOfCtrlrs = false;
@@ -130,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (playerVeloc.x > 0)
             {
-                playerVeloc.x -= m_fFriction * Time.deltaTime;
+                playerVeloc.x -= platformFriction * Time.deltaTime;
 
                 if (playerVeloc.x < 0.0f)
                 {
@@ -140,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (playerVeloc.x < 0)
             {
-                playerVeloc.x += m_fFriction * Time.deltaTime;
+                playerVeloc.x += platformFriction * Time.deltaTime;
 
                 if (playerVeloc.x > 0.0f)
                 {
@@ -158,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (playerVeloc.z > 0)
             {
-                playerVeloc.z -= m_fFriction * Time.deltaTime;
+                playerVeloc.z -= platformFriction * Time.deltaTime;
 
                 if (playerVeloc.z < 0.0f)
                     playerVeloc.z = 0.0f;
@@ -166,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (playerVeloc.z < 0)
             {
-                playerVeloc.z += m_fFriction * Time.deltaTime;
+                playerVeloc.z += platformFriction * Time.deltaTime;
 
                 if (playerVeloc.z > 0.0f)
                     playerVeloc.z = 0.0f;
@@ -205,5 +194,18 @@ public class PlayerMovement : MonoBehaviour
                 m_RigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
             }
         }
+    }
+
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.gameObject.tag =="Platform")
+        {
+            Platform currentPlatform = collision.collider.gameObject.GetComponent<Platform>();
+
+            platformFriction = currentPlatform.currFriction;
+        }
+
+
     }
 }
