@@ -5,12 +5,12 @@ using XboxCtrlrInput;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private RaycastHit m_HasHit;
-    private Rigidbody m_RigidBody;
-    private Animator Anim;
-    public XboxController m_Controller;
+    private RaycastHit m_rHasHit;
+    private Rigidbody m_rbRigidBody;
+    private Animator m_aAnimation;
+    public XboxController m_xcController;
 
-    [SerializeField] private float m_fSpeed;
+    [SerializeField] [Tooltip("Speed of character which is now determined thru full speed in Attack script; don't bother changing!")] private float m_fSpeed;
     public float Speed
     {
         get
@@ -23,37 +23,43 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public float m_fJumpPower;
-    public float m_fFallGravity;
+    [SerializeField] [Tooltip("This is the platforms friction(change currFriction under Platform script); Don't bother changing! ")] private float m_fFriction;
 
-    private float platformFriction;
+    [Tooltip("Power of your jump.")] public float m_fJumpPower;
+
+    [Tooltip("How much the gravity is increased when the character is falling down")] public float m_fFallGravity;
 
     private bool m_bGrounded = true;
-    private static bool didQueryNumOfCtrlrs = false;
+    private static bool m_bDidQueryNumOfCtrlrs = false;
 
     // Use this for initialization
     void Awake()
     {
-        m_RigidBody = GetComponent<Rigidbody>();
-        m_RigidBody.maxAngularVelocity = 10;
-        Anim = GetComponent<Animator>();
+        m_rbRigidBody = GetComponent<Rigidbody>();
+        m_rbRigidBody.maxAngularVelocity = 10;
+        m_aAnimation = GetComponent<Animator>();
 
-        if (!didQueryNumOfCtrlrs)
+        //--------------------------------------------------
+        //Checks if controller is connected
+        //Also how many are connected
+        //Use for debugging.
+        //--------------------------------------------------
+        if (!m_bDidQueryNumOfCtrlrs)
         {
-            didQueryNumOfCtrlrs = true;
+            m_bDidQueryNumOfCtrlrs = true;
 
-            int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
-            if (queriedNumberOfCtrlrs == 1)
+            int c_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+            if (c_iQueriedNumberOfCtrlrs == 1)
             {
-                Debug.Log("Only " + queriedNumberOfCtrlrs + " Xbox controller plugged in.");
+                Debug.Log("Only " + c_iQueriedNumberOfCtrlrs + " Xbox controller plugged in.");
             }
-            else if (queriedNumberOfCtrlrs == 0)
+            else if (c_iQueriedNumberOfCtrlrs == 0)
             {
                 Debug.Log("No Xbox controllers plugged in!");
             }
             else
             {
-                Debug.Log(queriedNumberOfCtrlrs + " Xbox controllers plugged in.");
+                Debug.Log(c_iQueriedNumberOfCtrlrs + " Xbox controllers plugged in.");
             }
 
             XCI.DEBUG_LogControllerNames();
@@ -63,7 +69,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //raycast to check if the player has landed or not
+        //-----------------------------------------------------------
+        //raycast downwards to check if the player has landed or not
+        //-----------------------------------------------------------
         if (Physics.Raycast(transform.position, Vector3.down, 0.2f))
         {
             m_bGrounded = true;
@@ -73,139 +81,152 @@ public class PlayerMovement : MonoBehaviour
             m_bGrounded = false;
         }
     }
-    //------------------------------------------
-    //
-    //
-    // Paramaters:
-    //
-    //------------------------------------------
+
     private void FixedUpdate()
     {
-        int queriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+        int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
-        Vector3 movement = Vector3.zero;
-        if (queriedNumberOfCtrlrs > 0)
+        Vector3 c_vMovement = Vector3.zero;
+        //------------------------------------------------
+        //Checks if controller is connected
+        //if it is it uses controller to contol character
+        //if no controllers are connected use keyboard.
+        //------------------------------------------------
+        if (m_iQueriedNumberOfCtrlrs > 0)
         {
-            movement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_Controller);
-            movement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_Controller);
+            c_vMovement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_xcController);
+            c_vMovement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_xcController);
         }
         else
         {
-            movement.x = Input.GetAxis("Horizontal");
-            movement.z = Input.GetAxis("Vertical");
+            c_vMovement.x = Input.GetAxis("Horizontal");
+            c_vMovement.z = Input.GetAxis("Vertical");
         }
-        
-
-        m_RigidBody.AddForce(movement * Speed, ForceMode.Force);
-
-        if (movement.magnitude > 0.01f)
+        //--------------------------------------------------------------
+        //Adds force to the character towards whichever way they face
+        //--------------------------------------------------------------
+        m_rbRigidBody.AddForce(c_vMovement * Speed, ForceMode.Force);
+        //--------------------------------------------------------------
+        //if character is moving you face whicever way you move towards
+        //--------------------------------------------------------------
+        if (c_vMovement.magnitude > 0.01f)
         {
-            m_RigidBody.rotation = Quaternion.LookRotation(movement.normalized, Vector3.up);
+            m_rbRigidBody.rotation = Quaternion.LookRotation(c_vMovement.normalized, Vector3.up);
         }
 
-        Vector3 playerVeloc = m_RigidBody.velocity;
-
-        if (movement.x != 0 || movement.z != 0)
+        Vector3 m_vPlayerVeloc = m_rbRigidBody.velocity;
+        //-----------------------------------------------------------
+        //Animation for the movement
+        //-----------------------------------------------------------
+        if (c_vMovement.x != 0 || c_vMovement.z != 0)
         {
-            Anim.SetBool("IsMoving", true);
-
+            m_aAnimation.SetBool("IsMoving", true);
         }
         else
         {
-            Anim.SetBool("IsMoving", false);
+            m_aAnimation.SetBool("IsMoving", false);
         }
-
-        if (movement.x == 0)
+        //---------------------------------------------------------------------
+        //affects the movement on the x axis
+        //deals with the friction and velocity on x axis
+        //and also stops player if their velocity drops below certain level
+        //---------------------------------------------------------------------
+        if (c_vMovement.x == 0)
         {
-            if (playerVeloc.x > 0)
+            if (m_vPlayerVeloc.x > 0)
             {
-                playerVeloc.x -= platformFriction * Time.deltaTime;
+                m_vPlayerVeloc.x -= m_fFriction * Time.deltaTime;
 
-                if (playerVeloc.x < 0.0f)
+                if (m_vPlayerVeloc.x < 0.0f)
                 {
-                    playerVeloc.x = 0.0f;
+                    m_vPlayerVeloc.x = 0.0f;
                 }
             }
 
-            if (playerVeloc.x < 0)
+            if (m_vPlayerVeloc.x < 0)
             {
-                playerVeloc.x += platformFriction * Time.deltaTime;
+                m_vPlayerVeloc.x += m_fFriction * Time.deltaTime;
 
-                if (playerVeloc.x > 0.0f)
+                if (m_vPlayerVeloc.x > 0.0f)
                 {
-                    playerVeloc.x = 0.0f;
+                    m_vPlayerVeloc.x = 0.0f;
                 }
             }
 
-            if (playerVeloc.x < 1.0f && playerVeloc.x > -1.0f)
+            if (m_vPlayerVeloc.x < 1.0f && m_vPlayerVeloc.x > -1.0f)
             {
-                playerVeloc.x = 0;
+                m_vPlayerVeloc.x = 0;
             }
         }
-
-        if (movement.z == 0)
+        //---------------------------------------------------------------------
+        //Affects the movement on the z axis
+        //deals with the friction and velocity on z axis
+        //and also stops player if their velocity drops below certain level
+        //---------------------------------------------------------------------
+        if (c_vMovement.z == 0)
         {
-            if (playerVeloc.z > 0)
+            if (m_vPlayerVeloc.z > 0)
             {
-                playerVeloc.z -= platformFriction * Time.deltaTime;
+                m_vPlayerVeloc.z -= m_fFriction * Time.deltaTime;
 
-                if (playerVeloc.z < 0.0f)
-                    playerVeloc.z = 0.0f;
+                if (m_vPlayerVeloc.z < 0.0f)
+                    m_vPlayerVeloc.z = 0.0f;
             }
 
-            if (playerVeloc.z < 0)
+            if (m_vPlayerVeloc.z < 0)
             {
-                playerVeloc.z += platformFriction * Time.deltaTime;
+                m_vPlayerVeloc.z += m_fFriction * Time.deltaTime;
 
-                if (playerVeloc.z > 0.0f)
-                    playerVeloc.z = 0.0f;
+                if (m_vPlayerVeloc.z > 0.0f)
+                    m_vPlayerVeloc.z = 0.0f;
             }
 
-            if (playerVeloc.z < 1.0f && playerVeloc.z > -1.0f)
+            if (m_vPlayerVeloc.z < 1.0f && m_vPlayerVeloc.z > -1.0f)
             {
-                playerVeloc.z = 0;
+                m_vPlayerVeloc.z = 0;
             }
-
         }
 
-        m_RigidBody.velocity = playerVeloc;
-
-        if (m_RigidBody.velocity.magnitude > 10)
+        m_rbRigidBody.velocity = m_vPlayerVeloc;
+        //------------------------------------------
+        //Limits the player max velocity
+        //so that player doesn't keep accelarating
+        //------------------------------------------
+        if (m_rbRigidBody.velocity.magnitude > 10)
         {
-            m_RigidBody.velocity = m_RigidBody.velocity.normalized;
-            m_RigidBody.velocity *= 10;
+            m_rbRigidBody.velocity = m_rbRigidBody.velocity.normalized;
+            m_rbRigidBody.velocity *= 10;
         }
 
-        m_RigidBody.angularVelocity = Vector3.zero;
-
+        m_rbRigidBody.angularVelocity = Vector3.zero;
+        //-----------------------------------------------------------
         // Jumping through physics
         // and makeing it feel right through gravity manipulation
-        if(m_bGrounded == true)
+        // like mario jump
+        //-----------------------------------------------------------
+        if (m_bGrounded == true)
         {
-            if(Input.GetButtonDown("Jump") || XCI.GetButtonDown(XboxButton.A, m_Controller))
-            {       
-                m_RigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);           
-            }  
-        }
-        if(m_bGrounded == false)
-        {
-            if (m_RigidBody.velocity.y < 0)
+            if (Input.GetButtonDown("Jump") || XCI.GetButtonDown(XboxButton.A, m_xcController))
             {
-                m_RigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
+                m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+            }
+        }
+        if (m_bGrounded == false)
+        {
+            if (m_rbRigidBody.velocity.y < 0)
+            {
+                m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
             }
         }
     }
 
-
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.gameObject.tag =="Platform")
+        if (collision.collider.gameObject.tag == "Platform")
         {
             Platform currentPlatform = collision.collider.gameObject.GetComponent<Platform>();
 
-            platformFriction = currentPlatform.currFriction;
+            m_fFriction = currentPlatform.currFriction;
         }
-
-
     }
 }
