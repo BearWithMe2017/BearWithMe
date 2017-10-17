@@ -206,10 +206,24 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------
         if (m_bGrounded == true)
         {
-            if (Input.GetButtonDown("Jump") || XCI.GetButtonDown(XboxButton.A, m_xcController))
+            if (m_iQueriedNumberOfCtrlrs > 0)
             {
-                m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+                if(XCI.GetButtonDown(XboxButton.A, m_xcController))
+                {
+                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+                }
             }
+            else
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+                }
+            }
+            //if (Input.GetButtonDown("Jump") || XCI.GetButtonDown(XboxButton.A, m_xcController))
+            //{
+            //    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+            //}
         }
         if (m_bGrounded == false)
         {
