@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (m_iQueriedNumberOfCtrlrs > 0)
             {
-                if(XCI.GetButtonDown(XboxButton.A, m_xcController))
+                if (XCI.GetButtonDown(XboxButton.A, m_xcController))
                 {
                     m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
                 }

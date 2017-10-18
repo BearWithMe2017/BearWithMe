@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using XboxCtrlrInput;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,13 +13,15 @@ public class GameManager : MonoBehaviour
     Text timer;
     [SerializeField]
     GameObject beachBallPrefab;
-    
+    private XboxController m_xcController;
 
     private void Awake()
 	{
 		//find any game manager
 		GameManager[] managers = FindObjectsOfType<GameManager>();
 		
+        
+
 		if(managers.Length > 1)
 		{
 			//destroy yourself, there's already a game manager
@@ -32,7 +35,7 @@ public class GameManager : MonoBehaviour
 
         //UIManager.getNumofPlayers()
         //timeLeft = UIManager.getTime();
-        timeLeft = 5f;
+        timeLeft = 60.0f;
         timer = GameObject.Find("RoundTime").GetComponent<Text>();
 
         Players.Add(GameObject.Find("PlayerCharacter1"));
@@ -90,6 +93,10 @@ public class GameManager : MonoBehaviour
         timer.text = "Time: " + timeLeft;
 
         if (timeLeft <= 0)
+        {
+            Reset();
+        }
+        else if(XCI.GetButtonDown(XboxButton.Back, m_xcController))
         {
             Reset();
         }
