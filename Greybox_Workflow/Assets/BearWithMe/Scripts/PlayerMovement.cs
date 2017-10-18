@@ -240,4 +240,5 @@ public class PlayerMovement : MonoBehaviour
             m_fFriction = currentPlatform.currFriction;
         }
     }
+
 }

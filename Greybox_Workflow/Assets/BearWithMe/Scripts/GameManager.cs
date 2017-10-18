@@ -32,8 +32,16 @@ public class GameManager : MonoBehaviour
 
         //UIManager.getNumofPlayers()
         //timeLeft = UIManager.getTime();
-        timeLeft = 30f;
-        //timer = GameObject.Find("RoundTime").GetComponent<Text>();
+        timeLeft = 5f;
+        timer = GameObject.Find("RoundTime").GetComponent<Text>();
+
+        Players.Add(GameObject.Find("PlayerCharacter1"));
+        Players.Add(GameObject.Find("PlayerCharacter2"));
+        Players.Add(GameObject.Find("PlayerCharacter3"));
+        Players.Add(GameObject.Find("PlayerCharacter4"));
+
+        playerNumber = 4;
+
 
     }
 
@@ -44,7 +52,6 @@ public class GameManager : MonoBehaviour
             UpdateTime();
             InvokeRepeating("UpdateTime", 1f, 1f);
         }
-       // LoadBeachBall();
     }
 
     private void Update()
@@ -53,6 +60,25 @@ public class GameManager : MonoBehaviour
         {
             LoadBeachBall();
         }
+
+       //if (Players[1].transform.position.y < -25 && Players[1] != null)
+       //{
+       //    
+       //    GameObject.Destroy(Players[1]);
+       //}
+       //if (Players[2].transform.position.y < -25 && Players[2] != null)
+       //{
+       //    GameObject.Destroy(Players[2]);
+       //}
+       //if (Players[3].transform.position.y < -25 && Players[3] != null)
+       //{
+       //    GameObject.Destroy(Players[3]);
+       //}
+       //if (Players[4].transform.position.y < -25 && Players[4] != null)
+       //{
+       //    GameObject.Destroy(Players[4]);
+       //}
+
     }
 
 
@@ -61,11 +87,11 @@ public class GameManager : MonoBehaviour
     {
         timeLeft -= 1;
 
-     //   timer.text = "Time: " + timeLeft;
+        timer.text = "Time: " + timeLeft;
 
-        if (timeLeft < 0)
+        if (timeLeft <= 0)
         {
-           //Round End
+            Reset();
         }
     }
 
@@ -86,5 +112,12 @@ public class GameManager : MonoBehaviour
 
         beachBallPrefab = Instantiate(beachBallPrefab, BallPosArray[Random.Range(0, BallPosArray.Length)], Quaternion.identity);
         beachBallPrefab.SetActive(true);
+    }
+
+    private void Reset()
+    {
+
+        SceneManager.LoadScene("Mark's alpha scene_001");
+
     }
 }

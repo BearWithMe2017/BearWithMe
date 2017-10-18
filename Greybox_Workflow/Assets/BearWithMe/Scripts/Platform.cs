@@ -49,7 +49,7 @@ public class Platform : MonoBehaviour
         animator = transform.GetComponentInParent<Animator>();
         playerCount = 0;
         baseMass = 4.0f;
-        currFriction = 50.0f;
+        currFriction = 500.0f;
         posY = transform.position.y;
     }
 
@@ -59,14 +59,14 @@ public class Platform : MonoBehaviour
 
      
 
-        if (playerCount > 0)
-        {
-            rb.mass = baseMass - playerCount;
-        }
-        else
-        {
-            rb.mass = baseMass;
-        }
+       if (playerCount > 0)
+       {
+           rb.mass = baseMass - playerCount;
+       }
+       else
+       {
+           rb.mass = baseMass;
+       }
         
     }
 
