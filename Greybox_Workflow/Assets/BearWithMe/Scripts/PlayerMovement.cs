@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------
         //raycast downwards to check if the player has landed or not
         //-----------------------------------------------------------
-        if (Physics.Raycast(transform.position, Vector3.down, 0.2f))
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, 0.75f))
         {
             m_bGrounded = true;
         }
@@ -80,10 +80,7 @@ public class PlayerMovement : MonoBehaviour
         {
             m_bGrounded = false;
         }
-    }
 
-    private void FixedUpdate()
-    {
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
         Vector3 c_vMovement = Vector3.zero;

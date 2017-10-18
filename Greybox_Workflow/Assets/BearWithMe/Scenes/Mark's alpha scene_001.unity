@@ -6403,7 +6403,7 @@ GameObject:
   - component: {fileID: 115751158}
   m_Layer: 0
   m_Name: Plat4
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6484,8 +6484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buoyancyForce: 1210
-  rotationCorrection: 30
-  rotation: 0
+  rotationCorrection: 25
+  rotation: 1
   waterLevel: 0.3
   splashDownForce: -1.25
 --- !u!114 &115751159
@@ -6515,7 +6515,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!1 &126099167
 GameObject:
@@ -9343,15 +9343,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4853811025227416, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -3.08
       objectReference: {fileID: 0}
     - target: {fileID: 4853811025227416, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.545
+      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 4853811025227416, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 2.82
       objectReference: {fileID: 0}
     - target: {fileID: 4853811025227416, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_LocalRotation.x
@@ -9386,12 +9386,12 @@ Prefab:
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fJumpPower
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fFallGravity
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 65688389169719112, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -9407,6 +9407,22 @@ Prefab:
         type: 2}
       propertyPath: m_Center.y
       value: 0.822294
+      objectReference: {fileID: 0}
+    - target: {fileID: 54023648312030790, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65688389169719112, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1,
+        type: 2}
+    - target: {fileID: 54023648312030790, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
@@ -68546,6 +68562,88 @@ Transform:
   m_Father: {fileID: 2070483886}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1133064751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1133064755}
+  - component: {fileID: 1133064754}
+  - component: {fileID: 1133064753}
+  - component: {fileID: 1133064752}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1133064752
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133064751}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &1133064753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133064751}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1133064754
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133064751}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1133064755
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133064751}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: 3.32, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1134755905
 Mesh:
   m_ObjectHideFlags: 0
@@ -71010,7 +71108,7 @@ GameObject:
   - component: {fileID: 1195019452}
   m_Layer: 0
   m_Name: Plat3
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71091,8 +71189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buoyancyForce: 1210
-  rotationCorrection: 30
-  rotation: 0
+  rotationCorrection: 25
+  rotation: 1
   waterLevel: 0.3
   splashDownForce: -1.25
 --- !u!114 &1195019453
@@ -71122,7 +71220,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!1 &1202503236
 GameObject:
@@ -78015,7 +78113,7 @@ GameObject:
   - component: {fileID: 1354304024}
   m_Layer: 0
   m_Name: Plat1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78045,8 +78143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buoyancyForce: 1210
-  rotationCorrection: 30
-  rotation: 0
+  rotationCorrection: 25
+  rotation: 1
   waterLevel: 0.3
   splashDownForce: -1.25
 --- !u!23 &1354304020
@@ -78094,8 +78192,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
-  m_CollisionDetection: 0
+  m_Constraints: 46
+  m_CollisionDetection: 2
 --- !u!65 &1354304022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119015,7 +119113,7 @@ GameObject:
   - component: {fileID: 2127149435}
   m_Layer: 0
   m_Name: Plat2
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119096,8 +119194,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buoyancyForce: 1210
-  rotationCorrection: 30
-  rotation: 0
+  rotationCorrection: 25
+  rotation: 1
   waterLevel: 0.3
   splashDownForce: -1.25
 --- !u!114 &2127149436
@@ -119127,7 +119225,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 42
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!1001 &2141831469
 Prefab:

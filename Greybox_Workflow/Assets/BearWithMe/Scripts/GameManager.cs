@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         //UIManager.getNumofPlayers()
         //timeLeft = UIManager.getTime();
         timeLeft = 30f;
-        timer = GameObject.Find("RoundTime").GetComponent<Text>();
+        //timer = GameObject.Find("RoundTime").GetComponent<Text>();
 
     }
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         timeLeft -= 1;
 
-        timer.text = "Time: " + timeLeft;
+     //   timer.text = "Time: " + timeLeft;
 
         if (timeLeft < 0)
         {

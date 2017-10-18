@@ -27,6 +27,7 @@ public class Platform : MonoBehaviour
     float baseMass;
     int playerCount;
 
+    private float posY = 0.0f;
     void Awake()
     {
 
@@ -49,11 +50,15 @@ public class Platform : MonoBehaviour
         playerCount = 0;
         baseMass = 4.0f;
         currFriction = 50.0f;
+        posY = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+     
+
         if (playerCount > 0)
         {
             rb.mass = baseMass - playerCount;
