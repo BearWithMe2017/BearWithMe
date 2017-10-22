@@ -6,5 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BearWithMe/Scenes/Andrew_scene_002.unity
-    guid: f71ca2275f110ed4e9e3ec5441cbf816
+    path: Assets/BearWithMe/Scenes/Andrew's Menus/Start_Menu_001.unity
+    guid: d074f243620647348bc251ceababe580
+  - enabled: 1
+    path: Assets/BearWithMe/Scenes/Andrew's Menus/Start_Menu_002.unity
+    guid: 460974fc9f7c84646bdb175c6c4de5e6
+  - enabled: 1
+    path: Assets/BearWithMe/Scenes/Andrew's Menus/Start_Menu_003.unity
+    guid: 18d46622ed1e5714d9abd962952fa7b8
+  - enabled: 1
+    path: Assets/BearWithMe/Scenes/Andrew's Menus/Start_Menu_004.unity
+    guid: cf99514cf34c9954996352454c10db3c
+  - enabled: 1
+    path: Assets/BearWithMe/Scenes/Andrew's Menus/Start_Menu_005.unity
+    guid: 534856fde1415b148b49e17f639ac26c
+  - enabled: 1
+    path: Assets/BearWithMe/Scenes/Mark's alpha scene_001.unity
+    guid: e8492748c0566ef4b9397afb5b7b385f
