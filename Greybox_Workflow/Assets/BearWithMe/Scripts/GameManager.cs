@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject beachBallPrefab;
     private XboxController m_xcController;
+    private PlayerMovement m_PlayerMovement;
 
     private void Awake()
 	{
@@ -39,8 +40,6 @@ public class GameManager : MonoBehaviour
     
 
         playerNumber = 4;
-
-
     }
 
     private void Start()
@@ -59,25 +58,24 @@ public class GameManager : MonoBehaviour
             LoadBeachBall();
         }
 
-       //if (Players[1].transform.position.y < -25 && Players[1] != null)
-       //{
-       //    
-       //    GameObject.Destroy(Players[1]);
-       //}
-       //if (Players[2].transform.position.y < -25 && Players[2] != null)
-       //{
-       //    GameObject.Destroy(Players[2]);
-       //}
-       //if (Players[3].transform.position.y < -25 && Players[3] != null)
-       //{
-       //    GameObject.Destroy(Players[3]);
-       //}
-       //if (Players[4].transform.position.y < -25 && Players[4] != null)
-       //{
-       //    GameObject.Destroy(Players[4]);
-       //}
+     if(Players.Count == 1)
+     {
+            Reset();
+     }
 
+        for (int i = 0; i < Players.Capacity; i++)
+        {
+            if (Players[i] != null)
+            {
+                m_PlayerMovement = Players[i].GetComponent<PlayerMovement>();
+            }
+            if (m_PlayerMovement.IsDead == true)
+            {
+                playerNumber--;
+            }
+        }
     }
+
 
 
 
@@ -87,7 +85,7 @@ public class GameManager : MonoBehaviour
 
         timer.text = "Time: " + timeLeft;
 
-        if (timeLeft <= 0)
+        if (timeLeft <= 0 || playerNumber <= 1)
         {
             Reset();
         }
@@ -119,7 +117,7 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
 
-        SceneManager.LoadScene("Mark's alpha scene_001");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 }

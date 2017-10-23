@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(transform.localPosition.y);
         //-----------------------------------------------------------
         //raycast downwards to check if the player has landed or not
         //-----------------------------------------------------------
@@ -124,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if(transform.position.y <= 3.50f)
+        if(transform.localPosition.y <= -3.50f)
         {
             m_bIsDead = true;
             GameObject.Destroy(gameObject);
