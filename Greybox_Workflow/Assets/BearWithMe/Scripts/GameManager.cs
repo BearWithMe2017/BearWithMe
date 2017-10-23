@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int playerNumber;
     public List<GameObject> Players;
     private float timeLeft;
-    Text timer;
+    public Text timer;
     [SerializeField]
     GameObject beachBallPrefab;
     private XboxController m_xcController;
@@ -35,13 +35,7 @@ public class GameManager : MonoBehaviour
 
         //UIManager.getNumofPlayers()
         //timeLeft = UIManager.getTime();
-        timeLeft = 60.0f;
-        timer = GameObject.Find("RoundTime").GetComponent<Text>();
-
-        Players.Add(GameObject.Find("PlayerCharacter1"));
-        Players.Add(GameObject.Find("PlayerCharacter2"));
-        Players.Add(GameObject.Find("PlayerCharacter3"));
-        Players.Add(GameObject.Find("PlayerCharacter4"));
+        timeLeft = 10.0f;
 
         playerNumber = 4;
 
@@ -50,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5))
         {
             UpdateTime();
             InvokeRepeating("UpdateTime", 1f, 1f);
