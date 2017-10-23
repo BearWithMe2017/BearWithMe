@@ -12341,6 +12341,11 @@ Transform:
   m_Father: {fileID: 1961642827}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 27.8, z: 0}
+--- !u!1 &205224026 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1335843297561934, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+    type: 2}
+  m_PrefabInternal: {fileID: 1050882956}
 --- !u!1001 &208097735
 Prefab:
   m_ObjectHideFlags: 0
@@ -52167,6 +52172,11 @@ Transform:
   m_Father: {fileID: 1998881181}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &769466470 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1335843297561934, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+    type: 2}
+  m_PrefabInternal: {fileID: 181034648}
 --- !u!43 &776775570
 Mesh:
   m_ObjectHideFlags: 0
@@ -57214,6 +57224,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 7276073f8d975484ab9c77bada5f8d4a, type: 3}
   m_PrefabInternal: {fileID: 886716398}
+--- !u!1 &889338379 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1335843297561934, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+    type: 2}
+  m_PrefabInternal: {fileID: 2141831469}
 --- !u!1 &893175172
 GameObject:
   m_ObjectHideFlags: 0
@@ -94277,6 +94292,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 7276073f8d975484ab9c77bada5f8d4a, type: 3}
   m_PrefabInternal: {fileID: 1651824232}
+--- !u!1 &1659232989 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1335843297561934, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+    type: 2}
+  m_PrefabInternal: {fileID: 886194668}
 --- !u!1001 &1660382489
 Prefab:
   m_ObjectHideFlags: 0
@@ -100285,7 +100305,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 2
   Players:
-  - {fileID: 0}
+  - {fileID: 769466470}
+  - {fileID: 889338379}
+  - {fileID: 205224026}
+  - {fileID: 1659232989}
+  timer: {fileID: 523460364}
   beachBallPrefab: {fileID: 1046012776}
 --- !u!4 &1727128391
 Transform:
