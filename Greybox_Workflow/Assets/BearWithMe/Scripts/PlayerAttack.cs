@@ -94,10 +94,11 @@ public class PlayerAttack : MonoBehaviour
             if (XCI.GetButton(XboxButton.X, m_Controller))
             {
                 m_aAnimation.SetTrigger("Attack1Trigger");
-
+                
                 m_fHeldDown += Time.deltaTime;
+
             }
-            if (XCI.GetButton(XboxButton.B, m_Controller))
+            if(XCI.GetButton(XboxButton.B, m_Controller))
             {
                 Debug.Log("Blocking");
                 m_aAnimation.SetTrigger("Block1Trigger");
@@ -127,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
                 BGuardUp = false;
             }
         }
-        
+
         //-----------------------------------------------------
         //Checks if button is held down for set amount of time
         //-----------------------------------------------------
@@ -193,6 +194,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     Debug.Log("Charge Attack4");
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th);
+
                 }             
             }
             else

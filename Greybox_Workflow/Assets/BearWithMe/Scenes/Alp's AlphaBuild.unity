@@ -6499,7 +6499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 10
+  currFriction: 15
   isSlippery: 0
   isSunk: 0
 --- !u!54 &115751160
@@ -9381,7 +9381,7 @@ Prefab:
     - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fFullSpeed
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -9391,7 +9391,7 @@ Prefab:
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fFallGravity
-      value: 3
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 65688389169719112, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -9447,6 +9447,16 @@ Prefab:
         type: 2}
       propertyPath: m_fChargeForce4th
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 54023648312030790, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeAttMoveSpeed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
@@ -14656,7 +14666,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 14c113ed4e678414e80cb3b9d4d7906e, type: 2}
+  - {fileID: 2100000, guid: d2e5f4083e038f14cb119933cf4aa613, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14689,7 +14699,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 262783974}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.18, z: -0}
   m_LocalScale: {x: 32, y: 22, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -71196,7 +71206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 10
+  currFriction: 15
   isSlippery: 0
   isSunk: 0
 --- !u!54 &1195019454
@@ -78216,7 +78226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 10
+  currFriction: 15
   isSlippery: 0
   isSunk: 0
 --- !u!1001 &1356590325
@@ -88036,7 +88046,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1531601378}
-  m_LocalRotation: {x: 0.64713955, y: 0.28497455, z: -0.28497455, w: 0.64713955}
+  m_LocalRotation: {x: 0.6471395, y: 0.28497452, z: -0.28497452, w: 0.6471395}
   m_LocalPosition: {x: -5.030001, y: 0, z: 4.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -100128,7 +100138,8 @@ MonoBehaviour:
   Players:
   - {fileID: 1837111595}
   - {fileID: 400017088}
-  Player: {fileID: 0}
+  timeLeft: 0
+  timer: {fileID: 0}
   beachBallPrefab: {fileID: 0}
 --- !u!4 &1727128391
 Transform:
@@ -119208,7 +119219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 10
+  currFriction: 15
   isSlippery: 0
   isSunk: 0
 --- !u!54 &2127149437
@@ -119271,7 +119282,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1335843297561934, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -119296,12 +119307,12 @@ Prefab:
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fJumpPower
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fFallGravity
-      value: 3
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}

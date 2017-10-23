@@ -78,13 +78,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Debug.Log(transform.localPosition.y);
-        //-----------------------------------------------------------
-        //raycast downwards to check if the player has landed or not
-        //-----------------------------------------------------------
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, 0.75f))
         {
             m_bGrounded = true;
@@ -93,10 +88,19 @@ public class PlayerMovement : MonoBehaviour
         {
             m_bGrounded = false;
         }
+    }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        Debug.Log(transform.localPosition.y);
+        //-----------------------------------------------------------
+        //raycast downwards to check if the player has landed or not
+        //-----------------------------------------------------------
+        
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
-        Vector3 c_vMovement = Vector3.zero;
+        Vector3 c_vMovement = Vector3.zero.normalized;
         //------------------------------------------------
         //Checks if controller is connected
         //if it is it uses controller to contol character
@@ -171,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (m_vPlayerVeloc.x < 1.0f && m_vPlayerVeloc.x > -1.0f)
+            if (m_vPlayerVeloc.x < 0.5f && m_vPlayerVeloc.x > -0.5f)
             {
                 m_vPlayerVeloc.x = 0;
             }
@@ -199,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
                     m_vPlayerVeloc.z = 0.0f;
             }
 
-            if (m_vPlayerVeloc.z < 1.0f && m_vPlayerVeloc.z > -1.0f)
+            if (m_vPlayerVeloc.z < 0.5f && m_vPlayerVeloc.z > -0.5f)
             {
                 m_vPlayerVeloc.z = 0;
             }
@@ -228,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (XCI.GetButtonDown(XboxButton.A, m_xcController))
                 {
-                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+                    m_rbRigidBody.AddForce(Vector3.up * Mathf.Sqrt(m_fJumpPower), ForceMode.VelocityChange);
                 }
             }
             else
@@ -238,16 +242,13 @@ public class PlayerMovement : MonoBehaviour
                     m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
                 }
             }
-            //if (Input.GetButtonDown("Jump") || XCI.GetButtonDown(XboxButton.A, m_xcController))
-            //{
-            //    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
-            //}
         }
         if (m_bGrounded == false)
         {
             if (m_rbRigidBody.velocity.y < 0)
             {
-                m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
+                m_rbRigidBody.AddForce(-Vector3.up * m_fFallGravity, ForceMode.Acceleration);
+                //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
             }
         }
     }
@@ -261,5 +262,4 @@ public class PlayerMovement : MonoBehaviour
             m_fFriction = currentPlatform.currFriction;
         }
     }
-
 }
