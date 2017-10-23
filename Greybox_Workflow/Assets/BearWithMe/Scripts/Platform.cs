@@ -67,7 +67,8 @@ public class Platform : MonoBehaviour
        {
            rb.mass = baseMass;
        }
-        
+
+      
     }
 
     void FixedUpdate()
