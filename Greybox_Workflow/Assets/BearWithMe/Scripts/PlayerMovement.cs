@@ -29,8 +29,20 @@ public class PlayerMovement : MonoBehaviour
 
     [Tooltip("How much the gravity is increased when the character is falling down")] public float m_fFallGravity;
 
+
+
     private bool m_bGrounded = true;
     private static bool m_bDidQueryNumOfCtrlrs = false;
+
+    private bool m_bIsDead = false;
+
+    public bool IsDead
+    {
+        get
+        {
+            return m_bIsDead;
+        }
+    }
 
     // Use this for initialization
     void Awake()
@@ -102,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         //--------------------------------------------------------------
         //Adds force to the character towards whichever way they face
         //--------------------------------------------------------------
-        m_rbRigidBody.AddForce(c_vMovement * Speed, ForceMode.Force);
+        m_rbRigidBody.AddForce(c_vMovement * Speed, ForceMode.Acceleration);
         //--------------------------------------------------------------
         //if character is moving you face whicever way you move towards
         //--------------------------------------------------------------
@@ -110,6 +122,13 @@ public class PlayerMovement : MonoBehaviour
         {
             m_rbRigidBody.rotation = Quaternion.LookRotation(c_vMovement.normalized, Vector3.up);
         }
+
+
+        if(transform.position.y <= 3.50f)
+        {
+            m_bIsDead = true;
+        }
+
 
         Vector3 m_vPlayerVeloc = m_rbRigidBody.velocity;
         //-----------------------------------------------------------
