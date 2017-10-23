@@ -93,10 +93,12 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller))
             {
-                m_aAnimation.SetTrigger("Attack1Trigger");
-                
-                m_fHeldDown += Time.deltaTime;
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                {
+                    m_aAnimation.SetTrigger("Attack1Trigger");
+                }
 
+                m_fHeldDown += Time.deltaTime;
             }
             if(XCI.GetButton(XboxButton.B, m_Controller))
             {
@@ -113,7 +115,10 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetButton("Fire1"))
             {
-                m_aAnimation.SetTrigger("Attack1Trigger");
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                {
+                    m_aAnimation.SetTrigger("Attack1Trigger");
+                }
 
                 m_fHeldDown += Time.deltaTime;
             }
@@ -249,13 +254,13 @@ public class PlayerAttack : MonoBehaviour
     public void AttackOn()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = true;
-        Debug.Log("On");
+        //Debug.Log("On");
     }
 
     public void AttackOff()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
-        Debug.Log("Off");
+        //Debug.Log("Off");
     }
 }

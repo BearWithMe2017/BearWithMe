@@ -954,8 +954,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335843297561934}
-  m_LocalRotation: {x: 0, y: -0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: 4, y: 0.5, z: 4}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
+  m_LocalPosition: {x: -2.875, y: 2.17, z: 5.625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4346849767069812}
@@ -1030,8 +1030,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 1.6, z: 0.5}
-  m_Center: {x: 0, y: 0.85, z: 0}
+  m_Size: {x: 0.6, y: 1.6554122, z: 0.5}
+  m_Center: {x: -0, y: 0.822294, z: 0}
 --- !u!95 &95290810531205654
 Animator:
   serializedVersion: 3
@@ -1077,8 +1077,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86302cf70b666ce44b70d7b20a5e560d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Controller: 1
-  m_fForce: 50
+  m_Controller: 0
+  m_fForce: 10
+  m_fBlockStrength: 0
+  m_fChargeForce1st: 1
+  m_fChargeForce2nd: 2
+  m_fChargeForce3rd: 3
+  m_fChargeForce4th: 4
+  m_fFullSpeed: 15
+  m_fChargeAttMoveSpeed: 10
 --- !u!114 &114802961142881482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1090,9 +1097,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d09125554c53074884d82a92c705368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_xcController: 0
   m_fSpeed: 25
-  m_fFriction: 50
-  m_Controller: 1
+  m_fFriction: 100
+  m_fJumpPower: 10
+  m_fFallGravity: 20
 --- !u!136 &136414957807215486
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1119,7 +1128,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 31d2b6bddfd8f7040bc2be957b3e747c, type: 2}
+  - {fileID: 2100000, guid: e8420b4790e9fc742bf2e046c1c80ad8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("How much the gravity is increased when the character is falling down")] public float m_fFallGravity;
 
 
-
+    private bool m_bJumping = false;
     private bool m_bGrounded = true;
     private static bool m_bDidQueryNumOfCtrlrs = false;
 
@@ -89,17 +89,45 @@ public class PlayerMovement : MonoBehaviour
         {
             m_bGrounded = false;
         }
+
+        int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+
+        if (m_bGrounded == true)
+        {
+            if (m_iQueriedNumberOfCtrlrs > 0)
+            {
+                if (XCI.GetButtonDown(XboxButton.A, m_xcController))
+                {
+                    m_bJumping = true;
+                }
+                else
+                {
+                    m_bJumping = false;
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    m_bJumping = true;
+                }
+                else
+                {
+                    m_bJumping = false;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(transform.localPosition.y);
+        //Debug.Log(transform.localPosition.y);
         //-----------------------------------------------------------
         //raycast downwards to check if the player has landed or not
         //-----------------------------------------------------------
         
-        int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+        int c_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
         Vector3 c_vMovement = Vector3.zero.normalized;
         //------------------------------------------------
@@ -107,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         //if it is it uses controller to contol character
         //if no controllers are connected use keyboard.
         //------------------------------------------------
-        if (m_iQueriedNumberOfCtrlrs > 0)
+        if (c_iQueriedNumberOfCtrlrs > 0)
         {
             c_vMovement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_xcController);
             c_vMovement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_xcController);
@@ -120,7 +148,10 @@ public class PlayerMovement : MonoBehaviour
         //--------------------------------------------------------------
         //Adds force to the character towards whichever way they face
         //--------------------------------------------------------------
-        m_rbRigidBody.AddForce(c_vMovement * Speed, ForceMode.Acceleration);
+        //transform.Translate(c_vMovement * Speed, Time.deltaTime);
+        m_rbRigidBody.velocity += c_vMovement * Speed;
+        //m_rbRigidBody.AddForce(c_vMovement * Speed, ForceMode.Acceleration);
+        //m_rbRigidBody.MovePosition(m_rbRigidBody.position + c_vMovement * Speed);
         //--------------------------------------------------------------
         //if character is moving you face whicever way you move towards
         //--------------------------------------------------------------
@@ -136,8 +167,13 @@ public class PlayerMovement : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
 
-
+        //------------------------------------------------------------------
+        //Stores Default y velocity so it can't be modified by x and z axis
+        //------------------------------------------------------------------
+        float c_fYVel = m_rbRigidBody.velocity.y;
         Vector3 m_vPlayerVeloc = m_rbRigidBody.velocity;
+        m_vPlayerVeloc.y = 0;
+
         //-----------------------------------------------------------
         //Animation for the movement
         //-----------------------------------------------------------
@@ -209,18 +245,23 @@ public class PlayerMovement : MonoBehaviour
                 m_vPlayerVeloc.z = 0;
             }
         }
-
-        m_rbRigidBody.velocity = m_vPlayerVeloc;
+ 
         //------------------------------------------
         //Limits the player max velocity
         //so that player doesn't keep accelarating
         //------------------------------------------
-        if (m_rbRigidBody.velocity.magnitude > 10)
+        if (m_vPlayerVeloc.magnitude > 10)
         {
-            m_rbRigidBody.velocity = m_rbRigidBody.velocity.normalized;
-            m_rbRigidBody.velocity *= 10;
+            m_vPlayerVeloc = m_vPlayerVeloc.normalized;
+            m_vPlayerVeloc *= 10;
         }
 
+        //------------------------------------------------------------------
+        //sets stored y back to the player velocity.
+        //------------------------------------------------------------------
+        m_vPlayerVeloc.y = c_fYVel;
+        m_rbRigidBody.velocity = m_vPlayerVeloc;
+        Debug.Log("Button: " + c_vMovement.x + " Vel: " + m_rbRigidBody.velocity.x);
         m_rbRigidBody.angularVelocity = Vector3.zero;
         //-----------------------------------------------------------
         // Jumping through physics
@@ -229,29 +270,29 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------
         if (m_bGrounded == true)
         {
-            if (m_iQueriedNumberOfCtrlrs > 0)
+            if (c_iQueriedNumberOfCtrlrs > 0)
             {
-                if (XCI.GetButtonDown(XboxButton.A, m_xcController))
+                if (m_bJumping == true)
                 {
-                    m_rbRigidBody.AddForce(Vector3.up * Mathf.Sqrt(m_fJumpPower), ForceMode.VelocityChange);
+                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.VelocityChange);
                 }
             }
             else
             {
-                if (Input.GetButtonDown("Jump"))
+                if (m_bJumping == true)
                 {
                     m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
                 }
             }
         }
-        if (m_bGrounded == false)
-        {
-            if (m_rbRigidBody.velocity.y < 0)
-            {
-                m_rbRigidBody.AddForce(-Vector3.up * m_fFallGravity, ForceMode.Acceleration);
-                //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
-            }
-        }
+        //if (m_bGrounded == false)
+        //{
+        //    if (m_rbRigidBody.velocity.y < 0)
+        //    {
+        //        m_rbRigidBody.AddForce(-Vector3.up * m_fFallGravity, ForceMode.Acceleration);
+        //        //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
+        //    }
+        //}
         if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
         {
             Reset();
