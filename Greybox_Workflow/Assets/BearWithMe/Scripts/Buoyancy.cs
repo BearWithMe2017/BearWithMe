@@ -74,6 +74,8 @@ public class Buoyancy : MonoBehaviour
             waterResist = vecBetween.magnitude * 0.1f;
             rb.drag = waterResist;
             rb.AddForce(vecBetween * buoyancyForce * Time.fixedDeltaTime);
+
+
         }
         else
         {

@@ -205,17 +205,18 @@ public class Platform : MonoBehaviour
        {
 
             playerCount++;
+            rb.AddForce(0, -4.5f * rb.velocity.y, 0, ForceMode.Impulse);
 
 
-           //PlayerMovement playerMovement = collision.collider.gameObject.GetComponent<PlayerMovement>();
-           //prevPlayerFriction = playerMovement.Friction;
-           //if (wasSlippery == true)
-           //{
-           //    prevPlayerFriction = playerMovement.Friction;
-           //    playerMovement.Friction -= ((playerMovement.Friction * slipFrictionPercent) / 100);
-           //    Debug.Log("playerMovement Friction: " + playerMovement.Friction);
-           //}
-            
+            //PlayerMovement playerMovement = collision.collider.gameObject.GetComponent<PlayerMovement>();
+            //prevPlayerFriction = playerMovement.Friction;
+            //if (wasSlippery == true)
+            //{
+            //    prevPlayerFriction = playerMovement.Friction;
+            //    playerMovement.Friction -= ((playerMovement.Friction * slipFrictionPercent) / 100);
+            //    Debug.Log("playerMovement Friction: " + playerMovement.Friction);
+            //}
+
         }
    
    
