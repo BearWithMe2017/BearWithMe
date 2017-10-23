@@ -127,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
         if(transform.position.y <= 3.50f)
         {
             m_bIsDead = true;
+            GameObject.Destroy(gameObject);
         }
 
 
