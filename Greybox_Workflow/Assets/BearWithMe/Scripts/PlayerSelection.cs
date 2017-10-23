@@ -5,15 +5,16 @@ using XboxCtrlrInput;
 
 public class PlayerSelection : MonoBehaviour {
 
-	public static bool playerFirst = false;
-	public static bool playerSecond = false;
-	public static bool playerThird = false;
-	public static bool playerFourth = false;
+	public bool playerFirst = false;
+	public bool playerSecond = false;
+	public bool playerThird = false;
+	public bool playerFourth = false;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+
+        GameObject.DontDestroyOnLoad(gameObject);
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-		SceneManager.LoadScene ("Mark's alpha scene_001");
+		SceneManager.LoadScene ("AlphaBuild");
     }
 
 	public void OptionsMenu()

@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
         {
             UpdateTime();
             InvokeRepeating("UpdateTime", 1f, 1f);

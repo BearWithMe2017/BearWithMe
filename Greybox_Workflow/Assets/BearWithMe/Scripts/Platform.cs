@@ -49,7 +49,7 @@ public class Platform : MonoBehaviour
         animator = transform.GetComponentInParent<Animator>();
         playerCount = 0;
         baseMass = 4.0f;
-        currFriction = 500.0f;
+        
         posY = transform.position.y;
     }
 
