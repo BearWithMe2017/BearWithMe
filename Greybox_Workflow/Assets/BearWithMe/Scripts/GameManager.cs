@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public int playerNumber;
     public List<GameObject> Players;
+    [SerializeField]
     private float timeLeft;
     public Text timer;
     [SerializeField]
@@ -17,25 +18,25 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
 	{
-		//find any game manager
-		GameManager[] managers = FindObjectsOfType<GameManager>();
-		
-        
-
-		if(managers.Length > 1)
-		{
-			//destroy yourself, there's already a game manager
-			GameObject.Destroy(gameObject);
-		}
-		else
-		{	
-			//set yourself to not destroy (because you are the gamemanager)
-			GameObject.DontDestroyOnLoad(gameObject);
-		}
+		////find any game manager
+		//GameManager[] managers = FindObjectsOfType<GameManager>();
+		//
+        //
+        //
+		//if(managers.Length > 1)
+		//{
+		//	//destroy yourself, there's already a game manager
+		//	GameObject.Destroy(gameObject);
+		//}
+		//else
+		//{	
+		//	//set yourself to not destroy (because you are the gamemanager)
+		//	GameObject.DontDestroyOnLoad(gameObject);
+		//}
 
         //UIManager.getNumofPlayers()
         //timeLeft = UIManager.getTime();
-        timeLeft = 10.0f;
+    
 
         playerNumber = 4;
 
