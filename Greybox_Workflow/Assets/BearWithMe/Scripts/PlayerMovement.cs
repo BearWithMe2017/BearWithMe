@@ -310,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Reset()
     {
-        SceneManager.LoadScene("AlphaBuild");
+        SceneManager.LoadScene("BetaBuild");
     }
 
 }
