@@ -193,12 +193,12 @@ public class PlayerAttack : MonoBehaviour
                 else if (m_fHeldDown >= 1.50f && m_fHeldDown <= 1.99f)
                 {
                     Debug.Log("Charge Attack3");
-                    ChargeAttack(a_cOther.transform, m_fChargeForce3rd);
+                   ChargeAttack(a_cOther.transform, m_fChargeForce3rd);
                 }
                 else if (m_fHeldDown >= 2.00f)
                 {
                     Debug.Log("Charge Attack4");
-                    ChargeAttack(a_cOther.transform, m_fChargeForce4th);
+                   ChargeAttack(a_cOther.transform, m_fChargeForce4th);
 
                 }             
             }

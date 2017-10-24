@@ -142,8 +142,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            c_vMovement.x = Input.GetAxisRaw("Horizontal");
-            c_vMovement.z = Input.GetAxisRaw("Vertical");
+            c_vMovement.x = Input.GetAxis("Horizontal");
+            c_vMovement.z = Input.GetAxis("Vertical");
         }
         //--------------------------------------------------------------
         //Adds force to the character towards whichever way they face

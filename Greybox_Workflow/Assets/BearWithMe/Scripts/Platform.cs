@@ -88,6 +88,8 @@ public class Platform : MonoBehaviour
             //SlipperyPlatform();
         }
 
+
+
     }
 
     void SlipperyPlatform()
