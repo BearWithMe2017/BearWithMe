@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
         //---------------------------------------------------------------------
         if (c_vMovement.x == 0)
         {
-            if (m_vPlayerVeloc.x > 0)
+            if (m_vPlayerVeloc.x > 0 && m_bGrounded)
             {
                 m_vPlayerVeloc.x -= m_fFriction * Time.deltaTime;
 
@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (m_vPlayerVeloc.x < 0)
+            if (m_vPlayerVeloc.x < 0 && m_bGrounded)
             {
                 m_vPlayerVeloc.x += m_fFriction * Time.deltaTime;
 
@@ -224,7 +224,7 @@ public class PlayerMovement : MonoBehaviour
         //---------------------------------------------------------------------
         if (c_vMovement.z == 0)
         {
-            if (m_vPlayerVeloc.z > 0)
+            if (m_vPlayerVeloc.z > 0 && m_bGrounded)
             {
                 m_vPlayerVeloc.z -= m_fFriction * Time.deltaTime;
 
@@ -232,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
                     m_vPlayerVeloc.z = 0.0f;
             }
 
-            if (m_vPlayerVeloc.z < 0)
+            if (m_vPlayerVeloc.z < 0 && m_bGrounded)
             {
                 m_vPlayerVeloc.z += m_fFriction * Time.deltaTime;
 
@@ -285,14 +285,14 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        //if (m_bGrounded == false)
-        //{
-        //    if (m_rbRigidBody.velocity.y < 0)
-        //    {
-        //        m_rbRigidBody.AddForce(-Vector3.up * m_fFallGravity, ForceMode.Acceleration);
-        //        //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
-        //    }
-        //}
+        if (m_bGrounded == false)
+        {
+            if (m_rbRigidBody.velocity.y < 0)
+            {
+                m_rbRigidBody.AddForce(-Vector3.up * m_fFallGravity, ForceMode.Acceleration);
+                //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
+            }
+        }
         if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
         {
             Reset();
