@@ -137,13 +137,13 @@ public class PlayerMovement : MonoBehaviour
         //------------------------------------------------
         if (c_iQueriedNumberOfCtrlrs > 0)
         {
-            c_vMovement.x = XCI.GetAxis(XboxAxis.LeftStickX, m_xcController);
-            c_vMovement.z = XCI.GetAxis(XboxAxis.LeftStickY, m_xcController);
+            c_vMovement.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController);
+            c_vMovement.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController);
         }
         else
         {
-            c_vMovement.x = Input.GetAxis("Horizontal");
-            c_vMovement.z = Input.GetAxis("Vertical");
+            c_vMovement.x = Input.GetAxisRaw("Horizontal");
+            c_vMovement.z = Input.GetAxisRaw("Vertical");
         }
         //--------------------------------------------------------------
         //Adds force to the character towards whichever way they face
