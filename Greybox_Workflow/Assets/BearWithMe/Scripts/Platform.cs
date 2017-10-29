@@ -22,6 +22,7 @@ public class Platform : MonoBehaviour
 
     float platformHeight;
     float sinkSpeed;
+    float yLimitForce;
     Animator animator;
 
     float baseMass;
@@ -49,6 +50,7 @@ public class Platform : MonoBehaviour
         animator = transform.GetComponentInParent<Animator>();
         playerCount = 0;
         baseMass = 4.0f;
+        yLimitForce = 50.0f;
         
         posY = transform.position.y;
     }
@@ -88,7 +90,19 @@ public class Platform : MonoBehaviour
             //SlipperyPlatform();
         }
 
-
+        if (transform.localPosition.y <= -0.2f)
+        {
+            rb.AddForce(Vector3.up * (yLimitForce) );
+            yLimitForce -= 10.0f;
+            if (yLimitForce <= 0.0f)
+            {
+                yLimitForce = 0.0f;
+            }
+        }
+        else
+        {
+            yLimitForce = 50.0f;
+        }
 
     }
 
