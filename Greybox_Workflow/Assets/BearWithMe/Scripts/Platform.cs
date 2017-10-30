@@ -52,7 +52,7 @@ public class Platform : MonoBehaviour
         sinkSpeed = 0.7f;
         animator = transform.GetComponentInParent<Animator>();
         playerCount = 0;
-        baseMass = 4.0f;
+        baseMass = 5.0f;
         yLimitForce = 50.0f;
         origin = transform.position;
 
@@ -67,6 +67,7 @@ public class Platform : MonoBehaviour
 
        if (playerCount > 0)
        {
+           
            rb.mass = baseMass - playerCount;
        }
        else

@@ -6483,7 +6483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b8c8f7684962478bcfc0068478dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buoyancyForce: 1210
+  buoyancyForce: 1510
   rotationCorrection: 10
   rotation: 1
   waterLevel: 0.3
@@ -6509,9 +6509,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 115751153}
   serializedVersion: 2
-  m_Mass: 4
+  m_Mass: 5
   m_Drag: 0.01
-  m_AngularDrag: 10
+  m_AngularDrag: 8
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -71468,7 +71468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b8c8f7684962478bcfc0068478dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buoyancyForce: 1210
+  buoyancyForce: 1510
   rotationCorrection: 10
   rotation: 1
   waterLevel: 0.3
@@ -71494,9 +71494,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1195019447}
   serializedVersion: 2
-  m_Mass: 4
+  m_Mass: 5
   m_Drag: 0.01
-  m_AngularDrag: 10
+  m_AngularDrag: 8
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -78422,7 +78422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b8c8f7684962478bcfc0068478dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buoyancyForce: 1210
+  buoyancyForce: 1510
   rotationCorrection: 10
   rotation: 1
   waterLevel: 0.3
@@ -78466,9 +78466,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1354304016}
   serializedVersion: 2
-  m_Mass: 4
+  m_Mass: 5
   m_Drag: 0.01
-  m_AngularDrag: 10
+  m_AngularDrag: 8
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -88375,7 +88375,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1531601378}
-  m_LocalRotation: {x: 0.6471395, y: 0.28497452, z: -0.28497452, w: 0.6471395}
+  m_LocalRotation: {x: 0.64713955, y: 0.28497455, z: -0.28497455, w: 0.64713955}
   m_LocalPosition: {x: -5.030001, y: 0, z: 4.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -119534,7 +119534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9b8c8f7684962478bcfc0068478dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buoyancyForce: 1210
+  buoyancyForce: 1510
   rotationCorrection: 10
   rotation: 1
   waterLevel: 0.3
@@ -119560,9 +119560,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2127149430}
   serializedVersion: 2
-  m_Mass: 4
+  m_Mass: 5
   m_Drag: 0.01
-  m_AngularDrag: 10
+  m_AngularDrag: 8
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
