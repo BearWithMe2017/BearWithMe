@@ -74,6 +74,15 @@ public class GameManager : MonoBehaviour
                 playerNumber--;
             }
         }
+
+        if (timeLeft <= 0 || playerNumber <= 1)
+        {
+            Reset();
+        }
+        else if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
+        {
+            Reset();
+        }
     }
 
 
@@ -84,15 +93,6 @@ public class GameManager : MonoBehaviour
         timeLeft -= 1;
 
         timer.text = "Time: " + timeLeft;
-
-        if (timeLeft <= 0 || playerNumber <= 1)
-        {
-            Reset();
-        }
-        else if(XCI.GetButtonDown(XboxButton.Back, m_xcController))
-        {
-            Reset();
-        }
     }
 
     public int TimeLeft

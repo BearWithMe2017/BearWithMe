@@ -294,10 +294,10 @@ public class PlayerMovement : MonoBehaviour
                 //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
             }
         }
-        if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
-        {
-            Reset();
-        }
+       //if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
+       //{
+       //    Reset();
+       //}
     }
 
     private void OnCollisionStay(Collision collision)
@@ -309,9 +309,9 @@ public class PlayerMovement : MonoBehaviour
             m_fFriction = currentPlatform.currFriction;
         }
     }
-    public void Reset()
-    {
-        SceneManager.LoadScene("BetaBuild");
-    }
-
+    //public void Reset()
+    //{
+    //    SceneManager.LoadScene("BetaBuild");
+    //}
+     
 }
