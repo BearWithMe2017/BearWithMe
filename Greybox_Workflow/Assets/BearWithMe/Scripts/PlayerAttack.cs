@@ -7,7 +7,6 @@ public class PlayerAttack : MonoBehaviour
 {
     public XboxController m_Controller;
     private Animator m_aAnimation;
-    private Vector3 m_NewPosition;
     private PlayerMovement m_PlayerMovementSpeed;
 
     [Tooltip("How much you knockback when you hit.")] public float m_fForce;
