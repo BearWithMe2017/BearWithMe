@@ -28,6 +28,9 @@ public class Platform : MonoBehaviour
     float baseMass;
     int playerCount;
 
+    private Vector3 angle;
+    private Vector3 origin;
+
     private float posY = 0.0f;
     void Awake()
     {
@@ -51,7 +54,8 @@ public class Platform : MonoBehaviour
         playerCount = 0;
         baseMass = 4.0f;
         yLimitForce = 50.0f;
-        
+        origin = transform.position;
+
         posY = transform.position.y;
     }
 
@@ -91,18 +95,20 @@ public class Platform : MonoBehaviour
         }
 
         if (transform.localPosition.y <= -0.2f)
+        { 
+            rb.AddForce(Vector3.up * (yLimitForce));
+        yLimitForce -= 10.0f;
+        if (yLimitForce <= 0.0f)
         {
-            rb.AddForce(Vector3.up * (yLimitForce) );
-            yLimitForce -= 10.0f;
-            if (yLimitForce <= 0.0f)
-            {
-                yLimitForce = 0.0f;
-            }
+            yLimitForce = 0.0f;
         }
-        else
-        {
-            yLimitForce = 50.0f;
-        }
+    }
+      else
+      {
+          yLimitForce = 50.0f;
+      }
+
+        ClampRotation();
 
     }
 
@@ -215,8 +221,99 @@ public class Platform : MonoBehaviour
       
     }
 
+    //Clamps local rotation x and z of object
+    private void ClampRotation()
+    {
 
-   private void OnCollisionEnter(Collision collision)
+        //Get the current rotation
+        Vector3 clampedRotation = transform.eulerAngles;
+
+        Debug.Log(clampedRotation);
+        //if(clampedRotation.x)
+
+
+
+       // Clamp the X value
+       clampedRotation.x = ClampAngle(clampedRotation.x, -2, 2);
+       clampedRotation.z = ClampAngle(clampedRotation.z, -2, 2);
+       // assign the clamped rotation
+       transform.rotation = Quaternion.Euler(clampedRotation);
+
+        Debug.Log(clampedRotation);
+
+        // angle = transform.localRotation.eulerAngles;
+        //
+        // if (angle.x < 355.0f && angle.x > 340.0f)
+        // {
+        //     angle = transform.localRotation.eulerAngles;
+        //     angle.x = 355.0f;
+        //     transform.localRotation = Quaternion.Euler(angle);
+        // }
+        //
+        // if (angle.x > 5.0f && angle.x < 15.0f)
+        // {
+        //     angle = transform.localRotation.eulerAngles;
+        //     angle.x = 5.0f;
+        //     transform.localRotation = Quaternion.Euler(angle);
+        // }
+        //
+        // if (angle.z < 355.0f && angle.z > 340.0f)
+        // {
+        //     angle = transform.localRotation.eulerAngles;
+        //     angle.z = 355.0f;
+        //     transform.localRotation = Quaternion.Euler(angle);
+        // }
+        // if (angle.z > 5.0f && angle.z < 15.0f)
+        // {
+        //     angle = transform.localRotation.eulerAngles;
+        //     angle.z = 5.0f;
+        //     transform.localRotation = Quaternion.Euler(angle);
+        // }
+    }
+
+    public static float ClampAngle(float angle, float min, float max)
+    {
+        angle = Mathf.Repeat(angle, 360);
+        min = Mathf.Repeat(min, 360);
+        max = Mathf.Repeat(max, 360);
+        bool inverse = false;
+        var tmin = min;
+        var tangle = angle;
+        if (min > 180)
+        {
+            inverse = !inverse;
+            tmin -= 180;
+        }
+        if (angle > 180)
+        {
+            inverse = !inverse;
+            tangle -= 180;
+        }
+        var result = !inverse ? tangle > tmin : tangle < tmin;
+        if (!result)
+            angle = min;
+
+        inverse = false;
+        tangle = angle;
+        var tmax = max;
+        if (angle > 180)
+        {
+            inverse = !inverse;
+            tangle -= 180;
+        }
+        if (max > 180)
+        {
+            inverse = !inverse;
+            tmax -= 180;
+        }
+
+        result = !inverse ? tangle < tmax : tangle > tmax;
+        if (!result)
+            angle = max;
+        return angle;
+    }
+
+    private void OnCollisionEnter(Collision collision)
    {
        if (collision.collider.gameObject.CompareTag("Player"))
        {

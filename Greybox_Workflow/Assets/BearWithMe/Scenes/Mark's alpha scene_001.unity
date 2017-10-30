@@ -6511,7 +6511,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0.01
-  m_AngularDrag: 2
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -7228,7 +7228,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh49180
+  m_Name: pb_Mesh210850
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -9441,7 +9441,7 @@ Prefab:
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fFriction
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 95753177531288106, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -14670,7 +14670,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 14c113ed4e678414e80cb3b9d4d7906e, type: 2}
+  - {fileID: 2100000, guid: 2de6e20faf297a04d990577a3c70a151, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29770,7 +29770,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh49082
+  m_Name: pb_Mesh210722
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -55846,8 +55846,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 847069976}
-  m_LocalRotation: {x: -0.45672333, y: 0.0018657569, z: -0.0009573702, w: -0.88960636}
-  m_LocalPosition: {x: -0.8922233, y: 17.66131, z: -12.711115}
+  m_LocalRotation: {x: -0.35676363, y: -0.006448452, z: 0.0024626502, w: -0.93416923}
+  m_LocalPosition: {x: -0.21078539, y: 13.653619, z: -15.267079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -66600,7 +66600,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh48730
+  m_Name: pb_Mesh210290
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -71461,7 +71461,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0.01
-  m_AngularDrag: 2
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -75039,7 +75039,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh48024
+  m_Name: pb_Mesh209366
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -78433,7 +78433,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0.01
-  m_AngularDrag: 2
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -81463,7 +81463,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh48076
+  m_Name: pb_Mesh209436
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -85057,7 +85057,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh49468
+  m_Name: pb_Mesh211218
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -87100,6 +87100,11 @@ Prefab:
     - target: {fileID: 1613398510575424, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135066505587307570, guid: 051938850a8a3a24da23b802bb86837e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 051938850a8a3a24da23b802bb86837e, type: 2}
@@ -91484,7 +91489,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh48158
+  m_Name: pb_Mesh209542
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -101223,7 +101228,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh49124
+  m_Name: pb_Mesh210778
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -110605,7 +110610,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh49776
+  m_Name: pb_Mesh211614
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -119522,7 +119527,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 4
   m_Drag: 0.01
-  m_AngularDrag: 2
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0

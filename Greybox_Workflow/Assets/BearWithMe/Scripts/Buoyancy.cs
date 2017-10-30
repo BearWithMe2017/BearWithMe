@@ -25,7 +25,6 @@ public class Buoyancy : MonoBehaviour
     private bool submerged;
 
     //--------Vector 3's---------
-    private Vector3 angle;
 
     private Rigidbody rb;
 
@@ -89,44 +88,11 @@ public class Buoyancy : MonoBehaviour
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, (rotationCorrection * Time.fixedDeltaTime));
             }
-
-            //ClampRotation();
         }
 
     }
 
-    //Clamps local rotation x and z of object
-    private void ClampRotation()
-    {
-        angle = transform.localRotation.eulerAngles;
 
-        if (angle.x < 355.0f && angle.x > 340.0f)
-        {
-            angle = transform.localRotation.eulerAngles;
-            angle.x = 355.0f;
-            transform.localRotation = Quaternion.Euler(angle);
-        }
-
-        if (angle.x > 5.0f && angle.x < 15.0f)
-        {
-            angle = transform.localRotation.eulerAngles;
-            angle.x = 5.0f;
-            transform.localRotation = Quaternion.Euler(angle);
-        }
-
-        if (angle.z < 355.0f && angle.z > 340.0f)
-        {
-            angle = transform.localRotation.eulerAngles;
-            angle.z = 355.0f;
-            transform.localRotation = Quaternion.Euler(angle);
-        }
-        if (angle.z > 5.0f && angle.z < 15.0f)
-        {
-            angle = transform.localRotation.eulerAngles;
-            angle.z = 5.0f;
-            transform.localRotation = Quaternion.Euler(angle);
-        }
-    }
 
 
 }
