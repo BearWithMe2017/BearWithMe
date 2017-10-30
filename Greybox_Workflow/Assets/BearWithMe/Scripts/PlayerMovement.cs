@@ -275,14 +275,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (m_bJumping == true)
                 {
-                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.VelocityChange);
+                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
                 }
             }
             else
             {
                 if (m_bJumping == true)
                 {
-                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.VelocityChange);
+                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
                 }
             }
         }

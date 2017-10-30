@@ -97,12 +97,12 @@ public class Platform : MonoBehaviour
         if (transform.localPosition.y <= -0.2f)
         { 
             rb.AddForce(Vector3.up * (yLimitForce));
-        yLimitForce -= 10.0f;
-        if (yLimitForce <= 0.0f)
-        {
-            yLimitForce = 0.0f;
+            yLimitForce -= 10.0f;
+            if (yLimitForce <= 0.0f)
+            {
+                yLimitForce = 0.0f;
+            }
         }
-    }
       else
       {
           yLimitForce = 50.0f;
@@ -317,10 +317,10 @@ public class Platform : MonoBehaviour
    {
        if (collision.collider.gameObject.CompareTag("Player"))
        {
-
             playerCount++;
-            rb.AddForce(0, -4.5f * rb.velocity.y, 0, ForceMode.Impulse);
+            rb.AddForceAtPosition(new Vector3 (0, -4.5f * rb.velocity.y, 0), collision.gameObject.transform.position, ForceMode.Impulse);
 
+            //rb.AddForce(0, -4.5f * rb.velocity.y, 0, ForceMode.Impulse);
 
             //PlayerMovement playerMovement = collision.collider.gameObject.GetComponent<PlayerMovement>();
             //prevPlayerFriction = playerMovement.Friction;

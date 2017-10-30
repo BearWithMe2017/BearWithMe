@@ -9381,7 +9381,7 @@ Prefab:
     - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fFullSpeed
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -9391,7 +9391,7 @@ Prefab:
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fFallGravity
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 65688389169719112, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -9436,7 +9436,7 @@ Prefab:
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fSpeed
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
@@ -9456,7 +9456,42 @@ Prefab:
     - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
         type: 2}
       propertyPath: m_fChargeAttMoveSpeed
-      value: 0.25
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce1st
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce2nd
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce3rd
+      value: 13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce4th
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284721059057956, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
