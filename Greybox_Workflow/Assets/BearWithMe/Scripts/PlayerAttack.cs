@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] [Tooltip("Sets Characters speed.")] private float m_fFullSpeed;
     [SerializeField] [Tooltip("Movement speed while charging the attack.")] private float m_fChargeAttMoveSpeed;
-
+    [SerializeField] [Tooltip("Movement speed while Blocking.")] private float m_fBlockintgMoveSpeed;
     private float m_fHeldDown = 0.0f;
 
     private bool m_bGuardUp = false;
@@ -93,12 +93,22 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller))
             {
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.IsInTransition(0))
-                {
-                    m_aAnimation.SetTrigger("Attack1Trigger");
-                }
-
                 m_fHeldDown += Time.deltaTime;
+
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
+                {
+                    m_aAnimation.SetBool("IsHeld", true);
+
+
+                }
+                if (m_fHeldDown >= 3.0f)
+                {
+                    m_aAnimation.Play("attackanim3");
+                }
+            }
+            if(XCI.GetButtonUp(XboxButton.X, m_Controller))
+            {
+                m_aAnimation.SetBool("IsHeld", false);
             }
             if(XCI.GetButton(XboxButton.B, m_Controller))
             {
@@ -117,23 +127,25 @@ public class PlayerAttack : MonoBehaviour
             {
                 m_fHeldDown += Time.deltaTime;
 
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.IsInTransition(0))
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
                 {
-                    m_aAnimation.SetTrigger("Attack1Trigger");
-                    if (m_fHeldDown >= 3.0f)
-                    {
-                        m_aAnimation.Play("attackanim3");
-                    }
+                    m_aAnimation.SetBool("IsHeld" , true);
+                   
+                    
+                }
+                if (m_fHeldDown >= 3.0f)
+                {
+                    m_aAnimation.Play("attackanim3");
                 }
             }       
             if (Input.GetButtonUp("Fire1"))
             {
-                if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && m_aAnimation.IsInTransition(0))
-                {
-                    m_aAnimation.SetBool("IsHeld", false);
-                }                
+                //if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && m_aAnimation.IsInTransition(0))
+                
+                 m_aAnimation.SetBool("IsHeld", false);
+                                
             }
-            if (Input.GetButton("Fire2"))
+            if (Input.GetButtonDown("Fire2"))
             {
                 Debug.Log("Blocking");
                 m_aAnimation.SetTrigger("Block1Trigger");
@@ -163,12 +175,13 @@ public class PlayerAttack : MonoBehaviour
         }
         else if (BGuardUp == true)
         {
-            m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
+            m_PlayerMovementSpeed.Speed = m_fBlockintgMoveSpeed;
         }
         else
         {
             m_PlayerMovementSpeed.Speed = m_fFullSpeed;
         }
+
     }
 
     //--------------------------------------------------

@@ -6499,7 +6499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 15
+  currFriction: 50
   isSlippery: 0
   isSunk: 0
 --- !u!54 &115751160
@@ -9372,11 +9372,6 @@ Prefab:
     - target: {fileID: 4853811025227416, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
       propertyPath: m_RootOrder
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114802961142881482, guid: 98554c1eff9318d4ca2e0b10e69ca687,
-        type: 2}
-      propertyPath: m_fJumpPower
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
@@ -55524,7 +55519,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 847069976}
   m_LocalRotation: {x: 0.47715867, y: 0, z: 0, w: 0.8788172}
-  m_LocalPosition: {x: 0, y: 10.16, z: -9.46}
+  m_LocalPosition: {x: 0, y: 13.89, z: -11.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -71126,7 +71121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 15
+  currFriction: 50
   isSlippery: 0
   isSunk: 0
 --- !u!54 &1195019454
@@ -78146,7 +78141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 15
+  currFriction: 50
   isSlippery: 0
   isSunk: 0
 --- !u!1001 &1356590325
@@ -87966,7 +87961,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1531601378}
-  m_LocalRotation: {x: 0.6471395, y: 0.28497452, z: -0.28497452, w: 0.6471395}
+  m_LocalRotation: {x: 0.64713955, y: 0.28497455, z: -0.28497455, w: 0.64713955}
   m_LocalPosition: {x: -5.030001, y: 0, z: 4.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -99043,6 +99038,7 @@ MonoBehaviour:
   m_fChargeForce4th: 0
   m_fFullSpeed: 0
   m_fChargeAttMoveSpeed: 0
+  m_fBlockintgMoveSpeed: 0
 --- !u!54 &1695083803
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99056,7 +99052,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!23 &1695083804
 MeshRenderer:
@@ -119258,7 +119254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currFriction: 15
+  currFriction: 50
   isSlippery: 0
   isSunk: 0
 --- !u!54 &2127149437

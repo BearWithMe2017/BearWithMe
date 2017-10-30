@@ -190,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
         //deals with the friction and velocity on x axis
         //and also stops player if their velocity drops below certain level
         //---------------------------------------------------------------------
+
         if (c_vMovement.x == 0)
         {
             if (m_vPlayerVeloc.x > 0 && m_bGrounded)
@@ -281,7 +282,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (m_bJumping == true)
                 {
-                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.VelocityChange);
                 }
             }
         }

@@ -1084,8 +1084,9 @@ MonoBehaviour:
   m_fChargeForce2nd: 2
   m_fChargeForce3rd: 3
   m_fChargeForce4th: 4
-  m_fFullSpeed: 15
-  m_fChargeAttMoveSpeed: 10
+  m_fFullSpeed: 10
+  m_fChargeAttMoveSpeed: 0.4
+  m_fBlockintgMoveSpeed: 0
 --- !u!114 &114802961142881482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1098,10 +1099,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_xcController: 0
-  m_fSpeed: 25
-  m_fFriction: 100
-  m_fJumpPower: 10
-  m_fFallGravity: 20
+  m_fSpeed: 10
+  m_fFriction: 0
+  m_fJumpPower: 4
+  m_fFallGravity: 15
 --- !u!136 &136414957807215486
 CapsuleCollider:
   m_ObjectHideFlags: 1
