@@ -93,7 +93,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller))
             {
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.IsInTransition(0))
                 {
                     m_aAnimation.SetTrigger("Attack1Trigger");
                 }
@@ -115,12 +115,23 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetButton("Fire1"))
             {
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                m_fHeldDown += Time.deltaTime;
+
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.IsInTransition(0))
                 {
                     m_aAnimation.SetTrigger("Attack1Trigger");
+                    if (m_fHeldDown >= 3.0f)
+                    {
+                        m_aAnimation.Play("attackanim3");
+                    }
                 }
-
-                m_fHeldDown += Time.deltaTime;
+            }       
+            if (Input.GetButtonUp("Fire1"))
+            {
+                if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && m_aAnimation.IsInTransition(0))
+                {
+                    m_aAnimation.SetBool("IsHeld", false);
+                }                
             }
             if (Input.GetButton("Fire2"))
             {

@@ -1,7 +1,7 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:3,bdst:7,dpts:2,wrdp:False,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-6343-OUT,spec-9360-OUT,gloss-1813-OUT,normal-3840-OUT,transm-537-OUT,lwrap-537-OUT,alpha-3042-OUT,refract-1616-OUT;n:type:ShaderForge.SFN_Multiply,id:6343,x:32505,y:32387,varname:node_6343,prsc:2|A-6548-RGB,B-1859-A;n:type:ShaderForge.SFN_Slider,id:1813,x:32199,y:32719,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.2738053,max:1;n:type:ShaderForge.SFN_Color,id:6548,x:32171,y:32317,ptovrint:False,ptlb:Color,ptin:_Color,varname:node_6548,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0,c2:0.2425578,c3:1,c4:1;n:type:ShaderForge.SFN_VertexColor,id:1859,x:32264,y:32458,varname:node_1859,prsc:2;n:type:ShaderForge.SFN_ValueProperty,id:9360,x:32437,y:32624,ptovrint:False,ptlb:Value,ptin:_Value,varname:node_9360,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0;n:type:ShaderForge.SFN_Slider,id:3042,x:32237,y:32926,ptovrint:False,ptlb:Opacity,ptin:_Opacity,varname:node_3042,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.2905983,max:1;n:type:ShaderForge.SFN_TexCoord,id:3519,x:31579,y:32889,varname:node_3519,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_Panner,id:8158,x:31757,y:32889,varname:node_8158,prsc:2,spu:0.02,spv:0.02|UVIN-3519-UVOUT;n:type:ShaderForge.SFN_Tex2d,id:9023,x:31937,y:32942,ptovrint:False,ptlb:Refraction,ptin:_Refraction,varname:node_9023,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:7aaeb55bd61f2d14ba3bbe9b2e227940,ntxv:3,isnm:True|UVIN-8158-UVOUT;n:type:ShaderForge.SFN_ComponentMask,id:6605,x:32121,y:32967,varname:node_6605,prsc:2,cc1:0,cc2:1,cc3:-1,cc4:-1|IN-9023-RGB;n:type:ShaderForge.SFN_Multiply,id:1616,x:32358,y:33006,varname:node_1616,prsc:2|A-6605-OUT,B-4245-OUT;n:type:ShaderForge.SFN_Multiply,id:4245,x:32179,y:33160,varname:node_4245,prsc:2|A-8555-OUT,B-9617-OUT;n:type:ShaderForge.SFN_Slider,id:8555,x:31757,y:33138,ptovrint:False,ptlb:Distortion,ptin:_Distortion,varname:node_8555,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.4846151,max:1;n:type:ShaderForge.SFN_Vector1,id:9617,x:31994,y:33228,varname:node_9617,prsc:2,v1:0.2;n:type:ShaderForge.SFN_Vector1,id:537,x:32512,y:32843,varname:node_537,prsc:2,v1:1;n:type:ShaderForge.SFN_Slider,id:6278,x:31600,y:32732,ptovrint:False,ptlb:Reflection,ptin:_Reflection,varname:node_6278,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:1;n:type:ShaderForge.SFN_Vector3,id:5596,x:31797,y:32629,varname:node_5596,prsc:2,v1:0,v2:0,v3:1;n:type:ShaderForge.SFN_Lerp,id:8226,x:31985,y:32751,varname:node_8226,prsc:2|A-5596-OUT,B-9023-RGB,T-6278-OUT;n:type:ShaderForge.SFN_Normalize,id:3840,x:32300,y:32787,varname:node_3840,prsc:2|IN-8226-OUT;proporder:1813-6548-9360-3042-9023-8555-6278;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:3,bdst:7,dpts:2,wrdp:False,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-6343-OUT,spec-9360-OUT,gloss-1813-OUT,normal-3840-OUT,transm-537-OUT,lwrap-537-OUT,alpha-3042-OUT,refract-1616-OUT;n:type:ShaderForge.SFN_Multiply,id:6343,x:32505,y:32387,varname:node_6343,prsc:2|A-6548-RGB,B-1859-A;n:type:ShaderForge.SFN_Slider,id:1813,x:32199,y:32719,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.2738053,max:1;n:type:ShaderForge.SFN_Color,id:6548,x:32171,y:32317,ptovrint:False,ptlb:Color,ptin:_Color,varname:node_6548,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0,c2:0.2425578,c3:1,c4:1;n:type:ShaderForge.SFN_VertexColor,id:1859,x:32264,y:32458,varname:node_1859,prsc:2;n:type:ShaderForge.SFN_ValueProperty,id:9360,x:32437,y:32624,ptovrint:False,ptlb:Value,ptin:_Value,varname:node_9360,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0;n:type:ShaderForge.SFN_Slider,id:3042,x:32237,y:32926,ptovrint:False,ptlb:Opacity,ptin:_Opacity,varname:node_3042,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.2905983,max:1;n:type:ShaderForge.SFN_TexCoord,id:3519,x:31579,y:32889,varname:node_3519,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_Panner,id:8158,x:31757,y:32889,varname:node_8158,prsc:2,spu:0.02,spv:0.02|UVIN-3519-UVOUT,DIST-4385-OUT;n:type:ShaderForge.SFN_Tex2d,id:9023,x:31937,y:32942,ptovrint:False,ptlb:Refraction,ptin:_Refraction,varname:node_9023,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:7aaeb55bd61f2d14ba3bbe9b2e227940,ntxv:3,isnm:True|UVIN-8158-UVOUT;n:type:ShaderForge.SFN_ComponentMask,id:6605,x:32121,y:32967,varname:node_6605,prsc:2,cc1:0,cc2:1,cc3:-1,cc4:-1|IN-9023-RGB;n:type:ShaderForge.SFN_Multiply,id:1616,x:32358,y:33006,varname:node_1616,prsc:2|A-6605-OUT,B-4245-OUT;n:type:ShaderForge.SFN_Multiply,id:4245,x:32271,y:33191,varname:node_4245,prsc:2|A-8555-OUT,B-9617-OUT;n:type:ShaderForge.SFN_Slider,id:8555,x:31757,y:33138,ptovrint:False,ptlb:Distortion,ptin:_Distortion,varname:node_8555,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.4846151,max:1;n:type:ShaderForge.SFN_Vector1,id:9617,x:31994,y:33228,varname:node_9617,prsc:2,v1:0.2;n:type:ShaderForge.SFN_Vector1,id:537,x:32512,y:32843,varname:node_537,prsc:2,v1:1;n:type:ShaderForge.SFN_Slider,id:6278,x:31600,y:32732,ptovrint:False,ptlb:Reflection,ptin:_Reflection,varname:node_6278,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:1;n:type:ShaderForge.SFN_Vector3,id:5596,x:31797,y:32629,varname:node_5596,prsc:2,v1:0,v2:0,v3:1;n:type:ShaderForge.SFN_Lerp,id:8226,x:31985,y:32751,varname:node_8226,prsc:2|A-5596-OUT,B-9023-RGB,T-6278-OUT;n:type:ShaderForge.SFN_Normalize,id:3840,x:32300,y:32787,varname:node_3840,prsc:2|IN-8226-OUT;n:type:ShaderForge.SFN_Time,id:5612,x:31289,y:33195,varname:node_5612,prsc:2;n:type:ShaderForge.SFN_Slider,id:826,x:31683,y:33434,ptovrint:False,ptlb:speed,ptin:_speed,varname:node_826,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:-10,cur:0,max:10;n:type:ShaderForge.SFN_Multiply,id:4385,x:31566,y:33122,varname:node_4385,prsc:2|A-5612-T,B-826-OUT;proporder:1813-6548-9360-3042-9023-8555-6278-826;pass:END;sub:END;*/
 
 Shader "Shader Forge/AttemptNo" {
     Properties {
@@ -12,6 +12,7 @@ Shader "Shader Forge/AttemptNo" {
         _Refraction ("Refraction", 2D) = "bump" {}
         _Distortion ("Distortion", Range(0, 1)) = 0.4846151
         _Reflection ("Reflection", Range(0, 1)) = 0
+        _speed ("speed", Range(-10, 10)) = 0
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
@@ -54,6 +55,7 @@ Shader "Shader Forge/AttemptNo" {
             uniform sampler2D _Refraction; uniform float4 _Refraction_ST;
             uniform float _Distortion;
             uniform float _Reflection;
+            uniform float _speed;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -108,8 +110,8 @@ Shader "Shader Forge/AttemptNo" {
                 i.normalDir = normalize(i.normalDir);
                 float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float4 node_5435 = _Time;
-                float2 node_8158 = (i.uv0+node_5435.g*float2(0.02,0.02));
+                float4 node_5612 = _Time;
+                float2 node_8158 = (i.uv0+(node_5612.g*_speed)*float2(0.02,0.02));
                 float3 _Refraction_var = UnpackNormal(tex2D(_Refraction,TRANSFORM_TEX(node_8158, _Refraction)));
                 float3 normalLocal = normalize(lerp(float3(0,0,1),_Refraction_var.rgb,_Reflection));
                 float3 normalDirection = normalize(mul( normalLocal, tangentTransform )); // Perturbed normals
@@ -260,6 +262,7 @@ Shader "Shader Forge/AttemptNo" {
             uniform sampler2D _Refraction; uniform float4 _Refraction_ST;
             uniform float _Distortion;
             uniform float _Reflection;
+            uniform float _speed;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -305,8 +308,8 @@ Shader "Shader Forge/AttemptNo" {
                 i.normalDir = normalize(i.normalDir);
                 float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float4 node_5611 = _Time;
-                float2 node_8158 = (i.uv0+node_5611.g*float2(0.02,0.02));
+                float4 node_5612 = _Time;
+                float2 node_8158 = (i.uv0+(node_5612.g*_speed)*float2(0.02,0.02));
                 float3 _Refraction_var = UnpackNormal(tex2D(_Refraction,TRANSFORM_TEX(node_8158, _Refraction)));
                 float3 normalLocal = normalize(lerp(float3(0,0,1),_Refraction_var.rgb,_Reflection));
                 float3 normalDirection = normalize(mul( normalLocal, tangentTransform )); // Perturbed normals

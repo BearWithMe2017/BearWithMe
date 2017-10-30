@@ -85,8 +85,8 @@ Shader "Shader Forge/waterSurface_01" {
                 float faceSign = ( facing >= 0 ? 1 : -1 );
                 float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float4 node_6541 = _Time;
-                float2 node_7792 = (i.uv0+node_6541.g*float2(0.02,0.02));
+                float4 node_5034 = _Time;
+                float2 node_7792 = (i.uv0+node_5034.g*float2(0.02,0.02));
                 float3 _Refraction_var = UnpackNormal(tex2D(_Refraction,TRANSFORM_TEX(node_7792, _Refraction)));
                 float3 normalLocal = normalize(lerp(float3(0,0,1),_Refraction_var.rgb,_Reflection));
                 float3 normalDirection = normalize(mul( normalLocal, tangentTransform )); // Perturbed normals
@@ -259,8 +259,8 @@ Shader "Shader Forge/waterSurface_01" {
                 float faceSign = ( facing >= 0 ? 1 : -1 );
                 float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
-                float4 node_603 = _Time;
-                float2 node_7792 = (i.uv0+node_603.g*float2(0.02,0.02));
+                float4 node_4360 = _Time;
+                float2 node_7792 = (i.uv0+node_4360.g*float2(0.02,0.02));
                 float3 _Refraction_var = UnpackNormal(tex2D(_Refraction,TRANSFORM_TEX(node_7792, _Refraction)));
                 float3 normalLocal = normalize(lerp(float3(0,0,1),_Refraction_var.rgb,_Reflection));
                 float3 normalDirection = normalize(mul( normalLocal, tangentTransform )); // Perturbed normals
