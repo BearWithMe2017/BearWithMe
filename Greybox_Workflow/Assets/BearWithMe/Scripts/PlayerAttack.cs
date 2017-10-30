@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] [Tooltip("Sets Characters speed.")] private float m_fFullSpeed;
     [SerializeField] [Tooltip("Movement speed while charging the attack.")] private float m_fChargeAttMoveSpeed;
-    [SerializeField] [Tooltip("Movement speed while Blocking.")] private float m_fBlockintgMoveSpeed;
+    [SerializeField] [Tooltip("Movement speed while Blocking.")] private float m_fBlockingMoveSpeed;
     private float m_fHeldDown = 0.0f;
 
     private bool m_bGuardUp = false;
@@ -173,9 +173,9 @@ public class PlayerAttack : MonoBehaviour
         {
             m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
         }
-        else if (BGuardUp == true)
+        else if(m_bGuardUp == true && m_bChargeAtk != true)
         {
-            m_PlayerMovementSpeed.Speed = m_fBlockintgMoveSpeed;
+            m_PlayerMovementSpeed.Speed = m_fBlockingMoveSpeed;
         }
         else
         {
