@@ -7,22 +7,22 @@ using XboxCtrlrInput;
 public class PlayerReady : MonoBehaviour
 {
 
-    public GameObject Player1ControllerDefault;
-    public GameObject Player1ControllerReady;
+    [Tooltip("The player 1 grey controller from top down #1)")] public GameObject Player1ControllerDefault;
+    [Tooltip("Coloured Player 1 Controller")] public GameObject Player1ControllerReady;
 
-    public GameObject Player2ControllerDefault;
-    public GameObject Player2ControllerReady;
+    [Tooltip("The player 2 grey controller from top down #2)")] public GameObject Player2ControllerDefault;
+    [Tooltip("Coloured Player 2 Controller")] public GameObject Player2ControllerReady;
 
-    public GameObject Player3ControllerDefault;
-    public GameObject Player3ControllerReady;
+    [Tooltip("The player 3 grey controller from top down #3)")] public GameObject Player3ControllerDefault;
+    [Tooltip("Coloured Player 3 Controller")] public GameObject Player3ControllerReady;
 
-    public GameObject Player4ControllerDefault;
-    public GameObject Player4ControllerReady;
+    [Tooltip("The player 4 grey controller from top down #4)")] public GameObject Player4ControllerDefault;
+    [Tooltip("Coloured Player 4 Controller")] public GameObject Player4ControllerReady;
 
-    public GameObject Camera2;
-    public GameObject MatchSettingsUI;
-    public GameObject Camera3;
-    public GameObject CharacterUI;
+    public bool playerFirst = false;
+    public bool playerSecond = false;
+    public bool playerThird = false;
+    public bool playerFourth = false;
 
     public XboxController m_Controller;
 
@@ -37,128 +37,210 @@ public class PlayerReady : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //SUDO: if controller 1 connected
-        if (Input.GetKeyDown("1"))
+        //player 1
         {
-            if (!Player1ControllerReady.activeSelf)
+            if (XCI.GetButtonDown(XboxButton.A, XboxController.First))
             {
-                Player1ControllerDefault.SetActive(false);
-                Player1ControllerReady.SetActive(true);
-                print("Player 1 ready");
+                if (!Player1ControllerReady.activeSelf && playerFirst == false)
+                {
+                    Player1ControllerDefault.SetActive(false);
+                    Player1ControllerReady.SetActive(true);
+                    print("Player 1 ready");
+                    playerFirst = true;
+                }
+
+                else if (!Player1ControllerDefault.activeSelf && playerFirst == true)
+                {
+                    Player1ControllerReady.SetActive(false);
+                    Player1ControllerDefault.SetActive(true);
+                    print("Player 1 not Ready");
+                    playerFirst = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 1");
+                }
             }
 
-            else if (!Player1ControllerDefault.activeSelf)
+            if (Input.GetKeyDown("1"))
             {
-                Player1ControllerReady.SetActive(false);
-                Player1ControllerDefault.SetActive(true);
-                print("Player 1 not Ready");
-            }
+                if (!Player1ControllerReady.activeSelf && playerFirst == false)
+                {
+                    Player1ControllerDefault.SetActive(false);
+                    Player1ControllerReady.SetActive(true);
+                    print("Player 1 ready");
+                    playerFirst = true;
+                }
 
-            else
-            {
-                print("Fatal error: Player 1");
+                else if (!Player1ControllerDefault.activeSelf && playerFirst == true)
+                {
+                    Player1ControllerReady.SetActive(false);
+                    Player1ControllerDefault.SetActive(true);
+                    print("Player 1 not Ready");
+                    playerFirst = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 1");
+                }
             }
         }
 
-        //SUDO: if controller 2 connected
-        if (Input.GetKeyDown("2"))
+        // player 2
         {
-            print("Ran get key 2");
-            if (!Player2ControllerReady.activeSelf)
+            if (XCI.GetButtonDown(XboxButton.A, XboxController.Second))
             {
-                Player2ControllerDefault.SetActive(false);
-                Player2ControllerReady.SetActive(true);
-                print("Player 2 ready");
+                if (!Player2ControllerReady.activeSelf && playerSecond == false)
+                {
+                    Player2ControllerDefault.SetActive(false);
+                    Player2ControllerReady.SetActive(true);
+                    print("Player 2 ready");
+                    playerSecond = true;
+                }
+
+                else if (!Player2ControllerDefault.activeSelf && playerSecond == true)
+                {
+                    Player2ControllerReady.SetActive(false);
+                    Player2ControllerDefault.SetActive(true);
+                    print("Player 2 not Ready");
+                    playerSecond = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 2");
+                }
             }
 
-            else if (!Player2ControllerDefault.activeSelf)
+            if (Input.GetKeyDown("2"))
             {
-                Player2ControllerReady.SetActive(false);
-                Player2ControllerDefault.SetActive(true);
-                print("Player 2 not Ready");
-            }
+                print("Ran get key 2");
+                if (!Player2ControllerReady.activeSelf && playerSecond == false)
+                {
+                    Player2ControllerDefault.SetActive(false);
+                    Player2ControllerReady.SetActive(true);
+                    print("Player 2 ready");
+                    playerSecond = true;
+                }
 
-            else
-            {
-                print("Fatal error: Player 2");
+                else if (!Player2ControllerDefault.activeSelf && playerSecond == true)
+                {
+                    Player2ControllerReady.SetActive(false);
+                    Player2ControllerDefault.SetActive(true);
+                    print("Player 2 not Ready");
+                    playerSecond = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 2");
+                }
             }
         }
 
-        //SUDO: if controller 3 connected
-        if (Input.GetKeyDown("3"))
+        //Player 3
         {
-            if (!Player3ControllerReady.activeSelf)
+            if (XCI.GetButtonDown(XboxButton.A, XboxController.Third))
             {
-                Player3ControllerDefault.SetActive(false);
-                Player3ControllerReady.SetActive(true);
-                print("Player 3 ready");
+                if (!Player3ControllerReady.activeSelf && playerThird == false)
+                {
+                    Player3ControllerDefault.SetActive(false);
+                    Player3ControllerReady.SetActive(true);
+                    print("Player 3 ready");
+                    playerThird = true;
+
+                }
+
+                else if (!Player3ControllerDefault.activeSelf && playerThird == true)
+                {
+                    Player3ControllerReady.SetActive(false);
+                    Player3ControllerDefault.SetActive(true);
+                    print("Player 3 not Ready");
+                    playerThird = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 3");
+                }
             }
 
-            else if (!Player3ControllerDefault.activeSelf)
+            if (Input.GetKeyDown("3"))
             {
-                Player3ControllerReady.SetActive(false);
-                Player3ControllerDefault.SetActive(true);
-                print("Player 3 not Ready");
-            }
+                if (!Player3ControllerReady.activeSelf && playerThird == false)
+                {
+                    Player3ControllerDefault.SetActive(false);
+                    Player3ControllerReady.SetActive(true);
+                    print("Player 3 ready");
+                    playerThird = true;
+                }
 
-            else
-            {
-                print("Fatal error: Player 3");
+                else if (!Player3ControllerDefault.activeSelf && playerThird == true)
+                {
+                    Player3ControllerReady.SetActive(false);
+                    Player3ControllerDefault.SetActive(true);
+                    print("Player 3 not Ready");
+                    playerThird = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 3");
+                }
             }
         }
 
-        if (Input.GetKeyDown("4"))
+        //player 4
         {
-            if (!Player4ControllerReady.activeSelf)
+            if (XCI.GetButtonDown(XboxButton.A, XboxController.Fourth))
             {
-                Player4ControllerDefault.SetActive(false);
-                Player4ControllerReady.SetActive(true);
-                print("Player 4 ready");
+                if (!Player4ControllerReady.activeSelf && playerFourth == false)
+                {
+                    Player4ControllerDefault.SetActive(false);
+                    Player4ControllerReady.SetActive(true);
+                    print("Player 4 ready");
+                    playerFourth = true;
+                }
+
+                else if (!Player4ControllerDefault.activeSelf && playerFourth == true)
+                {
+                    Player4ControllerReady.SetActive(false);
+                    Player4ControllerDefault.SetActive(true);
+                    print("Player 4 not Ready");
+                    playerFourth = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 4");
+                }
             }
 
-            else if (!Player4ControllerDefault.activeSelf)
+            if (Input.GetKeyDown("4"))
             {
-                Player4ControllerReady.SetActive(false);
-                Player4ControllerDefault.SetActive(true);
-                print("Player 4 not Ready");
+                if (!Player4ControllerReady.activeSelf && playerFourth == false)
+                {
+                    Player4ControllerDefault.SetActive(false);
+                    Player4ControllerReady.SetActive(true);
+                    print("Player 4 ready");
+                    playerFourth = true;
+                }
+
+                else if (!Player4ControllerDefault.activeSelf && playerFourth == true)
+                {
+                    Player4ControllerReady.SetActive(false);
+                    Player4ControllerDefault.SetActive(true);
+                    print("Player 4 not Ready");
+                    playerFourth = false;
+                }
+
+                else
+                {
+                    print("Fatal error: Player 4");
+                }
             }
-
-            else
-            {
-                print("Fatal error: Player 4");
-            }
         }
-
-
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            Camera3.SetActive(false);
-            CharacterUI.SetActive(false);
-            Camera2.SetActive(true);
-            MatchSettingsUI.SetActive(true);
-        }
-
-
-        // if int connected controllers == int players ready
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            print("start next scene");
-            //foreach (GameObject g in SceneManager.GetActiveScene().GetRootGameObjects())
-            //{
-            //    g.SetActive(false);
-            //}
-            //
-            //foreach (GameObject g in SceneManager.GetSceneByName("Game").GetRootGameObjects())
-            //{
-            //    g.SetActive(true);
-            //}
-
-            LoadScene();
-        }
-    }
-
-    public void LoadScene()
-    {
-        SceneManager.LoadScene(1);
     }
 }

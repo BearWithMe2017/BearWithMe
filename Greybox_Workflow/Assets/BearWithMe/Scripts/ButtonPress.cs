@@ -19,6 +19,9 @@ public class ButtonPress : MonoBehaviour
     public GameObject PlayerSelectionStartButton;
     public GameObject PlayerSelectionPressedStartButton;
 
+    public GameObject OptionsSettingsBackButton;
+    public GameObject OptionsSettingsPressedBackButton;
+
     public EventSystem ES;
 
     // Use this for initialization
@@ -61,6 +64,21 @@ public class ButtonPress : MonoBehaviour
             {
                 PlayerSelectionBackButton.SetActive(false);
                 PlayerSelectionPressedBackButton.SetActive(true);
+            }
+        }
+
+        else if (scene.name == "OptionsMenu")
+        {
+            if (XCI.GetButtonDown(XboxButton.B))
+            {
+                OptionsSettingsBackButton.SetActive(false);
+                OptionsSettingsPressedBackButton.SetActive(true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                OptionsSettingsBackButton.SetActive(false);
+                OptionsSettingsPressedBackButton.SetActive(true);
             }
         }
     }

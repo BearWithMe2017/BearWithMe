@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] [Tooltip("Sets Characters speed.")] private float m_fFullSpeed;
     [SerializeField] [Tooltip("Movement speed while charging the attack.")] private float m_fChargeAttMoveSpeed;
-    [SerializeField] [Tooltip("Movement speed while Blocking.")] private float m_fBlockingMoveSpeed;
+
     private float m_fHeldDown = 0.0f;
 
     private bool m_bGuardUp = false;
@@ -93,24 +93,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller))
             {
+                m_aAnimation.SetTrigger("Attack1Trigger");
+
                 m_fHeldDown += Time.deltaTime;
-
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
-                {
-                    m_aAnimation.SetBool("IsHeld", true);
-
-
-                }
-                if (m_fHeldDown >= 3.0f)
-                {
-                    m_aAnimation.Play("attackanim3");
-                }
             }
-            if(XCI.GetButtonUp(XboxButton.X, m_Controller))
-            {
-                m_aAnimation.SetBool("IsHeld", false);
-            }
-            if(XCI.GetButton(XboxButton.B, m_Controller))
+            if (XCI.GetButton(XboxButton.B, m_Controller))
             {
                 Debug.Log("Blocking");
                 m_aAnimation.SetTrigger("Block1Trigger");
@@ -125,27 +112,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetButton("Fire1"))
             {
-                m_fHeldDown += Time.deltaTime;
+                m_aAnimation.SetTrigger("Attack1Trigger");
 
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
-                {
-                    m_aAnimation.SetBool("IsHeld" , true);
-                   
-                    
-                }
-                if (m_fHeldDown >= 3.0f)
-                {
-                    m_aAnimation.Play("attackanim3");
-                }
-            }       
-            if (Input.GetButtonUp("Fire1"))
-            {
-                //if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && m_aAnimation.IsInTransition(0))
-                
-                 m_aAnimation.SetBool("IsHeld", false);
-                                
+                m_fHeldDown += Time.deltaTime;
             }
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButton("Fire2"))
             {
                 Debug.Log("Blocking");
                 m_aAnimation.SetTrigger("Block1Trigger");
@@ -156,7 +127,7 @@ public class PlayerAttack : MonoBehaviour
                 BGuardUp = false;
             }
         }
-
+        
         //-----------------------------------------------------
         //Checks if button is held down for set amount of time
         //-----------------------------------------------------
@@ -173,15 +144,14 @@ public class PlayerAttack : MonoBehaviour
         {
             m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
         }
-        else if(m_bGuardUp == true && m_bChargeAtk != true)
+        else if (BGuardUp == true)
         {
-            m_PlayerMovementSpeed.Speed = m_fBlockingMoveSpeed;
+            m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
         }
         else
         {
             m_PlayerMovementSpeed.Speed = m_fFullSpeed;
         }
-
     }
 
     //--------------------------------------------------
@@ -217,13 +187,12 @@ public class PlayerAttack : MonoBehaviour
                 else if (m_fHeldDown >= 1.50f && m_fHeldDown <= 1.99f)
                 {
                     Debug.Log("Charge Attack3");
-                   ChargeAttack(a_cOther.transform, m_fChargeForce3rd);
+                    ChargeAttack(a_cOther.transform, m_fChargeForce3rd);
                 }
                 else if (m_fHeldDown >= 2.00f)
                 {
                     Debug.Log("Charge Attack4");
-                   ChargeAttack(a_cOther.transform, m_fChargeForce4th);
-
+                    ChargeAttack(a_cOther.transform, m_fChargeForce4th);
                 }             
             }
             else
@@ -278,13 +247,13 @@ public class PlayerAttack : MonoBehaviour
     public void AttackOn()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = true;
-        //Debug.Log("On");
+        Debug.Log("On");
     }
 
     public void AttackOff()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
-        //Debug.Log("Off");
+        Debug.Log("Off");
     }
 }

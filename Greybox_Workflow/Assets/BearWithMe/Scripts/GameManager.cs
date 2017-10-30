@@ -9,42 +9,48 @@ public class GameManager : MonoBehaviour
 {
     public int playerNumber;
     public List<GameObject> Players;
-    [SerializeField]
     private float timeLeft;
-    public Text timer;
+    Text timer;
     [SerializeField]
     GameObject beachBallPrefab;
     private XboxController m_xcController;
-    private PlayerMovement m_PlayerMovement;
 
     private void Awake()
 	{
-		////find any game manager
-		//GameManager[] managers = FindObjectsOfType<GameManager>();
-		//
-        //
-        //
-		//if(managers.Length > 1)
-		//{
-		//	//destroy yourself, there's already a game manager
-		//	GameObject.Destroy(gameObject);
-		//}
-		//else
-		//{	
-		//	//set yourself to not destroy (because you are the gamemanager)
-		//	GameObject.DontDestroyOnLoad(gameObject);
-		//}
+		//find any game manager
+		GameManager[] managers = FindObjectsOfType<GameManager>();
+		
+        
+
+		if(managers.Length > 1)
+		{
+			//destroy yourself, there's already a game manager
+			GameObject.Destroy(gameObject);
+		}
+		else
+		{	
+			//set yourself to not destroy (because you are the gamemanager)
+			GameObject.DontDestroyOnLoad(gameObject);
+		}
 
         //UIManager.getNumofPlayers()
         //timeLeft = UIManager.getTime();
-    
+        timeLeft = 60.0f;
+        timer = GameObject.Find("RoundTime").GetComponent<Text>();
+
+        Players.Add(GameObject.Find("PlayerCharacter1"));
+        Players.Add(GameObject.Find("PlayerCharacter2"));
+        Players.Add(GameObject.Find("PlayerCharacter3"));
+        Players.Add(GameObject.Find("PlayerCharacter4"));
 
         playerNumber = 4;
+
+
     }
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             UpdateTime();
             InvokeRepeating("UpdateTime", 1f, 1f);
@@ -58,33 +64,25 @@ public class GameManager : MonoBehaviour
             LoadBeachBall();
         }
 
-     if(Players.Count == 1)
-     {
-            Reset();
-     }
+       //if (Players[1].transform.position.y < -25 && Players[1] != null)
+       //{
+       //    
+       //    GameObject.Destroy(Players[1]);
+       //}
+       //if (Players[2].transform.position.y < -25 && Players[2] != null)
+       //{
+       //    GameObject.Destroy(Players[2]);
+       //}
+       //if (Players[3].transform.position.y < -25 && Players[3] != null)
+       //{
+       //    GameObject.Destroy(Players[3]);
+       //}
+       //if (Players[4].transform.position.y < -25 && Players[4] != null)
+       //{
+       //    GameObject.Destroy(Players[4]);
+       //}
 
-        for (int i = 0; i < Players.Capacity; i++)
-        {
-            if (Players[i] != null)
-            {
-                m_PlayerMovement = Players[i].GetComponent<PlayerMovement>();
-            }
-            if (m_PlayerMovement.IsDead == true)
-            {
-                playerNumber--;
-            }
-        }
-
-        if (timeLeft <= 0 || playerNumber <= 1)
-        {
-            Reset();
-        }
-        else if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
-        {
-            Reset();
-        }
     }
-
 
 
 
@@ -93,6 +91,15 @@ public class GameManager : MonoBehaviour
         timeLeft -= 1;
 
         timer.text = "Time: " + timeLeft;
+
+        if (timeLeft <= 0)
+        {
+            Reset();
+        }
+        else if(XCI.GetButtonDown(XboxButton.Back, m_xcController))
+        {
+            Reset();
+        }
     }
 
     public int TimeLeft
@@ -117,7 +124,7 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Mark's alpha scene_001");
 
     }
 }

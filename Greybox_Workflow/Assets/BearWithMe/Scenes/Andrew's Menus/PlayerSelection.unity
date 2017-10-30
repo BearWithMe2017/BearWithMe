@@ -185,7 +185,6 @@ GameObject:
   m_Component:
   - component: {fileID: 17295545}
   - component: {fileID: 17295544}
-  - component: {fileID: 17295546}
   m_Layer: 0
   m_Name: SettingTransfer
   m_TagString: Untagged
@@ -201,9 +200,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 17295543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373484ca9152a23469907cbcdf1d8908, type: 3}
+  m_Script: {fileID: 11500000, guid: 4656f49960cabba4fb02aada9d40891d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player1ControllerDefault: {fileID: 1644028492}
+  Player1ControllerReady: {fileID: 96355603}
+  Player2ControllerDefault: {fileID: 932633372}
+  Player2ControllerReady: {fileID: 37374273}
+  Player3ControllerDefault: {fileID: 1646317816}
+  Player3ControllerReady: {fileID: 2101996143}
+  Player4ControllerDefault: {fileID: 486867857}
+  Player4ControllerReady: {fileID: 2014505716}
+  playerFirst: 0
+  playerSecond: 0
+  playerThird: 0
+  playerFourth: 0
+  m_Controller: 0
+  changeScenes: 0
 --- !u!4 &17295545
 Transform:
   m_ObjectHideFlags: 0
@@ -217,17 +230,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &17295546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 17295543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373484ca9152a23469907cbcdf1d8908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &33113271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,17 +1662,14 @@ MonoBehaviour:
   MenuSlectionOptionsImage: {fileID: 0}
   MenuSlectionControlsImage: {fileID: 0}
   MenuSlectionQuitImage: {fileID: 0}
-  optionsPanel: {fileID: 0}
-  optionsTint: {fileID: 0}
-  ControlsPanel: {fileID: 0}
   MenuSelectionStartActive: 0
   MenuSelectionOptionsActive: 0
   MenuSelectionControlsActive: 0
   MenuSelectionQuitActive: 0
   OptionsSelectionMusicArrow: {fileID: 0}
   OptionsSelectionEffectsArrow: {fileID: 0}
-  back: 
-  ES: {fileID: 0}
+  OptionsSelectionMusicArrowActive: 0
+  OptionsSelectionEffectsArrowActive: 0
 --- !u!114 &1149957095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1690,6 +1689,8 @@ MonoBehaviour:
   PlayerSelectionPressedBackButton: {fileID: 1960091369}
   PlayerSelectionStartButton: {fileID: 0}
   PlayerSelectionPressedStartButton: {fileID: 0}
+  OptionsSettingsBackButton: {fileID: 0}
+  OptionsSettingsPressedBackButton: {fileID: 0}
   ES: {fileID: 0}
 --- !u!1 &1202061022
 GameObject:

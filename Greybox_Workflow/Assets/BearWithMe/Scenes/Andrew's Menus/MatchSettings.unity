@@ -209,17 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373484ca9152a23469907cbcdf1d8908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFirst: 0
-  playerSecond: 0
-  playerThird: 0
-  playerFourth: 0
-  CharactSelectionUI: {fileID: 0}
-  MatchSettingsBackButton: {fileID: 0}
-  MatchSettingsPressedBackButton: {fileID: 0}
-  MatchSettingsStartButton: {fileID: 0}
-  MatchSettingsPressedStartButton: {fileID: 0}
-  back: 
-  ES: {fileID: 0}
 --- !u!4 &56338569
 Transform:
   m_ObjectHideFlags: 0
@@ -2505,7 +2494,6 @@ GameObject:
   - component: {fileID: 2027379280}
   - component: {fileID: 2027379279}
   - component: {fileID: 2027379287}
-  - component: {fileID: 2027379288}
   m_Layer: 5
   m_Name: MatchSettingsUI
   m_TagString: Untagged
@@ -2734,33 +2722,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2027379278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3afdfa6eebfe82848832347a5c0929c6, type: 3}
+  m_Script: {fileID: 11500000, guid: a33e0624e5ad6904bbf8db60d746eb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  back: 
-  ES: {fileID: 362272457}
---- !u!114 &2027379288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2027379278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373484ca9152a23469907cbcdf1d8908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerFirst: 0
-  playerSecond: 0
-  playerThird: 0
-  playerFourth: 0
-  CharactSelectionUI: {fileID: 0}
-  MatchSettingsBackButton: {fileID: 200797660}
-  MatchSettingsPressedBackButton: {fileID: 791934371}
-  MatchSettingsStartButton: {fileID: 0}
-  MatchSettingsPressedStartButton: {fileID: 0}
-  back: 
-  ES: {fileID: 0}
+  MenuSelectionStartArrow: {fileID: 0}
+  MenuSelectionOptionsArrow: {fileID: 0}
+  MenuSelectionControlsArrow: {fileID: 0}
+  MenuSelectionQuitArrow: {fileID: 0}
+  MenuSlectionStartImage: {fileID: 0}
+  MenuSlectionOptionsImage: {fileID: 0}
+  MenuSlectionControlsImage: {fileID: 0}
+  MenuSlectionQuitImage: {fileID: 0}
+  MenuSelectionStartActive: 0
+  MenuSelectionOptionsActive: 0
+  MenuSelectionControlsActive: 0
+  MenuSelectionQuitActive: 0
+  OptionsSelectionMusicArrow: {fileID: 0}
+  OptionsSelectionEffectsArrow: {fileID: 0}
 --- !u!1 &2054151240
 GameObject:
   m_ObjectHideFlags: 0
