@@ -294,7 +294,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (m_bGrounded == false)
         {
-            if (m_rbRigidBody.velocity.y < 0.5f)
+            if (m_rbRigidBody.velocity.y < 0.0f)
             {
                 m_rbRigidBody.AddForce(-Vector3.up * m_fFallGravity, ForceMode.Acceleration);
                 //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
