@@ -19,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] [Tooltip("Sets Characters speed.")] private float m_fFullSpeed;
     [SerializeField] [Tooltip("Movement speed while charging the attack.")] private float m_fChargeAttMoveSpeed;
+    [SerializeField] [Tooltip("Movement speed while Blocking the attack.")] private float m_fBlockingMoveSpeed;
 
     private float m_fHeldDown = 0.0f;
 
@@ -73,8 +74,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 Debug.Log(c_iQueriedNumberOfCtrlrs + " Xbox controllers plugged in.");
             }
-            XCI.DEBUG_LogControllerNames();            
-        }  
+            XCI.DEBUG_LogControllerNames();
+        }
     }
 
     // Update is called once per frame
@@ -92,11 +93,21 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller))
             {
-                m_aAnimation.SetTrigger("Attack1Trigger");
-
                 m_fHeldDown += Time.deltaTime;
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
+                {
+                    m_aAnimation.SetBool("IsHeld", true);
+                }
+                if (m_fHeldDown >= 3.0f)
+                {
+                    m_aAnimation.Play("attackanim3");
+                }
             }
-            if (XCI.GetButton(XboxButton.B, m_Controller))
+            if (XCI.GetButtonUp(XboxButton.X, m_Controller))
+            {
+                m_aAnimation.SetBool("IsHeld", false);
+            }
+            if (XCI.GetButtonDown(XboxButton.B, m_Controller))
             {
                 Debug.Log("Blocking");
                 m_aAnimation.SetTrigger("Block1Trigger");
@@ -109,13 +120,24 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            if (Input.GetButton("Fire1"))
+            if(Input.GetButton("Fire1"))
             {
-                m_aAnimation.SetTrigger("Attack1Trigger");
-
                 m_fHeldDown += Time.deltaTime;
+
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
+                {
+                    m_aAnimation.SetBool("IsHeld", true);
+                }
+                if (m_fHeldDown >= 3.0f)
+                {
+                    m_aAnimation.Play("attackanim3");
+                }
             }
-            if (Input.GetButton("Fire2"))
+            if (Input.GetButtonUp("Fire1"))
+            {
+                m_aAnimation.SetBool("IsHeld", false);
+            }
+            if(Input.GetButton("Fire2"))
             {
                 Debug.Log("Blocking");
                 m_aAnimation.SetTrigger("Block1Trigger");
@@ -126,13 +148,13 @@ public class PlayerAttack : MonoBehaviour
                 BGuardUp = false;
             }
         }
-        
+
         //-----------------------------------------------------
         //Checks if button is held down for set amount of time
         //-----------------------------------------------------
         if (m_fHeldDown >= m_fChargeTimerStart)
         {
-            m_bChargeAtk = true;              
+            m_bChargeAtk = true;
         }
         else
         {
@@ -143,9 +165,9 @@ public class PlayerAttack : MonoBehaviour
         {
             m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
         }
-        else if (BGuardUp == true)
+        else if (BGuardUp == true && m_bChargeAtk != true)
         {
-            m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
+            m_PlayerMovementSpeed.Speed = m_fBlockingMoveSpeed;
         }
         else
         {
@@ -192,7 +214,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     Debug.Log("Charge Attack4");
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th);
-                }             
+                }
             }
             else
             {

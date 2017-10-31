@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             m_bGrounded = false;
+            m_bJumping = false;
         }
 
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
@@ -102,20 +103,12 @@ public class PlayerMovement : MonoBehaviour
                 {
                     m_bJumping = true;
                 }
-                else
-                {
-                    m_bJumping = false;
-                }
             }
             else
             {
                 if (Input.GetButtonDown("Jump"))
                 {
                     m_bJumping = true;
-                }
-                else
-                {
-                    m_bJumping = false;
                 }
             }
         }
@@ -277,19 +270,10 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------
         if (m_bGrounded == true)
         {
-            if (c_iQueriedNumberOfCtrlrs > 0)
+            if (m_bJumping == true)
             {
-                if (m_bJumping == true)
-                {
-                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
-                }
-            }
-            else
-            {
-                if (m_bJumping == true)
-                {
-                    m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
-                }
+                m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
+                m_bJumping = false;
             }
         }
         if (m_bGrounded == false)
