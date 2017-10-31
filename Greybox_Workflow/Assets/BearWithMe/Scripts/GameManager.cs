@@ -64,23 +64,32 @@ public class GameManager : MonoBehaviour
             LoadBeachBall();
         }
 
-       //if (Players[1].transform.position.y < -25 && Players[1] != null)
-       //{
-       //    
-       //    GameObject.Destroy(Players[1]);
-       //}
-       //if (Players[2].transform.position.y < -25 && Players[2] != null)
-       //{
-       //    GameObject.Destroy(Players[2]);
-       //}
-       //if (Players[3].transform.position.y < -25 && Players[3] != null)
-       //{
-       //    GameObject.Destroy(Players[3]);
-       //}
-       //if (Players[4].transform.position.y < -25 && Players[4] != null)
-       //{
-       //    GameObject.Destroy(Players[4]);
-       //}
+        //if (Players[1].transform.position.y < -25 && Players[1] != null)
+        //{
+        //    
+        //    GameObject.Destroy(Players[1]);
+        //}
+        //if (Players[2].transform.position.y < -25 && Players[2] != null)
+        //{
+        //    GameObject.Destroy(Players[2]);
+        //}
+        //if (Players[3].transform.position.y < -25 && Players[3] != null)
+        //{
+        //    GameObject.Destroy(Players[3]);
+        //}
+        //if (Players[4].transform.position.y < -25 && Players[4] != null)
+        //{
+        //    GameObject.Destroy(Players[4]);
+        //}
+
+        if (timeLeft <= 0)
+        {
+            Reset();
+        }
+        else if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
+        {
+            Reset();
+        }
 
     }
 
@@ -92,14 +101,7 @@ public class GameManager : MonoBehaviour
 
         timer.text = "Time: " + timeLeft;
 
-        if (timeLeft <= 0)
-        {
-            Reset();
-        }
-        else if(XCI.GetButtonDown(XboxButton.Back, m_xcController))
-        {
-            Reset();
-        }
+
     }
 
     public int TimeLeft
@@ -124,7 +126,7 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
 
-        SceneManager.LoadScene("Mark's alpha scene_001");
+        SceneManager.LoadScene(5);
 
     }
 }

@@ -26,6 +26,7 @@ public class Platform : MonoBehaviour
 
     float baseMass;
     int playerCount;
+    float yLimitForce;
 
     private float posY = 0.0f;
     void Awake()
@@ -49,8 +50,8 @@ public class Platform : MonoBehaviour
         animator = transform.GetComponentInParent<Animator>();
         playerCount = 0;
         baseMass = 5.0f;
-        currFriction = 500.0f;
-        posY = transform.position.y;
+        yLimitForce = 50.0f;
+       posY = transform.position.y;
     }
 
     // Update is called once per frame
@@ -86,6 +87,20 @@ public class Platform : MonoBehaviour
             animator.Play("Slippery");
             isSlippery = false;
             //SlipperyPlatform();
+        }
+
+        if (transform.localPosition.y <= -0.2f)
+        {
+            rb.AddForce(Vector3.up * (yLimitForce));
+            yLimitForce -= 10.0f;
+            if (yLimitForce <= 0.0f)
+            {
+                yLimitForce = 0.0f;
+            }
+        }
+        else
+        {
+            yLimitForce = 50.0f;
         }
 
     }
@@ -206,17 +221,17 @@ public class Platform : MonoBehaviour
        {
 
             playerCount++;
+            rb.AddForceAtPosition(new Vector3(0, -5.5f * rb.velocity.y, 0), collision.transform.position, ForceMode.Impulse);
 
+            //PlayerMovement playerMovement = collision.collider.gameObject.GetComponent<PlayerMovement>();
+            //prevPlayerFriction = playerMovement.Friction;
+            //if (wasSlippery == true)
+            //{
+            //    prevPlayerFriction = playerMovement.Friction;
+            //    playerMovement.Friction -= ((playerMovement.Friction * slipFrictionPercent) / 100);
+            //    Debug.Log("playerMovement Friction: " + playerMovement.Friction);
+            //}
 
-           //PlayerMovement playerMovement = collision.collider.gameObject.GetComponent<PlayerMovement>();
-           //prevPlayerFriction = playerMovement.Friction;
-           //if (wasSlippery == true)
-           //{
-           //    prevPlayerFriction = playerMovement.Friction;
-           //    playerMovement.Friction -= ((playerMovement.Friction * slipFrictionPercent) / 100);
-           //    Debug.Log("playerMovement Friction: " + playerMovement.Friction);
-           //}
-            
         }
    
    
