@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+ 
             m_bGrounded = false;
             m_bJumping = false;
         }
@@ -284,6 +285,7 @@ public class PlayerMovement : MonoBehaviour
                 //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
             }
         }
+
         if(m_PlayerAttack.BGuardUp == true)
         {
             if (m_vPlayerVeloc.x > 2.0f)

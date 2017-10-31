@@ -165,7 +165,7 @@ public class PlayerAttack : MonoBehaviour
         {
             m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
         }
-        else if (BGuardUp == true && m_bChargeAtk != true)
+        else if (BGuardUp == true)
         {
             m_PlayerMovementSpeed.Speed = m_fBlockingMoveSpeed;
         }
