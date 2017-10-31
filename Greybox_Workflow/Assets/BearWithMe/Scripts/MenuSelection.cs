@@ -319,18 +319,18 @@ public class MenuSelection : MonoBehaviour
 
         if (scene.name == "MatchSettings")
         {
-            // Next Scene
-            {
-                if (XCI.GetButtonUp(XboxButton.Start))
-                {
-                    PlayerMenu();
-                }
-
-                if (Input.GetKeyUp(KeyCode.Return))
-                {
-                    PlayerMenu();
-                }
-            }
+            //// Next Scene
+            //{
+            //    if (XCI.GetButtonUp(XboxButton.Start))
+            //    {
+            //        PlayerMenu();
+            //    }
+            //
+            //    if (Input.GetKeyUp(KeyCode.Return))
+            //    {
+            //        PlayerMenu();
+            //    }
+            //}
 
             // Back
             {
