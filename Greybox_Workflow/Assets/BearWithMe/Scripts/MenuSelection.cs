@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using XboxCtrlrInput;
+using UnityEngine.UI;
 
 public class MenuSelection : MonoBehaviour
 {
@@ -32,8 +33,6 @@ public class MenuSelection : MonoBehaviour
     public bool OptionsSelectionMusicArrowActive;
     public bool OptionsSelectionEffectsArrowActive;
 
-
-
     // Use this for initialization
     public void Awake()
     {
@@ -55,269 +54,268 @@ public class MenuSelection : MonoBehaviour
 
     void Update()
     {
+
         Scene scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "Start_Menu_001")
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                print("space triggered");
+        //if (scene.name == "Start_Menu_001")
+       // {
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    print("space triggered");
 
-            }
-            
+            //}
             //pressed Down
-            {
-               if (XCI.GetButtonDown(XboxButton.DPadDown))
-               {
-                   print("Down Key pressed");
-                   if (MenuSelectionStartArrow.activeSelf)
-                   {
-                       print("Event 1 triggered");
-                       MenuSelectionStartArrow.SetActive(false);
-                       MenuSelectionStartActive = false;
-                       MenuSelectionOptionsArrow.SetActive(true);
-                       MenuSelectionOptionsActive = true;
-                       MenuSelectionControlsArrow.SetActive(false);
-                       MenuSelectionControlsActive = false;
-                       MenuSelectionQuitArrow.SetActive(false);
-                       MenuSelectionQuitActive = false;
+            //{
+            //    if (XCI.GetButtonDown(XboxButton.DPadDown)) 
+            //    {
+            //         print("Down Key pressed");
+            //        if (MenuSelectionStartArrow.activeSelf)
+            //        {
+            //            print("Event 1 triggered");
+            //            MenuSelectionStartArrow.SetActive(false);
+            //            MenuSelectionStartActive = false;
+            //            MenuSelectionOptionsArrow.SetActive(true);
+            //            MenuSelectionOptionsActive = true;
+            //            MenuSelectionControlsArrow.SetActive(false);
+            //            MenuSelectionControlsActive = false;
+            //            MenuSelectionQuitArrow.SetActive(false);
+            //            MenuSelectionQuitActive = false;
+                
+            //        }
+                
+            //        else if (MenuSelectionOptionsArrow.activeSelf)
+            //        {
+            //            print("Event 2 triggered");
+            //            MenuSelectionStartArrow.SetActive(false);
+            //            MenuSelectionStartActive = false;
+            //            MenuSelectionOptionsArrow.SetActive(false);
+            //            MenuSelectionOptionsActive = false;
+            //            MenuSelectionControlsArrow.SetActive(true);
+            //            MenuSelectionControlsActive = true;
+            //            MenuSelectionQuitArrow.SetActive(false);
+            //            MenuSelectionQuitActive = false;
+            //        }
+                
+            //        else if (MenuSelectionControlsArrow.activeSelf)
+            //        {
+            //            print("Event 3 triggered");
+            //            MenuSelectionStartArrow.SetActive(false);
+            //            MenuSelectionStartActive = false;
+            //            MenuSelectionOptionsArrow.SetActive(false);
+            //            MenuSelectionOptionsActive = false;
+            //            MenuSelectionControlsArrow.SetActive(false);
+            //            MenuSelectionControlsActive = false;
+            //            MenuSelectionQuitArrow.SetActive(true);
+            //            MenuSelectionQuitActive = true;
+            //        }
+                
+            //        else if (MenuSelectionQuitArrow.activeSelf)
+            //        {
+            //            print("Event 4 triggered triggered");
+            //        }
+            //    }
             
-                   }
+            //    if (Input.GetKeyDown(KeyCode.DownArrow))
+            //    {
+            //    print("Down Key pressed");
+            //    if (MenuSelectionStartArrow.activeSelf)
+            //    {
+            //        print("Event 1 triggered");
+            //        MenuSelectionStartArrow.SetActive(false);
+            //        MenuSelectionStartActive = false;
+            //        MenuSelectionOptionsArrow.SetActive(true);
+            //        MenuSelectionOptionsActive = true;
+            //        MenuSelectionControlsArrow.SetActive(false);
+            //        MenuSelectionControlsActive = false;
+            //        MenuSelectionQuitArrow.SetActive(false);
+            //        MenuSelectionQuitActive = false;
             
-                   else if (MenuSelectionOptionsArrow.activeSelf)
-                   {
-                       print("Event 2 triggered");
-                       MenuSelectionStartArrow.SetActive(false);
-                       MenuSelectionStartActive = false;
-                       MenuSelectionOptionsArrow.SetActive(false);
-                       MenuSelectionOptionsActive = false;
-                       MenuSelectionControlsArrow.SetActive(true);
-                       MenuSelectionControlsActive = true;
-                       MenuSelectionQuitArrow.SetActive(false);
-                       MenuSelectionQuitActive = false;
-                   }
+            //    }
             
-                   else if (MenuSelectionControlsArrow.activeSelf)
-                   {
-                       print("Event 3 triggered");
-                       MenuSelectionStartArrow.SetActive(false);
-                       MenuSelectionStartActive = false;
-                       MenuSelectionOptionsArrow.SetActive(false);
-                       MenuSelectionOptionsActive = false;
-                       MenuSelectionControlsArrow.SetActive(false);
-                       MenuSelectionControlsActive = false;
-                       MenuSelectionQuitArrow.SetActive(true);
-                       MenuSelectionQuitActive = true;
-                   }
+            //    else if (MenuSelectionOptionsArrow.activeSelf)
+            //    {
+            //        print("Event 2 triggered");
+            //        MenuSelectionStartArrow.SetActive(false);
+            //        MenuSelectionStartActive = false;
+            //        MenuSelectionOptionsArrow.SetActive(false);
+            //        MenuSelectionOptionsActive = false;
+            //        MenuSelectionControlsArrow.SetActive(true);
+            //        MenuSelectionControlsActive = true;
+            //        MenuSelectionQuitArrow.SetActive(false);
+            //        MenuSelectionQuitActive = false;
+            //    }
             
-                   else if (MenuSelectionQuitArrow.activeSelf)
-                   {
-                       print("Event 4 triggered triggered");
-                   }
-               }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                print("Down Key pressed");
-                if (MenuSelectionStartArrow.activeSelf)
-                {
-                    print("Event 1 triggered");
-                    MenuSelectionStartArrow.SetActive(false);
-                    MenuSelectionStartActive = false;
-                    MenuSelectionOptionsArrow.SetActive(true);
-                    MenuSelectionOptionsActive = true;
-                    MenuSelectionControlsArrow.SetActive(false);
-                    MenuSelectionControlsActive = false;
-                    MenuSelectionQuitArrow.SetActive(false);
-                    MenuSelectionQuitActive = false;
-
-                }
-
-                else if (MenuSelectionOptionsArrow.activeSelf)
-                {
-                    print("Event 2 triggered");
-                    MenuSelectionStartArrow.SetActive(false);
-                    MenuSelectionStartActive = false;
-                    MenuSelectionOptionsArrow.SetActive(false);
-                    MenuSelectionOptionsActive = false;
-                    MenuSelectionControlsArrow.SetActive(true);
-                    MenuSelectionControlsActive = true;
-                    MenuSelectionQuitArrow.SetActive(false);
-                    MenuSelectionQuitActive = false;
-                }
-
-                else if (MenuSelectionControlsArrow.activeSelf)
-                {
-                    print("Event 3 triggered");
-                    MenuSelectionStartArrow.SetActive(false);
-                    MenuSelectionStartActive = false;
-                    MenuSelectionOptionsArrow.SetActive(false);
-                    MenuSelectionOptionsActive = false;
-                    MenuSelectionControlsArrow.SetActive(false);
-                    MenuSelectionControlsActive = false;
-                    MenuSelectionQuitArrow.SetActive(true);
-                    MenuSelectionQuitActive = true;
-                }
-
-                else if (MenuSelectionQuitArrow.activeSelf)
-                {
-                    print("Event 4 triggered triggered");
-                }
-                }
-            }
-
-            //Up Pressed
-            {
-                if (XCI.GetButtonDown(XboxButton.DPadUp))
-                {
-                    print("up Key pressed");
-                    if (MenuSelectionOptionsArrow.activeSelf)
-                    {
-                        print("Event 6 triggered");
-                        MenuSelectionStartArrow.SetActive(true);
-                        MenuSelectionStartActive = true;
-                        MenuSelectionOptionsArrow.SetActive(false);
-                        MenuSelectionOptionsActive = false;
-                        MenuSelectionControlsArrow.SetActive(false);
-                        MenuSelectionControlsActive = false;
-                        MenuSelectionQuitArrow.SetActive(false);
-                        MenuSelectionQuitActive = false;
-                    }
-             
-                    else if (MenuSelectionControlsArrow.activeSelf)
-                    {
-                        print("Event 7 triggered");
-                        MenuSelectionStartArrow.SetActive(false);
-                        MenuSelectionStartActive = false;
-                        MenuSelectionOptionsArrow.SetActive(true);
-                        MenuSelectionOptionsActive = true;
-                        MenuSelectionControlsArrow.SetActive(false);
-                        MenuSelectionControlsActive = false;
-                        MenuSelectionQuitArrow.SetActive(false);
-                        MenuSelectionQuitActive = false;
-                    }
-             
-                    else if (MenuSelectionQuitArrow.activeSelf)
-                    {
-                        print("Event 8 triggered triggered");
-                        MenuSelectionStartArrow.SetActive(false);
-                        MenuSelectionStartActive = false;
-                        MenuSelectionOptionsArrow.SetActive(false);
-                        MenuSelectionOptionsActive = false;
-                        MenuSelectionControlsArrow.SetActive(true);
-                        MenuSelectionControlsActive = true;
-                        MenuSelectionQuitArrow.SetActive(false);
-                        MenuSelectionQuitActive = false;
-                    }
-             
-                    else
-                    {
-                        print("Event 5 triggered triggered");
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    print("up Key pressed");
-                    if (MenuSelectionOptionsArrow.activeSelf)
-                    {
-                        print("Event 6 triggered");
-                        MenuSelectionStartArrow.SetActive(true);
-                        MenuSelectionStartActive = true;
-                        MenuSelectionOptionsArrow.SetActive(false);
-                        MenuSelectionOptionsActive = false;
-                        MenuSelectionControlsArrow.SetActive(false);
-                        MenuSelectionControlsActive = false;
-                        MenuSelectionQuitArrow.SetActive(false);
-                        MenuSelectionQuitActive = false;
-                    }
-
-                    else if (MenuSelectionControlsArrow.activeSelf)
-                    {
-                        print("Event 7 triggered");
-                        MenuSelectionStartArrow.SetActive(false);
-                        MenuSelectionStartActive = false;
-                        MenuSelectionOptionsArrow.SetActive(true);
-                        MenuSelectionOptionsActive = true;
-                        MenuSelectionControlsArrow.SetActive(false);
-                        MenuSelectionControlsActive = false;
-                        MenuSelectionQuitArrow.SetActive(false);
-                        MenuSelectionQuitActive = false;
-                    }
-
-                    else if (MenuSelectionQuitArrow.activeSelf)
-                    {
-                        print("Event 8 triggered triggered");
-                        MenuSelectionStartArrow.SetActive(false);
-                        MenuSelectionStartActive = false;
-                        MenuSelectionOptionsArrow.SetActive(false);
-                        MenuSelectionOptionsActive = false;
-                        MenuSelectionControlsArrow.SetActive(true);
-                        MenuSelectionControlsActive = true;
-                        MenuSelectionQuitArrow.SetActive(false);
-                        MenuSelectionQuitActive = false;
-                    }
-
-                    else
-                    {
-                        print("Event 5 triggered triggered");
-                    }
-                }
-            }
-
+            //    else if (MenuSelectionControlsArrow.activeSelf)
+            //    {
+            //        print("Event 3 triggered");
+            //        MenuSelectionStartArrow.SetActive(false);
+            //        MenuSelectionStartActive = false;
+            //        MenuSelectionOptionsArrow.SetActive(false);
+            //        MenuSelectionOptionsActive = false;
+            //        MenuSelectionControlsArrow.SetActive(false);
+            //        MenuSelectionControlsActive = false;
+            //        MenuSelectionQuitArrow.SetActive(true);
+            //        MenuSelectionQuitActive = true;
+            //    }
+            
+            //    else if (MenuSelectionQuitArrow.activeSelf)
+            //    {
+            //        print("Event 4 triggered triggered");
+            //    }
+            //    }
+            //}
+            
+            ////Up Pressed
+            //{
+            //   if (XCI.GetButtonDown(XboxButton.DPadUp))
+            //   {
+            //       print("up Key pressed");
+            //       if (MenuSelectionOptionsArrow.activeSelf)
+            //       {
+            //           print("Event 6 triggered");
+            //           MenuSelectionStartArrow.SetActive(true);
+            //           MenuSelectionStartActive = true;
+            //           MenuSelectionOptionsArrow.SetActive(false);
+            //           MenuSelectionOptionsActive = false;
+            //           MenuSelectionControlsArrow.SetActive(false);
+            //           MenuSelectionControlsActive = false;
+            //           MenuSelectionQuitArrow.SetActive(false);
+            //           MenuSelectionQuitActive = false;
+            //       }
+               
+            //       else if (MenuSelectionControlsArrow.activeSelf)
+            //       {
+            //           print("Event 7 triggered");
+            //           MenuSelectionStartArrow.SetActive(false);
+            //           MenuSelectionStartActive = false;
+            //           MenuSelectionOptionsArrow.SetActive(true);
+            //           MenuSelectionOptionsActive = true;
+            //           MenuSelectionControlsArrow.SetActive(false);
+            //           MenuSelectionControlsActive = false;
+            //           MenuSelectionQuitArrow.SetActive(false);
+            //           MenuSelectionQuitActive = false;
+            //       }
+               
+            //       else if (MenuSelectionQuitArrow.activeSelf)
+            //       {
+            //           print("Event 8 triggered triggered");
+            //           MenuSelectionStartArrow.SetActive(false);
+            //           MenuSelectionStartActive = false;
+            //           MenuSelectionOptionsArrow.SetActive(false);
+            //           MenuSelectionOptionsActive = false;
+            //           MenuSelectionControlsArrow.SetActive(true);
+            //           MenuSelectionControlsActive = true;
+            //           MenuSelectionQuitArrow.SetActive(false);
+            //           MenuSelectionQuitActive = false;
+            //       }
+               
+            //       else
+            //       {
+            //           print("Event 5 triggered triggered");
+            //       }
+            //   }
+            
+            //    if (Input.GetKeyDown(KeyCode.UpArrow))
+            //    {
+            //        print("up Key pressed");
+            //        if (MenuSelectionOptionsArrow.activeSelf)
+            //        {
+            //            print("Event 6 triggered");
+            //            MenuSelectionStartArrow.SetActive(true);
+            //            MenuSelectionStartActive = true;
+            //            MenuSelectionOptionsArrow.SetActive(false);
+            //            MenuSelectionOptionsActive = false;
+            //            MenuSelectionControlsArrow.SetActive(false);
+            //            MenuSelectionControlsActive = false;
+            //            MenuSelectionQuitArrow.SetActive(false);
+            //            MenuSelectionQuitActive = false;
+            //        }
+            
+            //        else if (MenuSelectionControlsArrow.activeSelf)
+            //        {
+            //            print("Event 7 triggered");
+            //            MenuSelectionStartArrow.SetActive(false);
+            //            MenuSelectionStartActive = false;
+            //            MenuSelectionOptionsArrow.SetActive(true);
+            //            MenuSelectionOptionsActive = true;
+            //            MenuSelectionControlsArrow.SetActive(false);
+            //            MenuSelectionControlsActive = false;
+            //            MenuSelectionQuitArrow.SetActive(false);
+            //            MenuSelectionQuitActive = false;
+            //        }
+            
+            //        else if (MenuSelectionQuitArrow.activeSelf)
+            //        {
+            //            print("Event 8 triggered triggered");
+            //            MenuSelectionStartArrow.SetActive(false);
+            //            MenuSelectionStartActive = false;
+            //            MenuSelectionOptionsArrow.SetActive(false);
+            //            MenuSelectionOptionsActive = false;
+            //            MenuSelectionControlsArrow.SetActive(true);
+            //            MenuSelectionControlsActive = true;
+            //            MenuSelectionQuitArrow.SetActive(false);
+            //            MenuSelectionQuitActive = false;
+            //        }
+            
+            //        else
+            //        {
+            //            print("Event 5 triggered triggered");
+            //        }
+            //    }
+            //}
             //is quit
-            {
-                 if(XCI.GetButtonDown(XboxButton.A))
-                 {
-                    print("is Quit? triggered");
-                    if (MenuSelectionStartActive == true)
-                    {
-                        MatchSettings();
-                    }
 
-                    else if (MenuSelectionOptionsActive == true)
-                    {
-                        OptionsMenu();
-                    }
+           //  if(XCI.GetButtonDown(XboxButton.A))
+           //  {
+           //     print("is Quit? triggered");
+           //     if (MenuSelectionStartActive)
+           //     {
+           //         MatchSettings();
+           //     }
+           // 
+           //     else if (MenuSelectionOptionsActive)
+           //     {
+           //         OptionsMenu();
+           //     }
+           // 
+           //     else if (MenuSelectionControlsActive)
+           //     {
+           //         ControlsMenu();
+           //     }
+           // 
+           //     else if (MenuSelectionQuitActive)
+           //     {
+           //         QuitGame();
+           //     }
+           // }
 
-                    else if (MenuSelectionControlsActive == true)
-                    {
-                        ControlsMenu();
-                    }
+            //if (Input.GetKeyDown(KeyCode.Return))
+            //{
+            //    print("is Quit? triggered");
+            //    if (MenuSelectionStartArrow.IsActive())
+            //    {
+            //        MatchSettings();
+            //    }
+            //
+            //    else if (MenuSelectionOptionsArrow.IsActive())
+            //    {
+            //        OptionsMenu();
+            //    }
+            //
+            //    else if (MenuSelectionControlsArrow.IsActive())
+            //    {
+            //        ControlsMenu();
+            //    }
+            //
+            //    else if (MenuSelectionQuitArrow.IsActive())
+            //    {
+            //        QuitGame();
+            //    }
+            //}
+        //}
 
-                    else if (MenuSelectionQuitActive == true)
-                    {
-                        QuitGame();
-                    }
-                }
 
-                if (Input.GetKeyDown(KeyCode.Return))
-                {
-                    print("is Quit? triggered");
-                    if (MenuSelectionStartActive == true)
-                    {
-                        MatchSettings();
-                    }
 
-                    else if (MenuSelectionOptionsActive == true)
-                    {
-                        OptionsMenu();
-                    }
-
-                    else if (MenuSelectionControlsActive == true)
-                    {
-                        ControlsMenu();
-                    }
-
-                    else if (MenuSelectionQuitActive == true)
-                    {
-                        QuitGame();
-                    }
-                }
-            }
-            
-            
-        }
 
         if (scene.name == "MatchSettings")
         {

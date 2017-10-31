@@ -9493,6 +9493,41 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114758699973454838, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fFullSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758699973454838, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758699973454838, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce1st
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758699973454838, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce2nd
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758699973454838, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce3rd
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758699973454838, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeForce4th
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114758699973454838, guid: 98554c1eff9318d4ca2e0b10e69ca687,
+        type: 2}
+      propertyPath: m_fChargeAttMoveSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98554c1eff9318d4ca2e0b10e69ca687, type: 2}
   m_IsPrefabParent: 0
@@ -52181,7 +52216,7 @@ TrailRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 769466470}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
