@@ -7,7 +7,8 @@ using XboxCtrlrInput;
 
 public class GameManager : MonoBehaviour
 {
-    private GameObject[] Players;
+    public GameObject[] Players;
+    private bool[] activePlayerArry;
     public int playerCount;
     private int deathCount;
     private float timeLeft;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     GameObject beachBallPrefab;
     private XboxController m_xcController;
     public int sceneIndex;
+    public bool player1Ready, player2Ready, player3Ready, player4Ready;
 
 
     private void Awake()
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
             GameObject.DontDestroyOnLoad(gameObject);
 
             Players = new GameObject[4];
+            activePlayerArry = new bool[4];
 
 
             //if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
@@ -48,6 +51,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        player1Ready = false;
+        player2Ready = false;
+        player3Ready = false;
+        player4Ready = false;
         //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         //{
         //    UpdateTime();
@@ -57,9 +64,17 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelWasLoaded(int sceneIndex)
     {
+        //ensure it's the correct GameManager running
+        if (activePlayerArry == null)
+            return;
         //
         if (sceneIndex == 1)
         {
+            activePlayerArry[0] = player1Ready;
+            activePlayerArry[1] = player2Ready;
+            activePlayerArry[2] = player3Ready;
+            activePlayerArry[3] = player4Ready;
+
             if (Players != null)
             {
                 Players[0] = GameObject.Find("PlayerCharacter1");
@@ -67,14 +82,12 @@ public class GameManager : MonoBehaviour
                 Players[2] = GameObject.Find("PlayerCharacter3");
                 Players[3] = GameObject.Find("PlayerCharacter4");
 
-                if (playerCount < 3)
+                for (int i = 0; i < activePlayerArry.Length; i++)
                 {
-                    Players[2].SetActive(false);
-                    Players[3].SetActive(false);
-                }
-                if (playerCount < 4)
-                {
-                    Players[3].SetActive(false);
+                    if (activePlayerArry[i] == false)
+                    {
+                        Players[i].SetActive(false);
+                    }
                 }
             }
 
@@ -174,28 +187,32 @@ public class GameManager : MonoBehaviour
 
     private void RestartRound()
     {
-        if (timeLeft < 0 && winsAmount > 1)
+        if (timeLeft <= 0 && winsAmount > 1)
         {
             timeLeft = StartTime;
+            CancelInvoke("UpdateTime");
             Reset();
         }
 
-        if (timeLeft < 0 && winsAmount == 1)
+        if (timeLeft <= 0 && winsAmount == 1)
         {
             timeLeft = 0;
             print("Game Over");
+            CancelInvoke("UpdateTime");
             SceneManager.LoadScene(0);
         }
 
         if (deathCount == playerCount - 1 && winsAmount > 1)
         {
             timeLeft = StartTime;
+            CancelInvoke("UpdateTime");
             Reset();
         }
 
         if (deathCount == playerCount - 1 && winsAmount == 1)
         {
             timeLeft = 0;
+            CancelInvoke("UpdateTime");
             print("Game Over");
             SceneManager.LoadScene(0);
         }

@@ -60,8 +60,13 @@ public class MenuSelection : MonoBehaviour
 
         Scene scene = SceneManager.GetActiveScene();
 
-        
-    
+
+        //when mouse clicked, set seleted gameobject to currentSelectedObject or startButton if nothing is selected
+        if (Input.GetMouseButtonDown(0))
+            eventSystem.SetSelectedGameObject( (eventSystem.currentSelectedGameObject == null)? startButton : eventSystem.currentSelectedGameObject );
+
+
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (currentPanel.name == "MatchSettingsPanel")
@@ -82,7 +87,7 @@ public class MenuSelection : MonoBehaviour
         {
             if (currentPanel.name == "CharacterSelectionPanel")
             {
-                if (GetComponent<PlayerReady>().playerSecond == true)
+                if (gm.playerCount > 1)
                 {
                     LoadGame();
                 }

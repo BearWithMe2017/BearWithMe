@@ -57,6 +57,8 @@ public class PlayerReady : MonoBehaviour
                     Player1ControllerReady.SetActive(true);
                     print("Player 1 ready");
                     playerFirst = true;
+                    gm.playerCount += 1;
+                    gm.player1Ready = true;
                 }
 
                 else if (!Player1ControllerDefault.activeSelf && playerFirst == true)
@@ -65,6 +67,8 @@ public class PlayerReady : MonoBehaviour
                     Player1ControllerDefault.SetActive(true);
                     print("Player 1 not Ready");
                     playerFirst = false;
+                    gm.playerCount -= 1;
+                    gm.player1Ready = false;
                 }
 
                 else
@@ -81,6 +85,8 @@ public class PlayerReady : MonoBehaviour
                     Player1ControllerReady.SetActive(true);
                     print("Player 1 ready");
                     playerFirst = true;
+                    gm.playerCount += 1;
+                    gm.player1Ready = true;
                 }
 
                 else if (!Player1ControllerDefault.activeSelf && playerFirst == true)
@@ -89,6 +95,8 @@ public class PlayerReady : MonoBehaviour
                     Player1ControllerDefault.SetActive(true);
                     print("Player 1 not Ready");
                     playerFirst = false;
+                    gm.playerCount -= 1;
+                    gm.player1Ready = false;
                 }
 
                 else
@@ -108,6 +116,8 @@ public class PlayerReady : MonoBehaviour
                     Player2ControllerReady.SetActive(true);
                     print("Player 2 ready");
                     playerSecond = true;
+                    gm.playerCount += 1;
+                    gm.player2Ready = true;
                 }
 
                 else if (!Player2ControllerDefault.activeSelf && playerSecond == true)
@@ -116,6 +126,8 @@ public class PlayerReady : MonoBehaviour
                     Player2ControllerDefault.SetActive(true);
                     print("Player 2 not Ready");
                     playerSecond = false;
+                    gm.playerCount -= 1;
+                    gm.player2Ready = false;
                 }
 
                 else
@@ -133,6 +145,8 @@ public class PlayerReady : MonoBehaviour
                     Player2ControllerReady.SetActive(true);
                     print("Player 2 ready");
                     playerSecond = true;
+                    gm.playerCount += 1;
+                    gm.player2Ready = true;
                 }
 
                 else if (!Player2ControllerDefault.activeSelf && playerSecond == true)
@@ -141,6 +155,8 @@ public class PlayerReady : MonoBehaviour
                     Player2ControllerDefault.SetActive(true);
                     print("Player 2 not Ready");
                     playerSecond = false;
+                    gm.playerCount -= 1;
+                    gm.player2Ready = false;
                 }
 
                 else
@@ -161,6 +177,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 3 ready");
                     playerThird = true;
                     gm.playerCount += 1;
+                    gm.player3Ready = true;
 
                 }
 
@@ -171,6 +188,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 3 not Ready");
                     playerThird = false;
                     gm.playerCount -= 1;
+                    gm.player3Ready = false;
                 }
 
                 else
@@ -188,6 +206,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 3 ready");
                     playerThird = true;
                     gm.playerCount += 1;
+                    gm.player3Ready = true;
                 }
 
                 else if (!Player3ControllerDefault.activeSelf && playerThird == true)
@@ -197,6 +216,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 3 not Ready");
                     playerThird = false;
                     gm.playerCount -= 1;
+                    gm.player3Ready = false;
                 }
 
                 else
@@ -217,6 +237,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 4 ready");
                     playerFourth = true;
                     gm.playerCount += 1;
+                    gm.player4Ready = true;
                 }
 
                 else if (!Player4ControllerDefault.activeSelf && playerFourth == true)
@@ -226,6 +247,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 4 not Ready");
                     playerFourth = false;
                     gm.playerCount -= 1;
+                    gm.player4Ready = false;
                 }
 
                 else
@@ -243,6 +265,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 4 ready");
                     playerFourth = true;
                     gm.playerCount += 1;
+                    gm.player4Ready = true;
                 }
 
                 else if (!Player4ControllerDefault.activeSelf && playerFourth == true)
@@ -252,6 +275,7 @@ public class PlayerReady : MonoBehaviour
                     print("Player 4 not Ready");
                     playerFourth = false;
                     gm.playerCount -= 1;
+                    gm.player4Ready = false;
                 }
 
                 else
