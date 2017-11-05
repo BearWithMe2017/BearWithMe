@@ -9,17 +9,5 @@ EditorBuildSettings:
     path: Assets/BearWithMe/Scenes/Andrew's Menus/Start_Menu_001.unity
     guid: d074f243620647348bc251ceababe580
   - enabled: 1
-    path: Assets/BearWithMe/Scenes/Andrew's Menus/MatchSettings.unity
-    guid: 460974fc9f7c84646bdb175c6c4de5e6
-  - enabled: 1
-    path: Assets/BearWithMe/Scenes/Andrew's Menus/PlayerSelection.unity
-    guid: 18d46622ed1e5714d9abd962952fa7b8
-  - enabled: 1
-    path: Assets/BearWithMe/Scenes/Andrew's Menus/OptionsMenu.unity
-    guid: cf99514cf34c9954996352454c10db3c
-  - enabled: 1
-    path: Assets/BearWithMe/Scenes/Andrew's Menus/ControlsMenu.unity
-    guid: 534856fde1415b148b49e17f639ac26c
-  - enabled: 1
     path: Assets/BearWithMe/Scenes/Mark Beta.unity
     guid: 6a7ca900d45ba32429ba160ee8166358

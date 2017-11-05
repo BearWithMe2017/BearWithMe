@@ -7,106 +7,148 @@ using XboxCtrlrInput;
 
 public class GameManager : MonoBehaviour
 {
-    public int playerNumber;
-    public List<GameObject> Players;
+    private GameObject[] Players;
+    public int playerCount;
+    private int deathCount;
     private float timeLeft;
-    Text timer;
+    private float startTime;
+    private int winsAmount;
+    private Text timer;
     [SerializeField]
     GameObject beachBallPrefab;
     private XboxController m_xcController;
+    public int sceneIndex;
+
 
     private void Awake()
-	{
-		//find any game manager
-		GameManager[] managers = FindObjectsOfType<GameManager>();
-		
-        
+    {
+        //find any game manager
+        GameManager[] managers = FindObjectsOfType<GameManager>();
 
-		if(managers.Length > 1)
-		{
-			//destroy yourself, there's already a game manager
-			GameObject.Destroy(gameObject);
-		}
-		else
-		{	
-			//set yourself to not destroy (because you are the gamemanager)
-			GameObject.DontDestroyOnLoad(gameObject);
-		}
+        if (managers.Length > 1)
+        {
+            //destroy yourself, there's already a game manager
+            GameObject.Destroy(gameObject);
+        }
+        else
+        {
 
-        //UIManager.getNumofPlayers()
-        //timeLeft = UIManager.getTime();
-        timeLeft = 60.0f;
-        timer = GameObject.Find("RoundTime").GetComponent<Text>();
+            //set yourself to not destroy (because you are the gamemanager)
+            GameObject.DontDestroyOnLoad(gameObject);
 
-        Players.Add(GameObject.Find("PlayerCharacter1"));
-        Players.Add(GameObject.Find("PlayerCharacter2"));
-        Players.Add(GameObject.Find("PlayerCharacter3"));
-        Players.Add(GameObject.Find("PlayerCharacter4"));
-
-        playerNumber = 4;
+            Players = new GameObject[4];
 
 
+            //if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+            //{
+            //    timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
+            //}
+        }
     }
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        //{
+        //    UpdateTime();
+        //    InvokeRepeating("UpdateTime", 1f, 1f);
+        //}
+    }
+
+    public void OnLevelWasLoaded(int sceneIndex)
+    {
+        //
+        if (sceneIndex == 1)
         {
-            UpdateTime();
-            InvokeRepeating("UpdateTime", 1f, 1f);
+            if (Players != null)
+            {
+                Players[0] = GameObject.Find("PlayerCharacter1");
+                Players[1] = GameObject.Find("PlayerCharacter2");
+                Players[2] = GameObject.Find("PlayerCharacter3");
+                Players[3] = GameObject.Find("PlayerCharacter4");
+
+                if (playerCount < 3)
+                {
+                    Players[2].SetActive(false);
+                    Players[3].SetActive(false);
+                }
+                if (playerCount < 4)
+                {
+                    Players[3].SetActive(false);
+                }
+            }
+
+            deathCount = 0;
+            timeLeft = StartTime;
+
+            if (startTime != 0)
+            {
+                timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
+                InvokeRepeating("UpdateTime", 1f, 1f);
+            }
+            
         }
+
+
+       // else if(playerCount != 4)
+       // { 
+       //      Players[2].SetActive(false);
+       // }
+      
+
     }
 
     private void Update()
     {
+        if (sceneIndex == 1)
+        {
+            for (int i = 0; i < playerCount; i++)
+            {
+                if (Players[i].GetComponent<PlayerMovement>().IsDead == true)
+                {
+                    Players[i].GetComponent<PlayerMovement>().IsDead = false;
+                    deathCount += 1; //not working
+                }
+            }
+        }
+
         if (Input.GetKeyDown("b"))
         {
             LoadBeachBall();
         }
 
-        //if (Players[1].transform.position.y < -25 && Players[1] != null)
-        //{
-        //    
-        //    GameObject.Destroy(Players[1]);
-        //}
-        //if (Players[2].transform.position.y < -25 && Players[2] != null)
-        //{
-        //    GameObject.Destroy(Players[2]);
-        //}
-        //if (Players[3].transform.position.y < -25 && Players[3] != null)
-        //{
-        //    GameObject.Destroy(Players[3]);
-        //}
-        //if (Players[4].transform.position.y < -25 && Players[4] != null)
-        //{
-        //    GameObject.Destroy(Players[4]);
-        //}
+        if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
+        {
+            Reset();
+        }
 
-        if (timeLeft <= 0)
-        {
-            Reset();
-        }
-        else if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
-        {
-            Reset();
-        }
+        RestartRound();
+
+        Debug.Log("Time: " + timeLeft);
+        Debug.Log("Wins: " + winsAmount);
+        Debug.Log("Death Count: " + deathCount);
 
     }
+
 
 
 
     private void UpdateTime()
     {
-        timeLeft -= 1;
-
-        timer.text = "Time: " + timeLeft;
-
-
+       timeLeft -= 1;
+       timer.text = "Time: " + timeLeft;
     }
 
-    public int TimeLeft
+    public int WinsAmount
     {
-        get { return TimeLeft; }
+        get { return winsAmount; }
+        set { winsAmount = value; }
+    }
+
+    public float StartTime
+    {
+        get { return startTime; }
+        set { startTime = value; }
     }
 
     void LoadBeachBall()
@@ -126,7 +168,36 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
 
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(1);
 
+    }
+
+    private void RestartRound()
+    {
+        if (timeLeft < 0 && winsAmount > 1)
+        {
+            timeLeft = StartTime;
+            Reset();
+        }
+
+        if (timeLeft < 0 && winsAmount == 1)
+        {
+            timeLeft = 0;
+            print("Game Over");
+            SceneManager.LoadScene(0);
+        }
+
+        if (deathCount == playerCount - 1 && winsAmount > 1)
+        {
+            timeLeft = StartTime;
+            Reset();
+        }
+
+        if (deathCount == playerCount - 1 && winsAmount == 1)
+        {
+            timeLeft = 0;
+            print("Game Over");
+            SceneManager.LoadScene(0);
+        }
     }
 }

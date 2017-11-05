@@ -44,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
         {
             return m_bIsDead;
         }
+        set
+        {
+            m_bIsDead = value;
+        }
     }
 
     // Use this for initialization
@@ -160,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
         if(transform.localPosition.y <= -3.50f)
         {
             m_bIsDead = true;
-            GameObject.Destroy(gameObject);
+            gameObject.SetActive(false); //disable or destroy?
         }
 
         //------------------------------------------------------------------
@@ -262,7 +266,7 @@ public class PlayerMovement : MonoBehaviour
         //------------------------------------------------------------------
         m_vPlayerVeloc.y = c_fYVel;
         m_rbRigidBody.velocity = m_vPlayerVeloc;
-        Debug.Log("Button: " + c_vMovement.x + " Vel: " + m_rbRigidBody.velocity.x);
+        //Debug.Log("Button: " + c_vMovement.x + " Vel: " + m_rbRigidBody.velocity.x);
         m_rbRigidBody.angularVelocity = Vector3.zero;
         //-----------------------------------------------------------
         // Jumping through physics
