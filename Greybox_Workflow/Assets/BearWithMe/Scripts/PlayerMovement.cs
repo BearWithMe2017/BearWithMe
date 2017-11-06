@@ -6,24 +6,56 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private RaycastHit m_rHasHit;
     private Rigidbody m_rbRigidBody;
     private Animator m_aAnimation;
     private PlayerAttack m_PlayerAttack;
     public XboxController m_xcController;
+    private Vector3 m_vPlayerVeloc;
 
-    [SerializeField] [Tooltip("Speed of character which is now determined thru full speed in Attack script; don't bother changing!")] private float m_fSpeed;
+    private float m_fStunTimer = 0.0f;
+    public float StunTimer
+    {
+        get
+        {
+            return m_fStunTimer;
+        }
+        set
+        {
+            m_fStunTimer = value;
+        }
+    }
+
+    private bool m_bIsStunned = false;
+    public bool Stunned
+    {
+        get
+        {
+            return m_bIsStunned;
+        }
+        set
+        {
+            m_bIsStunned = value;
+        }
+    }
+    //
+    //make timer stun char when hit for certain time
+    //
+    //
+    //
+
+    [SerializeField] [Tooltip("Speed of character!")] private float m_fPlayerVelocity;
     public float Speed
     {
         get
         {
-            return m_fSpeed;
+            return m_fPlayerVelocity;
         }
         set
         {
-            m_fSpeed = value;
+            m_fPlayerVelocity = value;
         }
     }
+    private float m_fSpeed = 100;
 
     [SerializeField] [Tooltip("This is the platforms friction(change currFriction under Platform script); Don't bother changing! ")] private float m_fFriction;
 
@@ -32,8 +64,20 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("How much the gravity is increased when the character is falling down")] public float m_fFallGravity;
 
 
+
     private bool m_bJumping = false;
     private bool m_bGrounded = true;
+    public bool Grounded
+    {
+        get
+        {
+            return m_bGrounded;
+        }
+        set
+        {
+            m_bGrounded = value;
+        }
+    }
     private static bool m_bDidQueryNumOfCtrlrs = false;
 
     private bool m_bIsDead = false;
@@ -57,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         m_rbRigidBody.maxAngularVelocity = 10;
         m_aAnimation = GetComponent<Animator>();
         m_PlayerAttack = GetComponent<PlayerAttack>();
+
 
         //--------------------------------------------------
         //Checks if controller is connected
@@ -89,11 +134,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, 0.75f))
         {
+
             m_bGrounded = true;
         }
         else
         {
- 
+            StunTimer += Time.deltaTime;
             m_bGrounded = false;
             m_bJumping = false;
         }
@@ -119,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -129,27 +176,45 @@ public class PlayerMovement : MonoBehaviour
         
         int c_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
-        Vector3 c_vMovement = Vector3.zero.normalized;
+        Vector3 c_vMovement = Vector3.zero;
         //------------------------------------------------
         //Checks if controller is connected
         //if it is it uses controller to contol character
         //if no controllers are connected use keyboard.
         //------------------------------------------------
-        if (c_iQueriedNumberOfCtrlrs > 0)
+        float c_vDeadzone = 0.70f;
+
+        
+
+        if (!Stunned)
         {
-            c_vMovement.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController);
-            c_vMovement.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController);
+            if (c_iQueriedNumberOfCtrlrs > 0)
+            {
+                c_vMovement.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController);
+                c_vMovement.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController);
+
+                if (c_vMovement.magnitude < c_vDeadzone)
+                {
+                    c_vMovement = Vector3.zero;
+                }
+                else
+                {
+                    c_vMovement = c_vMovement.normalized * ((c_vMovement.magnitude - c_vDeadzone) / (1 - c_vDeadzone));
+                }
+            }
+            else
+            {
+                c_vMovement.x = Input.GetAxis("Horizontal");
+                c_vMovement.z = Input.GetAxis("Vertical");
+            }
         }
-        else
-        {
-            c_vMovement.x = Input.GetAxis("Horizontal");
-            c_vMovement.z = Input.GetAxis("Vertical");
-        }
+        
+
         //--------------------------------------------------------------
         //Adds force to the character towards whichever way they face
         //--------------------------------------------------------------
         //transform.Translate(c_vMovement * Speed, Time.deltaTime);
-        m_rbRigidBody.velocity += c_vMovement * Speed;
+        m_rbRigidBody.velocity += c_vMovement * m_fSpeed;
         //m_rbRigidBody.AddForce(c_vMovement * Speed, ForceMode.Acceleration);
         //m_rbRigidBody.MovePosition(m_rbRigidBody.position + c_vMovement * Speed);
         //--------------------------------------------------------------
@@ -171,8 +236,8 @@ public class PlayerMovement : MonoBehaviour
         //Stores Default y velocity so it can't be modified by x and z axis
         //------------------------------------------------------------------
         float c_fYVel = m_rbRigidBody.velocity.y;
-        Vector3 m_vPlayerVeloc = m_rbRigidBody.velocity;
-       
+        m_vPlayerVeloc = m_rbRigidBody.velocity;
+
         m_vPlayerVeloc.y = 0;
 
         //-----------------------------------------------------------
@@ -250,15 +315,15 @@ public class PlayerMovement : MonoBehaviour
                 m_vPlayerVeloc.z = 0;
             }
         }
- 
+
         //------------------------------------------
         //Limits the player max velocity
         //so that player doesn't keep accelarating
         //------------------------------------------
-        if (m_vPlayerVeloc.magnitude > 10)
+        if (m_vPlayerVeloc.magnitude > 15)
         {
             m_vPlayerVeloc = m_vPlayerVeloc.normalized;
-            m_vPlayerVeloc *= 10;
+            m_vPlayerVeloc *= Speed;
         }
 
         //------------------------------------------------------------------
@@ -286,28 +351,8 @@ public class PlayerMovement : MonoBehaviour
             if (m_rbRigidBody.velocity.y < 0.0f)
             {
                 m_rbRigidBody.AddForce(-Vector3.up * m_fFallGravity, ForceMode.Acceleration);
-                //m_rbRigidBody.velocity += Vector3.up * Physics.gravity.y * (m_fFallGravity - 1) * Time.deltaTime;
             }
         }
-
-        if(m_PlayerAttack.BGuardUp == true)
-        {
-            if (m_vPlayerVeloc.x > 2.0f)
-            {
-                m_vPlayerVeloc.x = 0.0f;
-            }
-            if (m_vPlayerVeloc.z > 2.0f)
-            {
-                m_vPlayerVeloc.z = 0.0f;
-            }
-            //m_vPlayerVeloc.z = 0;
-
-            //m_vPlayerVeloc.z = 0;
-        }
-       //if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
-       //{
-       //    Reset();
-       //}
     }
 
     private void OnCollisionStay(Collision collision)
@@ -319,9 +364,21 @@ public class PlayerMovement : MonoBehaviour
             m_fFriction = currentPlatform.currFriction;
         }
     }
-    //public void Reset()
+
+    public void stun(float StunDur)
+    {
+        Stunned = true;
+        Invoke("removestun", StunDur);
+        
+    }
+    private void removestun()
+    {
+        Stunned = false;
+    }
+
+    //private IEnumerator JK(float Timer)
     //{
-    //    SceneManager.LoadScene("BetaBuild");
+    //    yield return new WaitForSeconds(Timer);
+    //    Stunned = false;
     //}
-     
 }

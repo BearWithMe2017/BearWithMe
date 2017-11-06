@@ -7,21 +7,31 @@ public class PlayerAttack : MonoBehaviour
 {
     public XboxController m_Controller;
     private Animator m_aAnimation;
-    private PlayerMovement m_PlayerMovementSpeed;
-
+    private PlayerMovement m_PlayerMovement;
+    //private PlayerMovement m_PlayerMovementStun;
+    //private PlayerMovement m_PlayerMovementStunTimer;
     [Tooltip("How much you knockback when you hit.")] public float m_fForce;
-    [Tooltip("How much you knockback when you hit.")] public float m_fBlockStrength;
+    [Tooltip("How much you knockUp when you hit.")] public float m_fUpForce;
+    [Tooltip("How much you get knockedback when you get hit.")] public float m_fBlockStrength;
 
     [Tooltip("How hard the charge will hit when you charge for 0.5 seconds.")] public float m_fChargeForce1st;
     [Tooltip("How hard the charge will hit when you charge for 1 seconds.")] public float m_fChargeForce2nd;
     [Tooltip("How hard the charge will hit when you charge for 1.5 seconds.")] public float m_fChargeForce3rd;
     [Tooltip("How hard the charge will hit when you charge for 2 seconds.")] public float m_fChargeForce4th;
 
+    [Tooltip("How high you will fly when you charge for 0.5 seconds and hit someone.")] public float m_fChargeUpForce1st;
+    [Tooltip("How high you will fly when you charge for 1 seconds and hit someone.")] public float m_fChargeUpForce2nd;
+    [Tooltip("How high you will fly when you charge for 1.5 seconds and hit someone.")] public float m_fChargeUpForce3rd;
+    [Tooltip("How high you will fly when you charge for 2 seconds and hit someone.")] public float m_fChargeUpForce4th;
+
     [SerializeField] [Tooltip("Sets Characters speed.")] private float m_fFullSpeed;
+
     [SerializeField] [Tooltip("Movement speed while charging the attack.")] private float m_fChargeAttMoveSpeed;
     [SerializeField] [Tooltip("Movement speed while Blocking the attack.")] private float m_fBlockingMoveSpeed;
 
     private float m_fHeldDown = 0.0f;
+
+    //private bool m_bStunned;
 
     private bool m_bGuardUp = false;
     private bool m_bChargeAtk = false;
@@ -45,13 +55,12 @@ public class PlayerAttack : MonoBehaviour
     void Awake()
     {
         m_aAnimation = GetComponent<Animator>();
-
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
+        m_PlayerMovement = GetComponent<PlayerMovement>();
+        //m_PlayerMovementStun = GetComponent<PlayerMovement>();
 
-        m_PlayerMovementSpeed = GetComponent<PlayerMovement>();
-
-        m_fFullSpeed = m_PlayerMovementSpeed.Speed;
-
+        m_fFullSpeed = m_PlayerMovement.Speed;
+        
         //--------------------------------------------------
         //Checks if controller is connected
         //Also how many are connected
@@ -123,7 +132,6 @@ public class PlayerAttack : MonoBehaviour
             if(Input.GetButton("Fire1"))
             {
                 m_fHeldDown += Time.deltaTime;
-
                 if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
                 {
                     m_aAnimation.SetBool("IsHeld", true);
@@ -163,15 +171,15 @@ public class PlayerAttack : MonoBehaviour
 
         if (m_bChargeAtk == true)
         {
-            m_PlayerMovementSpeed.Speed = m_fChargeAttMoveSpeed;
+            m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
         }
-        else if (BGuardUp == true)
+        else if(BGuardUp == true)
         {
-            m_PlayerMovementSpeed.Speed = m_fBlockingMoveSpeed;
+            m_PlayerMovement.Speed = m_fBlockingMoveSpeed;
         }
         else
         {
-            m_PlayerMovementSpeed.Speed = m_fFullSpeed;
+            m_PlayerMovement.Speed = m_fFullSpeed;
         }
     }
 
@@ -186,41 +194,56 @@ public class PlayerAttack : MonoBehaviour
     //---------------------------------------------------
     private void OnTriggerEnter(Collider a_cOther)
     {
+        PlayerAttack player = a_cOther.GetComponent<PlayerAttack>();
+        PlayerMovement playerMovement = a_cOther.GetComponent<PlayerMovement>();
         if (a_cOther.gameObject.tag == "Player")
         {
-            PlayerAttack player = a_cOther.GetComponent<PlayerAttack>();
+            
             if (player.BGuardUp == true && m_bChargeAtk == false)
             {
                 Guarded(a_cOther.transform, m_fBlockStrength);
+
             }
             else if (m_bChargeAtk == true && BGuardUp == false)
             {
-                if (m_fHeldDown >= 0.50f && m_fHeldDown <= 0.99f)
+                if (m_fHeldDown >= 0.50000000f && m_fHeldDown <= 0.99999999f)
                 {
                     Debug.Log("Charge Attack");
-                    ChargeAttack(a_cOther.transform, m_fChargeForce1st);
+                    playerMovement.stun(1);
+
+                    ChargeAttack(a_cOther.transform, m_fChargeForce1st, m_fChargeUpForce1st);
+                    
                 }
-                else if (m_fHeldDown >= 1.00f && m_fHeldDown <= 1.49f)
+                if (m_fHeldDown >= 1.00000000f && m_fHeldDown <= 1.49999999f)
                 {
                     Debug.Log("Charge Attack2");
-                    ChargeAttack(a_cOther.transform, m_fChargeForce2nd);
+                    playerMovement.stun(1.3f);
+
+                    ChargeAttack(a_cOther.transform, m_fChargeForce2nd, m_fChargeUpForce2nd);
                 }
-                else if (m_fHeldDown >= 1.50f && m_fHeldDown <= 1.99f)
+                if (m_fHeldDown >= 1.50000000f && m_fHeldDown <= 1.99999999f)
                 {
                     Debug.Log("Charge Attack3");
-                    ChargeAttack(a_cOther.transform, m_fChargeForce3rd);
+                    playerMovement.stun(1.5f);
+
+                    ChargeAttack(a_cOther.transform, m_fChargeForce3rd, m_fChargeUpForce3rd);
                 }
-                else if (m_fHeldDown >= 2.00f)
+                if (m_fHeldDown >= 2.00000000f)
                 {
                     Debug.Log("Charge Attack4");
-                    ChargeAttack(a_cOther.transform, m_fChargeForce4th);
+                    playerMovement.stun(1.7f);
+
+                    
+                    ChargeAttack(a_cOther.transform, m_fChargeForce4th, m_fChargeUpForce4th);
                 }
             }
             else
             {
-                TapAttack(a_cOther.transform, m_fForce);
+                TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
+                playerMovement.stun(0.75f);
             }
         }
+        
     }
 
     //-------------------------------------------------------
@@ -232,18 +255,17 @@ public class PlayerAttack : MonoBehaviour
         Vector3 c_vDir = (a_tOther.transform.position - transform.position);
         c_vDir = c_vDir.normalized;
         a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * m_fForce / a_fBlockStrength, ForceMode.Impulse);
-        m_fHeldDown = 0.0f;
     }
     //--------------------------------------------------------
     //normal knockback attack tap button play attack anim
     //and if you hit another player knock them back.
     //--------------------------------------------------------
-    private void TapAttack(Transform a_tOther, float a_fForce)
+    private void TapAttack(Transform a_tOther, float a_fForce, float a_fUpForce)
     {
         Vector3 c_vDir = (a_tOther.transform.position - transform.position);
         c_vDir = c_vDir.normalized;
-        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * m_fForce, ForceMode.Impulse);
-        m_fHeldDown = 0.0f;
+        Vector3 c_vUpForce = Vector3.up * a_fUpForce;
+        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fForce + c_vUpForce, ForceMode.Impulse);
     }
     //--------------------------------------------------------
     //Able to charge attack by holding down attack button
@@ -251,13 +273,12 @@ public class PlayerAttack : MonoBehaviour
     //the knockback force is increased accordingly
     //can not block and attack or charge attack.
     //--------------------------------------------------------
-    private void ChargeAttack(Transform a_tOther, float a_fChargeForce)
+    private void ChargeAttack(Transform a_tOther, float a_fChargeForce, float a_fChargeUpForce)
     {
-        Debug.Log("Charge Attack");
-        Vector3 c_vDir = (a_tOther.position - transform.position);
+        Vector3 c_vDir = (a_tOther.transform.position - transform.position);
         c_vDir = c_vDir.normalized;
-        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * m_fForce * a_fChargeForce, ForceMode.Impulse);
-        m_fHeldDown = 0.0f;
+        Vector3 c_vUpForce = Vector3.up * a_fChargeUpForce;
+        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fChargeForce + c_vUpForce, ForceMode.Impulse);
     }
 
     //--------------------------------------------------
@@ -277,4 +298,5 @@ public class PlayerAttack : MonoBehaviour
         m_fHeldDown = 0.0f;
         Debug.Log("Off");
     }
+
 }
