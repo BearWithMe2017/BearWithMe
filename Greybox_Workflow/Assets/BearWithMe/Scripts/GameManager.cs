@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private int deathCount;
     private float timeLeft;
     private float startTime;
-    private int winsAmount;
+    public int winsAmount;
     private Text timer;
     [SerializeField]
     GameObject beachBallPrefab;
@@ -190,6 +190,7 @@ public class GameManager : MonoBehaviour
         if (timeLeft <= 0 && winsAmount > 1)
         {
             timeLeft = StartTime;
+            winsAmount--;
             CancelInvoke("UpdateTime");
             Reset();
         }
@@ -204,7 +205,9 @@ public class GameManager : MonoBehaviour
 
         if (deathCount == playerCount - 1 && winsAmount > 1)
         {
-            timeLeft = StartTime;
+            deathCount = 0;
+            winsAmount--;
+            timeLeft = StartTime;            
             CancelInvoke("UpdateTime");
             Reset();
         }

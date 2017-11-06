@@ -8,12 +8,6 @@ using UnityEngine.UI;
 
 public class MenuSelection : MonoBehaviour
 {
-
-    //public bool MenuSelectionStartActive;
-    //public bool MenuSelectionOptionsActive;
-    //public bool MenuSelectionControlsActive;
-    //public bool MenuSelectionQuitActive;
-
     public GameObject OptionsSelectionMusicArrow;
     public GameObject OptionsSelectionEffectsArrow;
 
@@ -39,16 +33,6 @@ public class MenuSelection : MonoBehaviour
     public void Awake()
     {
         gm = GameObject.FindObjectOfType<GameManager>();
-
-        //MenuSelectionStartActive = true;
-        //MenuSelectionOptionsActive = false;
-        //MenuSelectionControlsActive = false;
-        //MenuSelectionQuitActive = false;
-
-        ////Get a component reference to ShowPanels attached to this object, store in showPanels variable
-        //showPanels = GetComponent<ShowPanels>();
-        ////Get a component reference to StartButton attached to this object, store in startScript variable
-        //startScript = GetComponent<StartOptions>();
     }
     void Start()
     {
@@ -57,35 +41,47 @@ public class MenuSelection : MonoBehaviour
 
     void Update()
     {
+        if (currentPanel == mainMenuPanel)
+        {
+            //when mouse clicked, set seleted gameobject to currentSelectedObject or startButton if nothing is selected
+            if (Input.GetMouseButtonDown(0))
+            {
+                eventSystem.SetSelectedGameObject((eventSystem.currentSelectedGameObject == null) ? startButton : eventSystem.currentSelectedGameObject);
+            }
+        }
 
-        Scene scene = SceneManager.GetActiveScene();
-
-
-        //when mouse clicked, set seleted gameobject to currentSelectedObject or startButton if nothing is selected
-        if (Input.GetMouseButtonDown(0))
-            eventSystem.SetSelectedGameObject( (eventSystem.currentSelectedGameObject == null)? startButton : eventSystem.currentSelectedGameObject );
-
-
+        if (currentPanel == matchSettingsPanel)
+        {
+            //when mouse clicked, set seleted gameobject to currentSelectedObject or startButton if nothing is selected
+            if (Input.GetMouseButtonDown(0))
+            {
+                eventSystem.SetSelectedGameObject((eventSystem.currentSelectedGameObject == null) ? winNegative : eventSystem.currentSelectedGameObject);
+            }
+        }
 
         if (Input.GetButtonDown("Cancel"))
         {
-            if (currentPanel.name == "MatchSettingsPanel")
+            if (currentPanel == matchSettingsPanel)
             {
                 MainMenu();
             }
-            if (currentPanel.name == "CharacterSelectionPanel")
+            if (currentPanel == playerSelectPanel)
             {
                 MatchSettings();
             }
-
-
-
+            if (currentPanel == optionsPanel)
+            {
+                MainMenu();
+            }
+            if (currentPanel == controlsPanel)
+            {
+                MainMenu();
+            }
         } 
-        
-       
+
         if (XCI.GetButtonUp(XboxButton.Start))
         {
-            if (currentPanel.name == "CharacterSelectionPanel")
+            if (currentPanel == playerSelectPanel)
             {
                 if (gm.playerCount > 1)
                 {
@@ -93,94 +89,6 @@ public class MenuSelection : MonoBehaviour
                 }
             }
         }   
-        
-
-        if (scene.name == "OptionsMenu")
-        {
-            //Menu Navigation
-            //Down Key
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    print("Down Key pressed");
-                    if (OptionsSelectionMusicArrow.activeSelf)
-                    {
-                        print("Effect Arrow triggered");
-                        OptionsSelectionMusicArrow.SetActive(false);
-                        OptionsSelectionMusicArrowActive = false;
-                        OptionsSelectionEffectsArrow.SetActive(true);
-                        OptionsSelectionEffectsArrowActive = true;
-                    }
-
-                    else if (OptionsSelectionEffectsArrow.activeSelf)
-                    {
-                        print("cant go any lower triggered");
-                    }
-                }
-
-                //Up Key
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    print("Down Key pressed");
-                    if (OptionsSelectionEffectsArrow.activeSelf)
-                    {
-                        print("music active triggered");
-                        OptionsSelectionMusicArrow.SetActive(true);
-                        OptionsSelectionMusicArrowActive = true;
-                        OptionsSelectionEffectsArrow.SetActive(false);
-                        OptionsSelectionEffectsArrowActive = false;
-                    }
-
-                    else if (OptionsSelectionMusicArrow.activeSelf)
-                    {
-                        print("Cant Go any higher triggered");
-                    }
-                }
-
-
-            //menu setting Down (Left button)
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                if (OptionsSelectionMusicArrow.activeSelf)
-                {
-                    // settings Down
-                    print("Music Option can not go any lower triggered");
-                }
-
-                else if (OptionsSelectionEffectsArrow.activeSelf)
-                {
-                    print("Effects Option can not go any lower triggered");
-                }
-            }
-            //menu setting up (right button)
-
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                if (OptionsSelectionMusicArrow.activeSelf)
-                {
-                    //settings up
-                    print("Music Option can not go any Higher triggered");
-                }
-
-                else if (OptionsSelectionEffectsArrow.activeSelf)
-                {
-                    //settings up
-                    print("Effects Option can not go any Higher triggered");
-                }
-            }
-
-            // Back
-            {
-                if (XCI.GetButtonUp(XboxButton.B))
-                {
-                    MainMenu();
-                }
-
-                if (Input.GetKeyUp(KeyCode.Backspace))
-                {
-                    MainMenu();
-                }
-            }
-        }
     }           
 
     public void LoadGame()
@@ -213,6 +121,8 @@ public class MenuSelection : MonoBehaviour
 
     public void MainMenu()
     {
+        GetComponent<MatchSettings>().enabled = false;
+        GetComponent<PlayerReady>().enabled = false;
         eventSystem.SetSelectedGameObject(startButton);
         mainMenuPanel.SetActive(true);
         currentPanel.SetActive(false);
@@ -221,12 +131,16 @@ public class MenuSelection : MonoBehaviour
 
     public void OptionsMenu()
     {
-        SceneManager.LoadScene("OptionsMenu");
+        optionsPanel.SetActive(true);
+        currentPanel.SetActive(false);
+        currentPanel = optionsPanel;
     }
 
     public void ControlsMenu()
     {
-        SceneManager.LoadScene("ControlsMenu");
+        controlsPanel.SetActive(true);
+        currentPanel.SetActive(false);
+        currentPanel = controlsPanel;
     }
 
     public void QuitGame()

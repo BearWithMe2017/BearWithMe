@@ -9,7 +9,6 @@ public class MatchSettings : MonoBehaviour {
     [SerializeField] private Text Wins;
     [SerializeField] private Text Time;
 
-   
     public int winsValue;
     public float timeValue;
     public int maxWins;
