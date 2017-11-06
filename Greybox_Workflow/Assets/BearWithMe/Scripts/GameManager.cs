@@ -7,19 +7,25 @@ using XboxCtrlrInput;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] Players;
-    private bool[] activePlayerArry;
+    [SerializeField] private GameObject[] playerPrefabs;
+    [SerializeField] private List<GameObject> activePlayers;
+    [SerializeField] private GameObject[] p1Stars;
+    [SerializeField] private GameObject[] p2Stars;
+    [SerializeField] private GameObject[] p3Stars;
+    [SerializeField] private GameObject[] p4Stars;
+
     public int playerCount;
     private int deathCount;
     private float timeLeft;
     private float startTime;
     public int winsAmount;
     private Text timer;
-    [SerializeField]
-    GameObject beachBallPrefab;
+    [SerializeField] GameObject beachBallPrefab;
     private XboxController m_xcController;
     public int sceneIndex;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
+    private bool sceneLoaded;
+
 
 
     private void Awake()
@@ -34,92 +40,87 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
             //set yourself to not destroy (because you are the gamemanager)
             GameObject.DontDestroyOnLoad(gameObject);
-
-            Players = new GameObject[4];
-            activePlayerArry = new bool[4];
-
-
-            //if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
-            //{
-            //    timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
-            //}
         }
+
+        p1Stars = new GameObject[5];
+        p2Stars = new GameObject[5];
+        p3Stars = new GameObject[5];
+        p4Stars = new GameObject[5];
     }
 
     private void Start()
     {
+        //currentScene = SceneManager.GetActiveScene();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         player1Ready = false;
         player2Ready = false;
         player3Ready = false;
         player4Ready = false;
-        //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
-        //{
-        //    UpdateTime();
-        //    InvokeRepeating("UpdateTime", 1f, 1f);
-        //}
+
     }
 
-    public void OnLevelWasLoaded(int sceneIndex)
+    public void OnSceneLoaded(Scene currentScene, LoadSceneMode mode)
     {
-        //ensure it's the correct GameManager running
-        if (activePlayerArry == null)
-            return;
-        //
-        if (sceneIndex == 1)
-        {
-            activePlayerArry[0] = player1Ready;
-            activePlayerArry[1] = player2Ready;
-            activePlayerArry[2] = player3Ready;
-            activePlayerArry[3] = player4Ready;
-
-            if (Players != null)
+       if (sceneLoaded == true)
+       {
+           return;
+       }
+            if (currentScene.buildIndex == 1)
             {
-                Players[0] = GameObject.Find("PlayerCharacter1");
-                Players[1] = GameObject.Find("PlayerCharacter2");
-                Players[2] = GameObject.Find("PlayerCharacter3");
-                Players[3] = GameObject.Find("PlayerCharacter4");
-
-                for (int i = 0; i < activePlayerArry.Length; i++)
+                if (player1Ready)
                 {
-                    if (activePlayerArry[i] == false)
-                    {
-                        Players[i].SetActive(false);
-                    }
+                    GameObject p1 = Instantiate(playerPrefabs[0], new Vector3(-3.72f, 0.37f, 4.4f), new Quaternion(0.0f, -225, 0, 0));
+                    activePlayers.Add(p1);
                 }
+
+                if (player2Ready)
+                {
+                    GameObject p2 = Instantiate(playerPrefabs[1], new Vector3(3.81f, 0.37f, 4.4f), new Quaternion(0.0f, -135, 0, 0));
+                    activePlayers.Add(p2);
+                }
+
+                if (player3Ready)
+                {
+                    GameObject p3 = Instantiate(playerPrefabs[2], new Vector3(-4f, 0.5f, -4f), new Quaternion(0.0f, 45f, 0f, 0f));
+                    activePlayers.Add(p3);
+                }
+
+                if (player4Ready)
+                {
+                    GameObject p4 = Instantiate(playerPrefabs[3], new Vector3(4f, 0.5f, -4f), new Quaternion(0.0f, -45, 0, 0));
+                    activePlayers.Add(p4);
+                }
+
+                playerCount = activePlayers.Count;
+
+                deathCount = 0;
+                timeLeft = StartTime;
+
+                if (startTime != 0)
+                {
+                    timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
+                    InvokeRepeating("UpdateTime", 1f, 1f);
+                }
+
+                sceneLoaded = true;
+
             }
 
-            deathCount = 0;
-            timeLeft = StartTime;
-
-            if (startTime != 0)
-            {
-                timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
-                InvokeRepeating("UpdateTime", 1f, 1f);
-            }
-            
-        }
-
-
-       // else if(playerCount != 4)
-       // { 
-       //      Players[2].SetActive(false);
-       // }
-      
-
+        
     }
 
     private void Update()
     {
         if (sceneIndex == 1)
         {
-            for (int i = 0; i < playerCount; i++)
+            for (int i = 0; i < activePlayers.Count; i++)
             {
-                if (Players[i].GetComponent<PlayerMovement>().IsDead == true)
+                if (activePlayers[i].GetComponent<PlayerMovement>().IsDead == true)
                 {
-                    Players[i].GetComponent<PlayerMovement>().IsDead = false;
+                    activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
                     deathCount += 1; //not working
                 }
             }
@@ -143,13 +144,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
-
     private void UpdateTime()
     {
-       timeLeft -= 1;
-       timer.text = "Time: " + timeLeft;
+        timeLeft -= 1;
+        timer.text = "Time: " + timeLeft;
     }
 
     public int WinsAmount
@@ -207,7 +205,7 @@ public class GameManager : MonoBehaviour
         {
             deathCount = 0;
             winsAmount--;
-            timeLeft = StartTime;            
+            timeLeft = StartTime;
             CancelInvoke("UpdateTime");
             Reset();
         }

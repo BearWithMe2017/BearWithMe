@@ -3066,9 +3066,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af79a272f859c142a3f8331fa059181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Players: []
+  playerPrefabs:
+  - {fileID: 1398718647794868, guid: 800052691d919e74e8821122e763442b, type: 2}
+  - {fileID: 1682503385886834, guid: f3204f064fa73214fbe764bf290b8055, type: 2}
+  - {fileID: 1399325647438962, guid: 37f4beb2531953d43a929c5352ad81dd, type: 2}
+  - {fileID: 1187458338552244, guid: 80b669bf7ce826a4d82f52c280dd2449, type: 2}
+  activePlayers: []
+  p1Stars: []
+  p2Stars: []
+  p3Stars: []
+  p4Stars: []
   playerCount: 0
-  winsAmount: -1
+  winsAmount: 0
   beachBallPrefab: {fileID: 0}
   sceneIndex: 0
   player1Ready: 0
