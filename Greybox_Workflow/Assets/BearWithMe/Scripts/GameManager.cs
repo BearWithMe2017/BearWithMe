@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] p2Stars;
     [SerializeField] private GameObject[] p3Stars;
     [SerializeField] private GameObject[] p4Stars;
+    [SerializeField] private GameObject[] playerPortraits;
+    [SerializeField] private GameObject gameCanvas;
 
     public int playerCount;
     private int deathCount;
@@ -25,9 +27,6 @@ public class GameManager : MonoBehaviour
     public int sceneIndex;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
     private bool sceneLoaded;
-    Scene currentScene;
-
-
 
     private void Awake()
     {
@@ -44,38 +43,16 @@ public class GameManager : MonoBehaviour
            //set yourself to not destroy (because you are the gamemanager)
            GameObject.DontDestroyOnLoad(gameObject);
        }
-
-        //DontDestroyOnLoad(gameObject);
-        //if (FindObjectsOfType(GetType()).Length > 1)
-        //{
-        //    Destroy(gameObject);
-        //}
-
-        p1Stars = new GameObject[5];
-        p2Stars = new GameObject[5];
-        p3Stars = new GameObject[5];
-        p4Stars = new GameObject[5];
     }
 
     private void Start()
     {
         //SceneManager.sceneLoaded += OnSceneLoaded;
 
-        player1Ready = false;
-        player2Ready = false;
-        player3Ready = false;
-        player4Ready = false;
-
-    }
-
-    public void OnSceneLoaded(Scene currentScene, LoadSceneMode mode)
-    {
-
-        //if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
-        //activePlayers.Clear();
-
-
-        //SceneManager.sceneLoaded -= OnSceneLoaded;
+        //player1Ready = false;
+        //player2Ready = false;
+        //player3Ready = false;
+        //player4Ready = false;
 
     }
 
@@ -84,31 +61,58 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
         {
+            gameCanvas.SetActive(true);
+
             if (player1Ready)
             {
+                playerPortraits[0].SetActive(true);
                 GameObject p1 = Instantiate(playerPrefabs[0], new Vector3(-3.72f, 0.37f, 4.4f), new Quaternion(0.0f, -225, 0, 0));
                 activePlayers.Add(p1);
             }
 
             if (player2Ready)
             {
+                playerPortraits[1].SetActive(true);
                 GameObject p2 = Instantiate(playerPrefabs[1], new Vector3(3.81f, 0.37f, 4.4f), new Quaternion(0.0f, -135, 0, 0));
                 activePlayers.Add(p2);
             }
 
             if (player3Ready)
             {
+                playerPortraits[2].SetActive(true);
                 GameObject p3 = Instantiate(playerPrefabs[2], new Vector3(-4f, 0.5f, -4f), new Quaternion(0.0f, 45f, 0f, 0f));
                 activePlayers.Add(p3);
             }
 
+
             if (player4Ready)
             {
+                playerPortraits[3].SetActive(true);
                 GameObject p4 = Instantiate(playerPrefabs[3], new Vector3(4f, 0.5f, -4f), new Quaternion(0.0f, -45, 0, 0));
                 activePlayers.Add(p4);
             }
 
-          
+            for (int i = 0; i < winsAmount; i++)
+            {
+                if (player1Ready)
+                {
+                    p1Stars[i].SetActive(true);
+                }
+                if (player2Ready)
+                {
+                    p2Stars[i].SetActive(true);
+                }
+                if (player3Ready)
+                {
+                    p3Stars[i].SetActive(true);
+                }
+                if (player4Ready)
+                {
+                    p4Stars[i].SetActive(true);
+                }
+            }
+
+
             playerCount = activePlayers.Count;
 
             deathCount = 0;
@@ -119,10 +123,13 @@ public class GameManager : MonoBehaviour
                 timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
                 InvokeRepeating("UpdateTime", 1f, 1f);
             }
-            
+
             sceneLoaded = true;
 
         }
+
+
+       
 
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
@@ -132,7 +139,7 @@ public class GameManager : MonoBehaviour
                 if (activePlayers[i].GetComponent<PlayerMovement>().IsDead == true)
                 {
                     activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
-                    deathCount += 1; //not working
+                    deathCount += 1;
                 }
             }
 
@@ -212,6 +219,8 @@ public class GameManager : MonoBehaviour
             timeLeft = 0;
             print("Game Over");
             CancelInvoke("UpdateTime");
+            gameCanvas.SetActive(false);
+            sceneLoaded = false;
             SceneManager.LoadScene(0);
         }
 
@@ -229,6 +238,8 @@ public class GameManager : MonoBehaviour
             timeLeft = 0;
             CancelInvoke("UpdateTime");
             print("Game Over");
+            gameCanvas.SetActive(false);
+            sceneLoaded = false;
             SceneManager.LoadScene(0);
         }
     }
