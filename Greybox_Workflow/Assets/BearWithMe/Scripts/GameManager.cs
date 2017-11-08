@@ -25,24 +25,31 @@ public class GameManager : MonoBehaviour
     public int sceneIndex;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
     private bool sceneLoaded;
+    Scene currentScene;
 
 
 
     private void Awake()
     {
         //find any game manager
-        GameManager[] managers = FindObjectsOfType<GameManager>();
+       GameManager[] managers = FindObjectsOfType<GameManager>();
+       
+       if (managers.Length > 1)
+       {
+           //destroy yourself, there's already a game manager
+           GameObject.Destroy(gameObject);
+       }
+       else
+       {
+           //set yourself to not destroy (because you are the gamemanager)
+           GameObject.DontDestroyOnLoad(gameObject);
+       }
 
-        if (managers.Length > 1)
-        {
-            //destroy yourself, there's already a game manager
-            GameObject.Destroy(gameObject);
-        }
-        else
-        {
-            //set yourself to not destroy (because you are the gamemanager)
-            GameObject.DontDestroyOnLoad(gameObject);
-        }
+        //DontDestroyOnLoad(gameObject);
+        //if (FindObjectsOfType(GetType()).Length > 1)
+        //{
+        //    Destroy(gameObject);
+        //}
 
         p1Stars = new GameObject[5];
         p2Stars = new GameObject[5];
@@ -52,8 +59,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //currentScene = SceneManager.GetActiveScene();
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
 
         player1Ready = false;
         player2Ready = false;
@@ -64,57 +70,62 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene currentScene, LoadSceneMode mode)
     {
-       if (sceneLoaded == true)
-       {
-           return;
-       }
-            if (currentScene.buildIndex == 1)
-            {
-                if (player1Ready)
-                {
-                    GameObject p1 = Instantiate(playerPrefabs[0], new Vector3(-3.72f, 0.37f, 4.4f), new Quaternion(0.0f, -225, 0, 0));
-                    activePlayers.Add(p1);
-                }
 
-                if (player2Ready)
-                {
-                    GameObject p2 = Instantiate(playerPrefabs[1], new Vector3(3.81f, 0.37f, 4.4f), new Quaternion(0.0f, -135, 0, 0));
-                    activePlayers.Add(p2);
-                }
+        //if(SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        //activePlayers.Clear();
 
-                if (player3Ready)
-                {
-                    GameObject p3 = Instantiate(playerPrefabs[2], new Vector3(-4f, 0.5f, -4f), new Quaternion(0.0f, 45f, 0f, 0f));
-                    activePlayers.Add(p3);
-                }
 
-                if (player4Ready)
-                {
-                    GameObject p4 = Instantiate(playerPrefabs[3], new Vector3(4f, 0.5f, -4f), new Quaternion(0.0f, -45, 0, 0));
-                    activePlayers.Add(p4);
-                }
+        //SceneManager.sceneLoaded -= OnSceneLoaded;
 
-                playerCount = activePlayers.Count;
-
-                deathCount = 0;
-                timeLeft = StartTime;
-
-                if (startTime != 0)
-                {
-                    timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
-                    InvokeRepeating("UpdateTime", 1f, 1f);
-                }
-
-                sceneLoaded = true;
-
-            }
-
-        
     }
 
     private void Update()
     {
-        if (sceneIndex == 1)
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
+        {
+            if (player1Ready)
+            {
+                GameObject p1 = Instantiate(playerPrefabs[0], new Vector3(-3.72f, 0.37f, 4.4f), new Quaternion(0.0f, -225, 0, 0));
+                activePlayers.Add(p1);
+            }
+
+            if (player2Ready)
+            {
+                GameObject p2 = Instantiate(playerPrefabs[1], new Vector3(3.81f, 0.37f, 4.4f), new Quaternion(0.0f, -135, 0, 0));
+                activePlayers.Add(p2);
+            }
+
+            if (player3Ready)
+            {
+                GameObject p3 = Instantiate(playerPrefabs[2], new Vector3(-4f, 0.5f, -4f), new Quaternion(0.0f, 45f, 0f, 0f));
+                activePlayers.Add(p3);
+            }
+
+            if (player4Ready)
+            {
+                GameObject p4 = Instantiate(playerPrefabs[3], new Vector3(4f, 0.5f, -4f), new Quaternion(0.0f, -45, 0, 0));
+                activePlayers.Add(p4);
+            }
+
+          
+            playerCount = activePlayers.Count;
+
+            deathCount = 0;
+            timeLeft = StartTime;
+
+            if (startTime != 0)
+            {
+                timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
+                InvokeRepeating("UpdateTime", 1f, 1f);
+            }
+            
+            sceneLoaded = true;
+
+        }
+
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             for (int i = 0; i < activePlayers.Count; i++)
             {
@@ -124,6 +135,8 @@ public class GameManager : MonoBehaviour
                     deathCount += 1; //not working
                 }
             }
+
+            RestartRound();
         }
 
         if (Input.GetKeyDown("b"))
@@ -136,11 +149,11 @@ public class GameManager : MonoBehaviour
             Reset();
         }
 
-        RestartRound();
 
-        Debug.Log("Time: " + timeLeft);
-        Debug.Log("Wins: " + winsAmount);
-        Debug.Log("Death Count: " + deathCount);
+
+        //Debug.Log("Time: " + timeLeft);
+        //Debug.Log("Wins: " + winsAmount);
+        //Debug.Log("Death Count: " + deathCount);
 
     }
 
@@ -178,7 +191,8 @@ public class GameManager : MonoBehaviour
 
     private void Reset()
     {
-
+        activePlayers.Clear();
+        sceneLoaded = false;
         SceneManager.LoadScene(1);
 
     }

@@ -3026,7 +3026,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 467748381}
         m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
@@ -3067,10 +3067,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 1398718647794868, guid: 800052691d919e74e8821122e763442b, type: 2}
-  - {fileID: 1682503385886834, guid: f3204f064fa73214fbe764bf290b8055, type: 2}
-  - {fileID: 1399325647438962, guid: 37f4beb2531953d43a929c5352ad81dd, type: 2}
-  - {fileID: 1187458338552244, guid: 80b669bf7ce826a4d82f52c280dd2449, type: 2}
+  - {fileID: 1398718647794868, guid: 29bfc9505a1dc4d419c942c69d4a49ce, type: 2}
+  - {fileID: 1682503385886834, guid: 82c02e2c9ebda7b4c80bad018a5b07d0, type: 2}
+  - {fileID: 1399325647438962, guid: c1ca2a673fd3db34fbf6950d97df24c0, type: 2}
+  - {fileID: 1187458338552244, guid: a484cfce35dee6f44957636139296735, type: 2}
   activePlayers: []
   p1Stars: []
   p2Stars: []

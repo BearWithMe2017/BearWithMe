@@ -9,6 +9,7 @@ public class MatchSettings : MonoBehaviour {
     [SerializeField] private Text Wins;
     [SerializeField] private Text Time;
 
+    private GameManager gm;
     public int winsValue;
     public float timeValue;
     public int maxWins;
@@ -17,7 +18,7 @@ public class MatchSettings : MonoBehaviour {
 
     void Awake()
     {
-
+        gm = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Use this for initialization

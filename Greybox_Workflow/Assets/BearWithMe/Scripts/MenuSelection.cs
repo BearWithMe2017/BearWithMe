@@ -95,7 +95,7 @@ public class MenuSelection : MonoBehaviour
     {
         gm.StartTime = GetComponent<MatchSettings>().timeValue;
         gm.WinsAmount = GetComponent<MatchSettings>().winsValue;
-        gm.sceneIndex = 1;
+        //gm.sceneIndex = 1;
         SceneManager.LoadScene(1);
     }
 

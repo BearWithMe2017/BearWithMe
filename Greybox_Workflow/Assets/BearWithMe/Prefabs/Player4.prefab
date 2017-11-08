@@ -1079,11 +1079,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Controller: 4
   m_fForce: 8
+  m_fUpForce: 7
   m_fBlockStrength: 0
   m_fChargeForce1st: 9.5
   m_fChargeForce2nd: 11
   m_fChargeForce3rd: 12.5
   m_fChargeForce4th: 15
+  m_fChargeUpForce1st: 0
+  m_fChargeUpForce2nd: 0
+  m_fChargeUpForce3rd: 0
+  m_fChargeUpForce4th: 0
   m_fFullSpeed: 1
   m_fChargeAttMoveSpeed: 0.2
   m_fBlockingMoveSpeed: 0.001
@@ -1099,7 +1104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_xcController: 4
-  m_fSpeed: 1
+  m_fPlayerVelocity: 5
   m_fFriction: 0
   m_fJumpPower: 4
   m_fFallGravity: 15

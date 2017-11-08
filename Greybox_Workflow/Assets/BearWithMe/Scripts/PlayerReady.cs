@@ -46,7 +46,6 @@ public class PlayerReady : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //player 1
         {
             if (XCI.GetButtonDown(XboxButton.A, XboxController.First))
