@@ -1,0 +1,230 @@
+fileFormatVersion: 2
+guid: 7fdf82e9c6c558a4c8196379393da784
+timeCreated: 1510113238
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: character_joint_ankle_L
+    100002: character_joint_ankle_R
+    100004: character_joint_clavicle_L
+    100006: character_joint_clavicle_R
+    100008: character_joint_finger1_L
+    100010: character_joint_finger1_R
+    100012: character_joint_finger2_L
+    100014: character_joint_finger2_R
+    100016: character_joint_finger3_L
+    100018: character_joint_finger3_R
+    100020: character_joint_foot1_L
+    100022: character_joint_foot1_R
+    100024: character_joint_foot2_L
+    100026: character_joint_foot2_R
+    100028: character_joint_forearm_L
+    100030: character_joint_forearm_R
+    100032: character_joint_head1
+    100034: character_joint_knee_L
+    100036: character_joint_knee_R
+    100038: character_joint_root
+    100040: character_joint_shoulder_L
+    100042: character_joint_shoulder_R
+    100044: character_joint_spine1
+    100046: character_joint_spine2
+    100048: character_joint_spine3
+    100050: character_joint_thigh_L
+    100052: character_joint_thigh_R
+    100054: character_joint_thumb1_L
+    100056: character_joint_thumb1_R
+    100058: character_joint_thumb2_L
+    100060: character_joint_thumb2_R
+    100062: character_joint_thumb3_L
+    100064: character_joint_thumb3_R
+    100066: character_joint_wrist_L
+    100068: character_joint_wrist_R
+    100070: character_mesh_001
+    100072: //RootNode
+    100074: floatie_mesh_001
+    100076: floatie_mesh_002
+    100078: ikHandle1
+    100080: ikHandle2
+    100082: jacket_mesh_001
+    100084: noodle_joint1
+    100086: noodle_joint2
+    100088: noodle_joint3
+    100090: noodle_joint4
+    100092: noodle_joint5
+    100094: noodle_joint6
+    100096: noodle_joint7
+    100098: noodle_joint8
+    100100: noodle_mesh
+    100102: noodle_root
+    100104: nurbsCircle1
+    400000: character_joint_ankle_L
+    400002: character_joint_ankle_R
+    400004: character_joint_clavicle_L
+    400006: character_joint_clavicle_R
+    400008: character_joint_finger1_L
+    400010: character_joint_finger1_R
+    400012: character_joint_finger2_L
+    400014: character_joint_finger2_R
+    400016: character_joint_finger3_L
+    400018: character_joint_finger3_R
+    400020: character_joint_foot1_L
+    400022: character_joint_foot1_R
+    400024: character_joint_foot2_L
+    400026: character_joint_foot2_R
+    400028: character_joint_forearm_L
+    400030: character_joint_forearm_R
+    400032: character_joint_head1
+    400034: character_joint_knee_L
+    400036: character_joint_knee_R
+    400038: character_joint_root
+    400040: character_joint_shoulder_L
+    400042: character_joint_shoulder_R
+    400044: character_joint_spine1
+    400046: character_joint_spine2
+    400048: character_joint_spine3
+    400050: character_joint_thigh_L
+    400052: character_joint_thigh_R
+    400054: character_joint_thumb1_L
+    400056: character_joint_thumb1_R
+    400058: character_joint_thumb2_L
+    400060: character_joint_thumb2_R
+    400062: character_joint_thumb3_L
+    400064: character_joint_thumb3_R
+    400066: character_joint_wrist_L
+    400068: character_joint_wrist_R
+    400070: character_mesh_001
+    400072: //RootNode
+    400074: floatie_mesh_001
+    400076: floatie_mesh_002
+    400078: ikHandle1
+    400080: ikHandle2
+    400082: jacket_mesh_001
+    400084: noodle_joint1
+    400086: noodle_joint2
+    400088: noodle_joint3
+    400090: noodle_joint4
+    400092: noodle_joint5
+    400094: noodle_joint6
+    400096: noodle_joint7
+    400098: noodle_joint8
+    400100: noodle_mesh
+    400102: noodle_root
+    400104: nurbsCircle1
+    2300000: floatie_mesh_001
+    2300002: floatie_mesh_002
+    3300000: floatie_mesh_001
+    3300002: floatie_mesh_002
+    4300000: character_mesh_001
+    4300002: jacket_mesh_001
+    4300004: floatie_mesh_001
+    4300006: floatie_mesh_002
+    4300008: noodle_mesh
+    7400000: walkanim
+    9500000: //RootNode
+    13700000: character_mesh_001
+    13700002: jacket_mesh_001
+    13700004: noodle_mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: walkanim
+      takeName: walkanim
+      firstFrame: 13
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 1
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

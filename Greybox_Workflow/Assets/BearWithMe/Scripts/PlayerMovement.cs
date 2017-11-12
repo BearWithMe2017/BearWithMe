@@ -9,23 +9,28 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody m_rbRigidBody;
     private Animator m_aAnimation;
     private PlayerAttack m_PlayerAttack;
-    public XboxController m_xcController;
     private Vector3 m_vPlayerVeloc;
 
-    private float m_fStunTimer = 0.0f;
-    public float StunTimer
-    {
-        get
-        {
-            return m_fStunTimer;
-        }
-        set
-        {
-            m_fStunTimer = value;
-        }
-    }
+    [SerializeField] private XboxController m_xcController;
+
+    [Header("### Character Speed ###")]
+    [SerializeField] [Tooltip("Speed of character!")] private float m_fPlayerVelocity;
+
+    [Header("### Speed of Falling ###")]
+    [SerializeField] [Tooltip("How much the gravity is increased when the character is falling down")] private float m_fFallGravity;
+
+    [Header("### Power of Jump ###")]
+    [Tooltip("Power of your jump.")] public float m_fJumpPower;
+
+    private float m_fSpeed = 100;
+    private float m_fFriction;
 
     private bool m_bIsStunned = false;
+    private bool m_bJumping = false;
+    private bool m_bGrounded = true;
+    private static bool m_bDidQueryNumOfCtrlrs = false;
+    private bool m_bIsDead = false;
+
     public bool Stunned
     {
         get
@@ -37,13 +42,6 @@ public class PlayerMovement : MonoBehaviour
             m_bIsStunned = value;
         }
     }
-    //
-    //make timer stun char when hit for certain time
-    //
-    //
-    //
-
-    [SerializeField] [Tooltip("Speed of character!")] private float m_fPlayerVelocity;
     public float Speed
     {
         get
@@ -55,18 +53,6 @@ public class PlayerMovement : MonoBehaviour
             m_fPlayerVelocity = value;
         }
     }
-    private float m_fSpeed = 100;
-
-    [SerializeField] [Tooltip("This is the platforms friction(change currFriction under Platform script); Don't bother changing! ")] private float m_fFriction;
-
-    [Tooltip("Power of your jump.")] public float m_fJumpPower;
-
-    [Tooltip("How much the gravity is increased when the character is falling down")] public float m_fFallGravity;
-
-
-
-    private bool m_bJumping = false;
-    private bool m_bGrounded = true;
     public bool Grounded
     {
         get
@@ -78,10 +64,6 @@ public class PlayerMovement : MonoBehaviour
             m_bGrounded = value;
         }
     }
-    private static bool m_bDidQueryNumOfCtrlrs = false;
-
-    private bool m_bIsDead = false;
-
     public bool IsDead
     {
         get
@@ -139,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            StunTimer += Time.deltaTime;
             m_bGrounded = false;
             m_bJumping = false;
         }
@@ -364,6 +345,7 @@ public class PlayerMovement : MonoBehaviour
             m_fFriction = currentPlatform.currFriction;
         }
     }
+
 
     public void stun(float StunDur)
     {
