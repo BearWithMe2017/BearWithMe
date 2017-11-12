@@ -44,6 +44,7 @@ public class PlayerAttack : MonoBehaviour
 
     public bool m_bGuardUp = false;
     private bool m_bChargeAtk = false;
+    private bool m_bAttackReleased = false;
     private static bool m_bDidQueryNumOfCtrlrs = false;
 
     private float m_fChargeTimerStart = 0.50f;
@@ -111,19 +112,31 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller))
             {
-                m_fHeldDown += Time.deltaTime;
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
                 {
-                    m_aAnimation.SetBool("IsHeld", true);
+                    m_aAnimation.SetTrigger("Attack1Trigger");
+                    m_bAttackReleased = false;
                 }
-                if (m_fHeldDown >= 3.0f)
+
+                if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
                 {
-                    m_aAnimation.Play("attackanim3");
+                    m_fHeldDown += Time.deltaTime;
+                    float time = m_aAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime;
+                    if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
+                    {
+                        m_aAnimation.speed = 0;
+                        m_bChargeAtk = true;
+                    }
+                    else if(m_fHeldDown >= 3.0f)
+                    {
+                        m_aAnimation.speed = 1;
+                    }
                 }
             }
-            if (XCI.GetButtonUp(XboxButton.X, m_Controller))
+            else
             {
-                m_aAnimation.SetBool("IsHeld", false);
+                m_bAttackReleased = true;
+                m_aAnimation.speed = 1;
             }
             if (XCI.GetButtonDown(XboxButton.B, m_Controller))
             {
@@ -132,57 +145,52 @@ public class PlayerAttack : MonoBehaviour
                 m_aAnimation.SetTrigger("Block1Trigger");
                 m_PlayerMovement.stun(0.5f);
             }
-            //else
-            //{
-            //    BGuardUp = false;
-            //}
+            else
+            {
+                BGuardUp = false;
+            }
         }
         else
         {
             if(Input.GetButton("Fire1"))
             {
-                m_fHeldDown += Time.deltaTime;
-                m_aAnimation.SetTrigger("Attacking");
-                
+                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                {
+                    m_aAnimation.SetTrigger("Attack1Trigger");
+                    m_bAttackReleased = false;
+                }
 
-                //if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanimspin (1)") && !m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim3") && !m_aAnimation.IsInTransition(0))
-                //{
-                //    m_aAnimation.SetBool("Attacking", true);
-                //}
-                //if (m_fHeldDown >= 3.0f)
-                //{
-                //    m_aAnimation.Play("attackanim3");
-                //}
+                if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                {
+                    m_fHeldDown += Time.deltaTime;
+                    float time = m_aAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime;
+                    if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
+                    {
+                        m_aAnimation.speed = 0;
+                        m_bChargeAtk = true;
+                    }
+                    else if (m_fHeldDown >= 3.0f)
+                    {
+                        m_aAnimation.speed = 1;
+                    }
+                }
             }
-            //if (Input.GetButtonUp("Fire1"))
-            //{
-            //    m_aAnimation.SetBool("IsHeld", false);
-            //}
-            if(Input.GetButton("Fire2"))
+            else
+            {
+                m_bAttackReleased = true;
+                m_aAnimation.speed = 1;
+            }
+            if (Input.GetButton("Fire2"))
             {
                 Debug.Log("Blocking");
                 m_aAnimation.SetTrigger("Block1Trigger");
                 BGuardUp = true;
             }
-            //else
-            //{
-            //    BGuardUp = false;
-            //}
+            else
+            {
+                BGuardUp = false;
+            }
         }
-
-        //-----------------------------------------------------
-        //Checks if button is held down for set amount of time
-        //-----------------------------------------------------
-        if (m_fHeldDown >= m_fChargeTimerStart)
-        {
-            m_bChargeAtk = true;
-            //m_aAnimation.speed = 0;
-        }
-        else
-        {
-            m_bChargeAtk = false;
-        }
-
         if (m_bChargeAtk == true)
         {
             m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
@@ -296,6 +304,10 @@ public class PlayerAttack : MonoBehaviour
     public void AttackOn()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = true;
+        //if(m_fHeldDown > )
+        //{
+
+        //}
         Debug.Log("On");
     }
 
@@ -303,6 +315,7 @@ public class PlayerAttack : MonoBehaviour
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
+        m_bChargeAtk = false;
         Debug.Log("Off");
     }
 
