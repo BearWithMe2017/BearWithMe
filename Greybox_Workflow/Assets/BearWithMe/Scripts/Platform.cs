@@ -24,6 +24,8 @@ public class Platform : MonoBehaviour
     float sinkSpeed;
     Animator animator;
 
+    float baseDrag;
+    float baseAngularDrag;
     float baseMass;
     int playerCount;
     float yLimitForce;
@@ -50,6 +52,8 @@ public class Platform : MonoBehaviour
         animator = transform.GetComponentInParent<Animator>();
         playerCount = 0;
         baseMass = 5.0f;
+        baseDrag = 40.0f;
+        baseAngularDrag = 40.0f;
         yLimitForce = 50.0f;
        posY = transform.position.y;
     }
@@ -64,10 +68,14 @@ public class Platform : MonoBehaviour
        {
            
            rb.mass = baseMass - playerCount;
+           rb.drag = baseDrag + (playerCount * 40);
+           rb.angularDrag = baseAngularDrag + (playerCount * baseAngularDrag);
        }
        else
        {
            rb.mass = baseMass;
+           rb.drag = baseDrag;
+           rb.angularDrag = baseAngularDrag;
        }
         
     }
