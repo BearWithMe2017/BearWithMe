@@ -96,10 +96,7 @@ public class GameManager : MonoBehaviour
 
             for (int i = 0; i < winsAmount; i++)
             {
-                
-               
-              
-                 
+
                 if (player1Ready)
                 {
                     p1Stars[i].SetActive(true);
@@ -327,6 +324,35 @@ public class GameManager : MonoBehaviour
 
         if (timeLeft <= 0 && winsAmount == 1)
         {
+
+            for (int i = 0; i < winsAmount; i++)
+            {
+
+                if (player1Ready)
+                {
+                    p1Stars[i].SetActive(false);
+                    p1Stars[i].GetComponent<Image>().color = Color.black;
+                }
+                if (player2Ready)
+                {
+                    p2Stars[i].SetActive(false);
+                    p2Stars[i].GetComponent<Image>().color = Color.black;
+
+                }
+                if (player3Ready)
+                {
+                    p3Stars[i].SetActive(false);
+                    p3Stars[i].GetComponent<Image>().color = Color.black;
+
+                }
+                if (player4Ready)
+                {
+                    p4Stars[i].SetActive(false);
+                    p4Stars[i].GetComponent<Image>().color = Color.black;
+
+                }
+            }
+
             timeLeft = 0;
             p1Score = 0;
             p2Score = 0;
@@ -341,13 +367,15 @@ public class GameManager : MonoBehaviour
             playerPortraits[1].SetActive(false);
             playerPortraits[2].SetActive(false);
             playerPortraits[3].SetActive(false);
-            winsAmount = 0;
             winner = false;
             activePlayers.Clear();
             print("Game Over");
             CancelInvoke("UpdateTime");
             gameCanvas.SetActive(false);
             sceneLoaded = false;
+
+
+            winsAmount = 0;
             SceneManager.LoadScene(0);
         }
 
@@ -361,6 +389,34 @@ public class GameManager : MonoBehaviour
 
         if (deathCount == playerCount - 1 && winner == true)
         {
+            for (int i = 0; i < winsAmount; i++)
+            {
+
+                if (player1Ready)
+                {
+                    p1Stars[i].SetActive(false);
+                    p1Stars[i].GetComponent<Image>().color = Color.black;
+                }
+                if (player2Ready)
+                {
+                    p2Stars[i].SetActive(false);
+                    p2Stars[i].GetComponent<Image>().color = Color.black;
+
+                }
+                if (player3Ready)
+                {
+                    p3Stars[i].SetActive(false);
+                    p3Stars[i].GetComponent<Image>().color = Color.black;
+
+                }
+                if (player4Ready)
+                {
+                    p4Stars[i].SetActive(false);
+                    p4Stars[i].GetComponent<Image>().color = Color.black;
+
+                }
+            }
+
             timeLeft = 0;
             p1Score = 0;
             p2Score = 0;

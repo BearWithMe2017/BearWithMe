@@ -546,7 +546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4796001710495182
 Transform:
   m_ObjectHideFlags: 1
@@ -1119,8 +1119,8 @@ MonoBehaviour:
   playerCount: 0
   winsAmount: 0
   beachBallPrefab: {fileID: 0}
-  player1Ready: 1
-  player2Ready: 1
+  player1Ready: 0
+  player2Ready: 0
   player3Ready: 0
   player4Ready: 0
 --- !u!114 &114765443020165716
