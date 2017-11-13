@@ -33,7 +33,7 @@ public class MatchSettings : MonoBehaviour {
     {
         Wins.text = winsValue.ToString();
 
-        if (timeValue != 0)
+        if (timeValue != 100)
         {
             Time.text = timeValue.ToString();
         }
@@ -82,7 +82,7 @@ public class MatchSettings : MonoBehaviour {
         }
         else
         {
-            timeValue = 0.0f;
+            timeValue = 100.0f;
         }
 
     }

@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
             deathCount = 0;
             timeLeft = StartTime;
 
-            if (startTime != 0)
+            if (startTime !=  100)
             {
                 timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
                 InvokeRepeating("UpdateTime", 1f, 1f);
@@ -149,46 +149,6 @@ public class GameManager : MonoBehaviour
                     activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
                     deathCount += 1;
                 }
-
-                //if (activePlayers[i].GetComponent<PlayerMovement>().IsDead != false && deathCount == playerCount - 1)
-                //{
-                //    if (i == 0)
-                //    {
-                //        p1Score++;
-                //
-                //        for (int j = 0; j < p1Score; j++)
-                //        {
-                //            p1Stars[j].GetComponent<Image>().color = Color.white;
-                //        }
-                //    }
-                //    if (i == 1)
-                //    {
-                //        p2Score++;
-                //
-                //        for (int j = 0; j < p2Score; j++)
-                //        {
-                //            p2Stars[j].GetComponent<Image>().color = Color.white;
-                //        }
-                //    }
-                //    if (i == 2)
-                //    {
-                //        p3Score++;
-                //
-                //        for (int j = 0; j < p3Score; j++)
-                //        {
-                //            p3Stars[j].GetComponent<Image>().color = Color.white;
-                //        }
-                //    }
-                //    if (i == 3)
-                //    {
-                //        p4Score++;
-                //
-                //        for (int j = 0; j < p4Score; j++)
-                //        {
-                //            p4Stars[j].GetComponent<Image>().color = Color.white;
-                //        }
-                //    }
-                //}
             }
 
             CheckWinner();
@@ -205,7 +165,7 @@ public class GameManager : MonoBehaviour
             Reset();
         }
 
-        //Debug.Log("Time: " + timeLeft);
+        Debug.Log("Time: " + timeLeft);
         //Debug.Log("Wins: " + winsAmount);
         //Debug.Log("Death Count: " + deathCount);
 
