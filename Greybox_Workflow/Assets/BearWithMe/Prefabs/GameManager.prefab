@@ -546,7 +546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4796001710495182
 Transform:
   m_ObjectHideFlags: 1
@@ -1081,10 +1081,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 1398718647794868, guid: 29bfc9505a1dc4d419c942c69d4a49ce, type: 2}
-  - {fileID: 1682503385886834, guid: 82c02e2c9ebda7b4c80bad018a5b07d0, type: 2}
-  - {fileID: 1399325647438962, guid: c1ca2a673fd3db34fbf6950d97df24c0, type: 2}
-  - {fileID: 1187458338552244, guid: a484cfce35dee6f44957636139296735, type: 2}
+  - {fileID: 1457096276635076, guid: ca97b8fc6f4591444a93bae713d70e2f, type: 2}
+  - {fileID: 1048442179346244, guid: 485778f3a1eee334abfdb3868a2ff3f6, type: 2}
+  - {fileID: 1125251261549514, guid: 6e127817bfa9c594e8c106e10f29064e, type: 2}
+  - {fileID: 1493609948374420, guid: 38083b4be3ff7934faaad6fabc984bf7, type: 2}
   activePlayers: []
   p1Stars:
   - {fileID: 1249546594363318}
@@ -1120,8 +1120,8 @@ MonoBehaviour:
   winsAmount: 0
   beachBallPrefab: {fileID: 0}
   sceneIndex: 0
-  player1Ready: 0
-  player2Ready: 0
+  player1Ready: 1
+  player2Ready: 1
   player3Ready: 0
   player4Ready: 0
 --- !u!114 &114765443020165716
@@ -1987,8 +1987,8 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1945342799933226}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.195435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 224434055768900076}
@@ -2002,7 +2002,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -602.4707, y: -421.29697}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &224732570137132714

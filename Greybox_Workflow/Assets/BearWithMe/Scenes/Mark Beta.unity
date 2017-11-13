@@ -41451,27 +41451,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1645756230613132, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
-      propertyPath: m_Name
-      value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1945342799933226, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
         type: 2}
-      propertyPath: player1Ready
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
-        type: 2}
-      propertyPath: player2Ready
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
-        type: 2}
-      propertyPath: player3Ready
+      propertyPath: sceneIndex
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private XboxController m_Controller;
     private Animator m_aAnimation;
     private PlayerMovement m_PlayerMovement;
-    private PlayerAttack otherPlayer;
+    public PlayerAttack otherPlayer;
     private PlayerMovement otherPlayerMovement;
 
     [Header("### Strength of Block ###")]
@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
     private bool m_bChargeAtk = false;
     private bool m_bAttackReleased = false;
     private static bool m_bDidQueryNumOfCtrlrs = false;
-    int m_iScoreCount = 0;
+    //[SerializeField] int m_iScoreCount = 0;
 
     private float m_fChargeTimerStart = 0.50f;
 
@@ -62,13 +62,17 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public int ScoreCount
-    {
-        set
-        {
-            m_iScoreCount = value;
-        }
-    }
+    //public int ScoreCount
+    //{
+    //    get
+    //    {
+    //        return m_iScoreCount;
+    //    }
+    //    set
+    //    {
+    //        m_iScoreCount = value;
+    //    }
+    //}
 
     // Use this for initialization
     void Awake()

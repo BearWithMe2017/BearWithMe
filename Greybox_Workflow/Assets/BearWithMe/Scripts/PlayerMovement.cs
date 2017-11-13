@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator m_aAnimation;
     private PlayerAttack m_PlayerAttack;
     private Vector3 m_vPlayerVeloc;
+    private PlayerAttack otherPlayer;
 
     [SerializeField] private XboxController m_xcController;
 
@@ -83,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         m_rbRigidBody.maxAngularVelocity = 10;
         m_aAnimation = GetComponent<Animator>();
         m_PlayerAttack = GetComponent<PlayerAttack>();
+        otherPlayer = GetComponent<PlayerAttack>().otherPlayer;
 
 
         //--------------------------------------------------

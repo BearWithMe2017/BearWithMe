@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     private Text timer;
     [SerializeField] GameObject beachBallPrefab;
     private XboxController m_xcController;
-    public int sceneIndex;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
     private bool sceneLoaded;
+    private int p1Score, p2Score, p3Score, p4Score;
 
     private void Awake()
     {
@@ -128,18 +128,54 @@ public class GameManager : MonoBehaviour
 
         }
 
-
-       
-
-
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             for (int i = 0; i < activePlayers.Count; i++)
             {
                 if (activePlayers[i].GetComponent<PlayerMovement>().IsDead == true)
                 {
-                    activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
+                    //activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
                     deathCount += 1;
+                }
+
+                if (activePlayers[i].GetComponent<PlayerMovement>().IsDead != false && deathCount == playerCount - 1)
+                {
+                    if (i == 0)
+                    {
+                        p1Score++;
+
+                        for (int j = 0; j < p1Score; j++)
+                        {
+                            p1Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                    }
+                    if (i == 1)
+                    {
+                        p2Score++;
+
+                        for (int j = 0; j < p2Score; j++)
+                        {
+                            p2Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                    }
+                    if (i == 2)
+                    {
+                        p3Score++;
+
+                        for (int j = 0; j < p3Score; j++)
+                        {
+                            p3Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                    }
+                    if (i == 3)
+                    {
+                        p4Score++;
+
+                        for (int j = 0; j < p4Score; j++)
+                        {
+                            p4Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                    }
                 }
             }
 
@@ -155,8 +191,6 @@ public class GameManager : MonoBehaviour
         {
             Reset();
         }
-
-
 
         //Debug.Log("Time: " + timeLeft);
         //Debug.Log("Wins: " + winsAmount);
