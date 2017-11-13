@@ -36,7 +36,6 @@ public class Buoyancy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         airResist = rb.drag;
         submerged = false;
-        rotation = true;
     }
 
     // Update is called once per frame

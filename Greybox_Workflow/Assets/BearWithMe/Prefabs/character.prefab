@@ -751,6 +751,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4005231031491284}
+  - component: {fileID: 136594219805788502}
   m_Layer: 0
   m_Name: noodle_root
   m_TagString: Untagged
@@ -959,8 +960,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1910584798914190}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0576506, y: 0.25, z: 2.325971}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
+  m_LocalPosition: {x: -4, y: 0.25, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4194240928156758}
@@ -969,7 +970,7 @@ Transform:
   - {fileID: 4005231031491284}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
 --- !u!4 &4166822753963508
 Transform:
   m_ObjectHideFlags: 1
@@ -1669,6 +1670,19 @@ MonoBehaviour:
   m_fPlayerVelocity: 5
   m_fFallGravity: 15
   m_fJumpPower: 5
+--- !u!136 &136594219805788502
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957735995346336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 18.41
+  m_Height: 248.87
+  m_Direction: 0
+  m_Center: {x: -110.1, y: 0, z: 0}
 --- !u!137 &137307275644267046
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
