@@ -752,6 +752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4005231031491284}
   - component: {fileID: 136594219805788502}
+  - component: {fileID: 136738363420990240}
   m_Layer: 0
   m_Name: noodle_root
   m_TagString: Untagged
@@ -1653,7 +1654,7 @@ MonoBehaviour:
   m_fChargeUpForce3rd: 10
   m_fChargeUpForce4th: 11
   m_fChargeAttMoveSpeed: 0.4
-  m_fBlockingMoveSpeed: 0.4
+  m_fBlockingMoveSpeed: 0
   m_bGuardUp: 0
 --- !u!114 &114763203820214710
 MonoBehaviour:
@@ -1683,6 +1684,19 @@ CapsuleCollider:
   m_Height: 248.87
   m_Direction: 0
   m_Center: {x: -110.1, y: 0, z: 0}
+--- !u!136 &136738363420990240
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957735995346336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 13.57
+  m_Height: 237.07
+  m_Direction: 0
+  m_Center: {x: -105.48, y: 0, z: 0}
 --- !u!137 &137307275644267046
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
