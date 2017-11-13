@@ -8,8 +8,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private XboxController m_Controller;
     private Animator m_aAnimation;
     private PlayerMovement m_PlayerMovement;
-
-
+    private PlayerAttack otherPlayer;
+    private PlayerMovement otherPlayerMovement;
 
     [Header("### Strength of Block ###")]
     [SerializeField] [Tooltip("How much you get knockedback when you get hit.")] private float m_fBlockStrength;
@@ -46,6 +46,7 @@ public class PlayerAttack : MonoBehaviour
     private bool m_bChargeAtk = false;
     private bool m_bAttackReleased = false;
     private static bool m_bDidQueryNumOfCtrlrs = false;
+    int m_iScoreCount = 0;
 
     private float m_fChargeTimerStart = 0.50f;
 
@@ -58,6 +59,14 @@ public class PlayerAttack : MonoBehaviour
         set
         {
             m_bGuardUp = value;
+        }
+    }
+
+    public int ScoreCount
+    {
+        set
+        {
+            m_iScoreCount = value;
         }
     }
 
@@ -212,11 +221,11 @@ public class PlayerAttack : MonoBehaviour
     //---------------------------------------------------
     private void OnTriggerEnter(Collider a_cOther)
     {
-        PlayerAttack player = a_cOther.GetComponent<PlayerAttack>();
-        PlayerMovement playerMovement = a_cOther.GetComponent<PlayerMovement>();
+        otherPlayer = a_cOther.GetComponent<PlayerAttack>();
+        otherPlayerMovement = a_cOther.GetComponent<PlayerMovement>();
         if (a_cOther.gameObject.tag == "Player")
         {   
-            if (player.BGuardUp == true && m_bChargeAtk == false)
+            if (otherPlayer.BGuardUp == true && m_bChargeAtk == false)
             {
                 Guarded(this.transform, a_cOther.transform,m_fBlockStrength, m_fUpForce);
             }
@@ -225,28 +234,28 @@ public class PlayerAttack : MonoBehaviour
                 if (m_fHeldDown >= 0.50000000f && m_fHeldDown <= 0.99999999f)
                 {
                     Debug.Log("Charge Attack");                    
-                    playerMovement.stun(m_fStunDuration1stCharge);
+                    otherPlayerMovement.stun(m_fStunDuration1stCharge);
 
                     ChargeAttack(a_cOther.transform, m_fChargeForce1st, m_fChargeUpForce1st);                    
                 }
                 if (m_fHeldDown >= 1.00000000f && m_fHeldDown <= 1.49999999f)
                 {
                     Debug.Log("Charge Attack2");
-                    playerMovement.stun(m_fStunDuration2ndCharge);
+                    otherPlayerMovement.stun(m_fStunDuration2ndCharge);
 
                     ChargeAttack(a_cOther.transform, m_fChargeForce2nd, m_fChargeUpForce2nd);
                 }
                 if (m_fHeldDown >= 1.50000000f && m_fHeldDown <= 1.99999999f)
                 {
                     Debug.Log("Charge Attack3");
-                    playerMovement.stun(m_fStunDuration3rdCharge);
+                    otherPlayerMovement.stun(m_fStunDuration3rdCharge);
 
                     ChargeAttack(a_cOther.transform, m_fChargeForce3rd, m_fChargeUpForce3rd);
                 }
                 if (m_fHeldDown >= 2.00000000f)
                 {
                     Debug.Log("Charge Attack4");
-                    playerMovement.stun(m_fStunDuration4thCharge);
+                    otherPlayerMovement.stun(m_fStunDuration4thCharge);
                     
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th, m_fChargeUpForce4th);
                 }
@@ -254,7 +263,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
-                playerMovement.stun(m_fStunDurationTap);
+                otherPlayerMovement.stun(m_fStunDurationTap);
             }
         }
         
