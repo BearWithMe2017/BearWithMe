@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private XboxController m_xcController;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
     private bool sceneLoaded;
+    private bool winner;
     private int p1Score, p2Score, p3Score, p4Score;
 
     private void Awake()
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         //player3Ready = false;
         //player4Ready = false;
 
+        winner = false;
     }
 
     private void Update()
@@ -94,22 +96,35 @@ public class GameManager : MonoBehaviour
 
             for (int i = 0; i < winsAmount; i++)
             {
+                
+               
+              
+                 
                 if (player1Ready)
                 {
                     p1Stars[i].SetActive(true);
+                   // p1Stars[i].GetComponent<Image>().color = Color.black;
                 }
                 if (player2Ready)
                 {
                     p2Stars[i].SetActive(true);
+                    //p2Stars[i].GetComponent<Image>().color = Color.black;
+
                 }
                 if (player3Ready)
                 {
                     p3Stars[i].SetActive(true);
+                   // p3Stars[i].GetComponent<Image>().color = Color.black;
+
                 }
                 if (player4Ready)
                 {
                     p4Stars[i].SetActive(true);
+                   // p4Stars[i].GetComponent<Image>().color = Color.black;
+
                 }
+
+
             }
 
 
@@ -134,51 +149,52 @@ public class GameManager : MonoBehaviour
             {
                 if (activePlayers[i].GetComponent<PlayerMovement>().IsDead == true)
                 {
-                    //activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
+                    activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
                     deathCount += 1;
                 }
 
-                if (activePlayers[i].GetComponent<PlayerMovement>().IsDead != false && deathCount == playerCount - 1)
-                {
-                    if (i == 0)
-                    {
-                        p1Score++;
-
-                        for (int j = 0; j < p1Score; j++)
-                        {
-                            p1Stars[j].GetComponent<Image>().color = Color.white;
-                        }
-                    }
-                    if (i == 1)
-                    {
-                        p2Score++;
-
-                        for (int j = 0; j < p2Score; j++)
-                        {
-                            p2Stars[j].GetComponent<Image>().color = Color.white;
-                        }
-                    }
-                    if (i == 2)
-                    {
-                        p3Score++;
-
-                        for (int j = 0; j < p3Score; j++)
-                        {
-                            p3Stars[j].GetComponent<Image>().color = Color.white;
-                        }
-                    }
-                    if (i == 3)
-                    {
-                        p4Score++;
-
-                        for (int j = 0; j < p4Score; j++)
-                        {
-                            p4Stars[j].GetComponent<Image>().color = Color.white;
-                        }
-                    }
-                }
+                //if (activePlayers[i].GetComponent<PlayerMovement>().IsDead != false && deathCount == playerCount - 1)
+                //{
+                //    if (i == 0)
+                //    {
+                //        p1Score++;
+                //
+                //        for (int j = 0; j < p1Score; j++)
+                //        {
+                //            p1Stars[j].GetComponent<Image>().color = Color.white;
+                //        }
+                //    }
+                //    if (i == 1)
+                //    {
+                //        p2Score++;
+                //
+                //        for (int j = 0; j < p2Score; j++)
+                //        {
+                //            p2Stars[j].GetComponent<Image>().color = Color.white;
+                //        }
+                //    }
+                //    if (i == 2)
+                //    {
+                //        p3Score++;
+                //
+                //        for (int j = 0; j < p3Score; j++)
+                //        {
+                //            p3Stars[j].GetComponent<Image>().color = Color.white;
+                //        }
+                //    }
+                //    if (i == 3)
+                //    {
+                //        p4Score++;
+                //
+                //        for (int j = 0; j < p4Score; j++)
+                //        {
+                //            p4Stars[j].GetComponent<Image>().color = Color.white;
+                //        }
+                //    }
+                //}
             }
 
+            CheckWinner();
             RestartRound();
         }
 
@@ -196,6 +212,68 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Wins: " + winsAmount);
         //Debug.Log("Death Count: " + deathCount);
 
+    }
+
+    private void CheckWinner()
+    {
+        for (int i = 0; i < activePlayers.Count; i++)
+        {
+            if (activePlayers[i].activeSelf != false && deathCount == playerCount - 1)
+            {
+                if (i == 0)
+                {
+                    p1Score++;
+
+                    for (int j = 0; j < p1Score; j++)
+                    {
+                        p1Stars[j].GetComponent<Image>().color = Color.white;
+                    }
+                }
+                if (i == 1)
+                {
+                    p2Score++;
+
+                    for (int j = 0; j < p2Score; j++)
+                    {
+                        p2Stars[j].GetComponent<Image>().color = Color.white;
+                    }
+                }
+                if (i == 2)
+                {
+                    p3Score++;
+
+                    for (int j = 0; j < p3Score; j++)
+                    {
+                        p3Stars[j].GetComponent<Image>().color = Color.white;
+                    }
+                }
+                if (i == 3)
+                {
+                    p4Score++;
+
+                    for (int j = 0; j < p4Score; j++)
+                    {
+                        p4Stars[j].GetComponent<Image>().color = Color.white;
+                    }
+                }
+            }
+        }
+        if (p1Score == winsAmount)
+        {
+            winner = true;
+        }
+        if (p2Score == winsAmount)
+        {
+            winner = true;
+        }
+        if (p3Score == winsAmount)
+        {
+            winner = true;
+        }
+        if (p4Score == winsAmount)
+        {
+            winner = true;
+        }
     }
 
     private void UpdateTime()
@@ -243,7 +321,6 @@ public class GameManager : MonoBehaviour
         if (timeLeft <= 0 && winsAmount > 1)
         {
             timeLeft = StartTime;
-            winsAmount--;
             CancelInvoke("UpdateTime");
             Reset();
         }
@@ -251,6 +328,22 @@ public class GameManager : MonoBehaviour
         if (timeLeft <= 0 && winsAmount == 1)
         {
             timeLeft = 0;
+            p1Score = 0;
+            p2Score = 0;
+            p3Score = 0;
+            p4Score = 0;
+            playerCount = 0;
+            player1Ready = false;
+            player2Ready = false;
+            player3Ready = false;
+            player4Ready = false;
+            playerPortraits[0].SetActive(false);
+            playerPortraits[1].SetActive(false);
+            playerPortraits[2].SetActive(false);
+            playerPortraits[3].SetActive(false);
+            winsAmount = 0;
+            winner = false;
+            activePlayers.Clear();
             print("Game Over");
             CancelInvoke("UpdateTime");
             gameCanvas.SetActive(false);
@@ -258,18 +351,33 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-        if (deathCount == playerCount - 1 && winsAmount > 1)
+        if (deathCount == playerCount - 1 && winner != true)
         {
             deathCount = 0;
-            winsAmount--;
             timeLeft = StartTime;
             CancelInvoke("UpdateTime");
             Reset();
         }
 
-        if (deathCount == playerCount - 1 && winsAmount == 1)
+        if (deathCount == playerCount - 1 && winner == true)
         {
             timeLeft = 0;
+            p1Score = 0;
+            p2Score = 0;
+            p3Score = 0;
+            p4Score = 0;
+            playerCount = 0;
+            player1Ready = false;
+            player2Ready = false;
+            player3Ready = false;
+            player4Ready = false;
+            playerPortraits[0].SetActive(false);
+            playerPortraits[1].SetActive(false);
+            playerPortraits[2].SetActive(false);
+            playerPortraits[3].SetActive(false);
+            activePlayers.Clear();
+            winsAmount = 0;
+            winner = false;
             CancelInvoke("UpdateTime");
             print("Game Over");
             gameCanvas.SetActive(false);
