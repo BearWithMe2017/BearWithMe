@@ -63,7 +63,7 @@ public class MatchSettings : MonoBehaviour {
     public void AddTime()
     {
 
-        if (timeValue == 0)
+        if (timeValue == 100)
         {
             timeValue = minTime;
         }
@@ -76,7 +76,7 @@ public class MatchSettings : MonoBehaviour {
     public void SubtractTime()
     {
 
-        if (timeValue != minTime && timeValue != 0)
+        if (timeValue != minTime && timeValue != 100)
         {
             timeValue -= 5.0f;
         }

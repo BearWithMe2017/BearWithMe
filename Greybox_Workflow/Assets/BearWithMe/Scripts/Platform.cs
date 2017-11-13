@@ -61,14 +61,11 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-     
-
        if (playerCount > 0)
        {
            
            rb.mass = baseMass - playerCount;
-           rb.drag = baseDrag + (playerCount * 40);
+           rb.drag = baseDrag + (playerCount * baseDrag);
            rb.angularDrag = baseAngularDrag + (playerCount * baseAngularDrag);
        }
        else
