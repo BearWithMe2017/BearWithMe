@@ -239,7 +239,7 @@ public class PlayerAttack : MonoBehaviour
             }
             else if (m_bChargeAtk == true && BGuardUp == false)
             {
-                if (m_fHeldDown >= 0.50000000f && m_fHeldDown <= 0.99999999f)
+                if (m_fHeldDown >= 0.49999999f && m_fHeldDown <= 0.99999999f)
                 {
                     Debug.Log("Charge Attack");                    
                     otherPlayerMovement.stun(m_fStunDuration1stCharge);

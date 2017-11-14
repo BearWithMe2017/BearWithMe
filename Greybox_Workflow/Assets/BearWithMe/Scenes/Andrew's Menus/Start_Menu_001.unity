@@ -779,6 +779,30 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: playerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1325194172572084, guid: dc2f1a3e3707b1b44845512259bc605e,
+        type: 2}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: playerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1046407031614552, guid: 0c74306fed7985243894902cf783467e,
+        type: 2}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: playerPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1367632755906804, guid: 5900cace445ec4141aecb011b33677f9,
+        type: 2}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: playerPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 1283057695869810, guid: efd9325c54408d64a856069319a07c7e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
   m_IsPrefabParent: 0
