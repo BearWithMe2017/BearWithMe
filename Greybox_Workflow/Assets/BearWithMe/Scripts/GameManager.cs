@@ -15,11 +15,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] p4Stars;
     [SerializeField] private GameObject[] playerPortraits;
     [SerializeField] private GameObject gameCanvas;
+    [SerializeField] private GameObject platformYellow;
+    [SerializeField] private GameObject platformOrange;
+    [SerializeField] private List<GameObject> activePlatforms;
 
     public int playerCount;
     private int deathCount;
     private float timeLeft;
     private float startTime;
+    private float percentOfStartTime;
     public int winsAmount;
     private Text timer;
     [SerializeField] GameObject beachBallPrefab;
@@ -27,7 +31,9 @@ public class GameManager : MonoBehaviour
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
     private bool sceneLoaded;
     private bool winner;
+    private bool platformSunk;
     private int p1Score, p2Score, p3Score, p4Score;
+    private int randIndex;
 
     private void Awake()
     {
@@ -48,14 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //SceneManager.sceneLoaded += OnSceneLoaded;
 
-        //player1Ready = false;
-        //player2Ready = false;
-        //player3Ready = false;
-        //player4Ready = false;
-
-        winner = false;
     }
 
     private void Update()
@@ -64,6 +63,20 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
         {
             gameCanvas.SetActive(true);
+            winner = false;
+            platformSunk = false;
+            percentOfStartTime = 0.30f * startTime;
+            randIndex = Random.Range(0, 4);
+
+            activePlatforms.Clear();
+            GameObject plat1 = Instantiate(platformOrange, new Vector3(-4.0f, -0.25f, 4.0f), Quaternion.identity);
+            activePlatforms.Add(plat1);
+            GameObject plat2 = Instantiate(platformYellow, new Vector3(4f, -0.25f, 4.0f), Quaternion.identity);
+            activePlatforms.Add(plat2);
+            GameObject plat3 = Instantiate(platformOrange, new Vector3(4.0f, -0.25f, -4.0f), Quaternion.identity);
+            activePlatforms.Add(plat3);
+            GameObject plat4 = Instantiate(platformYellow, new Vector3(-4.0f, -0.25f, -4.0f), Quaternion.identity);
+            activePlatforms.Add(plat4);
 
             if (player1Ready)
             {
@@ -100,24 +113,20 @@ public class GameManager : MonoBehaviour
                 if (player1Ready)
                 {
                     p1Stars[i].SetActive(true);
-                   // p1Stars[i].GetComponent<Image>().color = Color.black;
                 }
                 if (player2Ready)
                 {
                     p2Stars[i].SetActive(true);
-                    //p2Stars[i].GetComponent<Image>().color = Color.black;
 
                 }
                 if (player3Ready)
                 {
                     p3Stars[i].SetActive(true);
-                   // p3Stars[i].GetComponent<Image>().color = Color.black;
 
                 }
                 if (player4Ready)
                 {
                     p4Stars[i].SetActive(true);
-                   // p4Stars[i].GetComponent<Image>().color = Color.black;
 
                 }
 
@@ -148,6 +157,42 @@ public class GameManager : MonoBehaviour
                 {
                     activePlayers[i].GetComponent<PlayerMovement>().IsDead = false;
                     deathCount += 1;
+                }
+            }
+
+            if (timeLeft >= (startTime - percentOfStartTime - 0.5f) && timeLeft <= (startTime - percentOfStartTime + 0.5f) && platformSunk != true)
+            {
+                activePlatforms[randIndex].GetComponentInChildren<Platform>().isSunk = true;
+                platformSunk = true;
+            }
+            if (timeLeft >= (startTime - (percentOfStartTime * 2) - 0.5f) && timeLeft <= (startTime - (percentOfStartTime * 2) + 0.5f) && platformSunk != true)
+            {
+                if (randIndex != 3)
+                {
+                    activePlatforms[randIndex + 1].GetComponentInChildren<Platform>().isSunk = true;
+                    platformSunk = true;
+                    randIndex++;
+                }
+                else
+                {
+                    activePlatforms[0].GetComponentInChildren<Platform>().isSunk = true;
+                    platformSunk = true;
+                    randIndex = 0;
+                }
+            }
+            if (timeLeft >= (startTime - (percentOfStartTime * 3) - 0.5f) && timeLeft <= (startTime - (percentOfStartTime * 3) + 0.5f) && platformSunk != true)
+            {
+                if (randIndex != 3)
+                {
+                    activePlatforms[randIndex + 1].GetComponentInChildren<Platform>().isSunk = true;
+                    platformSunk = true;
+                    randIndex++;
+                }
+                else
+                {
+                    activePlatforms[0].GetComponentInChildren<Platform>().isSunk = true;
+                    platformSunk = true;
+                    randIndex = 0;
                 }
             }
 
@@ -237,6 +282,7 @@ public class GameManager : MonoBehaviour
     {
         timeLeft -= 1;
         timer.text = "Time: " + timeLeft;
+        platformSunk = false;
     }
 
     public int WinsAmount

@@ -209,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if(transform.localPosition.y <= -3.50f)
+        if(transform.localPosition.y <= -3.0f)
         {
             m_bIsDead = true;
             gameObject.SetActive(false); //disable or destroy?

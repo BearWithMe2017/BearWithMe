@@ -13,11 +13,9 @@ public class Platform : MonoBehaviour
     private bool forceApplied;
     public float currFriction;
     private float prevPlayerFriction;
-    [SerializeField]
-    bool isSlippery;
-    [SerializeField]
-    bool isSunk;
-    bool wasSunk;
+    public bool isSlippery;
+    public bool isSunk;
+    public bool wasSunk;
     bool wasSlippery;
 
     float platformHeight;
@@ -82,6 +80,8 @@ public class Platform : MonoBehaviour
         if (isSunk == true)
         {
             wasSunk = true;
+            GetComponent<Buoyancy>().enabled = false;
+            GetComponent<Platform>().enabled = false;
             animator.Play("Sink");
             isSunk = false;
             //SinkPlatform();
