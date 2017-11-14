@@ -24,8 +24,8 @@ public class MatchSettings : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        winsValue = 2;
-        timeValue = minTime;
+        //winsValue = 2;
+        //timeValue = minTime;
     }
 
     // Update is called once per frame

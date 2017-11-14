@@ -55,9 +55,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wins: {fileID: 0}
   Time: {fileID: 0}
-  winsValue: 5
-  timeValue: 30
-  maxWins: 5
+  winsValue: 3
+  timeValue: 40
+  maxWins: 3
   maxTime: 45
   minTime: 30
 --- !u!114 &114735923580822450

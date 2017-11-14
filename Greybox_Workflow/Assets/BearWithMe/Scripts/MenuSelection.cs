@@ -20,9 +20,9 @@ public class MenuSelection : MonoBehaviour
     
     private GameManager gm;
 
-    [SerializeField] public GameObject startButton;
-    [SerializeField] public GameObject winNegative;
-    [SerializeField] public GameObject playButton;
+    [SerializeField] GameObject startButton;
+    [SerializeField] GameObject winNegative;
+    [SerializeField] GameObject playButton;
 
     public EventSystem eventSystem;
 
@@ -67,7 +67,7 @@ public class MenuSelection : MonoBehaviour
             }
             if (currentPanel == playerSelectPanel)
             {
-                MatchSettings();
+                MainMenu();
             }
             if (currentPanel == optionsPanel)
             {

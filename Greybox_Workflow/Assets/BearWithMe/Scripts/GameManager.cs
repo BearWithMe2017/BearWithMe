@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             gameCanvas.SetActive(true);
             winner = false;
             platformSunk = false;
-            percentOfStartTime = 0.30f * startTime;
+            percentOfStartTime = 0.25f * startTime;
             randIndex = Random.Range(0, 4);
 
             activePlatforms.Clear();
