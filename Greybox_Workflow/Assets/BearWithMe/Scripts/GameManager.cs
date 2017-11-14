@@ -281,7 +281,7 @@ public class GameManager : MonoBehaviour
     private void UpdateTime()
     {
         timeLeft -= 1;
-        timer.text = "Time: " + timeLeft;
+        timer.text = timeLeft.ToString();
         platformSunk = false;
     }
 

@@ -42,9 +42,9 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 1.55
+      intensity: 2
       radius: 0.3
-      sampleCount: 10
+      sampleCount: 16
       downsampling: 0
       forceForwardCompatibility: 0
       ambientOnly: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 0.25
+        postExposure: 0.27
         temperature: 0
         tint: 0
         hueShift: 0
@@ -154,9 +154,9 @@ MonoBehaviour:
               tangentMode: 0
             - serializedVersion: 2
               time: 1
-              value: 0.91791046
-              inSlope: -0.8124033
-              outSlope: -0.8124033
+              value: 0.9056604
+              inSlope: -1.0857184
+              outSlope: -1.0857184
               tangentMode: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
