@@ -14,7 +14,6 @@ public class Waves : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        //transform.position = new Vector3(transform.position.x, Mathf.Sin(Mathf.Lerp(-0.1f, 0.1f, Mathf.PingPong(Time.time * speed, 1.0f))), transform.position.z);
-        transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * speed) * 0.1f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * speed) * 0.05f, transform.position.z);
     }
 }
