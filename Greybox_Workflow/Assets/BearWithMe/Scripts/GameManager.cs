@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
             Reset();
         }
 
-        Debug.Log("Time: " + timeLeft);
+        //Debug.Log("Time: " + timeLeft);
         //Debug.Log("Wins: " + winsAmount);
         //Debug.Log("Death Count: " + deathCount);
 

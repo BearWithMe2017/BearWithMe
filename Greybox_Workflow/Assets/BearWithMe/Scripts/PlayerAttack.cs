@@ -138,7 +138,10 @@ public class PlayerAttack : MonoBehaviour
                     if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
                     {
                         m_aAnimation.speed = 0;
-                        m_bChargeAtk = true;
+                        if (m_fHeldDown >= 0.5f)
+                        {
+                            m_bChargeAtk = true;
+                        }
                     }
                     else if(m_fHeldDown >= 3.0f)
                     {
@@ -180,7 +183,10 @@ public class PlayerAttack : MonoBehaviour
                     if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
                     {
                         m_aAnimation.speed = 0;
-                        m_bChargeAtk = true;
+                        if(m_fHeldDown >= 0.5f)
+                        {
+                            m_bChargeAtk = true;
+                        }
                     }
                     else if (m_fHeldDown >= 3.0f)
                     {
@@ -237,7 +243,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 Guarded(this.transform, a_cOther.transform,m_fBlockStrength, m_fUpForce);
             }
-            else if (m_bChargeAtk == true && BGuardUp == false)
+            else if (m_bChargeAtk == true)
             {
                 if (m_fHeldDown >= 0.49999999f && m_fHeldDown <= 0.99999999f)
                 {
