@@ -123,7 +123,7 @@ public class PlayerAttack : MonoBehaviour
         //------------------------------------------------
         if (m_iQueriedNumberOfCtrlrs > 0)
         {
-            if (XCI.GetButton(XboxButton.X, m_Controller))
+            if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller))
             {
                 if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
                 {
@@ -154,17 +154,17 @@ public class PlayerAttack : MonoBehaviour
                 m_bAttackReleased = true;
                 m_aAnimation.speed = 1;
             }
-            if (XCI.GetButtonDown(XboxButton.B, m_Controller))
-            {
-                Debug.Log("Blocking");
-                BGuardUp = true;
-                m_aAnimation.SetTrigger("Block1Trigger");
-                m_PlayerMovement.stun(0.5f);
-            }
-            else
-            {
-                BGuardUp = false;
-            }
+            //if (XCI.GetButtonDown(XboxButton.B, m_Controller))
+            //{
+            //    Debug.Log("Blocking");
+            //    BGuardUp = true;
+            //    m_aAnimation.SetTrigger("Block1Trigger");
+            //    m_PlayerMovement.stun(0.5f);
+            //}
+            //else
+            //{
+            //    BGuardUp = false;
+            //}
         }
         else
         {
@@ -199,16 +199,16 @@ public class PlayerAttack : MonoBehaviour
                 m_bAttackReleased = true;
                 m_aAnimation.speed = 1;
             }
-            if (Input.GetButton("Fire2"))
-            {
-                Debug.Log("Blocking");
-                m_aAnimation.SetTrigger("Block1Trigger");
-                BGuardUp = true;
-            }
-            else
-            {
-                BGuardUp = false;
-            }
+            //if (Input.GetButton("Fire2"))
+            //{
+            //    Debug.Log("Blocking");
+            //    m_aAnimation.SetTrigger("Block1Trigger");
+            //    BGuardUp = true;
+            //}
+            //else
+            //{
+            //    BGuardUp = false;
+            //}
         }
         if (m_bChargeAtk == true)
         {
