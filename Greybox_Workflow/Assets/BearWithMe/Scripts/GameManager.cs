@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using XboxCtrlrInput;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] p4Stars;
     [SerializeField] private GameObject[] playerPortraits;
     [SerializeField] private GameObject gameCanvas;
+    [SerializeField] private GameObject pauseCanvas;
     [SerializeField] private GameObject platformYellow;
     [SerializeField] private GameObject platformOrange;
     [SerializeField] private List<GameObject> activePlatforms;
+    [SerializeField] private GameObject exitBtn;
+
+    public EventSystem eventSystem;
 
     public int playerCount;
     private int deathCount;
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
     private bool sceneLoaded;
     private bool winner;
     private bool platformSunk;
+    private bool pause;
     private int p1Score, p2Score, p3Score, p4Score;
     private int randIndex;
 
@@ -62,7 +68,10 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
         {
+
+            eventSystem = FindObjectOfType<EventSystem>();
             gameCanvas.SetActive(true);
+            pause = false;
             winner = false;
             platformSunk = false;
             percentOfStartTime = 0.25f * startTime;
@@ -198,6 +207,20 @@ public class GameManager : MonoBehaviour
 
             CheckWinner();
             RestartRound();
+
+            if (XCI.GetButtonDown(XboxButton.Start, m_xcController) && pause != true)
+            {
+                Time.timeScale = 0;
+                pauseCanvas.SetActive(true);
+                //eventSystem.SetSelectedGameObject(exitBtn);
+                pause = true;
+            }
+            else if (XCI.GetButtonDown(XboxButton.Start, m_xcController) && pause == true)
+            {
+                Time.timeScale = 1;
+                pauseCanvas.SetActive(false);
+                pause = false;
+            }
         }
 
         if (Input.GetKeyDown("b"))
@@ -446,5 +469,61 @@ public class GameManager : MonoBehaviour
             sceneLoaded = false;
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void LoadMainMenu()
+    {
+        pauseCanvas.SetActive(false);
+
+        for (int i = 0; i < winsAmount; i++)
+        {
+
+            if (player1Ready)
+            {
+                p1Stars[i].SetActive(false);
+                p1Stars[i].GetComponent<Image>().color = Color.black;
+            }
+            if (player2Ready)
+            {
+                p2Stars[i].SetActive(false);
+                p2Stars[i].GetComponent<Image>().color = Color.black;
+
+            }
+            if (player3Ready)
+            {
+                p3Stars[i].SetActive(false);
+                p3Stars[i].GetComponent<Image>().color = Color.black;
+
+            }
+            if (player4Ready)
+            {
+                p4Stars[i].SetActive(false);
+                p4Stars[i].GetComponent<Image>().color = Color.black;
+
+            }
+        }
+
+        timeLeft = 0;
+        p1Score = 0;
+        p2Score = 0;
+        p3Score = 0;
+        p4Score = 0;
+        playerCount = 0;
+        player1Ready = false;
+        player2Ready = false;
+        player3Ready = false;
+        player4Ready = false;
+        playerPortraits[0].SetActive(false);
+        playerPortraits[1].SetActive(false);
+        playerPortraits[2].SetActive(false);
+        playerPortraits[3].SetActive(false);
+        activePlayers.Clear();
+        winsAmount = 0;
+        winner = false;
+        CancelInvoke("UpdateTime");
+        print("Game Over");
+        gameCanvas.SetActive(false);
+        sceneLoaded = false;
+        SceneManager.LoadScene(0);
     }
 }
