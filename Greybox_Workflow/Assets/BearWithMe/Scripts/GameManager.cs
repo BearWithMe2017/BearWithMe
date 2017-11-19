@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public int playerCount;
     private int deathCount;
     private float timeLeft;
-    private float startTime;
+    public float startTime;
     private float percentOfStartTime;
     public int winsAmount;
     private Text timer;
