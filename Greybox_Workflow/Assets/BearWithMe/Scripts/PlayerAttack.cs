@@ -109,11 +109,12 @@ public class PlayerAttack : MonoBehaviour
             XCI.DEBUG_LogControllerNames();
         }
     }
-
+   // public bool TriggerDown = false;
     // Update is called once per frame
     void Update()
     {
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+ 
 
         //Debug.Log(m_fHeldDown);
         //------------------------------------------------
@@ -123,7 +124,7 @@ public class PlayerAttack : MonoBehaviour
         //------------------------------------------------
         if (m_iQueriedNumberOfCtrlrs > 0)
         {
-            if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller))
+            if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller) || TriggerDown())
             {
                 if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
                 {
@@ -138,7 +139,7 @@ public class PlayerAttack : MonoBehaviour
                     if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
                     {
                         m_aAnimation.speed = 0;
-                        if (m_fHeldDown >= 0.5f)
+                        if (m_fHeldDown >= 0.05f)
                         {
                             m_bChargeAtk = true;
                         }
@@ -166,50 +167,7 @@ public class PlayerAttack : MonoBehaviour
             //    BGuardUp = false;
             //}
         }
-        else
-        {
-            if(Input.GetButton("Fire1"))
-            {
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
-                {
-                    m_aAnimation.SetTrigger("Attack1Trigger");
-                    m_bAttackReleased = false;
-                }
 
-                if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
-                {
-                    m_fHeldDown += Time.deltaTime;
-                    float time = m_aAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime;
-                    if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
-                    {
-                        m_aAnimation.speed = 0;
-                        if(m_fHeldDown >= 0.5f)
-                        {
-                            m_bChargeAtk = true;
-                        }
-                    }
-                    else if (m_fHeldDown >= 3.0f)
-                    {
-                        m_aAnimation.speed = 1;
-                    }
-                }
-            }
-            else
-            {
-                m_bAttackReleased = true;
-                m_aAnimation.speed = 1;
-            }
-            //if (Input.GetButton("Fire2"))
-            //{
-            //    Debug.Log("Blocking");
-            //    m_aAnimation.SetTrigger("Block1Trigger");
-            //    BGuardUp = true;
-            //}
-            //else
-            //{
-            //    BGuardUp = false;
-            //}
-        }
         if (m_bChargeAtk == true)
         {
             m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
@@ -342,4 +300,15 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("Off");
     }
 
+    public bool TriggerDown()
+    {
+        if(XCI.GetAxisRaw(XboxAxis.LeftTrigger, m_Controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightTrigger, m_Controller) != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

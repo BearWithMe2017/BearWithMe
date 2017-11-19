@@ -138,13 +138,6 @@ public class PlayerMovement : MonoBehaviour
                     m_bJumping = true;
                 }
             }
-            else
-            {
-                if (Input.GetButtonDown("Jump"))
-                {
-                    m_bJumping = true;
-                }
-            }
         }
     }
 
@@ -184,11 +177,6 @@ public class PlayerMovement : MonoBehaviour
                 {
                     c_vMovement = c_vMovement.normalized * ((c_vMovement.magnitude - c_vDeadzone) / (1 - c_vDeadzone));
                 }
-            }
-            else
-            {
-                c_vMovement.x = Input.GetAxis("Horizontal");
-                c_vMovement.z = Input.GetAxis("Vertical");
             }
         }
         
