@@ -50,14 +50,14 @@ public class MenuSelection : MonoBehaviour
             }
         }
 
-        if (currentPanel == matchSettingsPanel)
-        {
-            //when mouse clicked, set seleted gameobject to currentSelectedObject or startButton if nothing is selected
-            if (Input.GetMouseButtonDown(0))
-            {
-                eventSystem.SetSelectedGameObject((eventSystem.currentSelectedGameObject == null) ? winNegative : eventSystem.currentSelectedGameObject);
-            }
-        }
+        //if (currentPanel == matchSettingsPanel)
+        //{
+        //    //when mouse clicked, set seleted gameobject to currentSelectedObject or startButton if nothing is selected
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        eventSystem.SetSelectedGameObject((eventSystem.currentSelectedGameObject == null) ? winNegative : eventSystem.currentSelectedGameObject);
+        //    }
+        //}
 
         if (Input.GetButtonDown("Cancel"))
         {

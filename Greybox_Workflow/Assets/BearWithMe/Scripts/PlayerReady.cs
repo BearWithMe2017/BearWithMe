@@ -75,69 +75,12 @@ public class PlayerReady : MonoBehaviour
                     print("Fatal error: Player 1");
                 }
             }
-
-            if (Input.GetKeyDown("1"))
-            {
-                if (!Player1ControllerReady.activeSelf && playerFirst == false)
-                {
-                    Player1ControllerDefault.SetActive(false);
-                    Player1ControllerReady.SetActive(true);
-                    print("Player 1 ready");
-                    playerFirst = true;
-                    gm.playerCount += 1;
-                    gm.player1Ready = true;
-                }
-
-                else if (!Player1ControllerDefault.activeSelf && playerFirst == true)
-                {
-                    Player1ControllerReady.SetActive(false);
-                    Player1ControllerDefault.SetActive(true);
-                    print("Player 1 not Ready");
-                    playerFirst = false;
-                    gm.playerCount -= 1;
-                    gm.player1Ready = false;
-                }
-
-                else
-                {
-                    print("Fatal error: Player 1");
-                }
-            }
         }
 
         // player 2
         {
             if (XCI.GetButtonDown(XboxButton.A, XboxController.Second))
             {
-                if (!Player2ControllerReady.activeSelf && playerSecond == false)
-                {
-                    Player2ControllerDefault.SetActive(false);
-                    Player2ControllerReady.SetActive(true);
-                    print("Player 2 ready");
-                    playerSecond = true;
-                    gm.playerCount += 1;
-                    gm.player2Ready = true;
-                }
-
-                else if (!Player2ControllerDefault.activeSelf && playerSecond == true)
-                {
-                    Player2ControllerReady.SetActive(false);
-                    Player2ControllerDefault.SetActive(true);
-                    print("Player 2 not Ready");
-                    playerSecond = false;
-                    gm.playerCount -= 1;
-                    gm.player2Ready = false;
-                }
-
-                else
-                {
-                    print("Fatal error: Player 2");
-                }
-            }
-
-            if (Input.GetKeyDown("2"))
-            {
-                print("Ran get key 2");
                 if (!Player2ControllerReady.activeSelf && playerSecond == false)
                 {
                     Player2ControllerDefault.SetActive(false);
@@ -195,67 +138,11 @@ public class PlayerReady : MonoBehaviour
                     print("Fatal error: Player 3");
                 }
             }
-
-            if (Input.GetKeyDown("3"))
-            {
-                if (!Player3ControllerReady.activeSelf && playerThird == false)
-                {
-                    Player3ControllerDefault.SetActive(false);
-                    Player3ControllerReady.SetActive(true);
-                    print("Player 3 ready");
-                    playerThird = true;
-                    gm.playerCount += 1;
-                    gm.player3Ready = true;
-                }
-
-                else if (!Player3ControllerDefault.activeSelf && playerThird == true)
-                {
-                    Player3ControllerReady.SetActive(false);
-                    Player3ControllerDefault.SetActive(true);
-                    print("Player 3 not Ready");
-                    playerThird = false;
-                    gm.playerCount -= 1;
-                    gm.player3Ready = false;
-                }
-
-                else
-                {
-                    print("Fatal error: Player 3");
-                }
-            }
         }
 
         //player 4
         {
             if (XCI.GetButtonDown(XboxButton.A, XboxController.Fourth))
-            {
-                if (!Player4ControllerReady.activeSelf && playerFourth == false)
-                {
-                    Player4ControllerDefault.SetActive(false);
-                    Player4ControllerReady.SetActive(true);
-                    print("Player 4 ready");
-                    playerFourth = true;
-                    gm.playerCount += 1;
-                    gm.player4Ready = true;
-                }
-
-                else if (!Player4ControllerDefault.activeSelf && playerFourth == true)
-                {
-                    Player4ControllerReady.SetActive(false);
-                    Player4ControllerDefault.SetActive(true);
-                    print("Player 4 not Ready");
-                    playerFourth = false;
-                    gm.playerCount -= 1;
-                    gm.player4Ready = false;
-                }
-
-                else
-                {
-                    print("Fatal error: Player 4");
-                }
-            }
-
-            if (Input.GetKeyDown("4"))
             {
                 if (!Player4ControllerReady.activeSelf && playerFourth == false)
                 {

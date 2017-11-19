@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
     public int winsAmount;
     private Text timer;
     [SerializeField] GameObject beachBallPrefab;
-    private XboxController m_xcController;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
     private bool sceneLoaded;
     private bool winner;
@@ -208,18 +207,27 @@ public class GameManager : MonoBehaviour
             CheckWinner();
             RestartRound();
 
-            if (XCI.GetButtonDown(XboxButton.Start, m_xcController) && pause != true)
+            if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || XCI.GetButtonDown(XboxButton.Start, XboxController.Second) && pause != true)
             {
                 Time.timeScale = 0;
                 pauseCanvas.SetActive(true);
                 //eventSystem.SetSelectedGameObject(exitBtn);
                 pause = true;
             }
-            else if (XCI.GetButtonDown(XboxButton.Start, m_xcController) && pause == true)
+            else if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || XCI.GetButtonDown(XboxButton.Start, XboxController.Second) && pause == true)
             {
                 Time.timeScale = 1;
                 pauseCanvas.SetActive(false);
                 pause = false;
+            }
+
+            if (pause == true)
+            {
+                if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || XCI.GetButtonDown(XboxButton.B, XboxController.Second))
+                {
+                    Time.timeScale = 1;
+                    LoadMainMenu();
+                }
             }
         }
 
@@ -228,7 +236,7 @@ public class GameManager : MonoBehaviour
             LoadBeachBall();
         }
 
-        if (XCI.GetButtonDown(XboxButton.Back, m_xcController))
+        if (XCI.GetButtonDown(XboxButton.Back, XboxController.All))
         {
             Reset();
         }
