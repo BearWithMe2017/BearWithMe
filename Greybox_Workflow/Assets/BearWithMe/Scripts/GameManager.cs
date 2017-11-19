@@ -27,9 +27,9 @@ public class GameManager : MonoBehaviour
     public int playerCount;
     private int deathCount;
     private float timeLeft;
-    public float startTime;
+    private float startTime;
     private float percentOfStartTime;
-    public int winsAmount;
+    private int winsAmount;
     private Text timer;
     [SerializeField] GameObject beachBallPrefab;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
