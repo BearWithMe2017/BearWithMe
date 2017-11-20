@@ -120,6 +120,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     m_aAnimation.SetTrigger("Attack1Trigger");
                     m_bAttackReleased = false;
+                    m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
                 }
 
                 if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
@@ -142,9 +143,12 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                m_bAttackReleased = true;
-                m_Source.PlayOneShot(m_Sounds, m_Vol);
+                m_bAttackReleased = true;            
                 m_aAnimation.speed = 1;
+            }
+            if(m_bAttackReleased == true)
+            {
+                m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
             //if (XCI.GetButtonDown(XboxButton.B, m_Controller))
             //{
@@ -157,19 +161,6 @@ public class PlayerAttack : MonoBehaviour
             //{
             //    BGuardUp = false;
             //}
-        }
-
-        if (m_bChargeAtk == true)
-        {
-            m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
-        }
-        else if(BGuardUp)
-        {
-            m_PlayerMovement.Speed = m_fBlockingMoveSpeed;
-        }
-        else
-        {
-            m_PlayerMovement.Speed = m_fFullSpeed;
         }
     }
 
@@ -288,6 +279,7 @@ public class PlayerAttack : MonoBehaviour
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
         m_bChargeAtk = false;
+        m_PlayerMovement.Speed = m_fFullSpeed;
         Debug.Log("Off");
     }
 
