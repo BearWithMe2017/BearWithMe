@@ -12,7 +12,6 @@ public class PlayerAttack : MonoBehaviour
     private PlayerAttack otherPlayer;
     private PlayerMovement otherPlayerMovement;
     public AudioClip m_Sounds;
-    public AudioClip m_Grunt;
     private AudioSource m_Source;
 
     [Header("### Strength of Block ###")]
@@ -196,7 +195,6 @@ public class PlayerAttack : MonoBehaviour
                 TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
                 otherPlayerMovement.stun(m_fStunDurationTap);
                 m_Source.PlayOneShot(m_Sounds, m_Vol);
-                otherPlayer.m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
             else if (m_bChargeAtk == true)
             {

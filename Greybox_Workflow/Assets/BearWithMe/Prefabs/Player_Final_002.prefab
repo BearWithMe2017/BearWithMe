@@ -1606,6 +1606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d09125554c53074884d82a92c705368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Grunt: {fileID: 8300000, guid: 1d94d9bb53126384181d67972b159e40, type: 3}
   m_xcController: 2
   m_fPlayerVelocity: 5
   m_fFallGravity: 15
@@ -1622,7 +1623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Controller: 2
-  otherPlayer: {fileID: 0}
+  m_Sounds: {fileID: 0}
   m_fBlockStrength: 2
   m_fStunDurationTap: 0.7
   m_fStunDuration1stCharge: 0.8
@@ -1641,6 +1642,8 @@ MonoBehaviour:
   m_fChargeUpForce4th: 11
   m_fChargeAttMoveSpeed: 0.4
   m_fBlockingMoveSpeed: 0
+  volLowRange: 0.5
+  volHighRange: 1
   m_bGuardUp: 0
 --- !u!136 &136381162789525850
 CapsuleCollider:

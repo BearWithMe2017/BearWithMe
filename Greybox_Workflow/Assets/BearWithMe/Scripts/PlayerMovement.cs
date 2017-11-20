@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAttack m_PlayerAttack;
     private Vector3 m_vPlayerVeloc;
     private PlayerAttack otherPlayer;
+    public AudioClip Grunt;
+    private AudioSource source;
+    private float volLowRange = .5f;
+    private float volHighRange = 1.0f;
 
     [SerializeField] private XboxController m_xcController;
 
@@ -85,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         m_aAnimation = GetComponent<Animator>();
         m_PlayerAttack = GetComponent<PlayerAttack>();
         otherPlayer = GetComponent<PlayerAttack>();
-
+        source = GetComponent<AudioSource>();
 
         //--------------------------------------------------
         //Checks if controller is connected
@@ -128,6 +132,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+
+        if (Stunned == true)
+        {
+            float vol = Random.Range(volLowRange, volHighRange);
+            source.PlayOneShot(Grunt, vol);
+        }
 
         if (m_bGrounded == true)
         {
