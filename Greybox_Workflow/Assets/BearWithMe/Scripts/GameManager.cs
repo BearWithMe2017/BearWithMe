@@ -333,7 +333,7 @@ public class GameManager : MonoBehaviour
         Vector3[] BallPosArray = new Vector3[4];
 
         BallPosArray[0] = new Vector3(-15f, 4f, Random.Range(-15.0f, 15.0f));
-        BallPosArray[1] = new Vector3(21f, 4f, Random.Range(-15.0f, 15.0f));
+        BallPosArray[1] = new Vector3(20f, 4f, Random.Range(-15.0f, 15.0f));
         BallPosArray[2] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, -17f);
         BallPosArray[3] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, 15f);
 

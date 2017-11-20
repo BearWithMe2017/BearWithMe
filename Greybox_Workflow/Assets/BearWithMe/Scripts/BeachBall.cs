@@ -8,8 +8,9 @@ public class BeachBall : MonoBehaviour {
     float force;
     float gravity;
     Vector3 targetPos;
-    bool thrown;
     float minForce, maxForce;
+    public float torque;
+    public float turn;
 
     void Awake()
     {
@@ -20,9 +21,9 @@ public class BeachBall : MonoBehaviour {
     {
         force = 1000.0f;
         gravity = 10f;
-        RandomTargetPos();
-        transform.LookAt(new Vector3(3.0f, 0f, -3.0f));
+        transform.LookAt(new Vector3(Random.Range(-1.5f, 1.5f), 0f, Random.Range(-1.5f, 1.5f)));
         rb.AddForce(transform.forward + Vector3.up * (50.0f * Time.deltaTime), ForceMode.Impulse);
+        rb.AddTorque(new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)) * torque, ForceMode.Impulse);
     }
 
     // Update is called once per frame
@@ -31,10 +32,7 @@ public class BeachBall : MonoBehaviour {
 
     }
 
-    void RandomTargetPos()
-    {
-        targetPos = new Vector3(Random.Range(-4.0f, 10.0f), 0, Random.Range(-4.0f, 10.0f));
-    }
+
 
 
 }

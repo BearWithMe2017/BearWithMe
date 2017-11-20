@@ -1393,10 +1393,10 @@ MonoBehaviour:
   exitBtn: {fileID: 1634947636626680}
   eventSystem: {fileID: 0}
   playerCount: 0
-  winsAmount: 0
-  beachBallPrefab: {fileID: 0}
-  player1Ready: 0
-  player2Ready: 0
+  beachBallPrefab: {fileID: 1744548659319760, guid: 50ddcc29400bded498a342e7753996f9,
+    type: 2}
+  player1Ready: 1
+  player2Ready: 1
   player3Ready: 0
   player4Ready: 0
 --- !u!114 &114765443020165716

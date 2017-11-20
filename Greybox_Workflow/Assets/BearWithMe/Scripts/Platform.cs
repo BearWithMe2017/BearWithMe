@@ -29,6 +29,7 @@ public class Platform : MonoBehaviour
     float yLimitForce;
 
     private float posY = 0.0f;
+
     void Awake()
     {
 
@@ -82,7 +83,7 @@ public class Platform : MonoBehaviour
             wasSunk = true;
             GetComponent<Buoyancy>().enabled = false;
             GetComponent<Platform>().enabled = false;
-            animator.Play("Sink");
+            animator.Play("Shake");
             isSunk = false;
             //SinkPlatform();
         }
