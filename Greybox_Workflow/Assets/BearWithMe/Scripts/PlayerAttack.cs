@@ -8,8 +8,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private XboxController m_Controller;
     private Animator m_aAnimation;
     private PlayerMovement m_PlayerMovement;
-    public PlayerAttack otherPlayer;
+    private PlayerAttack otherPlayer;
     private PlayerMovement otherPlayerMovement;
+    public AudioClip m_Sounds;
+    private AudioSource m_Source;
 
     [Header("### Strength of Block ###")]
     [SerializeField] [Tooltip("How much you get knockedback when you get hit.")] private float m_fBlockStrength;
@@ -39,6 +41,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] [Tooltip("Movement speed while charging the attack.")] private float m_fChargeAttMoveSpeed;
     [SerializeField] [Tooltip("Movement speed while Blocking the attack.")] private float m_fBlockingMoveSpeed;
 
+    [Header("### Volume on Attack ###")]
+    [SerializeField] [Tooltip("Min Vol.")] private float volLowRange = .5f;
+    [SerializeField] [Tooltip("Max Vol.")] private float volHighRange = 1.0f;
+
     private float m_fHeldDown = 0.0f;
     private float m_fFullSpeed;
 
@@ -46,7 +52,6 @@ public class PlayerAttack : MonoBehaviour
     private bool m_bChargeAtk = false;
     private bool m_bAttackReleased = false;
     private static bool m_bDidQueryNumOfCtrlrs = false;
-    //[SerializeField] int m_iScoreCount = 0;
 
     private float m_fChargeTimerStart = 0.50f;
 
@@ -62,25 +67,13 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    //public int ScoreCount
-    //{
-    //    get
-    //    {
-    //        return m_iScoreCount;
-    //    }
-    //    set
-    //    {
-    //        m_iScoreCount = value;
-    //    }
-    //}
-
     // Use this for initialization
     void Awake()
     {
         m_aAnimation = GetComponent<Animator>();
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_PlayerMovement = GetComponent<PlayerMovement>();
-        //m_PlayerMovementStun = GetComponent<PlayerMovement>();
+        m_Source = GetComponent<AudioSource>();
 
         m_fFullSpeed = m_PlayerMovement.Speed;
         
@@ -109,14 +102,11 @@ public class PlayerAttack : MonoBehaviour
             XCI.DEBUG_LogControllerNames();
         }
     }
-   // public bool TriggerDown = false;
-    // Update is called once per frame
+
     void Update()
     {
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
- 
-
-        //Debug.Log(m_fHeldDown);
+        float m_Vol = Random.Range(volLowRange, volHighRange);
         //------------------------------------------------
         //checks if controller is connected
         //if it is it uses controller to contol character
@@ -125,7 +115,7 @@ public class PlayerAttack : MonoBehaviour
         if (m_iQueriedNumberOfCtrlrs > 0)
         {
             if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller) || TriggerDown())
-            {
+            {               
                 if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
                 {
                     m_aAnimation.SetTrigger("Attack1Trigger");
@@ -153,6 +143,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 m_bAttackReleased = true;
+                m_Source.PlayOneShot(m_Sounds, m_Vol);
                 m_aAnimation.speed = 1;
             }
             //if (XCI.GetButtonDown(XboxButton.B, m_Controller))
