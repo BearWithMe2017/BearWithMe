@@ -6,7 +6,8 @@ using XboxCtrlrInput;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private XboxController m_Controller;
-    private Animator m_aAnimation;
+    private Animator m_Animator;
+    private Animation m_Animation;
     private PlayerMovement m_PlayerMovement;
     private PlayerAttack otherPlayer;
     private PlayerMovement otherPlayerMovement;
@@ -70,7 +71,8 @@ public class PlayerAttack : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_aAnimation = GetComponent<Animator>();
+        m_Animator = GetComponent<Animator>();
+        m_Animation = GetComponent<Animation>();
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_PlayerMovement = GetComponent<PlayerMovement>();
         m_Source = GetComponent<AudioSource>();
@@ -116,20 +118,20 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller) || TriggerDown())
             {               
-                if (!m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
                 {
-                    m_aAnimation.SetTrigger("Attack1Trigger");
+                    m_Animator.SetTrigger("Attack1Trigger");                  
                     m_bAttackReleased = false;
                     m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
                 }
 
-                if (m_aAnimation.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_aAnimation.IsInTransition(0))
+                if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
                 {
                     m_fHeldDown += Time.deltaTime;
-                    float time = m_aAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime;
+                    float time = m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
                     if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
                     {
-                        m_aAnimation.speed = 0;
+                        m_Animator.speed = 0;
                         if (m_fHeldDown >= 0.05f)
                         {
                             m_bChargeAtk = true;
@@ -137,18 +139,14 @@ public class PlayerAttack : MonoBehaviour
                     }
                     else if(m_fHeldDown >= 3.0f)
                     {
-                        m_aAnimation.speed = 1;
+                        m_Animator.speed = 1;
                     }
                 }
             }
             else
-            {
+            {            
                 m_bAttackReleased = true;            
-                m_aAnimation.speed = 1;
-            }
-            if(m_bAttackReleased == true)
-            {
-
+                m_Animator.speed = 1;
             }
             //if (XCI.GetButtonDown(XboxButton.B, m_Controller))
             //{
@@ -218,6 +216,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
+                
                 otherPlayerMovement.stun(m_fStunDurationTap);
                 m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
@@ -269,10 +268,6 @@ public class PlayerAttack : MonoBehaviour
     public void AttackOn()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = true;
-        //if(m_fHeldDown > )
-        //{
-
-        //}
         Debug.Log("On");
     }
 
