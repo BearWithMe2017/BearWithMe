@@ -1706,11 +1706,11 @@ MonoBehaviour:
   m_Sounds: {fileID: 8300000, guid: 84806f8920dcb3c489b2de767bcb4204, type: 3}
   m_Grunt: {fileID: 8300000, guid: 1d94d9bb53126384181d67972b159e40, type: 3}
   m_fBlockStrength: 2
-  m_fStunDurationTap: 1
-  m_fStunDuration1stCharge: 1
-  m_fStunDuration2ndCharge: 1
+  m_fStunDurationTap: 0.7
+  m_fStunDuration1stCharge: 0.8
+  m_fStunDuration2ndCharge: 0.9
   m_fStunDuration3rdCharge: 1
-  m_fStunDuration4thCharge: 1
+  m_fStunDuration4thCharge: 1.1
   m_fForce: 7
   m_fChargeForce1st: 8
   m_fChargeForce2nd: 9

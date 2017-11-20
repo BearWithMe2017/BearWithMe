@@ -1624,11 +1624,11 @@ MonoBehaviour:
   m_Controller: 3
   otherPlayer: {fileID: 0}
   m_fBlockStrength: 2
-  m_fStunDurationTap: 1
-  m_fStunDuration1stCharge: 1
-  m_fStunDuration2ndCharge: 1
+  m_fStunDurationTap: 0.7
+  m_fStunDuration1stCharge: 0.8
+  m_fStunDuration2ndCharge: 0.9
   m_fStunDuration3rdCharge: 1
-  m_fStunDuration4thCharge: 1
+  m_fStunDuration4thCharge: 1.1
   m_fForce: 7
   m_fChargeForce1st: 8
   m_fChargeForce2nd: 9

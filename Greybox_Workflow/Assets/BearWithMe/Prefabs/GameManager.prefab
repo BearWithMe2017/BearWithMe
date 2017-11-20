@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 1325194172572084, guid: 464cce702b4e1f648bf095d524f8cc1c, type: 2}
+  - {fileID: 1325194172572084, guid: dc2f1a3e3707b1b44845512259bc605e, type: 2}
   - {fileID: 1046407031614552, guid: 0c74306fed7985243894902cf783467e, type: 2}
   - {fileID: 1367632755906804, guid: 5900cace445ec4141aecb011b33677f9, type: 2}
   - {fileID: 1283057695869810, guid: efd9325c54408d64a856069319a07c7e, type: 2}
