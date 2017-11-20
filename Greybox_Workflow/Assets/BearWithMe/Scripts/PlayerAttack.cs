@@ -106,7 +106,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
-        float m_Vol = Random.Range(volLowRange, volHighRange);
+        
         //------------------------------------------------
         //checks if controller is connected
         //if it is it uses controller to contol character
@@ -148,7 +148,7 @@ public class PlayerAttack : MonoBehaviour
             }
             if(m_bAttackReleased == true)
             {
-                m_Source.PlayOneShot(m_Sounds, m_Vol);
+
             }
             //if (XCI.GetButtonDown(XboxButton.B, m_Controller))
             //{
@@ -177,6 +177,7 @@ public class PlayerAttack : MonoBehaviour
     {
         otherPlayer = a_cOther.GetComponent<PlayerAttack>();
         otherPlayerMovement = a_cOther.GetComponent<PlayerMovement>();
+        float m_Vol = Random.Range(volLowRange, volHighRange);
         if (a_cOther.gameObject.tag == "Player")
         {   
             if (otherPlayer.BGuardUp == true && m_bChargeAtk == false)
@@ -189,35 +190,36 @@ public class PlayerAttack : MonoBehaviour
                 {
                     Debug.Log("Charge Attack");                    
                     otherPlayerMovement.stun(m_fStunDuration1stCharge);
-
-                    ChargeAttack(a_cOther.transform, m_fChargeForce1st, m_fChargeUpForce1st);                    
+                    ChargeAttack(a_cOther.transform, m_fChargeForce1st, m_fChargeUpForce1st);
+                    m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.00000000f && m_fHeldDown <= 1.49999999f)
                 {
                     Debug.Log("Charge Attack2");
                     otherPlayerMovement.stun(m_fStunDuration2ndCharge);
-
                     ChargeAttack(a_cOther.transform, m_fChargeForce2nd, m_fChargeUpForce2nd);
+                    m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.50000000f && m_fHeldDown <= 1.99999999f)
                 {
                     Debug.Log("Charge Attack3");
                     otherPlayerMovement.stun(m_fStunDuration3rdCharge);
-
                     ChargeAttack(a_cOther.transform, m_fChargeForce3rd, m_fChargeUpForce3rd);
+                    m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 2.00000000f)
                 {
                     Debug.Log("Charge Attack4");
-                    otherPlayerMovement.stun(m_fStunDuration4thCharge);
-                    
+                    otherPlayerMovement.stun(m_fStunDuration4thCharge);            
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th, m_fChargeUpForce4th);
+                    m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
             }
             else
             {
                 TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
                 otherPlayerMovement.stun(m_fStunDurationTap);
+                m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
         }
         
