@@ -135,7 +135,7 @@ public class PlayerAttack : MonoBehaviour
                         if (m_fHeldDown >= 0.05f)
                         {
                             m_bChargeAtk = true;
-                        }
+                        }                  
                     }
                     else if(m_fHeldDown >= 3.0f)
                     {
