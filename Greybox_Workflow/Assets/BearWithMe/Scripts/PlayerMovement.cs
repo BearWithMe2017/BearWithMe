@@ -336,6 +336,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Environment")
+        {
+            IsDead = true;
+        }
+    }
+
 
     public void stun(float StunDur)
     {
