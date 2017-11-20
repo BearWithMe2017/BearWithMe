@@ -118,19 +118,22 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller) || TriggerDown())
             {               
-                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
+                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0) && m_PlayerMovement.Grounded == true)
                 {
                     m_Animator.SetTrigger("Attack1Trigger");                  
                     m_bAttackReleased = false;
-                    if(m_PlayerMovement.Grounded == true)
-                    {
-                        m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
-                    }
-                    else if(m_PlayerMovement.Grounded == false)
-                    {
-                        m_PlayerMovement.Speed = m_fFullSpeed;
-                    }
-                    
+                    m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;                 
+                }
+                else if(!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0) && m_PlayerMovement.Grounded == false)
+                {
+                    m_Animator.SetTrigger("Attack1Trigger");
+                    m_bAttackReleased = false;
+                    m_PlayerMovement.Speed = m_fFullSpeed;
+                }
+                else if(m_PlayerMovement.Grounded == true && m_bChargeAtk == true)
+                {
+                    m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
+
                 }
 
                 if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
