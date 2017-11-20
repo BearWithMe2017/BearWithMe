@@ -133,7 +133,6 @@ public class PlayerAttack : MonoBehaviour
                 else if(m_PlayerMovement.Grounded == true && m_bChargeAtk == true)
                 {
                     m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
-
                 }
 
                 if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
@@ -230,7 +229,23 @@ public class PlayerAttack : MonoBehaviour
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
             }           
-        }     
+        }
+        if (a_cOther.gameObject.tag == "BeachBall")
+        {
+            TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
+            
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "BeachBall")
+        {
+            TapAttack(this.transform, m_fForce, m_fUpForce);
+            TapAttack(collision.transform, m_fForce, m_fUpForce);
+            otherPlayerMovement.stun(m_fStunDurationTap);
+        }
     }
 
     //-------------------------------------------------------
