@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerAttack otherPlayer;
     private PlayerMovement otherPlayerMovement;
     public AudioClip m_Sounds;
+    public AudioClip m_Grunt;
     private AudioSource m_Source;
 
     [Header("### Strength of Block ###")]
@@ -122,7 +123,15 @@ public class PlayerAttack : MonoBehaviour
                 {
                     m_Animator.SetTrigger("Attack1Trigger");                  
                     m_bAttackReleased = false;
-                    m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
+                    if(m_PlayerMovement.Grounded == true)
+                    {
+                        m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
+                    }
+                    else if(m_PlayerMovement.Grounded == false)
+                    {
+                        m_PlayerMovement.Speed = m_fFullSpeed;
+                    }
+                    
                 }
 
                 if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
@@ -132,7 +141,7 @@ public class PlayerAttack : MonoBehaviour
                     if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
                     {
                         m_Animator.speed = 0;
-                        if (m_fHeldDown >= 0.05f)
+                        if (m_fHeldDown >= 0.5f)
                         {
                             m_bChargeAtk = true;
                         }                  
@@ -178,9 +187,16 @@ public class PlayerAttack : MonoBehaviour
         float m_Vol = Random.Range(volLowRange, volHighRange);
         if (a_cOther.gameObject.tag == "Player")
         {   
-            if (otherPlayer.BGuardUp == true && m_bChargeAtk == false)
+            //if (otherPlayer.BGuardUp == true && m_bChargeAtk == false)
+            //{
+            //    Guarded(this.transform, a_cOther.transform,m_fBlockStrength, m_fUpForce);
+            //}
+            if(m_fHeldDown <= 0.5f)
             {
-                Guarded(this.transform, a_cOther.transform,m_fBlockStrength, m_fUpForce);
+                TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
+                otherPlayerMovement.stun(m_fStunDurationTap);
+                m_Source.PlayOneShot(m_Sounds, m_Vol);
+                otherPlayer.m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
             else if (m_bChargeAtk == true)
             {
@@ -212,16 +228,8 @@ public class PlayerAttack : MonoBehaviour
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th, m_fChargeUpForce4th);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
-            }
-            else
-            {
-                TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
-                
-                otherPlayerMovement.stun(m_fStunDurationTap);
-                m_Source.PlayOneShot(m_Sounds, m_Vol);
-            }
-        }
-        
+            }           
+        }     
     }
 
     //-------------------------------------------------------
