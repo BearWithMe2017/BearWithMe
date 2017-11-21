@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-           // CheckWinner();
+            CheckWinner();
             RestartRound();
 
             if (XCI.GetButtonDown(XboxButton.Start, XboxController.All) && pause != true)

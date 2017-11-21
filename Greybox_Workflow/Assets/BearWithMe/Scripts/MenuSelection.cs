@@ -93,8 +93,8 @@ public class MenuSelection : MonoBehaviour
 
     public void LoadGame()
     {
-        gm.StartTime = 45.0f;
-        gm.WinsAmount = 5;
+        gm.StartTime = 40.0f;
+        gm.WinsAmount = 3;
         //gm.sceneIndex = 1;
         SceneManager.LoadScene(1);
     }
