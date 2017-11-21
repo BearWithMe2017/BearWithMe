@@ -232,20 +232,33 @@ public class PlayerAttack : MonoBehaviour
         }
         if (a_cOther.gameObject.tag == "BeachBall")
         {
-            TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
+            TappAttack(a_cOther.transform, 1);
             
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "BeachBall")
         {
-            TapAttack(this.transform, m_fForce, m_fUpForce);
-            TapAttack(collision.transform, m_fForce, m_fUpForce);
-            otherPlayerMovement.stun(m_fStunDurationTap);
+            BeachBall(this.transform, collision.transform, 15, 15);
+            m_PlayerMovement.stun(m_fStunDuration4thCharge);
         }
+    }
+
+    private void BeachBall(Transform a_tDefender, Transform a_tAttacker, float a_fBlockStrength, float a_fUpForce)
+    {
+        Vector3 c_vDir = (a_tDefender.position - a_tAttacker.position);
+        c_vDir = c_vDir.normalized;
+        Vector3 c_vUpForce = Vector3.up * a_fUpForce;
+        a_tDefender.GetComponent<Rigidbody>().AddForce(c_vDir * a_fBlockStrength + c_vUpForce, ForceMode.Impulse);
+    }
+
+    private void TappAttack(Transform a_tOther, float a_fForce)
+    {
+        Vector3 c_vDir = (a_tOther.position - transform.position);
+        c_vDir = c_vDir.normalized;
+        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fForce, ForceMode.Impulse);
     }
 
     //-------------------------------------------------------

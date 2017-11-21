@@ -351,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
         if(collision.gameObject.tag == "Environment")
         {
             m_bIsDead = true;
-            gameObject.SetActive(false); //disable or destroy?
+             gameObject.SetActive(false); //disable or destroy?
         }
     }
 
