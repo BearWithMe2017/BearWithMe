@@ -210,6 +210,22 @@ namespace XboxCtrlrInput
 		/// </param>
 		public static bool GetButtonDown(XboxButton button, XboxController controller)
 		{
+            if (controller == XboxController.All)
+            {
+                if (GetButtonDown(button, XboxController.First))
+                    return true;
+                if (GetButtonDown(button, XboxController.Second))
+                    return true;
+                if (GetButtonDown(button, XboxController.Third))
+                    return true;
+                if (GetButtonDown(button, XboxController.Fourth))
+                    return true;
+
+                return false;
+
+            }
+
+
 			if (button.IsDPad())
 				return GetDPadDown(button.ToDPad(), controller);
 

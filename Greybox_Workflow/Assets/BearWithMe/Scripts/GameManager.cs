@@ -68,7 +68,8 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
         {
-
+            winsAmount = 5;
+            startTime = 40;
             eventSystem = FindObjectOfType<EventSystem>();
             gameCanvas.SetActive(true);
             pause = false;
@@ -360,7 +361,7 @@ public class GameManager : MonoBehaviour
             CancelInvoke("UpdateTime");
 
             roundOverPanel.GetComponent<Image>().color = Color.Lerp(Color.clear, Color.black, 0.1f * Time.deltaTime);
-
+            Reset();
             if (roundOverPanel.GetComponent<Image>().color == Color.black)
             {
                 deathCount = 0;
@@ -432,7 +433,7 @@ public class GameManager : MonoBehaviour
             CancelInvoke("UpdateTime");
 
             roundOverPanel.GetComponent<Image>().color = Color.Lerp(Color.clear, Color.black, 0.1f * Time.deltaTime);
-
+            Reset();
             if (roundOverPanel.GetComponent<Image>().color == Color.black)
             {
                 deathCount = 0;

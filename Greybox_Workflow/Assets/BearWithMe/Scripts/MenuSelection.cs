@@ -93,8 +93,8 @@ public class MenuSelection : MonoBehaviour
 
     public void LoadGame()
     {
-        gm.StartTime = GetComponent<MatchSettings>().timeValue;
-        gm.WinsAmount = GetComponent<MatchSettings>().winsValue;
+        //gm.StartTime = GetComponent<MatchSettings>().timeValue;
+        //gm.WinsAmount = GetComponent<MatchSettings>().winsValue;
         //gm.sceneIndex = 1;
         SceneManager.LoadScene(1);
     }
