@@ -15,5 +15,6 @@ public class Waves : MonoBehaviour {
 	void Update ()
     {
         transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * speed) * 0.05f, transform.position.z);
+
     }
 }

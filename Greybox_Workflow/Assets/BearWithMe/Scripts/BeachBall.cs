@@ -11,6 +11,7 @@ public class BeachBall : MonoBehaviour {
     float minForce, maxForce;
     public float torque;
     public float turn;
+    private float yLimitForce = 12.0f;
 
     void Awake()
     {
@@ -29,6 +30,6 @@ public class BeachBall : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        
+
     }
 }

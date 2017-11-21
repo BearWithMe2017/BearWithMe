@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            CheckWinner();
+            //CheckWinner();
             RestartRound();
 
             if (XCI.GetButtonDown(XboxButton.Start, XboxController.All) && pause != true)
@@ -347,8 +347,7 @@ public class GameManager : MonoBehaviour
         BallPosArray[3] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, 15f);
 
 
-        beachBallPrefab = Instantiate(beachBallPrefab, BallPosArray[Random.Range(0, BallPosArray.Length)], Quaternion.identity);
-        beachBallPrefab.SetActive(true);
+        Instantiate(beachBallPrefab, BallPosArray[Random.Range(0, BallPosArray.Length)], Quaternion.identity);
     }
 
     private IEnumerator Fade(Color start, Color end, float duration)
@@ -361,6 +360,11 @@ public class GameManager : MonoBehaviour
             percent += Time.deltaTime * speed;
             roundOverPanel.GetComponent<Image>().color = Color.Lerp(start, end, percent);
             yield return null;
+
+            if (percent >= 0.7f)
+            {
+                CheckWinner();
+            }
         }
         Reset();
 
@@ -370,8 +374,10 @@ public class GameManager : MonoBehaviour
     private void Reset()
     {
         roundOverPanel.GetComponent<Image>().color = Color.clear;
+        deathCount = 0;
         activePlayers.Clear();
         sceneLoaded = false;
+        StopAllCoroutines();
         SceneManager.LoadScene(1);
 
     }
@@ -383,7 +389,6 @@ public class GameManager : MonoBehaviour
             
             timeLeft = StartTime;
             CancelInvoke("UpdateTime");
-            deathCount = 0;
             StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
 
         }
@@ -441,15 +446,19 @@ public class GameManager : MonoBehaviour
             sceneLoaded = false;
 
 
+            roundOverPanel.GetComponent<Image>().color = Color.clear;
+            deathCount = 0;
+            StopAllCoroutines();
+
             winsAmount = 0;
             SceneManager.LoadScene(0);
+
         }
 
         if (deathCount == playerCount - 1 && winner != true)
         {
             timeLeft = StartTime;
             CancelInvoke("UpdateTime");
-            deathCount = 0;
             StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
         }
 
@@ -504,6 +513,11 @@ public class GameManager : MonoBehaviour
             print("Game Over");
             gameCanvas.SetActive(false);
             sceneLoaded = false;
+
+            roundOverPanel.GetComponent<Image>().color = Color.clear;
+            deathCount = 0;
+            StopAllCoroutines();
+
             SceneManager.LoadScene(0);
         }
     }
