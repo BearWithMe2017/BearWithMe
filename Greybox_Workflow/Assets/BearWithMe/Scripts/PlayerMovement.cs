@@ -7,15 +7,12 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody m_rbRigidBody;
-    private Animator m_aAnimation;
-    private PlayerAttack m_PlayerAttack;
+    private Animator m_aAnimator;
     private Vector3 m_vPlayerVeloc;
-    private PlayerAttack otherPlayer;
-    public AudioClip Grunt;
-    public AudioClip DED;
+    public AudioClip m_Grunt;
+    public AudioClip m_Ded;
     private AudioSource source;
-    private float volLowRange = .5f;
-    private float volHighRange = 1.0f;
+
 
     [SerializeField] private XboxController m_xcController;
 
@@ -30,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float m_fSpeed = 100;
     private float m_fFriction;
+    private float volLowRange = .5f;
+    private float volHighRange = 1.0f;
 
     private bool m_bIsStunned = false;
     private bool m_bJumping = false;
@@ -87,9 +86,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_rbRigidBody = GetComponent<Rigidbody>();
         m_rbRigidBody.maxAngularVelocity = 10;
-        m_aAnimation = GetComponent<Animator>();
-        m_PlayerAttack = GetComponent<PlayerAttack>();
-        otherPlayer = GetComponent<PlayerAttack>();
+        m_aAnimator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
 
         //--------------------------------------------------
@@ -137,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         if (Stunned == true)
         {
             float vol = Random.Range(volLowRange, volHighRange);
-            source.PlayOneShot(Grunt, vol);
+            source.PlayOneShot(m_Grunt, vol);
         }
 
         if (m_bGrounded == true)
@@ -212,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
         {
             m_bIsDead = true;
             float vol = Random.Range(volLowRange, volHighRange);
-            source.PlayOneShot(DED, vol);
+            source.PlayOneShot(m_Ded, vol);
             gameObject.SetActive(false); //disable or destroy?
         }
 
@@ -229,11 +226,11 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------
         if (c_vMovement.x != 0 || c_vMovement.z != 0)
         {
-            m_aAnimation.SetBool("IsMoving", true);
+            m_aAnimator.SetBool("IsMoving", true);
         }
         else
         {
-            m_aAnimation.SetBool("IsMoving", false);
+            m_aAnimator.SetBool("IsMoving", false);
         }
         //---------------------------------------------------------------------
         //affects the movement on the x axis

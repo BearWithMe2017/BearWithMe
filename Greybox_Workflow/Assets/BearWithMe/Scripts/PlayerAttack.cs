@@ -9,8 +9,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator m_Animator;
     private Animation m_Animation;
     private PlayerMovement m_PlayerMovement;
-    private PlayerAttack otherPlayer;
-    private PlayerMovement otherPlayerMovement;
+    private PlayerAttack m_PlayerAttack;
     public AudioClip m_Sounds;
     private AudioSource m_Source;
 
@@ -183,8 +182,8 @@ public class PlayerAttack : MonoBehaviour
     //---------------------------------------------------
     private void OnTriggerEnter(Collider a_cOther)
     {
-        otherPlayer = a_cOther.GetComponent<PlayerAttack>();
-        otherPlayerMovement = a_cOther.GetComponent<PlayerMovement>();
+        m_PlayerAttack = a_cOther.GetComponent<PlayerAttack>();
+        m_PlayerMovement = a_cOther.GetComponent<PlayerMovement>();
         float m_Vol = Random.Range(volLowRange, volHighRange);
         if (a_cOther.gameObject.tag == "Player")
         {   
@@ -195,7 +194,7 @@ public class PlayerAttack : MonoBehaviour
             if(m_fHeldDown <= 0.5f)
             {
                 TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
-                otherPlayerMovement.stun(m_fStunDurationTap);
+                m_PlayerMovement.stun(m_fStunDurationTap);
                 m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
             else if (m_bChargeAtk == true)
@@ -203,28 +202,28 @@ public class PlayerAttack : MonoBehaviour
                 if (m_fHeldDown >= 0.49999999f && m_fHeldDown <= 0.99999999f)
                 {
                     Debug.Log("Charge Attack");                    
-                    otherPlayerMovement.stun(m_fStunDuration1stCharge);
+                    m_PlayerMovement.stun(m_fStunDuration1stCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce1st, m_fChargeUpForce1st);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.00000000f && m_fHeldDown <= 1.49999999f)
                 {
                     Debug.Log("Charge Attack2");
-                    otherPlayerMovement.stun(m_fStunDuration2ndCharge);
+                    m_PlayerMovement.stun(m_fStunDuration2ndCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce2nd, m_fChargeUpForce2nd);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.50000000f && m_fHeldDown <= 1.99999999f)
                 {
                     Debug.Log("Charge Attack3");
-                    otherPlayerMovement.stun(m_fStunDuration3rdCharge);
+                    m_PlayerMovement.stun(m_fStunDuration3rdCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce3rd, m_fChargeUpForce3rd);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 2.00000000f)
                 {
                     Debug.Log("Charge Attack4");
-                    otherPlayerMovement.stun(m_fStunDuration4thCharge);            
+                    m_PlayerMovement.stun(m_fStunDuration4thCharge);            
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th, m_fChargeUpForce4th);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
