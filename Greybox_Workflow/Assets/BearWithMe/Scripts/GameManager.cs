@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     private bool winner;
     private bool platformSunk;
     private bool pause;
+    private bool scored;
     private int p1Score, p2Score, p3Score, p4Score;
     private int randIndex;
 
@@ -68,12 +69,11 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
         {
-            winsAmount = 5;
-            startTime = 40;
             eventSystem = FindObjectOfType<EventSystem>();
             gameCanvas.SetActive(true);
             pause = false;
             winner = false;
+            scored = false;
             platformSunk = false;
             percentOfStartTime = 0.25f * startTime;
             randIndex = Random.Range(0, 4);
@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            CheckWinner();
+           // CheckWinner();
             RestartRound();
 
             if (XCI.GetButtonDown(XboxButton.Start, XboxController.All) && pause != true)
@@ -255,40 +255,47 @@ public class GameManager : MonoBehaviour
         {
             if (activePlayers[i].activeSelf != false && deathCount == playerCount - 1)
             {
-                if (i == 0)
+                if (scored == false)
                 {
-                    p1Score++;
-
-                    for (int j = 0; j < p1Score; j++)
+                    if (i == 0)
                     {
-                        p1Stars[j].GetComponent<Image>().color = Color.white;
+                        p1Score++;
+
+                        for (int j = 0; j < p1Score; j++)
+                        {
+                            p1Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                        scored = true;
                     }
-                }
-                if (i == 1)
-                {
-                    p2Score++;
-
-                    for (int j = 0; j < p2Score; j++)
+                    if (i == 1)
                     {
-                        p2Stars[j].GetComponent<Image>().color = Color.white;
+                        p2Score++;
+
+                        for (int j = 0; j < p2Score; j++)
+                        {
+                            p2Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                        scored = true;
                     }
-                }
-                if (i == 2)
-                {
-                    p3Score++;
-
-                    for (int j = 0; j < p3Score; j++)
+                    if (i == 2)
                     {
-                        p3Stars[j].GetComponent<Image>().color = Color.white;
+                        p3Score++;
+
+                        for (int j = 0; j < p3Score; j++)
+                        {
+                            p3Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                        scored = true;
                     }
-                }
-                if (i == 3)
-                {
-                    p4Score++;
-
-                    for (int j = 0; j < p4Score; j++)
+                    if (i == 3)
                     {
-                        p4Stars[j].GetComponent<Image>().color = Color.white;
+                        p4Score++;
+
+                        for (int j = 0; j < p4Score; j++)
+                        {
+                            p4Stars[j].GetComponent<Image>().color = Color.white;
+                        }
+                        scored = true;
                     }
                 }
             }
@@ -344,8 +351,25 @@ public class GameManager : MonoBehaviour
         beachBallPrefab.SetActive(true);
     }
 
+    private IEnumerator Fade(Color start, Color end, float duration)
+    {
+        float speed = 1 / duration;
+        float percent = 0;
+
+        while (percent < 1)
+        {
+            percent += Time.deltaTime * speed;
+            roundOverPanel.GetComponent<Image>().color = Color.Lerp(start, end, percent);
+            yield return null;
+        }
+        Reset();
+
+
+    }
+
     private void Reset()
     {
+        roundOverPanel.GetComponent<Image>().color = Color.clear;
         activePlayers.Clear();
         sceneLoaded = false;
         SceneManager.LoadScene(1);
@@ -359,15 +383,9 @@ public class GameManager : MonoBehaviour
             
             timeLeft = StartTime;
             CancelInvoke("UpdateTime");
+            deathCount = 0;
+            StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
 
-            roundOverPanel.GetComponent<Image>().color = Color.Lerp(Color.clear, Color.black, 0.1f * Time.deltaTime);
-            Reset();
-            if (roundOverPanel.GetComponent<Image>().color == Color.black)
-            {
-                deathCount = 0;
-                Reset();
-            }
-            
         }
 
         if (timeLeft <= 0 && winsAmount == 1)
@@ -431,14 +449,8 @@ public class GameManager : MonoBehaviour
         {
             timeLeft = StartTime;
             CancelInvoke("UpdateTime");
-
-            roundOverPanel.GetComponent<Image>().color = Color.Lerp(Color.clear, Color.black, 0.1f * Time.deltaTime);
-            Reset();
-            if (roundOverPanel.GetComponent<Image>().color == Color.black)
-            {
-                deathCount = 0;
-                Reset();
-            }
+            deathCount = 0;
+            StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
         }
 
         if (deathCount == playerCount - 1 && winner == true)
