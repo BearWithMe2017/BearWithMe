@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/BearWithMe/Scenes/MainMenu.unity
     guid: 8d645cf490353b948b1ce85544aaa317
   - enabled: 1
-    path: Assets/BearWithMe/Scenes/Alp's Gold Build.unity
-    guid: 63c20df832c8e704d9294ab429ba0fb1
+    path: Assets/BearWithMe/Scenes/GoldMark.unity
+    guid: 70f866a1382071445932cfc95d53f3a0
