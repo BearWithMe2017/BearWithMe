@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject platformOrange;
     [SerializeField] private List<GameObject> activePlatforms;
     [SerializeField] private GameObject exitBtn;
+    [SerializeField] private GameObject roundOverPanel;
 
     public EventSystem eventSystem;
 
@@ -207,14 +208,14 @@ public class GameManager : MonoBehaviour
             CheckWinner();
             RestartRound();
 
-            if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || XCI.GetButtonDown(XboxButton.Start, XboxController.Second) && pause != true)
+            if (XCI.GetButtonDown(XboxButton.Start, XboxController.All) && pause != true)
             {
                 Time.timeScale = 0;
                 pauseCanvas.SetActive(true);
                 //eventSystem.SetSelectedGameObject(exitBtn);
                 pause = true;
             }
-            else if (XCI.GetButtonDown(XboxButton.Start, XboxController.First) || XCI.GetButtonDown(XboxButton.Start, XboxController.Second) && pause == true)
+            else if (XCI.GetButtonDown(XboxButton.Start, XboxController.All))
             {
                 Time.timeScale = 1;
                 pauseCanvas.SetActive(false);
@@ -223,7 +224,7 @@ public class GameManager : MonoBehaviour
 
             if (pause == true)
             {
-                if (XCI.GetButtonDown(XboxButton.B, XboxController.First) || XCI.GetButtonDown(XboxButton.B, XboxController.Second))
+                if (XCI.GetButtonDown(XboxButton.B, XboxController.First))
                 {
                     Time.timeScale = 1;
                     LoadMainMenu();
@@ -354,9 +355,18 @@ public class GameManager : MonoBehaviour
     {
         if (timeLeft <= 0 && winsAmount > 1)
         {
+            
             timeLeft = StartTime;
             CancelInvoke("UpdateTime");
-            Reset();
+
+            roundOverPanel.GetComponent<Image>().color = Color.Lerp(Color.clear, Color.black, 0.1f * Time.deltaTime);
+
+            if (roundOverPanel.GetComponent<Image>().color == Color.black)
+            {
+                deathCount = 0;
+                Reset();
+            }
+            
         }
 
         if (timeLeft <= 0 && winsAmount == 1)
@@ -418,10 +428,16 @@ public class GameManager : MonoBehaviour
 
         if (deathCount == playerCount - 1 && winner != true)
         {
-            deathCount = 0;
             timeLeft = StartTime;
             CancelInvoke("UpdateTime");
-            Reset();
+
+            roundOverPanel.GetComponent<Image>().color = Color.Lerp(Color.clear, Color.black, 0.1f * Time.deltaTime);
+
+            if (roundOverPanel.GetComponent<Image>().color == Color.black)
+            {
+                deathCount = 0;
+                Reset();
+            }
         }
 
         if (deathCount == playerCount - 1 && winner == true)

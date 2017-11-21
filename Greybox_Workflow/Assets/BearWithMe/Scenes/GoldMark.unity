@@ -6794,9 +6794,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: roundOverPanel
+      value: 
+      objectReference: {fileID: 769461200}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &769461200 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1717401618917542, guid: c4843140c548acb45ace51f49bad8a92,
+    type: 2}
+  m_PrefabInternal: {fileID: 769461199}
 --- !u!1 &772280439 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1972403314573666, guid: 97fffbd3018a5f34ab3aad137303e8f3,
