@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_vPlayerVeloc;
     private PlayerAttack otherPlayer;
     public AudioClip Grunt;
+    public AudioClip DED;
     private AudioSource source;
     private float volLowRange = .5f;
     private float volHighRange = 1.0f;
@@ -210,6 +211,8 @@ public class PlayerMovement : MonoBehaviour
         if(transform.localPosition.y <= -3.0f)
         {
             m_bIsDead = true;
+            float vol = Random.Range(volLowRange, volHighRange);
+            source.PlayOneShot(DED, vol);
             gameObject.SetActive(false); //disable or destroy?
         }
 
@@ -350,7 +353,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.gameObject.tag == "Environment")
         {
-            m_bIsDead = true;
+             m_bIsDead = true;
              gameObject.SetActive(false); //disable or destroy?
         }
     }

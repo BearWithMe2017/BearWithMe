@@ -230,11 +230,13 @@ public class PlayerAttack : MonoBehaviour
                 }
             }           
         }
-        if (a_cOther.gameObject.tag == "BeachBall")
+        if(m_PlayerMovement.Grounded == true)
         {
-            TappAttack(a_cOther.transform, 1);
-            
-        }
+            if (a_cOther.gameObject.tag == "BeachBall")
+            {
+                TappAttack(a_cOther.transform, 1);         
+            }
+        }     
     }
 
     private void OnCollisionEnter(Collision collision)
