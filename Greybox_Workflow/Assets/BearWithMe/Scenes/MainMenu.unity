@@ -86,7 +86,7 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 112000002, guid: c704edfb7da296d4fb9c9dd097863e9c,
+  m_LightingDataAsset: {fileID: 112000002, guid: 46695bf0dd7f9be498cdd5919dcd75f4,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -5883,12 +5883,12 @@ Prefab:
     - target: {fileID: 224726737824822890, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -83.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224726737824822890, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 167
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224047221254506908, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
@@ -5933,12 +5933,12 @@ Prefab:
     - target: {fileID: 224346775924976544, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -280.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224346775924976544, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 167
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224668466933735370, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
@@ -5958,12 +5958,12 @@ Prefab:
     - target: {fileID: 224668466933735370, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -477.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224668466933735370, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 167
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114010978609068820, guid: f72397c68e86e1146ad8a488dc3cd01f,
         type: 2}
@@ -10082,11 +10082,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4796001710495182, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
       propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
-        type: 2}
-      propertyPath: winsAmount
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
