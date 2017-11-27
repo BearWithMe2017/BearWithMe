@@ -8,7 +8,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private XboxController m_Controller;
     private Animator m_Animator;
     private Animation m_Animation;
-    private PlayerMovement m_PlayerMovement;
+    private PlayerMovement m_PlayerMovementS;
+    private PlayerMovement m_PlayerMov;
     private PlayerAttack m_PlayerAttack;
     public AudioClip m_Sounds;
     private AudioSource m_Source;
@@ -73,10 +74,10 @@ public class PlayerAttack : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         m_Animation = GetComponent<Animation>();
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
-        m_PlayerMovement = GetComponent<PlayerMovement>();
+        m_PlayerMovementS = GetComponent<PlayerMovement>();
         m_Source = GetComponent<AudioSource>();
 
-        m_fFullSpeed = m_PlayerMovement.Speed;
+        m_fFullSpeed = m_PlayerMovementS.Speed;
         
         //--------------------------------------------------
         //Checks if controller is connected
@@ -117,28 +118,28 @@ public class PlayerAttack : MonoBehaviour
         {
             if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller) || TriggerDown())
             {               
-                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0) && m_PlayerMovement.Grounded == true)
+                if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0) && m_PlayerMovementS.Grounded == true)
                 {
                     m_Animator.SetTrigger("Attack1Trigger");                  
                     m_bAttackReleased = false;
-                    m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;                 
+                    m_PlayerMovementS.Speed = m_fChargeAttMoveSpeed;
                 }
-                else if(!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0) && m_PlayerMovement.Grounded == false)
+                else if(!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0) && m_PlayerMovementS.Grounded == false)
                 {
                     m_Animator.SetTrigger("Attack1Trigger");
+                    m_PlayerMovementS.Speed = m_fFullSpeed;
                     m_bAttackReleased = false;
-                    m_PlayerMovement.Speed = m_fFullSpeed;
                 }
-                else if(m_PlayerMovement.Grounded == true && m_bChargeAtk == true)
+                else if(m_PlayerMovementS.Grounded == true && m_bChargeAtk == true)
                 {
-                    m_PlayerMovement.Speed = m_fChargeAttMoveSpeed;
+                    m_PlayerMovementS.Speed = m_fChargeAttMoveSpeed;
                 }
 
                 if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
                 {
                     m_fHeldDown += Time.deltaTime;
                     float time = m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-                    if (time >= 0.28f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
+                    if (time >= 24f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
                     {
                         m_Animator.speed = 0;
                         if (m_fHeldDown >= 0.5f)
@@ -183,7 +184,7 @@ public class PlayerAttack : MonoBehaviour
     private void OnTriggerEnter(Collider a_cOther)
     {
         m_PlayerAttack = a_cOther.GetComponent<PlayerAttack>();
-        m_PlayerMovement = a_cOther.GetComponent<PlayerMovement>();
+        m_PlayerMov = a_cOther.GetComponent<PlayerMovement>();
         float m_Vol = Random.Range(volLowRange, volHighRange);
         if (a_cOther.gameObject.tag == "Player")
         {   
@@ -194,42 +195,42 @@ public class PlayerAttack : MonoBehaviour
             if(m_fHeldDown <= 0.5f)
             {
                 TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
-                m_PlayerMovement.stun(m_fStunDurationTap);
+                m_PlayerMov.stun(m_fStunDurationTap);
                 m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
             else if (m_bChargeAtk == true)
             {
                 if (m_fHeldDown >= 0.49999999f && m_fHeldDown <= 0.99999999f)
                 {
-                    Debug.Log("Charge Attack");                    
-                    m_PlayerMovement.stun(m_fStunDuration1stCharge);
+                    Debug.Log("Charge Attack");
+                    m_PlayerMov.stun(m_fStunDuration1stCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce1st, m_fChargeUpForce1st);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.00000000f && m_fHeldDown <= 1.49999999f)
                 {
                     Debug.Log("Charge Attack2");
-                    m_PlayerMovement.stun(m_fStunDuration2ndCharge);
+                    m_PlayerMov.stun(m_fStunDuration2ndCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce2nd, m_fChargeUpForce2nd);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.50000000f && m_fHeldDown <= 1.99999999f)
                 {
                     Debug.Log("Charge Attack3");
-                    m_PlayerMovement.stun(m_fStunDuration3rdCharge);
+                    m_PlayerMov.stun(m_fStunDuration3rdCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce3rd, m_fChargeUpForce3rd);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 2.00000000f)
                 {
                     Debug.Log("Charge Attack4");
-                    m_PlayerMovement.stun(m_fStunDuration4thCharge);            
+                    m_PlayerMov.stun(m_fStunDuration4thCharge);            
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th, m_fChargeUpForce4th);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
             }           
         }
-        if(m_PlayerMovement.Grounded == true)
+        if(m_PlayerMovementS.Grounded == true)
         {
             if (a_cOther.gameObject.tag == "BeachBall")
             {
@@ -243,7 +244,7 @@ public class PlayerAttack : MonoBehaviour
         if (collision.gameObject.tag == "BeachBall")
         {
             BeachBall(this.transform, collision.transform, 15, 15);
-            m_PlayerMovement.stun(m_fStunDuration4thCharge);
+            m_PlayerMovementS.stun(m_fStunDuration4thCharge);
         }
     }
 
@@ -282,6 +283,7 @@ public class PlayerAttack : MonoBehaviour
         Vector3 c_vDir = (a_tOther.position - transform.position);
         c_vDir = c_vDir.normalized;
         Vector3 c_vUpForce = Vector3.up * a_fUpForce;
+        a_tOther.transform.position += Vector3.up * 0.1f;
         a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fForce + c_vUpForce, ForceMode.Impulse);
     }
     //--------------------------------------------------------
@@ -295,6 +297,7 @@ public class PlayerAttack : MonoBehaviour
         Vector3 c_vDir = (a_tOther.transform.position - transform.position);
         c_vDir = c_vDir.normalized;
         Vector3 c_vUpForce = Vector3.up * a_fChargeUpForce;
+        a_tOther.transform.position += Vector3.up * 0.1f;
         a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fChargeForce + c_vUpForce, ForceMode.Impulse);
     }
 
@@ -314,7 +317,7 @@ public class PlayerAttack : MonoBehaviour
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
         m_bChargeAtk = false;
-        m_PlayerMovement.Speed = m_fFullSpeed;
+        m_PlayerMovementS.Speed = m_fFullSpeed;
         Debug.Log("Off");
     }
 

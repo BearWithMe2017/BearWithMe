@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody m_rbRigidBody;
     private Animator m_aAnimator;
+    private Animation m_aAnimation;
     private Vector3 m_vPlayerVeloc;
     public AudioClip m_Grunt;
     public AudioClip m_Ded;
@@ -134,9 +135,18 @@ public class PlayerMovement : MonoBehaviour
         if (Stunned == true)
         {
             float vol = Random.Range(volLowRange, volHighRange);
-            source.PlayOneShot(m_Grunt, vol);
-        }
+            if(source.isPlaying == false)
+            {
+                source.PlayOneShot(m_Grunt, vol);
+            }
 
+        
+            m_aAnimator.SetBool("IsStunned", true);
+        }
+        else
+        {
+            m_aAnimator.SetBool("IsStunned", false);
+        }
         if (m_bGrounded == true)
         {
             if (m_iQueriedNumberOfCtrlrs > 0)
@@ -145,6 +155,15 @@ public class PlayerMovement : MonoBehaviour
                 {
                     m_bJumping = true;
                 }
+            }
+        }
+        if(transform.localPosition.y <= -1.0f)
+        {
+            float vol = Random.Range(volLowRange, volHighRange);
+            if (source.isPlaying == false)
+            {
+                source.PlayOneShot(m_Ded, vol);
+
             }
         }
     }
@@ -208,11 +227,8 @@ public class PlayerMovement : MonoBehaviour
         if(transform.localPosition.y <= -3.0f)
         {
             m_bIsDead = true;
-            float vol = Random.Range(volLowRange, volHighRange);
-            source.PlayOneShot(m_Ded, vol);
             gameObject.SetActive(false); //disable or destroy?
         }
-
         //------------------------------------------------------------------
         //Stores Default y velocity so it can't be modified by x and z axis
         //------------------------------------------------------------------

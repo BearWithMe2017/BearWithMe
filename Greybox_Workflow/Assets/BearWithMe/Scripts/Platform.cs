@@ -9,6 +9,12 @@ public class Platform : MonoBehaviour
     private GameObject plat2;
     private GameObject plat3;
     private GameObject plat4;
+    public AudioClip m_SinkSound;
+    public AudioClip m_ShakeSound;
+    private AudioSource m_Source;
+
+    private float volLowRange = .5f;
+    private float volHighRange = 1.0f;
     private int platformNum;
     private bool forceApplied;
     public float currFriction;
@@ -38,7 +44,7 @@ public class Platform : MonoBehaviour
     void Start ()
     {
         rb = GetComponent<Rigidbody>();
-
+        m_Source = GetComponent<AudioSource>();
         //default value (value > 3 || < 0)
         platformNum = 0;
         forceApplied = false;
@@ -73,7 +79,16 @@ public class Platform : MonoBehaviour
            rb.drag = baseDrag;
            rb.angularDrag = baseAngularDrag;
        }
-        
+
+        if(transform.localPosition.y <= -0.27)
+        {
+            float vol = Random.Range(volLowRange, volHighRange);
+
+            if (m_Source.isPlaying == false)
+            {
+                m_Source.PlayOneShot(m_SinkSound, vol);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -81,6 +96,11 @@ public class Platform : MonoBehaviour
         if (isSunk == true)
         {
             wasSunk = true;
+            float vol = Random.Range(volLowRange, volHighRange);
+            if (m_Source.isPlaying == false)
+            {
+                m_Source.PlayOneShot(m_ShakeSound, vol);
+            }
             GetComponent<Buoyancy>().enabled = false;
             GetComponent<Platform>().enabled = false;
             animator.Play("Shake");
