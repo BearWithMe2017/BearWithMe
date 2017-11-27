@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 199507396608196698}
   - component: {fileID: 114173118197776572}
   m_Layer: 0
-  m_Name: Player1_Charge_001
+  m_Name: Player_Charge_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745182654239884}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -4, y: 1, z: 4}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4016289403475568}
@@ -87,7 +87,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1fe33177bc6b73745bc9a09f753fc397, type: 2}
+  - {fileID: 2100000, guid: 83ada8acd1032d6459edea1d75fda17d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,7 +198,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1957575606
+  randomSeed: 689289400
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -1100,7 +1100,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.23921569, b: 0, a: 0}
         key1: {r: 1, g: 0, b: 0, a: 1}
         key2: {r: 1, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
