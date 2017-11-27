@@ -479,11 +479,13 @@ public class GameManager : MonoBehaviour
             if (p3Score == winsAmount)
             {
                 playerPortraits[2].GetComponent<RectTransform>().anchoredPosition = Vector3.MoveTowards(playerPortraits[2].GetComponent<RectTransform>().anchoredPosition, new Vector3(0, 540, 0.0f), 500f * Time.deltaTime);
+                StartCoroutine(Scale(playerPortraits[2].GetComponent<RectTransform>(), 2.5f, 0.07f));
             }
 
             if (p4Score == winsAmount)
             {
                 playerPortraits[3].GetComponent<RectTransform>().anchoredPosition = Vector3.MoveTowards(playerPortraits[3].GetComponent<RectTransform>().anchoredPosition, new Vector3(0, 540, 0.0f), 500f * Time.deltaTime);
+                StartCoroutine(Scale(playerPortraits[3].GetComponent<RectTransform>(), 2.5f, 0.07f));
             }
 
             yield return new WaitForSeconds(5);

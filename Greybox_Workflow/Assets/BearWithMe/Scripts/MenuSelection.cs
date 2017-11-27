@@ -8,14 +8,11 @@ using UnityEngine.UI;
 
 public class MenuSelection : MonoBehaviour
 {
-    public GameObject OptionsSelectionMusicArrow;
-    public GameObject OptionsSelectionEffectsArrow;
-
     public GameObject currentPanel;
     public GameObject mainMenuPanel;
     public GameObject matchSettingsPanel;
     public GameObject playerSelectPanel;
-    public GameObject optionsPanel;
+    public GameObject creditsPanel;
     public GameObject controlsPanel;
     
     private GameManager gm;
@@ -26,8 +23,6 @@ public class MenuSelection : MonoBehaviour
 
     public EventSystem eventSystem;
 
-    public bool OptionsSelectionMusicArrowActive;
-    public bool OptionsSelectionEffectsArrowActive;
 
     // Use this for initialization
     public void Awake()
@@ -69,7 +64,7 @@ public class MenuSelection : MonoBehaviour
             {
                 MainMenu();
             }
-            if (currentPanel == optionsPanel)
+            if (currentPanel == creditsPanel)
             {
                 MainMenu();
             }
@@ -129,11 +124,11 @@ public class MenuSelection : MonoBehaviour
         currentPanel = mainMenuPanel;
     }
 
-    public void OptionsMenu()
+    public void CreditsMenu()
     {
-        optionsPanel.SetActive(true);
+        creditsPanel.SetActive(true);
         currentPanel.SetActive(false);
-        currentPanel = optionsPanel;
+        currentPanel = creditsPanel;
     }
 
     public void ControlsMenu()
