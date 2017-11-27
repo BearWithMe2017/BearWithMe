@@ -11,6 +11,8 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement m_PlayerMovementS;
     private PlayerMovement m_PlayerMov;
     private PlayerAttack m_PlayerAttack;
+    private ParticleSystem m_ParticleSystem;
+
     public AudioClip m_Sounds;
     private AudioSource m_Source;
 
@@ -50,6 +52,7 @@ public class PlayerAttack : MonoBehaviour
     private float m_fFullSpeed;
 
     public bool m_bGuardUp = false;
+    private bool m_bEnabled = false;
     private bool m_bChargeAtk = false;
     private bool m_bAttackReleased = false;
     private static bool m_bDidQueryNumOfCtrlrs = false;
@@ -76,9 +79,14 @@ public class PlayerAttack : MonoBehaviour
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_PlayerMovementS = GetComponent<PlayerMovement>();
         m_Source = GetComponent<AudioSource>();
-
         m_fFullSpeed = m_PlayerMovementS.Speed;
-        
+        //the charge particle system has a ScaleOverTime component on it.
+        m_ParticleSystem = GetComponentInChildren<ScaleOverTime>().GetComponent<ParticleSystem>(); 
+
+
+        m_ParticleSystem.gameObject.SetActive(false);
+
+
         //--------------------------------------------------
         //Checks if controller is connected
         //Also how many are connected
@@ -108,7 +116,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
-        
+
         //------------------------------------------------
         //checks if controller is connected
         //if it is it uses controller to contol character
@@ -139,13 +147,22 @@ public class PlayerAttack : MonoBehaviour
                 {
                     m_fHeldDown += Time.deltaTime;
                     float time = m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-                    if (time >= 24f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
+                    if (time >= 0.24f && !m_bAttackReleased && m_fHeldDown <= 3.0f)
                     {
                         m_Animator.speed = 0;
                         if (m_fHeldDown >= 0.5f)
                         {
+
+                            if (m_bChargeAtk == false)
+                            {
+                                m_ParticleSystem.gameObject.SetActive(true);
+                                m_ParticleSystem.Play();
+                                m_ParticleSystem.GetComponent<ScaleOverTime>().StartScaling();
+                            }
+
                             m_bChargeAtk = true;
-                        }                  
+
+                        }
                     }
                     else if(m_fHeldDown >= 3.0f)
                     {
@@ -200,6 +217,7 @@ public class PlayerAttack : MonoBehaviour
             }
             else if (m_bChargeAtk == true)
             {
+
                 if (m_fHeldDown >= 0.49999999f && m_fHeldDown <= 0.99999999f)
                 {
                     Debug.Log("Charge Attack");
@@ -317,6 +335,9 @@ public class PlayerAttack : MonoBehaviour
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
         m_bChargeAtk = false;
+
+        m_ParticleSystem.GetComponent<ScaleOverTime>().Reset();
+        m_ParticleSystem.gameObject.SetActive(false);
         m_PlayerMovementS.Speed = m_fFullSpeed;
         Debug.Log("Off");
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: New Post-Processing Profile
   m_EditorClassIdentifier: 
   debugViews:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
       depth:
@@ -42,8 +42,8 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 1.39
-      radius: 0.48
+      intensity: 2.33
+      radius: 0.69
       sampleCount: 16
       downsampling: 0
       forceForwardCompatibility: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
     m_Settings:
       bloom:
         intensity: 0.5
-        threshold: 1.3
+        threshold: 1.15
         softKnee: 0.182
         radius: 7
         antiFlicker: 1
@@ -120,7 +120,7 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 0.2
+        postExposure: 0.39
         temperature: 0
         tint: 0
         hueShift: 0

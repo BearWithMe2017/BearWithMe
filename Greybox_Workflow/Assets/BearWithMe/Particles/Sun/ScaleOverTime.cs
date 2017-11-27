@@ -7,10 +7,10 @@ public class ScaleOverTime : MonoBehaviour
     public float maxSize;
     public float growFactor;
     public float waitTime;
-
+    private Vector3 initialScale;
     void Start()
     {
-        StartCoroutine(Scale());
+        initialScale = transform.localScale;
     }
 
     IEnumerator Scale()
@@ -43,4 +43,19 @@ public class ScaleOverTime : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
     }
+
+    public void Reset()
+    {
+        //reset the scale
+        transform.localScale = initialScale;
+
+      
+    }
+
+    public void StartScaling()
+    {
+        //and allow it to start scaling again
+        StartCoroutine(Scale());
+    }
+
 }
