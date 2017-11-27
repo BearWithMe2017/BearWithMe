@@ -8,6 +8,7 @@ public class BeachBall : MonoBehaviour {
     float force;
     float gravity;
     Vector3 targetPos;
+    GameManager gm;
     float minForce, maxForce;
     public float torque;
     public float turn;
@@ -16,6 +17,8 @@ public class BeachBall : MonoBehaviour {
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        gm = FindObjectOfType<GameManager>();
+        targetPos = gm.randPlayerPos;
     }
     // Use this for initialization
     void Start ()
@@ -30,6 +33,6 @@ public class BeachBall : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-
+        Debug.Log("BEACHBALL Pos: " + targetPos);
     }
 }

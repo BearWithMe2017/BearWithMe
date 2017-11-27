@@ -872,7 +872,7 @@ Animator:
   m_GameObject: {fileID: 1257170511240982}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53230c230e7ed694c97d936fe00b22e3, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -889,7 +889,7 @@ Animator:
   m_GameObject: {fileID: 1388183183334220}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53230c230e7ed694c97d936fe00b22e3, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -906,7 +906,7 @@ Animator:
   m_GameObject: {fileID: 1585022877843484}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53230c230e7ed694c97d936fe00b22e3, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -923,7 +923,7 @@ Animator:
   m_GameObject: {fileID: 1469932384293612}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53230c230e7ed694c97d936fe00b22e3, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1776,14 +1776,15 @@ MonoBehaviour:
   - {fileID: 0}
   exitBtn: {fileID: 1634947636626680}
   roundOverPanel: {fileID: 1717401618917542}
+  gameCamera: {fileID: 1269306875633928}
   eventSystem: {fileID: 0}
   playerCount: 0
   startTime: 40
   winsAmount: 3
   beachBallPrefab: {fileID: 1744548659319760, guid: 50ddcc29400bded498a342e7753996f9,
     type: 2}
-  player1Ready: 1
-  player2Ready: 1
+  player1Ready: 0
+  player2Ready: 0
   player3Ready: 0
   player4Ready: 0
 --- !u!114 &114765443020165716
