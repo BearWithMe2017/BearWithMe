@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip m_Grunt;
     public AudioClip m_Ded;
     private AudioSource source;
+    [SerializeField] private ParticleSystem m_ParticleSystem;
     [SerializeField] private GameObject footSplash;
 
 
@@ -90,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         m_rbRigidBody = GetComponent<Rigidbody>();
         m_rbRigidBody.maxAngularVelocity = 10;
         m_aAnimator = GetComponent<Animator>();
-        source = GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();        
 
         //--------------------------------------------------
         //Checks if controller is connected
@@ -175,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
             if (source.isPlaying == false)
             {
                 source.PlayOneShot(m_Ded, vol);
-
+                m_ParticleSystem.GetComponent<ParticleSystem>().Play();
             }
         }
     }
@@ -198,7 +199,6 @@ public class PlayerMovement : MonoBehaviour
         //if no controllers are connected use keyboard.
         //------------------------------------------------
         float c_vDeadzone = 0.70f;
-
         
         if (!Stunned)
         {
@@ -218,7 +218,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
-
         //--------------------------------------------------------------
         //Adds force to the character towards whichever way they face
         //--------------------------------------------------------------
@@ -355,6 +354,7 @@ public class PlayerMovement : MonoBehaviour
                 m_bJumping = false;
             }
         }
+
         if (m_bGrounded == false)
         {
             if (m_rbRigidBody.velocity.y < 0.0f)
@@ -378,8 +378,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.gameObject.tag == "Environment")
         {
-             m_bIsDead = true;
-             gameObject.SetActive(false); //disable or destroy?
+            m_bIsDead = true;
+          
+            gameObject.SetActive(false); //disable or destroy?
         }
     }
 
