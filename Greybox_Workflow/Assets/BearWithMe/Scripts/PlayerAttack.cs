@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement m_PlayerMovementS;
     private PlayerMovement m_PlayerMov;
     private PlayerAttack m_PlayerAttack;
-    private ParticleSystem m_ParticleSystem;
+    //private ParticleSystem m_ParticleSystem;
 
     public AudioClip m_Sounds;
     private AudioSource m_Source;
@@ -51,9 +51,10 @@ public class PlayerAttack : MonoBehaviour
     private float m_fHeldDown = 0.0f;
     private float m_fFullSpeed;
 
+
     public bool m_bGuardUp = false;
     private bool m_bEnabled = false;
-    private bool m_bChargeAtk = false;
+    private bool m_bChargeAttack = false;
     private bool m_bAttackReleased = false;
     private static bool m_bDidQueryNumOfCtrlrs = false;
 
@@ -71,6 +72,18 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public bool BChargeAttack
+    {
+        get
+        {
+            return m_bChargeAttack;
+        }
+        set
+        {
+            m_bChargeAttack = value;
+        }
+    }
+
     // Use this for initialization
     void Awake()
     {
@@ -81,11 +94,8 @@ public class PlayerAttack : MonoBehaviour
         m_Source = GetComponent<AudioSource>();
         m_fFullSpeed = m_PlayerMovementS.Speed;
         //the charge particle system has a ScaleOverTime component on it.
-        m_ParticleSystem = GetComponentInChildren<ScaleOverTime>().GetComponent<ParticleSystem>(); 
-
-
-        m_ParticleSystem.gameObject.SetActive(false);
-
+       // m_ParticleSystem = GetComponentInChildren<ScaleOverTime>().GetComponent<ParticleSystem>();
+        //m_ParticleSystem.gameObject.SetActive(false);
 
         //--------------------------------------------------
         //Checks if controller is connected
@@ -122,6 +132,9 @@ public class PlayerAttack : MonoBehaviour
         //if it is it uses controller to contol character
         //if no controllers are connected use keyboard.
         //------------------------------------------------
+
+       
+
         if (m_iQueriedNumberOfCtrlrs > 0)
         {
             if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller) || TriggerDown())
@@ -138,7 +151,7 @@ public class PlayerAttack : MonoBehaviour
                     m_PlayerMovementS.Speed = m_fFullSpeed;
                     m_bAttackReleased = false;
                 }
-                else if(m_PlayerMovementS.Grounded == true && m_bChargeAtk == true)
+                else if(m_PlayerMovementS.Grounded == true && BChargeAttack == true)
                 {
                     m_PlayerMovementS.Speed = m_fChargeAttMoveSpeed;
                 }
@@ -153,15 +166,15 @@ public class PlayerAttack : MonoBehaviour
                         if (m_fHeldDown >= 0.5f)
                         {
 
-                            if (m_bChargeAtk == false)
-                            {
-                                m_ParticleSystem.gameObject.SetActive(true);
-                                m_ParticleSystem.Play();
-                                m_ParticleSystem.GetComponent<ScaleOverTime>().StartScaling();
-                            }
+                            //if (BChargeAttack == false)
+                            //{
+                            //    m_ParticleSystem.gameObject.SetActive(true);
+                            //    m_ParticleSystem.Play();
+                            //    m_ParticleSystem.GetComponent<ScaleOverTime>().StartScaling();
+                            //}
 
-                            m_bChargeAtk = true;
-
+                            BChargeAttack = true;
+                     
                         }
                     }
                     else if(m_fHeldDown >= 3.0f)
@@ -215,7 +228,7 @@ public class PlayerAttack : MonoBehaviour
                 m_PlayerMov.stun(m_fStunDurationTap);
                 m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
-            else if (m_bChargeAtk == true)
+            else if (BChargeAttack == true)
             {
 
                 if (m_fHeldDown >= 0.49999999f && m_fHeldDown <= 0.99999999f)
@@ -334,10 +347,10 @@ public class PlayerAttack : MonoBehaviour
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
-        m_bChargeAtk = false;
+        BChargeAttack = false;
 
-        m_ParticleSystem.GetComponent<ScaleOverTime>().Reset();
-        m_ParticleSystem.gameObject.SetActive(false);
+      //m_ParticleSystem.GetComponent<ScaleOverTime>().Reset();
+      //m_ParticleSystem.gameObject.SetActive(false);
         m_PlayerMovementS.Speed = m_fFullSpeed;
         Debug.Log("Off");
     }

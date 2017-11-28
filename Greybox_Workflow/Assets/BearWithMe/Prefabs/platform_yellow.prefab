@@ -266,8 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdd8d5966ee04c40909cd28856f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SinkSound: {fileID: 8300000, guid: c6245bc5bbdb5b34096a3d30f89d9fcb, type: 3}
-  m_ShakeSound: {fileID: 8300000, guid: 90265fea6365484499812a444938f4fc, type: 3}
+  m_SinkSound: {fileID: 8300000, guid: 5dac12f54608b4a4fbee380a46a6717b, type: 3}
+  m_ShakeSound: {fileID: 8300000, guid: c882e6188d613a949b4385ac72352a15, type: 3}
   currFriction: 150
   isSlippery: 0
   isSunk: 0

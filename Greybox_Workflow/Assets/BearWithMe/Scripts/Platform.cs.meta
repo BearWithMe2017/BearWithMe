@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 7fdd8d5966ee04c40909cd28856f0af4
-timeCreated: 1506915550
+timeCreated: 1511828652
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_SinkSound: {fileID: 8300000, guid: 5dac12f54608b4a4fbee380a46a6717b, type: 3}
+  - m_ShakeSound: {fileID: 8300000, guid: c882e6188d613a949b4385ac72352a15, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

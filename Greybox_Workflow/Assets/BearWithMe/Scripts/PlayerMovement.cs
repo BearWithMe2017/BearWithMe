@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private float volLowRange = .5f;
     private float volHighRange = 1.0f;
 
+    private bool m_SoundPlayed = false;
     private bool m_bIsStunned = false;
     private bool m_bJumping = false;
     private bool m_bGrounded = true;
@@ -121,7 +122,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, 0.75f))
         {
-
             m_bGrounded = true;
         }
         else
@@ -138,15 +138,15 @@ public class PlayerMovement : MonoBehaviour
             if(source.isPlaying == false)
             {
                 source.PlayOneShot(m_Grunt, vol);
+                m_SoundPlayed = true;
             }
-
-        
             m_aAnimator.SetBool("IsStunned", true);
         }
         else
         {
             m_aAnimator.SetBool("IsStunned", false);
         }
+
         if (m_bGrounded == true)
         {
             if (m_iQueriedNumberOfCtrlrs > 0)
@@ -188,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
         float c_vDeadzone = 0.70f;
 
         
-
         if (!Stunned)
         {
             if (c_iQueriedNumberOfCtrlrs > 0)
@@ -337,6 +336,7 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------
         if (m_bGrounded == true)
         {
+            m_SoundPlayed = false;
             if (m_bJumping == true)
             {
                 m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);

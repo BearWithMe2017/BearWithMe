@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 86302cf70b666ce44b70d7b20a5e560d
-timeCreated: 1506984369
+timeCreated: 1511828564
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_Sounds: {fileID: 8300000, guid: 3e3a99dd3bcfc6f45ac3a655b742d76a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
