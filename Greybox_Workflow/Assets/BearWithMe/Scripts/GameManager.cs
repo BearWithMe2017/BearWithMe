@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject roundOverPanel;
     [SerializeField] GameObject gameCamera;
 
+
     public EventSystem eventSystem;
 
     public int playerCount;
