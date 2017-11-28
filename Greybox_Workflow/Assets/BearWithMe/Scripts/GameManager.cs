@@ -413,15 +413,22 @@ public class GameManager : MonoBehaviour
 
         RandPlayerPos();
 
-        Vector3[] BallPosArray = new Vector3[4];
+        //Vector3[] BallPosArray = new Vector3[4];
+        //
+        //BallPosArray[0] = new Vector3(-15f, 4f, Random.Range(-15.0f, 15.0f));
+        //BallPosArray[1] = new Vector3(15f, 4f, Random.Range(-15.0f, 15.0f));
+        //BallPosArray[2] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, -17f);
+        //BallPosArray[3] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, 15f);
 
-        BallPosArray[0] = new Vector3(-15f, 4f, Random.Range(-15.0f, 15.0f));
-        BallPosArray[1] = new Vector3(15f, 4f, Random.Range(-15.0f, 15.0f));
-        BallPosArray[2] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, -17f);
-        BallPosArray[3] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, 15f);
+        float dist = 18;
+        float angle = 100;
 
+        Vector3 posToSpawn = randPlayerPos;
+        posToSpawn.y = 5f;
 
-        Instantiate(beachBallPrefab, BallPosArray[Random.Range(0, BallPosArray.Length)], Quaternion.identity);
+        posToSpawn += (Quaternion.Euler(0, Random.Range(-angle, angle), 0) * Vector3.forward) * dist;
+
+        Instantiate(beachBallPrefab, posToSpawn, Quaternion.identity);
     }
 
     private IEnumerator Scale(RectTransform portrait, float maxSize, float growFactor)

@@ -19,13 +19,13 @@ public class BeachBall : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         gm = FindObjectOfType<GameManager>();
         targetPos = gm.randPlayerPos;
+        force = 64.0f;
     }
     // Use this for initialization
     void Start ()
     {
         transform.LookAt(targetPos);
-        force = (targetPos - transform.position).magnitude;
-        rb.AddForce(transform.forward + Vector3.up * (force * 2 * Time.deltaTime), ForceMode.Impulse);
+        rb.AddForce(transform.forward + Vector3.up * (force * Time.deltaTime), ForceMode.Impulse);
         rb.AddTorque(new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)) * torque, ForceMode.Impulse);
     }
 
