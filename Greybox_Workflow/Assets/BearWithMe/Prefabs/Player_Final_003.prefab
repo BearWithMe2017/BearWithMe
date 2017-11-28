@@ -690,7 +690,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1846761314639354
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -701,6 +701,21 @@ GameObject:
   - component: {fileID: 114530692770374576}
   m_Layer: 0
   m_Name: Player_Charge_003
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1864560811994908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4056912604107146}
+  m_Layer: 0
+  m_Name: ParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -825,6 +840,20 @@ Transform:
   m_Father: {fileID: 4299094592568732}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4056912604107146
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864560811994908}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.037, y: 1.41, z: -0.157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4183303646204320}
+  m_Father: {fileID: 4299094592568732}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4122469058597728
 Transform:
   m_ObjectHideFlags: 1
@@ -873,14 +902,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1846761314639354}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.679, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.10000006, z: 0.10000006}
   m_Children:
   - {fileID: 4718506475744892}
-  m_Father: {fileID: 4299094592568732}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_Father: {fileID: 4056912604107146}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4187018273225068
 Transform:
   m_ObjectHideFlags: 1
@@ -998,7 +1027,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1325194172572084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4823155, y: 4.847549, z: -2.2774677}
+  m_LocalPosition: {x: 12.647446, y: 1.0000005, z: 10.162821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912908308129498}
@@ -1006,7 +1035,7 @@ Transform:
   - {fileID: 4320598135046694}
   - {fileID: 4228024494627192}
   - {fileID: 4001555467103174}
-  - {fileID: 4183303646204320}
+  - {fileID: 4056912604107146}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1841,8 +1870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e26dc86d128f4341b35c4f580f50e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: 1.2
-  growFactor: 0.4
+  maxSize: 1.5
+  growFactor: 0.5
   waitTime: 0
 --- !u!135 &135904664149145942
 SphereCollider:
@@ -2114,7 +2143,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -132635907
+  randomSeed: -35320673
   InitialModule:
     serializedVersion: 3
     enabled: 1

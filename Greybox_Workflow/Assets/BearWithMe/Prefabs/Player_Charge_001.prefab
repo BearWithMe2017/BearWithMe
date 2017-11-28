@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e26dc86d128f4341b35c4f580f50e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: 1.2
-  growFactor: 0.2
-  waitTime: 0.4
+  maxSize: 1.5
+  growFactor: 0.5
+  waitTime: 0
 --- !u!135 &135098440831240046
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -146,7 +146,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745182654239884}
   serializedVersion: 5
-  lengthInSec: 2
+  lengthInSec: 3
   simulationSpeed: 1
   looping: 1
   prewarm: 1
