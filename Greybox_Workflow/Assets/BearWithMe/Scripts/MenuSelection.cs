@@ -74,7 +74,7 @@ public class MenuSelection : MonoBehaviour
             }
         } 
 
-        if (XCI.GetButtonUp(XboxButton.Start, XboxController.All))
+        if (XCI.GetButtonDown(XboxButton.Start, XboxController.All))
         {
             if (currentPanel == playerSelectPanel)
             {

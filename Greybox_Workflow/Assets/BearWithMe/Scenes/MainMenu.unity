@@ -7839,7 +7839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &943670977
 Animator:
   serializedVersion: 3
@@ -14292,12 +14292,28 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1027228548087022, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
+    - target: {fileID: 1269306875633928, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1269306875633928, guid: c4843140c548acb45ace51f49bad8a92, type: 2}
-      propertyPath: m_IsActive
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player1Ready
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player2Ready
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player3Ready
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player4Ready
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

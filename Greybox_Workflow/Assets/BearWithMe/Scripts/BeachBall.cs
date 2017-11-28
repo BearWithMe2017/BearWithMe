@@ -23,16 +23,15 @@ public class BeachBall : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        force = 1000.0f;
-        gravity = 10f;
-        transform.LookAt(new Vector3(Random.Range(-1.5f, 1.5f), 0f, Random.Range(-1.5f, 1.5f)));
-        rb.AddForce(transform.forward + Vector3.up * (50.0f * Time.deltaTime), ForceMode.Impulse);
+        transform.LookAt(targetPos);
+        force = (targetPos - transform.position).magnitude;
+        rb.AddForce(transform.forward + Vector3.up * (force * 2 * Time.deltaTime), ForceMode.Impulse);
         rb.AddTorque(new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)) * torque, ForceMode.Impulse);
     }
 
     // Update is called once per frame
     void Update ()
     {
-        Debug.Log("BEACHBALL Pos: " + targetPos);
+
     }
 }

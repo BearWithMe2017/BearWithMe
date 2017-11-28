@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
     private float percentOfStartTime;
     public int winsAmount;
     private int scoringPlayerIndex;
-    private Text timer;
     [SerializeField] GameObject beachBallPrefab;
     public bool player1Ready, player2Ready, player3Ready, player4Ready;
     private bool sceneLoaded;
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
     private bool pause;
     private bool scored;
     private bool roundOver, gameOver;
+    private bool beachBallSpawned;
     private int p1Score, p2Score, p3Score, p4Score;
     private int randIndex;
     private Vector3[] playerPortraitsPos;
@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
 
+
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
         {
             gameCamera.SetActive(true);
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
             winner = false;
             scored = false;
             platformSunk = false;
+            beachBallSpawned = false;
             percentOfStartTime = 0.25f * startTime;
             randIndex = Random.Range(0, 4);
             randPlayerPosList = new List<Vector3>();
@@ -172,7 +174,6 @@ public class GameManager : MonoBehaviour
 
             if (startTime != 100)
             {
-                timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
                 InvokeRepeating("UpdateTime", 1f, 1f);
             }
 
@@ -195,6 +196,21 @@ public class GameManager : MonoBehaviour
                 }
             }
 
+            if (timeLeft == 25.0f && beachBallSpawned == false)
+            {
+                LoadBeachBall();
+                beachBallSpawned = true;
+            }
+            if (timeLeft == 24.0f)
+            {
+                beachBallSpawned = false;
+            }
+            if (timeLeft == 15.0f && beachBallSpawned == false)
+            {
+                LoadBeachBall();
+                beachBallSpawned = true;
+            }
+
             if (timeLeft >= (startTime - percentOfStartTime - 0.5f) && timeLeft <= (startTime - percentOfStartTime + 0.5f) && platformSunk != true)
             {
                 activePlatforms[randIndex].GetComponentInChildren<Platform>().isSunk = true;
@@ -207,8 +223,6 @@ public class GameManager : MonoBehaviour
                     activePlatforms[randIndex + 1].GetComponentInChildren<Platform>().isSunk = true;
                     platformSunk = true;
                     randIndex++;
-
-                    LoadBeachBall();
                 }
                 else
                 {
@@ -252,7 +266,7 @@ public class GameManager : MonoBehaviour
 
             if (pause == true)
             {
-                if (XCI.GetButtonDown(XboxButton.B, XboxController.First))
+                if (XCI.GetButtonDown(XboxButton.B, XboxController.All))
                 {
                     Time.timeScale = 1;
                     LoadMainMenu();
@@ -265,10 +279,6 @@ public class GameManager : MonoBehaviour
             LoadBeachBall();
         }
 
-        if (XCI.GetButtonDown(XboxButton.Back, XboxController.All))
-        {
-            RestartRound();
-        }
     }
 
     private void CheckWinner()
@@ -368,7 +378,6 @@ public class GameManager : MonoBehaviour
     private void UpdateTime()
     {
         timeLeft -= 1;
-        timer.text = timeLeft.ToString();
         platformSunk = false;
     }
 
@@ -388,14 +397,14 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < activePlayers.Count; i++)
         {
-            if (activePlayers[i].GetComponent<PlayerMovement>().IsDead != true)
+            if (activePlayers[i].activeSelf == true)
             {
                 randPlayerPosList.Add(activePlayers[i].transform.position);
             }
         }
 
         //get random pos of active players
-        randPlayerPos = randPlayerPosList[Random.Range(0, randPlayerPosList.Capacity)];
+        randPlayerPos = randPlayerPosList[Random.Range(0, randPlayerPosList.Count)];
         randPlayerPosList.Clear();
     }
 
@@ -407,7 +416,7 @@ public class GameManager : MonoBehaviour
         Vector3[] BallPosArray = new Vector3[4];
 
         BallPosArray[0] = new Vector3(-15f, 4f, Random.Range(-15.0f, 15.0f));
-        BallPosArray[1] = new Vector3(20f, 4f, Random.Range(-15.0f, 15.0f));
+        BallPosArray[1] = new Vector3(15f, 4f, Random.Range(-15.0f, 15.0f));
         BallPosArray[2] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, -17f);
         BallPosArray[3] = new Vector3(Random.Range(-15.0f, 15.0f), 4f, 15f);
 
@@ -421,7 +430,6 @@ public class GameManager : MonoBehaviour
         // so we can work with a float instead of comparing vectors
         while (maxSize > portrait.localScale.x)
         {
-            //timer += Time.deltaTime;
             portrait.localScale += new Vector3(0.8f * (growFactor * Time.deltaTime), 0.8f * (growFactor * Time.deltaTime), 1);
 
             yield return null;
@@ -580,13 +588,13 @@ public class GameManager : MonoBehaviour
         if (timeLeft <= 0 && winsAmount > 1)
         {
             roundOver = true;
-            StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
+            StartCoroutine(Fade(Color.clear, Color.black, 1.0f));
         }
 
         if (deathCount == playerCount - 1 && winner != true)
         {
             roundOver = true;
-            StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
+            StartCoroutine(Fade(Color.clear, Color.black, 1.0f));
         }
     }
 
@@ -595,14 +603,14 @@ public class GameManager : MonoBehaviour
         if (timeLeft <= 0 && winsAmount == 1)
         {
             
-            StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
+            StartCoroutine(Fade(Color.clear, Color.black, 1.0f));
             gameOver = true;
         }
 
         if (deathCount == playerCount - 1 && winner == true)
         {
             
-            StartCoroutine(Fade(Color.clear, Color.black, 2.0f));
+            StartCoroutine(Fade(Color.clear, Color.black, 1.0f));
             gameOver = true;
         }
     }
