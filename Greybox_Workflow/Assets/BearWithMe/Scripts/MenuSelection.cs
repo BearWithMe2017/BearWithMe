@@ -14,7 +14,8 @@ public class MenuSelection : MonoBehaviour
     public GameObject playerSelectPanel;
     public GameObject creditsPanel;
     public GameObject controlsPanel;
-    
+    public GameObject playText;
+
     private GameManager gm;
 
     [SerializeField] GameObject startButton;
@@ -28,6 +29,7 @@ public class MenuSelection : MonoBehaviour
     public void Awake()
     {
         gm = GameObject.FindObjectOfType<GameManager>();
+        playText.SetActive(false);
     }
     void Start()
     {
@@ -80,10 +82,24 @@ public class MenuSelection : MonoBehaviour
             {
                 if (gm.playerCount > 1)
                 {
+                    playText.SetActive(true);
                     LoadGame();
                 }
             }
-        }   
+        }
+
+        if (currentPanel == playerSelectPanel)
+        {
+            if (gm.playerCount > 1)
+            {
+                playText.SetActive(true);
+
+            }
+            else
+            {
+                playText.SetActive(false);
+            }
+        }
     }           
 
     public void LoadGame()

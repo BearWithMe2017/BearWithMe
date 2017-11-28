@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip m_Grunt;
     public AudioClip m_Ded;
     private AudioSource source;
+    [SerializeField] private GameObject footSplash;
 
 
     [SerializeField] private XboxController m_xcController;
@@ -155,8 +156,19 @@ public class PlayerMovement : MonoBehaviour
                 {
                     m_bJumping = true;
                 }
+
+                if (XCI.GetAxisRaw(XboxAxis.LeftStickX) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickX) < 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY) < 0)
+                {
+                    footSplash.GetComponent<ParticleSystem>().Play();
+                }
+                else
+                {
+                    footSplash.GetComponent<ParticleSystem>().Stop();
+                }
+
             }
         }
+
         if(transform.localPosition.y <= -1.0f)
         {
             float vol = Random.Range(volLowRange, volHighRange);

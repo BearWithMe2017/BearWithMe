@@ -375,7 +375,7 @@ Prefab:
       objectReference: {fileID: 943670976}
     - target: {fileID: 114905328539913906, guid: 1fcab36c4812227439af362e7a8ab6e5,
         type: 2}
-      propertyPath: optionsPanel
+      propertyPath: creditsPanel
       value: 
       objectReference: {fileID: 943670960}
     - target: {fileID: 114905328539913906, guid: 1fcab36c4812227439af362e7a8ab6e5,
@@ -383,6 +383,11 @@ Prefab:
       propertyPath: controlsPanel
       value: 
       objectReference: {fileID: 943670959}
+    - target: {fileID: 114905328539913906, guid: 1fcab36c4812227439af362e7a8ab6e5,
+        type: 2}
+      propertyPath: playText
+      value: 
+      objectReference: {fileID: 1186259402}
     - target: {fileID: 114905328539913906, guid: 1fcab36c4812227439af362e7a8ab6e5,
         type: 2}
       propertyPath: startButton
@@ -395,19 +400,9 @@ Prefab:
       objectReference: {fileID: 943670962}
     - target: {fileID: 114905328539913906, guid: 1fcab36c4812227439af362e7a8ab6e5,
         type: 2}
-      propertyPath: playButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114905328539913906, guid: 1fcab36c4812227439af362e7a8ab6e5,
-        type: 2}
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 999846986}
-    - target: {fileID: 114905328539913906, guid: 1fcab36c4812227439af362e7a8ab6e5,
-        type: 2}
-      propertyPath: creditsPanel
-      value: 
-      objectReference: {fileID: 943670960}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fcab36c4812227439af362e7a8ab6e5, type: 2}
   m_IsPrefabParent: 0
@@ -11130,7 +11125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1186259403
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14723,6 +14718,32 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: playerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1325194172572084, guid: 464cce702b4e1f648bf095d524f8cc1c,
+        type: 2}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player1Ready
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player2Ready
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player3Ready
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114721806254810922, guid: c4843140c548acb45ace51f49bad8a92,
+        type: 2}
+      propertyPath: player4Ready
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4843140c548acb45ace51f49bad8a92, type: 2}

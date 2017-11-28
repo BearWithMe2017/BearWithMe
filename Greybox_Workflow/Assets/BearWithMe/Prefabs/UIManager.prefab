@@ -96,17 +96,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8250e918344bd254e9ae996881aed273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OptionsSelectionMusicArrow: {fileID: 0}
-  OptionsSelectionEffectsArrow: {fileID: 0}
   currentPanel: {fileID: 0}
   mainMenuPanel: {fileID: 0}
   matchSettingsPanel: {fileID: 0}
   playerSelectPanel: {fileID: 0}
-  optionsPanel: {fileID: 0}
+  creditsPanel: {fileID: 0}
   controlsPanel: {fileID: 0}
+  playText: {fileID: 0}
   startButton: {fileID: 0}
   winNegative: {fileID: 0}
   playButton: {fileID: 0}
   eventSystem: {fileID: 0}
-  OptionsSelectionMusicArrowActive: 0
-  OptionsSelectionEffectsArrowActive: 0
