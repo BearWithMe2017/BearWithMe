@@ -247,11 +247,11 @@ GameObject:
   - component: {fileID: 114111042569492460}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1290052129127488
 GameObject:
   m_ObjectHideFlags: 1
@@ -572,7 +572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1733704992692008
 GameObject:
   m_ObjectHideFlags: 1
@@ -1783,10 +1783,10 @@ MonoBehaviour:
   winsAmount: 3
   beachBallPrefab: {fileID: 1744548659319760, guid: 50ddcc29400bded498a342e7753996f9,
     type: 2}
-  player1Ready: 1
-  player2Ready: 1
-  player3Ready: 1
-  player4Ready: 1
+  player1Ready: 0
+  player2Ready: 0
+  player3Ready: 0
+  player4Ready: 0
   randPlayerPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114765443020165716
 MonoBehaviour:
