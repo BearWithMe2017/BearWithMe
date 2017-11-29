@@ -50,6 +50,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NA:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -59,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _node_8645:
-        m_Texture: {fileID: 2800000, guid: 769c614258006864a89701dc793d0d36, type: 3}
+        m_Texture: {fileID: 2800000, guid: e753e09df688be345b0e9aa321bec7f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _node_9278:
@@ -78,6 +82,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutLineWidth: 0
     - _Parallax: 0.02
     - _Saturation: 1
     - _Saturation_copy: 1
@@ -87,6 +92,7 @@ Material:
     - _Steps: 4
     - _UVSec: 0
     - _ZWrite: 1
+    - _node_152: 0
     - _node_1713: 1
     - _node_4502: 0.5
     - _node_4621: 0.4
@@ -100,7 +106,8 @@ Material:
     - _ObjectColour: {r: 1, g: 1, b: 1, a: 1}
     - _ObjectColour_copy: {r: 1, g: 1, b: 1, a: 1}
     - _ObjectTin: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _ObjectTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _ObjectTint: {r: 0.43382353, g: 0.43382353, b: 0.43382353, a: 1}
+    - _OutLineColur: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _ShadowColour: {r: 0.2, g: 0.2, b: 0.2, a: 0.2}
     - _node_1505: {r: 1, g: 1, b: 1, a: 1}
     - _node_4814: {r: 1, g: 1, b: 1, a: 1}

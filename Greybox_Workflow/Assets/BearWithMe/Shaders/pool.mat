@@ -66,7 +66,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Distortion: 0.016
+    - _Distortion: 0
     - _DstBlend: 0
     - _Gloss: 0.573
     - _GlossMapScale: 1
@@ -87,5 +87,5 @@ Material:
     - _ZWrite: 1
     - _speed: 0
     m_Colors:
-    - _Color: {r: 0.21323532, g: 1, b: 0.9348884, a: 1}
+    - _Color: {r: 0.20588237, g: 1, b: 0.93427986, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
