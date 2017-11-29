@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
                     m_bJumping = true;
                 }
 
-                if (XCI.GetAxisRaw(XboxAxis.LeftStickX) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickX) < 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY) < 0)
+                if (XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController) < 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController) < 0)
                 {
                     footSplash.GetComponent<ParticleSystem>().Play();
                 }
