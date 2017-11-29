@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         if (Stunned == true)
         {
             float vol = Random.Range(volLowRange, volHighRange);
-            if(source.isPlaying == false)
+            if(source.isPlaying == false && !m_SoundPlayed)
             {
                 source.PlayOneShot(m_Grunt, vol);
                 m_SoundPlayed = true;
@@ -147,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             m_aAnimator.SetBool("IsStunned", false);
+            m_SoundPlayed = false;
         }
 
         if (m_bGrounded == true)
@@ -347,7 +348,6 @@ public class PlayerMovement : MonoBehaviour
         //-----------------------------------------------------------
         if (m_bGrounded == true)
         {
-            m_SoundPlayed = false;
             if (m_bJumping == true)
             {
                 m_rbRigidBody.AddForce(Vector3.up * m_fJumpPower, ForceMode.Impulse);
