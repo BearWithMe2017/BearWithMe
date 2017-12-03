@@ -1028,7 +1028,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1325194172572084}
   m_LocalRotation: {x: -0.00011204476, y: 0.026549706, z: 0.00004379837, w: 0.9996475}
-  m_LocalPosition: {x: 2.8724241, y: 8.906366, z: -8.861188}
+  m_LocalPosition: {x: 5.2792788, y: -0.5, z: -4.3430805}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4943886820917044}
@@ -1813,7 +1813,7 @@ MonoBehaviour:
   m_Grunt: {fileID: 8300000, guid: 701687b2cb3bbd0448d2a2bfdcce2d51, type: 3}
   m_Ded: {fileID: 8300000, guid: deb0f565830aa104985bc7a388ef2443, type: 3}
   m_ParticleSystem: {fileID: 198227052001163516}
-  footSplash: {fileID: 1294264285748630}
+  m_FootSplash: {fileID: 1294264285748630}
   m_xcController: 2
   m_fPlayerVelocity: 5
   m_fFallGravity: 15
@@ -1849,8 +1849,8 @@ MonoBehaviour:
   m_fChargeUpForce4th: 11
   m_fChargeAttMoveSpeed: 0.4
   m_fBlockingMoveSpeed: 0
-  volLowRange: 0.5
-  volHighRange: 1
+  m_fVolLowRange: 0.5
+  m_fVolHighRange: 1
   m_bGuardUp: 0
 --- !u!114 &114453121681524418
 MonoBehaviour:
@@ -1863,7 +1863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b037ba7774cf40a48c938461c5987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_colour: {r: 0.36078432, g: 0.36078432, b: 1, a: 0}
+  m_Colour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!136 &136515250383257480
 CapsuleCollider:
   m_ObjectHideFlags: 1

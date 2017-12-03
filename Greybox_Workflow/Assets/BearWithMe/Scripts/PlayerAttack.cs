@@ -7,11 +7,8 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private XboxController m_Controller;
     private Animator m_Animator;
-    private Animation m_Animation;
     private PlayerMovement m_PlayerMovementS;
     private PlayerMovement m_PlayerMov;
-    private PlayerAttack m_PlayerAttack;
-    //private ParticleSystem m_ParticleSystem;
 
     public AudioClip m_Sounds;
     private AudioSource m_Source;
@@ -45,20 +42,16 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] [Tooltip("Movement speed while Blocking the attack.")] private float m_fBlockingMoveSpeed;
 
     [Header("### Volume on Attack ###")]
-    [SerializeField] [Tooltip("Min Vol.")] private float volLowRange = .5f;
-    [SerializeField] [Tooltip("Max Vol.")] private float volHighRange = 1.0f;
+    [SerializeField] [Tooltip("Min Vol.")] private float m_fVolLowRange = .5f;
+    [SerializeField] [Tooltip("Max Vol.")] private float m_fVolHighRange = 1.0f;
 
     private float m_fHeldDown = 0.0f;
     private float m_fFullSpeed;
 
-
     public bool m_bGuardUp = false;
-    private bool m_bEnabled = false;
     private bool m_bChargeAttack = false;
     private bool m_bAttackReleased = false;
     private static bool m_bDidQueryNumOfCtrlrs = false;
-
-    private float m_fChargeTimerStart = 0.50f;
 
     public bool BGuardUp
     {
@@ -84,18 +77,13 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // Use this for initialization
     void Awake()
     {
         m_Animator = GetComponent<Animator>();
-        m_Animation = GetComponent<Animation>();
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_PlayerMovementS = GetComponent<PlayerMovement>();
         m_Source = GetComponent<AudioSource>();
         m_fFullSpeed = m_PlayerMovementS.Speed;
-        //the charge particle system has a ScaleOverTime component on it.
-       // m_ParticleSystem = GetComponentInChildren<ScaleOverTime>().GetComponent<ParticleSystem>();
-        //m_ParticleSystem.gameObject.SetActive(false);
 
         //--------------------------------------------------
         //Checks if controller is connected
@@ -106,18 +94,18 @@ public class PlayerAttack : MonoBehaviour
         {
             m_bDidQueryNumOfCtrlrs = true;
 
-            int c_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
-            if (c_iQueriedNumberOfCtrlrs == 1)
+            int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
+            if (m_iQueriedNumberOfCtrlrs == 1)
             {
-                Debug.Log("Only " + c_iQueriedNumberOfCtrlrs + " Xbox controller plugged in.");
+                Debug.Log("Only " + m_iQueriedNumberOfCtrlrs + " Xbox controller plugged in.");
             }
-            else if (c_iQueriedNumberOfCtrlrs == 0)
+            else if (m_iQueriedNumberOfCtrlrs == 0)
             {
                 Debug.Log("No Xbox controllers plugged in!");
             }
             else
             {
-                Debug.Log(c_iQueriedNumberOfCtrlrs + " Xbox controllers plugged in.");
+                Debug.Log(m_iQueriedNumberOfCtrlrs + " Xbox controllers plugged in.");
             }
             XCI.DEBUG_LogControllerNames();
         }
@@ -127,16 +115,17 @@ public class PlayerAttack : MonoBehaviour
     {
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
-        //------------------------------------------------
-        //checks if controller is connected
-        //if it is it uses controller to contol character
-        //if no controllers are connected use keyboard.
-        //------------------------------------------------
-
-       
-
+        //--------------------------------------------------------------
+        //if controller is connected allows you to attack
+        //--------------------------------------------------------------
         if (m_iQueriedNumberOfCtrlrs > 0)
         {
+            //--------------------------------------------------------------
+            //handles the animation and sounds for attacking 
+            //also which buttons you can press to attack
+            //and it also manipulates the speed of the players
+            //charge attack slows you down
+            //--------------------------------------------------------------
             if (XCI.GetButton(XboxButton.X, m_Controller) || XCI.GetButton(XboxButton.B, m_Controller) || XCI.GetButton(XboxButton.Y, m_Controller) || XCI.GetButton(XboxButton.LeftBumper, m_Controller) || XCI.GetButton(XboxButton.RightBumper, m_Controller) || TriggerDown())
             {               
                 if (!m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0) && m_PlayerMovementS.Grounded == true)
@@ -155,7 +144,10 @@ public class PlayerAttack : MonoBehaviour
                 {
                     m_PlayerMovementS.Speed = m_fChargeAttMoveSpeed;
                 }
-
+                //--------------------------------------------------------------
+                //if player is doing a charge attack pause the animation
+                // whenthe noodle is over shoulder
+                //--------------------------------------------------------------
                 if (m_Animator.GetCurrentAnimatorStateInfo(0).IsName("attackanim") && !m_Animator.IsInTransition(0))
                 {
                     m_fHeldDown += Time.deltaTime;
@@ -165,16 +157,7 @@ public class PlayerAttack : MonoBehaviour
                         m_Animator.speed = 0;
                         if (m_fHeldDown >= 0.5f)
                         {
-
-                            //if (BChargeAttack == false)
-                            //{
-                            //    m_ParticleSystem.gameObject.SetActive(true);
-                            //    m_ParticleSystem.Play();
-                            //    m_ParticleSystem.GetComponent<ScaleOverTime>().StartScaling();
-                            //}
-
-                            BChargeAttack = true;
-                     
+                            BChargeAttack = true;                     
                         }
                     }
                     else if(m_fHeldDown >= 3.0f)
@@ -188,17 +171,6 @@ public class PlayerAttack : MonoBehaviour
                 m_bAttackReleased = true;            
                 m_Animator.speed = 1;
             }
-            //if (XCI.GetButtonDown(XboxButton.B, m_Controller))
-            //{
-            //    Debug.Log("Blocking");
-            //    BGuardUp = true;
-            //    m_aAnimation.SetTrigger("Block1Trigger");
-            //    m_PlayerMovement.stun(0.5f);
-            //}
-            //else
-            //{
-            //    BGuardUp = false;
-            //}
         }
     }
 
@@ -209,127 +181,129 @@ public class PlayerAttack : MonoBehaviour
     //and change the tag of the thing hitting to Player.
     //
     //Paramaters:
-    //      Collide other
+    //      Collide a_cOther
     //---------------------------------------------------
     private void OnTriggerEnter(Collider a_cOther)
     {
-        m_PlayerAttack = a_cOther.GetComponent<PlayerAttack>();
+        //-----------------------------------------------
+        //Controls the power of the hits as well
+        //the longer chargeattack is true the harder you
+        //will knockback and knockup the opponent
+        //-----------------------------------------------
         m_PlayerMov = a_cOther.GetComponent<PlayerMovement>();
-        float m_Vol = Random.Range(volLowRange, volHighRange);
+        float m_Vol = Random.Range(m_fVolLowRange, m_fVolHighRange);
         if (a_cOther.gameObject.tag == "Player")
         {   
-            //if (otherPlayer.BGuardUp == true && m_bChargeAtk == false)
-            //{
-            //    Guarded(this.transform, a_cOther.transform,m_fBlockStrength, m_fUpForce);
-            //}
             if(m_fHeldDown <= 0.5f)
             {
                 TapAttack(a_cOther.transform, m_fForce, m_fUpForce);
-                m_PlayerMov.stun(m_fStunDurationTap);
+                m_PlayerMov.Stun(m_fStunDurationTap);
                 m_Source.PlayOneShot(m_Sounds, m_Vol);
             }
             else if (BChargeAttack == true)
             {
-
                 if (m_fHeldDown >= 0.49999999f && m_fHeldDown <= 0.99999999f)
                 {
                     Debug.Log("Charge Attack");
-                    m_PlayerMov.stun(m_fStunDuration1stCharge);
+                    m_PlayerMov.Stun(m_fStunDuration1stCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce1st, m_fChargeUpForce1st);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.00000000f && m_fHeldDown <= 1.49999999f)
                 {
                     Debug.Log("Charge Attack2");
-                    m_PlayerMov.stun(m_fStunDuration2ndCharge);
+                    m_PlayerMov.Stun(m_fStunDuration2ndCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce2nd, m_fChargeUpForce2nd);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 1.50000000f && m_fHeldDown <= 1.99999999f)
                 {
                     Debug.Log("Charge Attack3");
-                    m_PlayerMov.stun(m_fStunDuration3rdCharge);
+                    m_PlayerMov.Stun(m_fStunDuration3rdCharge);
                     ChargeAttack(a_cOther.transform, m_fChargeForce3rd, m_fChargeUpForce3rd);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
                 if (m_fHeldDown >= 2.00000000f)
                 {
                     Debug.Log("Charge Attack4");
-                    m_PlayerMov.stun(m_fStunDuration4thCharge);            
+                    m_PlayerMov.Stun(m_fStunDuration4thCharge);            
                     ChargeAttack(a_cOther.transform, m_fChargeForce4th, m_fChargeUpForce4th);
                     m_Source.PlayOneShot(m_Sounds, m_Vol);
                 }
             }           
         }
+        //--------------------------------------------
+        //if player is grounded allows the player 
+        //to hit the ball
+        //--------------------------------------------
         if(m_PlayerMovementS.Grounded == true)
         {
             if (a_cOther.gameObject.tag == "BeachBall")
             {
-                TappAttack(a_cOther.transform, 1);         
+                BallAttack(a_cOther.transform, 1);         
             }
         }     
     }
 
+    //--------------------------------------------------------------
+    //if the player is hit by the beach ball also knock them back
+    //--------------------------------------------------------------
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "BeachBall")
         {
             BeachBall(this.transform, collision.transform, 15, 15);
-            m_PlayerMovementS.stun(m_fStunDuration4thCharge);
+            m_PlayerMovementS.Stun(m_fStunDuration4thCharge);
         }
     }
 
+    //-----------------------------------------------------------------------------------
+    //Controlls the forces that will be applied to the player when hit by the beach ball
+    //-----------------------------------------------------------------------------------
     private void BeachBall(Transform a_tDefender, Transform a_tAttacker, float a_fBlockStrength, float a_fUpForce)
     {
-        Vector3 c_vDir = (a_tDefender.position - a_tAttacker.position);
-        c_vDir = c_vDir.normalized;
-        Vector3 c_vUpForce = Vector3.up * a_fUpForce;
-        a_tDefender.GetComponent<Rigidbody>().AddForce(c_vDir * a_fBlockStrength + c_vUpForce, ForceMode.Impulse);
+        Vector3 m_vDir = (a_tDefender.position - a_tAttacker.position);
+        m_vDir = m_vDir.normalized;
+        Vector3 m_vUpForce = Vector3.up * a_fUpForce;
+        a_tDefender.GetComponent<Rigidbody>().AddForce(m_vDir * a_fBlockStrength + m_vUpForce, ForceMode.Impulse);
     }
 
-    private void TappAttack(Transform a_tOther, float a_fForce)
+    //-------------------------------------------------------------------------------------
+    //Controlls the forces that will be applied to the beach ball if the player attacks it
+    //-------------------------------------------------------------------------------------
+    private void BallAttack(Transform a_tOther, float a_fForce)
     {
-        Vector3 c_vDir = (a_tOther.position - transform.position);
-        c_vDir = c_vDir.normalized;
-        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fForce, ForceMode.Impulse);
+        Vector3 m_vDir = (a_tOther.position - transform.position);
+        m_vDir = m_vDir.normalized;
+        a_tOther.GetComponent<Rigidbody>().AddForce(m_vDir * a_fForce, ForceMode.Impulse);
     }
 
-    //-------------------------------------------------------
-    //If player is guarding knock them back a small amount
-    //applies for charge attack too.
-    //-------------------------------------------------------
-    private void Guarded(Transform a_tDefender, Transform a_tAttacker,float a_fBlockStrength, float a_fUpForce)
-    {
-        Vector3 c_vDir = (a_tDefender.position - a_tAttacker.position);
-        c_vDir = c_vDir.normalized;
-        Vector3 c_vUpForce = Vector3.up * a_fUpForce;
-        a_tDefender.GetComponent<Rigidbody>().AddForce(c_vDir * a_fBlockStrength + c_vUpForce, ForceMode.Impulse);
-    }
     //--------------------------------------------------------
     //normal knockback attack tap button play attack anim
-    //and if you hit another player knock them back.
+    //and if you hit another player knock them back and up.
     //--------------------------------------------------------
     private void TapAttack(Transform a_tOther, float a_fForce, float a_fUpForce)
     {
-        Vector3 c_vDir = (a_tOther.position - transform.position);
-        c_vDir = c_vDir.normalized;
-        Vector3 c_vUpForce = Vector3.up * a_fUpForce;
+        Vector3 m_vDir = (a_tOther.position - transform.position);
+        m_vDir = m_vDir.normalized;
+        Vector3 m_vUpForce = Vector3.up * a_fUpForce;
         a_tOther.transform.position += Vector3.up * 0.1f;
-        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fForce + c_vUpForce, ForceMode.Impulse);
+        a_tOther.GetComponent<Rigidbody>().AddForce(m_vDir * a_fForce + m_vUpForce, ForceMode.Impulse);
     }
-    //--------------------------------------------------------
+
+    //------------------------------------------------------------------
     //Able to charge attack by holding down attack button
     //for certain amount of time(above 0.5 secs)
-    //the knockback force is increased accordingly
+    //the knockback force and knock up force is increased accordingly
     //can not block and attack or charge attack.
-    //--------------------------------------------------------
+    //------------------------------------------------------------------
     private void ChargeAttack(Transform a_tOther, float a_fChargeForce, float a_fChargeUpForce)
     {
-        Vector3 c_vDir = (a_tOther.transform.position - transform.position);
-        c_vDir = c_vDir.normalized;
-        Vector3 c_vUpForce = Vector3.up * a_fChargeUpForce;
+        Vector3 m_vDir = (a_tOther.transform.position - transform.position);
+        m_vDir = m_vDir.normalized;
+        Vector3 c_vUpForcem = Vector3.up * a_fChargeUpForce;
         a_tOther.transform.position += Vector3.up * 0.1f;
-        a_tOther.GetComponent<Rigidbody>().AddForce(c_vDir * a_fChargeForce + c_vUpForce, ForceMode.Impulse);
+        a_tOther.GetComponent<Rigidbody>().AddForce(m_vDir * a_fChargeForce + c_vUpForcem, ForceMode.Impulse);
     }
 
     //--------------------------------------------------
@@ -340,21 +314,23 @@ public class PlayerAttack : MonoBehaviour
     public void AttackOn()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = true;
-        Debug.Log("On");
     }
-
     public void AttackOff()
     {
         gameObject.GetComponentInChildren<CapsuleCollider>().enabled = false;
         m_fHeldDown = 0.0f;
         BChargeAttack = false;
-
-      //m_ParticleSystem.GetComponent<ScaleOverTime>().Reset();
-      //m_ParticleSystem.gameObject.SetActive(false);
         m_PlayerMovementS.Speed = m_fFullSpeed;
-        Debug.Log("Off");
     }
 
+    //----------------------------------------------------------------------------
+    //Basically turns the triggers into buttons instead of them
+    //being axis. When you press the triggers if it is equal to anything but zero
+    //it will return true
+    //
+    //Returns:
+    // returns true or false depending on if the triggers have been pressed
+    //----------------------------------------------------------------------------
     public bool TriggerDown()
     {
         if(XCI.GetAxisRaw(XboxAxis.LeftTrigger, m_Controller) != 0 || XCI.GetAxisRaw(XboxAxis.RightTrigger, m_Controller) != 0)

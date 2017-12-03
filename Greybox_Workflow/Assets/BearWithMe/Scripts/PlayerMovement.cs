@@ -12,9 +12,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_vPlayerVeloc;
     public AudioClip m_Grunt;
     public AudioClip m_Ded;
-    private AudioSource source;
+    private AudioSource m_Source;
     [SerializeField] private ParticleSystem m_ParticleSystem;
-    [SerializeField] private GameObject footSplash;
+    [SerializeField] private GameObject m_FootSplash;
 
 
     [SerializeField] private XboxController m_xcController;
@@ -30,15 +30,16 @@ public class PlayerMovement : MonoBehaviour
 
     private float m_fSpeed = 100;
     private float m_fFriction;
-    private float volLowRange = .5f;
-    private float volHighRange = 1.0f;
+    private float m_fVolLowRange = .5f;
+    private float m_fVolHighRange = 1.0f;
+    private float m_fDeadzone = 0.70f;
 
     private bool m_SoundPlayed = false;
     private bool m_bIsStunned = false;
     private bool m_bJumping = false;
     private bool m_bGrounded = true;
-    private static bool m_bDidQueryNumOfCtrlrs = false;
     private bool m_bIsDead = false;
+    private static bool m_bDidQueryNumOfCtrlrs = false;
 
     public bool Stunned
     {
@@ -91,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         m_rbRigidBody = GetComponent<Rigidbody>();
         m_rbRigidBody.maxAngularVelocity = 10;
         m_aAnimator = GetComponent<Animator>();
-        source = GetComponent<AudioSource>();        
+        m_Source = GetComponent<AudioSource>();        
 
         //--------------------------------------------------
         //Checks if controller is connected
@@ -122,6 +123,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //--------------------------------------------------
+        //Raycast downwards to see if  the player is on the
+        //ground if yes allow jump, if no do not allow jump
+        //--------------------------------------------------
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, 0.75f))
         {
             m_bGrounded = true;
@@ -134,12 +139,15 @@ public class PlayerMovement : MonoBehaviour
 
         int m_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
+        //-------------------------------------------------------
+        //if stunned is true will play a sound and an animation
+        //------------------------------------------------------
         if (Stunned == true)
         {
-            float vol = Random.Range(volLowRange, volHighRange);
-            if(source.isPlaying == false && !m_SoundPlayed)
+            float vol = Random.Range(m_fVolLowRange, m_fVolHighRange);
+            if(m_Source.isPlaying == false && !m_SoundPlayed)
             {
-                source.PlayOneShot(m_Grunt, vol);
+                m_Source.PlayOneShot(m_Grunt, vol);
                 m_SoundPlayed = true;
             }
             m_aAnimator.SetBool("IsStunned", true);
@@ -150,6 +158,10 @@ public class PlayerMovement : MonoBehaviour
             m_SoundPlayed = false;
         }
 
+        //--------------------------------------------------
+        //allows jumping if grounded and if moving plays little
+        //splash particle effects
+        //--------------------------------------------------
         if (m_bGrounded == true)
         {
             if (m_iQueriedNumberOfCtrlrs > 0)
@@ -161,81 +173,74 @@ public class PlayerMovement : MonoBehaviour
 
                 if (XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController) < 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController) > 0 || XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController) < 0)
                 {
-                    footSplash.GetComponent<ParticleSystem>().Play();
+                    m_FootSplash.GetComponent<ParticleSystem>().Play();
                 }
                 else
                 {
-                    footSplash.GetComponent<ParticleSystem>().Stop();
+                    m_FootSplash.GetComponent<ParticleSystem>().Stop();
                 }
-
             }
         }
-
-        if(transform.localPosition.y <= -1.0f)
+        //--------------------------------------------------
+        //if the player goes below a certain point on the y axis
+        //it will play particle effect and a sound clip
+        //--------------------------------------------------
+        if (transform.localPosition.y <= -1.0f)
         {
-            float vol = Random.Range(volLowRange, volHighRange);
-            if (source.isPlaying == false)
+            float vol = Random.Range(m_fVolLowRange, m_fVolHighRange);
+            if (m_Source.isPlaying == false)
             {
-                source.PlayOneShot(m_Ded, vol);
+                m_Source.PlayOneShot(m_Ded, vol);
                 m_ParticleSystem.GetComponent<ParticleSystem>().Play();
             }
         }
     }
-
-
-    // Update is called once per frame
+  
     void FixedUpdate()
-    {
-        //Debug.Log(transform.localPosition.y);
-        //-----------------------------------------------------------
-        //raycast downwards to check if the player has landed or not
-        //-----------------------------------------------------------
-        
+    {     
         int c_iQueriedNumberOfCtrlrs = XCI.GetNumPluggedCtrlrs();
 
-        Vector3 c_vMovement = Vector3.zero;
-        //------------------------------------------------
-        //Checks if controller is connected
-        //if it is it uses controller to contol character
-        //if no controllers are connected use keyboard.
-        //------------------------------------------------
-        float c_vDeadzone = 0.70f;
-        
+        Vector3 m_vMovement = Vector3.zero;
+
+
+        //--------------------------------------------------------------
+        //if not stunned allow the player to move around
+        //also sets the deadzone for the controllers
+        //--------------------------------------------------------------
         if (!Stunned)
         {
             if (c_iQueriedNumberOfCtrlrs > 0)
             {
-                c_vMovement.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController);
-                c_vMovement.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController);
+                m_vMovement.x = XCI.GetAxisRaw(XboxAxis.LeftStickX, m_xcController);
+                m_vMovement.z = XCI.GetAxisRaw(XboxAxis.LeftStickY, m_xcController);
 
-                if (c_vMovement.magnitude < c_vDeadzone)
+                if (m_vMovement.magnitude < m_fDeadzone)
                 {
-                    c_vMovement = Vector3.zero;
+                    m_vMovement = Vector3.zero;
                 }
                 else
                 {
-                    c_vMovement = c_vMovement.normalized * ((c_vMovement.magnitude - c_vDeadzone) / (1 - c_vDeadzone));
+                    m_vMovement = m_vMovement.normalized * ((m_vMovement.magnitude - m_fDeadzone) / (1 - m_fDeadzone));
                 }
             }
         }
         
         //--------------------------------------------------------------
-        //Adds force to the character towards whichever way they face
+        //adds velocity to the character(moves character)
         //--------------------------------------------------------------
-        //transform.Translate(c_vMovement * Speed, Time.deltaTime);
-        m_rbRigidBody.velocity += c_vMovement * m_fSpeed;
-        //m_rbRigidBody.AddForce(c_vMovement * Speed, ForceMode.Acceleration);
-        //m_rbRigidBody.MovePosition(m_rbRigidBody.position + c_vMovement * Speed);
+        m_rbRigidBody.velocity += m_vMovement * m_fSpeed;
+
         //--------------------------------------------------------------
         //if character is moving you face whicever way you move towards
         //--------------------------------------------------------------
-        if (c_vMovement.magnitude > 0.01f)
+        if (m_vMovement.magnitude > 0.01f)
         {
-            m_rbRigidBody.rotation = Quaternion.LookRotation(c_vMovement.normalized, Vector3.up);
+            m_rbRigidBody.rotation = Quaternion.LookRotation(m_vMovement.normalized, Vector3.up);
         }
-
-
-        if(transform.localPosition.y <= -3.0f)
+        //---------------------------------------------------------------------------
+        //if you go below certain point in the y axis the player will be deactivated
+        //---------------------------------------------------------------------------
+        if (transform.localPosition.y <= -3.0f)
         {
             m_bIsDead = true;
             gameObject.SetActive(false); //disable or destroy?
@@ -243,15 +248,14 @@ public class PlayerMovement : MonoBehaviour
         //------------------------------------------------------------------
         //Stores Default y velocity so it can't be modified by x and z axis
         //------------------------------------------------------------------
-        float c_fYVel = m_rbRigidBody.velocity.y;
+        float m_fYVel = m_rbRigidBody.velocity.y;
         m_vPlayerVeloc = m_rbRigidBody.velocity;
-
         m_vPlayerVeloc.y = 0;
 
         //-----------------------------------------------------------
         //Animation for the movement
         //-----------------------------------------------------------
-        if (c_vMovement.x != 0 || c_vMovement.z != 0)
+        if (m_vMovement.x != 0 || m_vMovement.z != 0)
         {
             m_aAnimator.SetBool("IsMoving", true);
         }
@@ -264,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
         //deals with the friction and velocity on x axis
         //and also stops player if their velocity drops below certain level
         //---------------------------------------------------------------------
-        if (c_vMovement.x == 0)
+        if (m_vMovement.x == 0)
         {
             if (m_vPlayerVeloc.x > 0 && m_bGrounded)
             {
@@ -296,7 +300,7 @@ public class PlayerMovement : MonoBehaviour
         //deals with the friction and velocity on z axis
         //and also stops player if their velocity drops below certain level
         //---------------------------------------------------------------------
-        if (c_vMovement.z == 0)
+        if (m_vMovement.z == 0)
         {
             if (m_vPlayerVeloc.z > 0 && m_bGrounded)
             {
@@ -325,7 +329,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //------------------------------------------
-        //Limits the player max velocity
+        //clamps the player max velocity
         //so that player doesn't keep accelarating
         //------------------------------------------
         if (m_vPlayerVeloc.magnitude > 15)
@@ -337,9 +341,8 @@ public class PlayerMovement : MonoBehaviour
         //------------------------------------------------------------------
         //sets stored y back to the player velocity.
         //------------------------------------------------------------------
-        m_vPlayerVeloc.y = c_fYVel;
+        m_vPlayerVeloc.y = m_fYVel;
         m_rbRigidBody.velocity = m_vPlayerVeloc;
-        //Debug.Log("Button: " + c_vMovement.x + " Vel: " + m_rbRigidBody.velocity.x);
         m_rbRigidBody.angularVelocity = Vector3.zero;
         //-----------------------------------------------------------
         // Jumping through physics
@@ -354,7 +357,6 @@ public class PlayerMovement : MonoBehaviour
                 m_bJumping = false;
             }
         }
-
         if (m_bGrounded == false)
         {
             if (m_rbRigidBody.velocity.y < 0.0f)
@@ -366,6 +368,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        //------------------------------------------------------------------------
+        //if players are on the platforms the friction is set by the platforms
+        //------------------------------------------------------------------------
         if (collision.collider.gameObject.tag == "Platform")
         {
             Platform currentPlatform = collision.collider.gameObject.GetComponent<Platform>();
@@ -376,28 +381,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Environment")
+        //--------------------------------------------------------------------------------
+        //if player collides with the object tagged environment the player is deactivated
+        //--------------------------------------------------------------------------------
+        if (collision.gameObject.tag == "Environment")
         {
             m_bIsDead = true;
           
             gameObject.SetActive(false); //disable or destroy?
         }
     }
-
-    public void stun(float StunDur)
+    //--------------------------------------------------------------
+    //disables player movement for a certain amount of time
+    //and then through invoke removes the stun
+    //--------------------------------------------------------------
+    public void Stun(float StunDur)
     {
         Stunned = true;
-        Invoke("removestun", StunDur);
-        
+        Invoke("RemoveStun", StunDur);      
     }
-    private void removestun()
+    private void RemoveStun()
     {
         Stunned = false;
     }
-
-    //private IEnumerator JK(float Timer)
-    //{
-    //    yield return new WaitForSeconds(Timer);
-    //    Stunned = false;
-    //}
 }
