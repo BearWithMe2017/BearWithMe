@@ -80,7 +80,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log("P1: " + p1Score);
+        Debug.Log("P2: " + p2Score);
+        Debug.Log("P3: " + p3Score);
+        Debug.Log("P4: " + p4Score);
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && sceneLoaded != true)
         {
@@ -286,33 +289,33 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < activePlayers.Count; i++)
         {
-            if (activePlayers[i].activeSelf != false && deathCount == playerCount - 1)
+            if (activePlayers[i].activeSelf != false && deathCount == activePlayers.Count - 1)
             {
                 if (scored == false)
                 {
-                    if (i == 0)
+                    if (activePlayers[i].GetComponent<PlayerMovement>().XcController == XboxController.First)
                     {
                         p1Score++;
                         scored = true;
-                        scoringPlayerIndex = i;
+                        scoringPlayerIndex = 0;
                     }
-                    if (i == 1)
+                    if (activePlayers[i].GetComponent<PlayerMovement>().XcController == XboxController.Second)
                     {
                         p2Score++;
                         scored = true;
-                        scoringPlayerIndex = i;
+                        scoringPlayerIndex = 1;
                     }
-                    if (i == 2)
+                    if (activePlayers[i].GetComponent<PlayerMovement>().XcController == XboxController.Third)
                     {
                         p3Score++;
                         scored = true;
-                        scoringPlayerIndex = i;
+                        scoringPlayerIndex = 2;
                     }
-                    if (i == 3)
+                    if (activePlayers[i].GetComponent<PlayerMovement>().XcController == XboxController.Fourth)
                     {
                         p4Score++;
                         scored = true;
-                        scoringPlayerIndex = i;
+                        scoringPlayerIndex = 3;
                     }
                 }
             }

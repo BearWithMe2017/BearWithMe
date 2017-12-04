@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     private float m_fVolHighRange = 1.0f;
     private float m_fDeadzone = 0.70f;
 
+    public int playerNumber;
+
     private bool m_SoundPlayed = false;
     private bool m_bIsStunned = false;
     private bool m_bJumping = false;
@@ -83,6 +85,18 @@ public class PlayerMovement : MonoBehaviour
         set
         {
             m_bIsDead = value;
+        }
+    }
+
+    public XboxController XcController
+    {
+        get
+        {
+            return m_xcController;
+        }
+        set
+        {
+            m_xcController = value;
         }
     }
 
